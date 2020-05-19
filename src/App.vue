@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import Sidebar from "@/views/Landing.vue";
+//import Sidebar from "@/components/Sidebar.vue";
+import Sidebar from "@/views/Choice.vue";
 
 export default {
   components: {
