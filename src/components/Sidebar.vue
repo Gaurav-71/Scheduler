@@ -48,7 +48,7 @@
           </a>
         </li>
       </ul>
-    </nav>
+    </nav>    
   </div>
 </template>
 
@@ -65,13 +65,17 @@ export default {
 <style lang="scss" scoped>
 @import "../scss/colors";
 .sidebar {
+  margin-left :5rem;
+  margin-top: 4.5rem;
+  padding: 1rem;
   nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 5rem;
     height: 100vh;
-    background: $primary-light;
+    //background: $primary-light;
+    background-image: $gradient;
     ul {
       list-style-type: none;
       margin: 0;
