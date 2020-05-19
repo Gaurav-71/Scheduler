@@ -130,7 +130,7 @@ export default {
     position: relative;
     overflow: hidden;
     width: 768px;
-    max-width: 100%;
+    max-width: 80%;
     min-height: 480px;
     .form-container {
       position: absolute;
