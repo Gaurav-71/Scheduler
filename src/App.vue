@@ -6,7 +6,7 @@
 
 <script>
 //import Sidebar from "@/components/Sidebar.vue";
-import Sidebar from "@/views/Choice.vue";
+import Sidebar from "@/views/Semester.vue";
 
 export default {
   components: {
@@ -20,6 +20,7 @@ export default {
 
 ::-webkit-scrollbar {
   width: 0.35rem;
+  height: 0.35rem;
 }
 
 ::-webkit-scrollbar-track {

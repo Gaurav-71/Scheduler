@@ -1,8 +1,10 @@
 $primary : #1c8d76;
-$background: rgba(209, 243, 201, 0.37);
+//$background: rgba(209, 243, 201, 0.37);
+$background:linear-gradient(45deg, transparent 0%, transparent 2%,rgba(116, 116, 116,0.04) 2%, rgba(116, 116, 116,0.04) 36%,transparent 36%, transparent 100%),linear-gradient(0deg, transparent 0%, transparent 48%,rgba(116, 116, 116,0.04) 48%, rgba(116, 116, 116,0.04) 64%,transparent 64%, transparent 100%),linear-gradient(90deg, transparent 0%, transparent 70%,rgba(116, 116, 116,0.04) 70%, rgba(116, 116, 116,0.04) 73%,transparent 73%, transparent 100%),linear-gradient(90deg, transparent 0%, transparent 17%,rgba(116, 116, 116,0.04) 17%, rgba(116, 116, 116,0.04) 54%,transparent 54%, transparent 100%),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
 $primary-light: lighten($primary, 6%);
 $primary-dark: darken($primary, 7.5%);
 $gradient: radial-gradient(circle at 58% 50%, hsla(89,0%,28%,0.1) 0%, hsla(89,0%,28%,0.1) 60%,transparent 60%, transparent 98%,transparent 98%, transparent 100%),radial-gradient(circle at 36% 79%, hsla(89,0%,28%,0.1) 0%, hsla(89,0%,28%,0.1) 49%,transparent 49%, transparent 99%,transparent 99%, transparent 100%),radial-gradient(circle at 48% 23%, hsla(89,0%,28%,0.1) 0%, hsla(89,0%,28%,0.1) 50%,transparent 50%, transparent 87%,transparent 87%, transparent 100%),radial-gradient(circle at 55% 69%, hsla(89,0%,28%,0.1) 0%, hsla(89,0%,28%,0.1) 3%,transparent 3%, transparent 19%,transparent 19%, transparent 100%),radial-gradient(circle at 38% 69%, hsla(89,0%,28%,0.1) 0%, hsla(89,0%,28%,0.1) 15%,transparent 15%, transparent 33%,transparent 33%, transparent 100%),linear-gradient(45deg, rgb(14, 124, 138),rgb(44, 254, 203));
+$gradient-progress-bar: radial-gradient(circle at center right, rgb(138, 138, 138),rgb(251, 251, 251));
 $sidebar-menu-text: #f4c20d;
 
 /*old vars

@@ -65,8 +65,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  font-family: "Montserrat", sans-serif;
+  flex-direction: column;  
   height: 100vh;
   .container {
     h1 {
@@ -104,6 +103,7 @@ export default {
       letter-spacing: 1px;
       text-transform: uppercase;
       transition: transform 80ms ease-in;
+      cursor: pointer;
     }
     button:active {
       transform: scale(0.95);

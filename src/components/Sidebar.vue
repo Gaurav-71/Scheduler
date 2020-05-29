@@ -48,7 +48,7 @@
           </a>
         </li>
       </ul>
-    </nav>    
+    </nav>
   </div>
 </template>
 
@@ -65,9 +65,6 @@ export default {
 <style lang="scss" scoped>
 @import "../scss/colors";
 .sidebar {
-  margin-left :5rem;
-  margin-top: 4.5rem;
-  padding: 1rem;
   nav {
     position: fixed;
     top: 0;
@@ -92,7 +89,7 @@ export default {
           align-items: center;
           justify-content: center;
           height: 5rem;
-          transition: 300ms;          
+          transition: 300ms;
           cursor: pointer;
           img {
             width: 45px;
@@ -134,5 +131,12 @@ export default {
       }
     }
   }
+}
+</style>
+
+<style>
+body,
+html {
+  margin-left: 5rem;
 }
 </style>
