@@ -1,0 +1,44 @@
+@import "../scss/colors";
+
+.container {
+  height: 78.4vh;
+  margin: 4rem;
+  margin-top: 5rem;
+  display: grid;
+  grid-template-rows: 20% 80%;  
+  .search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input {
+      width: 91%;
+      padding: 1rem;
+      font-size: 15px;
+      border-radius: 2rem;
+      border: 1px solid lightgray;
+      outline: none;
+      background-image: url("../assets/Professors/search.svg");
+      background-position-y: center;
+      background-position-x: 0.8rem;
+      background-size: 32.5px;
+      background-repeat: no-repeat;
+      text-indent: 40px;
+    }    
+    input:hover{
+        box-shadow: 0 0 5px gray; 
+        border: none; 
+    }
+    input:focus{
+        box-shadow: 0 0 5px #1c8d76; 
+        border: none; 
+    }
+    img {
+      width: 53px;
+      height: 53px;
+      cursor: pointer;
+    }
+    img:active {
+      transform: scale(0.95);
+    }
+  }
+}

@@ -27,6 +27,7 @@
 import Header from "../components/Header.vue";
 
 export default {
+  name: "Choice",
   components: {
     Header
   }

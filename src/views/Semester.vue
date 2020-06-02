@@ -1,6 +1,5 @@
 <template>
-  <div class="semester">
-    <Sidebar />
+  <div class="semester">    
     <div class="container">
       <div class="progress-bar">
         <div class="step" style="text-align: right;">
@@ -88,12 +87,8 @@
 </template>
 
 <script>
-import Sidebar from "../components/Sidebar.vue";
-
 export default {
-  components: {
-    Sidebar
-  },
+  name: "Semester",
   data() {
     return {
       progressCounter: 1,
@@ -105,17 +100,24 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/colors";
+@import "../scss/mediaQuery";
 
 .semester {
   margin-top: 5.7rem;
+  margin-left: 5rem;
   display: flex;
   justify-content: center;
   .container {
     border-radius: 2rem;
-    width: 1000px;    // 1200 for smaller    
-    min-height: 550px;
+    width: 85vw;
+    min-height: 550px;    
     display: grid;
-    grid-template-rows: 20% 70% 10%;
+    grid-template-rows: 20% 70% 10%;    
+    @include ipad-portrait{
+      //width: 1200px;
+      width: 100vw;
+      height: 850px;      
+    }    
     .progress-bar {
       height: 100%;
       width: 100%;

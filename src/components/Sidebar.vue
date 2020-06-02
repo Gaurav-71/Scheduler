@@ -1,54 +1,53 @@
-<!-- Note : Replace all a tags to router-links -->
-
 <template>
   <div class="sidebar">
     <Header />
     <nav>
       <ul>
         <li>
-          <a>
+          <router-link to="/home" class="router-link">
             <img src="../assets/Sidebar/home.svg" alt="home" />
             <span>Home</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a>
+          <router-link to="/semester" class="router-link">
             <img src="../assets/Sidebar/create.svg" alt="create" />
             <span>Create</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a>
+          <router-link to="#" class="router-link">
             <img src="../assets/Sidebar/view.svg" alt="view" />
             <span>View</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a>
+        <router-link to="/professors" class="router-link" >
             <img src="../assets/Sidebar/professor.svg" alt="professor" />
             <span>Professors</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a>
+          <router-link to="/courses" class="router-link">
             <img src="../assets/Sidebar/courses.svg" alt="courses" />
             <span>Courses</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a>
+          <router-link to="#" class="router-link">
             <img src="../assets/Sidebar/settings.svg" alt="settings" />
             <span>Settings</span>
-          </a>
+          </router-link>
         </li>
         <li>
-          <a>
+          <router-link to="#" class="router-link">
             <img src="../assets/Sidebar/exit.svg" alt="exit" />
             <span>Exit Time Table</span>
-          </a>
+          </router-link>
         </li>
       </ul>
     </nav>
+    <router-view />
   </div>
 </template>
 
@@ -58,6 +57,19 @@ import Header from "@/components/Header.vue";
 export default {
   components: {
     Header
+  },
+  data() {
+    return {
+      activeView: [0, 0, 0, 0, 0, 0]
+    };
+  },
+  methods: {
+    makeActive(viewNumber) {
+      for (let i = 0; i <= 6; i++) {
+        this.activeView[i] = 0;
+      }
+      this.activeView[viewNumber] = 1;
+    }
   }
 };
 </script>
@@ -84,12 +96,13 @@ export default {
       transition: width 200ms ease;
       li {
         width: 100%;
-        a {
+        .router-link {
           display: flex;
           align-items: center;
           justify-content: center;
           height: 5rem;
           transition: 300ms;
+          text-decoration: none;
           cursor: pointer;
           img {
             width: 45px;
@@ -98,12 +111,12 @@ export default {
             display: none;
           }
         }
-        a:hover {
+        .router-link:hover {
           background: $primary-dark;
           border-left: 3px solid red;
-        }
+        }      
       }
-      .active {
+      .active{
         background: $primary-dark;
         img {
           border: 3px solid $sidebar-menu-text;
@@ -133,10 +146,10 @@ export default {
   }
 }
 </style>
-
+<!--
 <style>
 body,
 html {
   margin-left: 5rem;
 }
-</style>
+</style>-->

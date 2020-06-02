@@ -17,7 +17,7 @@
         <form action="#">
           <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
           <h1 style="margin: 1rem;">Sign in</h1>
-          <input type="email" placeholder="Email" />          
+          <input type="email" placeholder="Email" />
           <input type="password" placeholder="Password" />
           <a href="#">Forgot your password?</a>
           <button>Sign In</button>
@@ -45,6 +45,7 @@
 import Header from "@/components/Header.vue";
 
 export default {
+  name: "Login",
   components: {
     Header
   },
@@ -65,7 +66,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;  
+  flex-direction: column;
   height: 100vh;
   .container {
     h1 {
@@ -121,7 +122,7 @@ export default {
       padding: 12px 15px;
       margin: 8px 0;
       width: 100%;
-    }    
+    }
   }
   .container {
     background-color: white;

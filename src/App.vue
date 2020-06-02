@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <Sidebar />
+    <Sidebar />    
   </div>
 </template>
 
 <script>
-//import Sidebar from "@/components/Sidebar.vue";
-import Sidebar from "@/views/Semester.vue";
+import Sidebar from "@/components/Sidebar.vue";
+//import Sidebar from "@/views/Semester.vue";
 
 export default {
   components: {
@@ -37,7 +37,9 @@ body {
   padding: 0;
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
-  background: $background;
+  background-image: $background;
+  background-position: center;
+  background-repeat: no-repeat;
   letter-spacing: 1px;
 }
 </style>
