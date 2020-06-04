@@ -7,9 +7,9 @@
       </div>
       <div class="results">
         <div v-for="(course,index) in courses" :key="index">
-          <div v-if="index!=4" class="card">
+          <div v-if="index!=0" class="card">
             <div class="actions">
-              <img src="../assets/Professors/edit.svg" alt="edit" />
+              <img src="../assets/Common/edit.svg" alt="edit" />
               <div class="semester">
                 <img src="../assets/Courses/three.svg" alt="three" v-if="course.semester=='three'" />
                 <img
@@ -34,7 +34,7 @@
                   v-else-if="course.semester=='eight'"
                 />
               </div>
-              <img src="../assets/Professors/delete (3).svg" alt="delete" />
+              <img src="../assets/Common/delete.svg" alt="delete" />
             </div>
             <div class="details">
               <h3>{{course.name}}</h3>
@@ -43,17 +43,39 @@
           </div>
           <div v-else class="card">
             <div class="actions-edit">
-              <img src="../assets/Professors/save.svg" alt="save" />
-              <div class="semester">
-                <img src="../assets/Courses/edit.svg" alt="edit" />
+              <img src="../assets/Common/edit.svg" alt="edit" />
+              <div class="actions-group">
+                <img src="../assets/Common/save.svg" alt="save" />
+                <img src="../assets/Common/cancel.svg" alt="cancel" />
               </div>
-              <img src="../assets/Professors/cancel.svg" alt="cancel" />
             </div>
             <div class="details-edit">
               <div class="row">
-                <input type="text" v-model="course.name" style="width: 7rem" />
-                <input type="text" v-model="course.code" style="width:2rem;" />
-                <input list="type" v-model="course.type" style="width: 5rem" />
+                <label for="name">Name :</label>
+                <input type="text" name="name" v-model="course.name" style="width: 7rem" />
+                <label for="code">Code :</label>
+                <input type="text" name="code" v-model="course.code" style="width:2rem;" />
+              </div>
+              <div class="row">
+                <label for="semester">Semester :</label>
+                <input
+                  list="semesters"
+                  name="semester"
+                  style="width: 3rem;"
+                  v-model="course.semester"
+                />
+                <datalist id="semesters">
+                  <option value="First Semester"></option>
+                  <option value="Second Semester"></option>
+                  <option value="Third Semester"></option>
+                  <option value="Fourth Semester"></option>
+                  <option value="Fifth Semester"></option>
+                  <option value="Sixth Semester"></option>
+                  <option value="Seventh Semester"></option>
+                  <option value="Eight Semester"></option>
+                </datalist>
+                <label for="type">Type:</label>
+                <input list="type" name="type" v-model="course.type" style="width: 5rem" />
                 <datalist id="type">
                   <option value="Theory"></option>
                   <option value="Lab"></option>
@@ -61,7 +83,7 @@
                 </datalist>
               </div>
               <div class="row">
-                <label for="lecture">L:</label>
+                <label for="lecture">Credits : L:</label>
                 <input
                   type="number"
                   id="lecture"
@@ -97,17 +119,6 @@
                   style="width: 2rem"
                   v-model="course.practical"
                 />
-                <input list="semesters" name="semester" style="width: 3rem;" v-model="course.semester"/>
-                <datalist id="semesters">
-                  <option value="First Semester"></option>
-                  <option value="Second Semester"></option>
-                  <option value="Third Semester"></option>
-                  <option value="Fourth Semester"></option>
-                  <option value="Fifth Semester"></option>
-                  <option value="Sixth Semester"></option>
-                  <option value="Seventh Semester"></option>
-                  <option value="Eight Semester"></option>
-                </datalist>
               </div>
             </div>
           </div>
@@ -262,6 +273,7 @@ export default {
         img {
           width: 30px;
           height: 30px;
+          cursor: pointer;
         }
         img:active {
           transform: scale(0.95);
@@ -273,6 +285,7 @@ export default {
             margin: 0.5rem 1.3rem;
             border: 2px solid white;
             border-radius: 50%;
+            cursor: auto;
           }
           img:active {
             transform: none;
@@ -300,21 +313,42 @@ export default {
         }
       }
       .actions-edit {
-        background: rgba(128, 128, 128, 0.5);
+        background: lightgray;
+        justify-content: space-between;
+        padding: 0 0.2rem;
         img {
-          border: 2px solid white;
-          border-radius: 50%;
+          margin: 0.5rem;    
+          cursor: auto;      
+        }
+        img:active{
+          transform: none;
+        }
+        .actions-group{
+          img{
+            cursor: pointer;
+          }
+          img:active{
+            transform: scale(0.95);
+          }
         }
       }
-      .details-edit {
+      .details-edit {   
+        font-size:smaller ;     
         .row {
           display: flex;
-          justify-content: center;
+          justify-content: space-around;
           align-items: center;
+          label{
+            color: $primary-dark;
+            font-weight: bold;
+          }
           input {
             margin: 0.5rem 0.3rem;
-            padding: 0.45rem;
-          }
+            padding: 0.35rem;
+            border: none;                        
+            border-bottom: 1px solid black;
+            font-size: small;
+          }          
         }
       }
     }

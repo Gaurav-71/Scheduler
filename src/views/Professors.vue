@@ -21,8 +21,8 @@
               </div>
             </div>
             <div class="actions">
-              <img src="../assets/Professors/edit.svg" alt="edit" />
-              <img src="../assets/Professors/delete (3).svg" alt="delete" />
+              <img src="../assets/Common/edit.svg" alt="edit" />
+              <img src="../assets/Common/delete.svg" alt="delete" />
             </div>
           </div>
           <div v-else class="card">
@@ -53,8 +53,8 @@
                 <input type="radio" id="other" name="gender" value="other" v-model="teacher.gender" />
                 <label for="other">Other</label>
               </form>
-              <img src="../assets/Professors/save.svg" alt="edit" />
-              <img src="../assets/Professors/prohibited.svg" alt="delete" />
+              <img src="../assets/Common/save.svg" alt="save" />
+              <img src="../assets/Common/cancel.svg" alt="cancel" />
             </div>
           </div>
         </div>
