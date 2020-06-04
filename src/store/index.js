@@ -121,7 +121,7 @@ export default new Vuex.Store({
       {
         name: "Dr. Annapurna P. Patil",
         designation: "Professor",
-        gender: "female",
+        gender: "other",
       },
       { name: "Dr. S. Seema", designation: "Professor", gender: "female" },
       {

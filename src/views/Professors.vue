@@ -15,6 +15,7 @@
                 alt="female"
                 v-else-if="professor.gender=='female'"
               />
+              <img src="../assets/Professors/other.svg" alt="male" v-else-if="professor.gender=='other'" />
               <div class="details">
                 <h3>{{professor.name}}</h3>
                 <h5>{{professor.designation}}</h5>
