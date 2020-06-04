@@ -2,7 +2,7 @@
   <div class="professors">
     <div class="container">
       <div class="search-bar">
-        <input type="text" placeholder="Search Professors" />
+        <input type="search" placeholder="Search Professors" />
         <img src="../assets/Professors/add.svg" alt="add" />
       </div>
       <div class="results">
@@ -148,12 +148,12 @@ export default {
   margin-left: 5rem;
   .results {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
     overflow-y: scroll;
     .card {
       width: 20rem;
-      margin: 0.5rem;
+      margin: 0.8rem;
       background: white;
       border: 1px solid lightgray;
       border-radius: 1rem;
@@ -186,7 +186,8 @@ export default {
       .actions-edit {
         display: flex;
         justify-content: flex-end;
-        background: $primary-light;
+        // background: $primary-light;
+        background-image: $gradient;
         padding: 0.6rem;
         border-bottom-left-radius: 0.9rem;
         border-bottom-right-radius: 0.9rem;
