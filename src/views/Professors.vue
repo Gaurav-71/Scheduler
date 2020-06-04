@@ -6,18 +6,18 @@
         <img src="../assets/Professors/add.svg" alt="add" />
       </div>
       <div class="results">
-        <div v-for="(teacher,index) in teachers" :key="index">
+        <div v-for="(professor,index) in $store.state.professors" :key="index">
           <div v-if="index!=2" class="card">
             <div class="card-container">
-              <img src="../assets/Professors/male.svg" alt="male" v-if="teacher.gender=='male'" />
+              <img src="../assets/Professors/male.svg" alt="male" v-if="professor.gender=='male'" />
               <img
                 src="../assets/Professors/female.svg"
                 alt="female"
-                v-else-if="teacher.gender=='female'"
+                v-else-if="professor.gender=='female'"
               />
               <div class="details">
-                <h3>{{teacher.name}}</h3>
-                <h5>{{teacher.designation}}</h5>
+                <h3>{{professor.name}}</h3>
+                <h5>{{professor.designation}}</h5>
               </div>
             </div>
             <div class="actions">
@@ -27,30 +27,25 @@
           </div>
           <div v-else class="card">
             <div class="card-container">
-              <img src="../assets/Professors/male.svg" alt="male" v-if="teacher.gender=='male'" />
-              <img
-                src="../assets/Professors/female.svg"
-                alt="female"
-                v-else-if="teacher.gender=='female'"
-              />
+              <img src="../assets/Common/edit.svg" alt="edit-mode">
               <div class="details-edit">
-                <input type="text" v-model="teacher.name" />
-                <input type="text" v-model="teacher.designation" />
+                <input type="text" v-model="professor.name" />
+                <input type="text" v-model="professor.designation" />
               </div>
             </div>
             <div class="actions-edit">
               <form>
-                <input type="radio" id="male" name="gender" value="male" v-model="teacher.gender" />
+                <input type="radio" id="male" name="gender" value="male" v-model="professor.gender" />
                 <label for="male">Male</label>
                 <input
                   type="radio"
                   id="female"
                   name="gender"
                   value="female"
-                  v-model="teacher.gender"
+                  v-model="professor.gender"
                 />
                 <label for="female">Female</label>
-                <input type="radio" id="other" name="gender" value="other" v-model="teacher.gender" />
+                <input type="radio" id="other" name="gender" value="other" v-model="professor.gender" />
                 <label for="other">Other</label>
               </form>
               <img src="../assets/Common/save.svg" alt="save" />
@@ -64,80 +59,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      teachers: [
-        {
-          name: "Dr. Anita Kanavalli",
-          designation: "Head of Department",
-          gender: "female"
-        },
-        { name: "Dr. S Ramani", designation: "Professor", gender: "male" },
-        {
-          name: "Bhushan A. Matad",
-          designation: "Associate Professor",
-          gender: "male"
-        },
-        {
-          name: "Dr. Annapurna P. Patil",
-          designation: "Professor",
-          gender: "female"
-        },
-        { name: "Dr. S. Seema", designation: "Professor", gender: "female" },
-        {
-          name: "Dr. Monica R. Mundada",
-          designation: "Professor",
-          gender: "female"
-        },
-        {
-          name: "Dr. Anita Kanavalli",
-          designation: "Head of Department",
-          gender: "female"
-        },
-        { name: "Dr. S Ramani", designation: "Professor", gender: "male" },
-        {
-          name: "Bhushan A. Matad",
-          designation: "Associate Professor",
-          gender: "male"
-        },
-        {
-          name: "Dr. Annapurna P. Patil",
-          designation: "Professor",
-          gender: "female"
-        },
-        { name: "Dr. S. Seema", designation: "Professor", gender: "female" },
-        {
-          name: "Dr. Monica R. Mundada",
-          designation: "Professor",
-          gender: "female"
-        },
-        {
-          name: "Dr. Anita Kanavalli",
-          designation: "Head of Department",
-          gender: "female"
-        },
-        { name: "Dr. S Ramani", designation: "Professor", gender: "male" },
-        {
-          name: "Bhushan A. Matad",
-          designation: "Associate Professor",
-          gender: "male"
-        },
-        {
-          name: "Dr. Annapurna P. Patil",
-          designation: "Professor",
-          gender: "female"
-        },
-        { name: "Dr. S. Seema", designation: "Professor", gender: "female" },
-        {
-          name: "Dr. Monica R. Mundada",
-          designation: "Professor",
-          gender: "female"
-        }
-      ]
-    };
-  }
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

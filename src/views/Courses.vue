@@ -6,8 +6,8 @@
         <img src="../assets/Courses/add.svg" alt="add" />
       </div>
       <div class="results">
-        <div v-for="(course,index) in courses" :key="index">
-          <div v-if="index!=0" class="card">
+        <div v-for="(course,index) in $store.state.courses" :key="index">
+          <div v-if="index!=4" class="card">
             <div class="actions">
               <img src="../assets/Common/edit.svg" alt="edit" />
               <div class="semester">
@@ -129,113 +129,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      courses: [
-        {
-          name: "Engineering Mathematics-IV",
-          code: "CS41",
-          lecture: 3,
-          tutorial: 1,
-          practical: 0,
-          type: "Theory",
-          semester: "four"
-        },
-        {
-          name: "Design and Analysis of Algorithms",
-          code: "CS42",
-          lecture: 3,
-          tutorial: 1,
-          practical: 0,
-          type: "Theory",
-          semester: "three"
-        },
-        {
-          name: "Microprocessors and Microcontrollers",
-          code: "CS43",
-          lecture: 3,
-          tutorial: 0,
-          practical: 1,
-          type: "Theory",
-          semester: "six"
-        },
-        {
-          name: "Design and Analysis of Algorithms",
-          code: "CS42",
-          lecture: 3,
-          tutorial: 1,
-          practical: 0,
-          type: "Theory",
-          semester: "eight"
-        },
-        {
-          name: "Microprocessors and Microcontrollers",
-          code: "CS43",
-          lecture: 3,
-          tutorial: 0,
-          practical: 1,
-          type: "Theory",
-          semester: "four"
-        },
-        {
-          name: "Design and Analysis of Algorithms",
-          code: "CS42",
-          lecture: 3,
-          tutorial: 1,
-          practical: 0,
-          type: "Theory",
-          semester: "four"
-        },
-        {
-          name: "Microprocessors and Microcontrollers",
-          code: "CS43",
-          lecture: 3,
-          tutorial: 0,
-          practical: 1,
-          type: "Theory",
-          semester: "four"
-        },
-        {
-          name: "Design and Analysis of Algorithms",
-          code: "CS42",
-          lecture: 3,
-          tutorial: 1,
-          practical: 0,
-          type: "Theory",
-          semester: "four"
-        },
-        {
-          name: "Microprocessors and Microcontrollers",
-          code: "CS43",
-          lecture: 3,
-          tutorial: 0,
-          practical: 1,
-          type: "Theory",
-          semester: "four"
-        },
-        {
-          name: "Design and Analysis of Algorithms",
-          code: "CS42",
-          lecture: 3,
-          tutorial: 1,
-          practical: 0,
-          type: "Theory",
-          semester: "four"
-        },
-        {
-          name: "Microprocessors and Microcontrollers",
-          code: "CS43",
-          lecture: 3,
-          tutorial: 0,
-          practical: 1,
-          type: "Theory",
-          semester: "four"
-        }
-      ]
-    };
-  }
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -317,38 +211,38 @@ export default {
         justify-content: space-between;
         padding: 0 0.2rem;
         img {
-          margin: 0.5rem;    
-          cursor: auto;      
+          margin: 0.5rem;
+          cursor: auto;
         }
-        img:active{
+        img:active {
           transform: none;
         }
-        .actions-group{
-          img{
+        .actions-group {
+          img {
             cursor: pointer;
           }
-          img:active{
+          img:active {
             transform: scale(0.95);
           }
         }
       }
-      .details-edit {   
-        font-size:smaller ;     
+      .details-edit {
+        font-size: smaller;
         .row {
           display: flex;
           justify-content: space-around;
           align-items: center;
-          label{
+          label {
             color: $primary-dark;
             font-weight: bold;
           }
           input {
             margin: 0.5rem 0.3rem;
             padding: 0.35rem;
-            border: none;                        
+            border: none;
             border-bottom: 1px solid black;
             font-size: small;
-          }          
+          }
         }
       }
     }
