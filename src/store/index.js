@@ -5,6 +5,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    showProfessorModal: false,
+    showCourseModal: false,
     courses: [
       {
         name: "Engineering Mathematics-IV",

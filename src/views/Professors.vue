@@ -3,7 +3,14 @@
     <div class="container">
       <div class="search-bar">
         <input type="search" placeholder="Search Professors" />
-        <img src="../assets/Professors/add.svg" alt="add" />
+        <img
+          src="../assets/Professors/add.svg"
+          alt="add"
+          @click="$store.state.showProfessorModal = true"
+        />
+        <transition name="fade" appear>
+          <AddProfessor v-if="$store.state.showProfessorModal" />
+        </transition>
       </div>
       <div class="results">
         <div v-for="(professor,index) in $store.state.professors" :key="index">
@@ -15,7 +22,11 @@
                 alt="female"
                 v-else-if="professor.gender=='female'"
               />
-              <img src="../assets/Professors/other.svg" alt="male" v-else-if="professor.gender=='other'" />
+              <img
+                src="../assets/Professors/other.svg"
+                alt="male"
+                v-else-if="professor.gender=='other'"
+              />
               <div class="details">
                 <h3>{{professor.name}}</h3>
                 <h5>{{professor.designation}}</h5>
@@ -28,7 +39,7 @@
           </div>
           <div v-else class="card">
             <div class="card-container">
-              <img src="../assets/Common/edit.svg" alt="edit-mode">
+              <img src="../assets/Common/edit.svg" alt="edit-mode" />
               <div class="details-edit">
                 <input type="text" v-model="professor.name" />
                 <input type="text" v-model="professor.designation" />
@@ -46,7 +57,13 @@
                   v-model="professor.gender"
                 />
                 <label for="female">Female</label>
-                <input type="radio" id="other" name="gender" value="other" v-model="professor.gender" />
+                <input
+                  type="radio"
+                  id="other"
+                  name="gender"
+                  value="other"
+                  v-model="professor.gender"
+                />
                 <label for="other">Other</label>
               </form>
               <img src="../assets/Common/save.svg" alt="save" />
@@ -60,7 +77,13 @@
 </template>
 
 <script>
-export default {};
+import AddProfessor from "../components/AddProfessor.vue";
+
+export default {
+  components: {
+    AddProfessor
+  }
+};
 </script>
 
 <style lang="scss" scoped>

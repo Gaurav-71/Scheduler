@@ -22,7 +22,7 @@
           </router-link>
         </li>
         <li>
-        <router-link to="/professors" class="router-link" >
+          <router-link to="/professors" class="router-link">
             <img src="../assets/Sidebar/professor.svg" alt="professor" />
             <span>Professors</span>
           </router-link>
@@ -83,7 +83,7 @@ export default {
     left: 0;
     width: 5rem;
     height: 100vh;
-    //background: $primary-light;
+    z-index: 1;
     background-image: $gradient;
     ul {
       list-style-type: none;
@@ -114,9 +114,9 @@ export default {
         .router-link:hover {
           background: $primary-dark;
           border-left: 3px solid red;
-        }      
+        }
       }
-      .active{
+      .active {
         background: $primary-dark;
         img {
           border: 3px solid $sidebar-menu-text;

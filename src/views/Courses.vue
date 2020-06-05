@@ -3,7 +3,10 @@
     <div class="container">
       <div class="search-bar">
         <input type="search" placeholder="Search Courses" />
-        <img src="../assets/Courses/add.svg" alt="add" />
+        <img src="../assets/Courses/add.svg" alt="add" @click="$store.state.showCourseModal=true" />
+        <transition name="fade" appear>
+          <AddCourse v-if="$store.state.showCourseModal" />
+        </transition>
       </div>
       <div class="results">
         <div v-for="(course,index) in $store.state.courses" :key="index">
@@ -129,7 +132,13 @@
 </template>
 
 <script>
-export default {};
+import AddCourse from "../components/AddCourse.vue";
+
+export default {
+  components: {
+    AddCourse
+  }
+};
 </script>
 
 <style lang="scss" scoped>
