@@ -1,36 +1,36 @@
 <template>
-  <div class="semester">    
+  <div class="semester">
     <div class="container">
       <div class="progress-bar">
         <div class="step" style="text-align: right;">
           <img
             src="../assets/Semester/semester.svg"
             alt="semester"
-            v-bind:class="{'active-img':progressCounter>1}"
+            v-bind:class="{'active-img':$store.state.progressCounter>1}"
           />
-          <p v-bind:class="{'active-p':progressCounter==1}">Class</p>
+          <p v-bind:class="{'active-p':$store.state.progressCounter==1}">Class</p>
         </div>
-        <div class="line" v-bind:class="{'active-line':progressCounter>1}"></div>
+        <div class="line" v-bind:class="{'active-line':$store.state.progressCounter>1}"></div>
         <div class="step" style="text-align: center;">
           <img
             src="../assets/Semester/classroom.svg"
             alt="classroom"
-            v-bind:class="{'active-img':progressCounter>2}"
+            v-bind:class="{'active-img':$store.state.progressCounter>2}"
           />
-          <p v-bind:class="{'active-p':progressCounter==2}">Room</p>
+          <p v-bind:class="{'active-p':$store.state.progressCounter==2}">Room</p>
         </div>
-        <div class="line" v-bind:class="{'active-line':progressCounter>2}"></div>
+        <div class="line" v-bind:class="{'active-line':$store.state.progressCounter>2}"></div>
         <div class="step" style="text-align: left;">
           <img
             src="../assets/Semester/automated.svg"
             alt="automated"
-            v-bind:class="{'active-img':progressCounter>3}"
+            v-bind:class="{'active-img':$store.state.progressCounter>3}"
           />
-          <p v-bind:class="{'active-p':progressCounter==3}">Type</p>
+          <p v-bind:class="{'active-p':$store.state.progressCounter==3}">Type</p>
         </div>
       </div>
       <div class="multiple-forms">
-        <div class="card semester-section" v-if="progressCounter==1">
+        <div class="card semester-section" v-if="$store.state.progressCounter==1">
           <h1>Semester & Section</h1>
           <img src="../assets/Semester/source/semester.svg" alt="semester" />
           <p>Select the semester and section of the class you want to schedule a new Timetable</p>
@@ -54,13 +54,13 @@
             </datalist>
           </form>
         </div>
-        <div class="card classroom" v-if="progressCounter==2">
+        <div class="card classroom" v-if="$store.state.progressCounter==2">
           <h1>Classroom</h1>
           <img src="../assets/Semester/source/classroom.svg" alt="classroom" />
           <p>Choose a classroom</p>
           <input type="text" placeholder="Enter classroom name" />
         </div>
-        <div class="card automated" v-if="progressCounter==3">
+        <div class="card automated" v-if="$store.state.progressCounter==3">
           <h1>Manual or Automated ?</h1>
           <img src="../assets/Semester/source/automated.svg" alt="automated" />
           <div class="card-container">
@@ -78,9 +78,8 @@
         </div>
       </div>
       <nav>
-        <div class="btn" @click="progressCounter-=1" v-if="progressCounter!=1">Back</div>
-        <!-- <a class="btn" v-if="progressCounter == 3">Create</a>-->
-        <div class="btn" @click="progressCounter+=1" v-if="progressCounter!=3">Next</div>
+        <div class="btn" @click="$store.state.progressCounter-=1" v-if="$store.state.progressCounter!=1">Back</div>        
+        <div class="btn" @click="$store.state.progressCounter+=1" v-if="$store.state.progressCounter!=3">Next</div>
       </nav>
     </div>
   </div>
@@ -88,13 +87,7 @@
 
 <script>
 export default {
-  name: "Semester",
-  data() {
-    return {
-      progressCounter: 1,
-      isTrue: true
-    };
-  }
+  name: "Semester",  
 };
 </script>
 
@@ -110,14 +103,14 @@ export default {
   .container {
     border-radius: 2rem;
     width: 85vw;
-    min-height: 550px;    
+    min-height: 550px;
     display: grid;
-    grid-template-rows: 20% 70% 10%;    
-    @include ipad-portrait{
+    grid-template-rows: 20% 70% 10%;
+    @include ipad-portrait {
       //width: 1200px;
       width: 100vw;
-      height: 850px;      
-    }    
+      height: 850px;
+    }
     .progress-bar {
       height: 100%;
       width: 100%;
@@ -247,7 +240,7 @@ export default {
               color: white;
               font-size: 0.9rem;
             }
-            button:active{
+            button:active {
               transform: scale(1.01);
             }
             button:focus {

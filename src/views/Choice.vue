@@ -9,7 +9,7 @@
           <h3>Timetable</h3>
           <p>Create a new timetable for any semester automatically without any hassle.</p>
         </div>
-        <a>Schedule Timetable</a>
+        <a @click="route(1)">Schedule Timetable</a>
       </div>
       <div class="card">
         <div class="image-2"></div>
@@ -17,7 +17,7 @@
           <h3>Internals</h3>
           <p>Create a new timetable for internals and send it via sms to all students without any hassle.</p>
         </div>
-        <a>Schedule Internals</a>
+        <a @click="route(2)">Schedule Internals</a>
       </div>
     </div>
   </div>
@@ -30,6 +30,13 @@ export default {
   name: "Choice",
   components: {
     Header
+  },
+  methods: {
+    route(page) {
+      if (page == 1) {
+        this.$router.push("timetable");
+      }
+    }
   }
 };
 </script>

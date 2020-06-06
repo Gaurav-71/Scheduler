@@ -4,7 +4,7 @@
     <h1>Schedule timetables and exams the modern way</h1>
     <h5>The scheduler is a smart web solution which helps in scheduling timetables and exams</h5>
     <h6>Made by Aravind Shreyas, Dheeraj Bhat, Divya, Gaurav v</h6>
-    <button>Login</button>
+    <button @click="route">Login</button>
     <footer>
       <img src="../assets/Landing/college.png" alt="college" />
     </footer>
@@ -18,6 +18,11 @@ export default {
   name: "Landing",
   components: {
     Header
+  },
+  methods: {
+    route() {
+      this.$router.push("login");
+    }
   }
 };
 </script>
@@ -28,6 +33,8 @@ export default {
 .landing {
   text-align: center;
   margin-top: 7rem;
+  height: 83vh;
+  overflow: hidden;
   h1 {
     color: $primary-light;
     font-size: 2.5rem;
@@ -71,6 +78,7 @@ export default {
     position: absolute;
     bottom: 0;
     left: 0;
+    right: 0;
     img {
       width: 100vw;
     }

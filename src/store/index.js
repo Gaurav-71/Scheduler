@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    progressCounter: 1,
     showProfessorModal: false,
     showCourseModal: false,
     courses: [

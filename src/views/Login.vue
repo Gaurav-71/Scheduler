@@ -10,7 +10,7 @@
           <input type="email" placeholder="Email" />
           <input type="password" placeholder="Password" />
           <input type="password" placeholder="Confirm Password" />
-          <button>Sign Up</button>
+          <button @click="signUp">Sign Up</button>
         </form>
       </div>
       <div class="form-container sign-in-container">
@@ -20,7 +20,7 @@
           <input type="email" placeholder="Email" />
           <input type="password" placeholder="Password" />
           <a href="#">Forgot your password?</a>
-          <button>Sign In</button>
+          <button @click="signIn">Sign In</button>
         </form>
       </div>
       <div class="overlay-container">
@@ -53,6 +53,14 @@ export default {
     return {
       shiftView: false
     };
+  },
+  methods: {
+    signIn() {
+      this.$router.push("choice");
+    },
+    signUp() {
+      this.$router.push("choice");
+    }
   }
 };
 </script>
