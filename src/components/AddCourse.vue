@@ -3,7 +3,7 @@
     <div class="modal">
       <img src="../assets/Courses/add.svg" alt="add" />
       <div class="line"></div>
-      <form>
+      <form class="form-data">
         <div class="row">
           <div class="field">
             <label for="name">Course name</label>
@@ -98,22 +98,22 @@
     margin: 1rem;
     .row {
       width: 100%;
-      height: 100%;
+     // height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       .field {
         width: 100%;
-        height: 100%;
+        //height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: left;
         align-items: center;
-        margin: 1rem 0;
+        margin: .7rem 0;
         label {
           margin: 0 0 0 2.5rem;
           width: 100%;
-          height: 100%;
+          //height: 100%;
           font-weight: bold;
           color: $primary-dark;
         }
@@ -137,7 +137,7 @@
     }
     .row1 {
       width: 100%;
-      height: 100%;
+      //height: 100%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -147,7 +147,7 @@
       .field1 {
         label {
           width: 100%;
-          height: 100%;
+          //height: 100%;
           font-weight: bold;
           color: $primary-dark;
         }

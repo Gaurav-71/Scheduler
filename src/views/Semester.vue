@@ -78,8 +78,16 @@
         </div>
       </div>
       <nav>
-        <div class="btn" @click="$store.state.progressCounter-=1" v-if="$store.state.progressCounter!=1">Back</div>        
-        <div class="btn" @click="$store.state.progressCounter+=1" v-if="$store.state.progressCounter!=3">Next</div>
+        <div
+          class="btn"
+          @click="$store.state.progressCounter-=1"
+          v-if="$store.state.progressCounter!=1"
+        >Back</div>
+        <div
+          class="btn"
+          @click="$store.state.progressCounter+=1"
+          v-if="$store.state.progressCounter!=3"
+        >Next</div>
       </nav>
     </div>
   </div>
@@ -87,7 +95,7 @@
 
 <script>
 export default {
-  name: "Semester",  
+  name: "Semester"
 };
 </script>
 
@@ -107,9 +115,8 @@ export default {
     display: grid;
     grid-template-rows: 20% 70% 10%;
     @include ipad-portrait {
-      //width: 1200px;
       width: 100vw;
-      height: 850px;
+      // height: 850px;
     }
     .progress-bar {
       height: 100%;
@@ -212,11 +219,17 @@ export default {
         img {
           width: 65px;
           height: 65px;
+          @include ipad-portrait {
+            display: none;
+          }
         }
         .card-container {
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
+          @include ipad-portrait {
+            margin: 1rem 1rem 3rem 1rem;
+          }
           .child-card {
             width: 20rem;
             height: 10rem;

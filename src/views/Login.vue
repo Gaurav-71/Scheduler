@@ -6,10 +6,10 @@
         <form action="#">
           <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
           <h1 style="margin: 1rem;">Create Account</h1>
-          <input type="text" placeholder="Name" />
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <input type="password" placeholder="Confirm Password" />
+          <input type="text" placeholder="Name" class="name" />
+          <input type="email" placeholder="Email" class="email" />
+          <input type="password" placeholder="Password" class="password" />
+          <input type="password" placeholder="Confirm Password" class="confirm-password" />
           <button @click="signUp">Sign Up</button>
         </form>
       </div>
@@ -17,8 +17,8 @@
         <form action="#">
           <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
           <h1 style="margin: 1rem;">Sign in</h1>
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
+          <input type="email" placeholder="Email" class="email" />
+          <input type="password" placeholder="Password" class="password" />
           <a href="#">Forgot your password?</a>
           <button @click="signIn">Sign In</button>
         </form>
@@ -100,6 +100,9 @@ export default {
       text-decoration: none;
       margin: 15px 0;
     }
+    a:hover {
+      color: rgb(199, 49, 49);
+    }
     button {
       margin-top: 1rem;
       border-radius: 20px;
@@ -130,6 +133,23 @@ export default {
       padding: 12px 15px;
       margin: 8px 0;
       width: 100%;
+      background-position-y: center;
+      background-position-x: 0.8rem;
+      background-size: 18px;
+      background-repeat: no-repeat;
+      text-indent: 30px;
+    }
+    .name {
+      background-image: url("../assets/Login/name.svg");
+    }
+    .email {
+      background-image: url("../assets/Login/mail.svg");
+    }
+    .password {
+      background-image: url("../assets/Login/password.svg");
+    }
+    .confirm-password {
+      background-image: url("../assets/Login/confirm.svg");
     }
   }
   .container {

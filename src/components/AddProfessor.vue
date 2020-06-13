@@ -3,7 +3,7 @@
     <div class="modal">
       <img src="../assets/Professors/add.svg" alt="add" />
       <div class="line"></div>
-      <form>
+      <form class="form-data">
         <div class="field1">
           <label for="name">Professor name</label>
           <br />
@@ -69,6 +69,9 @@
       }
       input {
         width: 95%;
+        @media (max-width: 991px) {
+          width: 88%;
+        }
         background-image: url("../assets/Professors/Modal/name.svg");
       }
     }
@@ -91,6 +94,12 @@
           display: flex;
           justify-content: flex-start;
           align-items: center;
+          @media (max-width: 991px) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          }
           .custom-label {
             display: flex;
             flex-direction: column;
@@ -100,6 +109,10 @@
             img {
               width: 40px;
               margin: 0.3rem;
+              @media (max-width: 991px) {
+                width: 35px;
+              }
+              cursor:default;
             }
             label {
               font-weight: lighter;

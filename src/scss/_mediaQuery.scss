@@ -1,28 +1,16 @@
 @mixin ipad {
-  @media (max-width: 1024px) {
-    @content;
-  }
   @media (max-width: 1112px) {
     @content;
-  }
+  }   
 }
 
 @mixin ipad-portrait {
-  @media (max-width: 768px) {
-    @content;
-  }
   @media (max-width: 991px) {
     @content;
-  }
+  }    
 }
 
-@mixin iphone {
-  @media (max-width: 320px) {
-    @content;
-  }
-  @media (max-width: 375px) {
-    @content;
-  }
+@mixin iphone {  
   @media (max-width: 414px) {
     @content;
   }
