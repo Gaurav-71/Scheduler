@@ -1,7 +1,7 @@
 <template>
   <div class="modal-container">
     <div class="modal">
-      <img src="../assets/Courses/add.svg" alt="add" />
+      <img src="../../assets/Courses/add.svg" alt="add" />
       <div class="line"></div>
       <form class="form-data">
         <div class="row">
@@ -85,12 +85,12 @@
         </div>
       </form>
     </div>
-    <img src="../assets/Common/delete.svg" alt="cancel" @click="$store.state.showCourseModal=false" />
+    <img src="../../assets/Common/delete.svg" alt="cancel" @click="$store.state.showCourseModal=false" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import "../scss/modal";
+@import "../../scss/modal";
 .modal {
   form {
     width: 90%;
@@ -122,16 +122,16 @@
           text-indent: 34px;
         }
         .name {
-          background-image: url("../assets/Courses/Modal/name.svg");
+          background-image: url("../../assets/Courses/Modal/name.svg");
         }
         .code {
-          background-image: url("../assets/Courses/Modal/id.svg");
+          background-image: url("../../assets/Courses/Modal/id.svg");
         }
         .sem {
-          background-image: url("../assets/Courses/Modal/semester.svg");
+          background-image: url("../../assets/Courses/Modal/semester.svg");
         }
         .type {
-          background-image: url("../assets/Courses/Modal/type.svg");
+          background-image: url("../../assets/Courses/Modal/type.svg");
         }
       }
     }
@@ -165,13 +165,13 @@
               text-indent: 34px;
             }
             .lecture {
-              background-image: url("../assets/Courses/Modal/lecture.svg");
+              background-image: url("../../assets/Courses/Modal/lecture.svg");
             }
             .tutorial {
-              background-image: url("../assets/Courses/Modal/tutorial.svg");
+              background-image: url("../../assets/Courses/Modal/tutorial.svg");
             }
             .lab {
-              background-image: url("../assets/Courses/Modal/lab.svg");
+              background-image: url("../../assets/Courses/Modal/lab.svg");
             }
           }
         }

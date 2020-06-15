@@ -5,43 +5,43 @@
       <ul>
         <li>
           <router-link to="/timetable/" class="router-link">
-            <img src="../assets/Sidebar/home.svg" alt="home" />
+            <img src="../../assets/Sidebar/home.svg" alt="home" />
             <span>Home</span>
           </router-link>
         </li>
         <li>
-          <router-link to="/semester" class="router-link">
-            <img src="../assets/Sidebar/create.svg" alt="create" />
+          <router-link to="/create" class="router-link">
+            <img src="../../assets/Sidebar/create.svg" alt="create" />
             <span>Create</span>
           </router-link>
         </li>
         <li>
-          <router-link to="#" class="router-link">
-            <img src="../assets/Sidebar/view.svg" alt="view" />
+          <router-link to="/semester" class="router-link">
+            <img src="../../assets/Sidebar/view.svg" alt="view" />
             <span>View</span>
           </router-link>
         </li>
         <li>
           <router-link to="/professors" class="router-link">
-            <img src="../assets/Sidebar/professor.svg" alt="professor" />
+            <img src="../../assets/Sidebar/professor.svg" alt="professor" />
             <span>Professors</span>
           </router-link>
         </li>
         <li>
           <router-link to="/courses" class="router-link">
-            <img src="../assets/Sidebar/courses.svg" alt="courses" />
+            <img src="../../assets/Sidebar/courses.svg" alt="courses" />
             <span>Courses</span>
           </router-link>
         </li>
         <li>
           <router-link to="#" class="router-link">
-            <img src="../assets/Sidebar/settings.svg" alt="settings" />
+            <img src="../../assets/Sidebar/settings.svg" alt="settings" />
             <span>Settings</span>
           </router-link>
         </li>
         <li>
           <router-link to="#" class="router-link">
-            <img src="../assets/Sidebar/exit.svg" alt="exit" />
+            <img src="../../assets/Sidebar/exit.svg" alt="exit" />
             <span>Exit Time Table</span>
           </router-link>
         </li>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
+import Header from "../Navigation/Header.vue";
 
 export default {
   components: {
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/colors";
+@import "../../scss/colors";
 .sidebar {
   nav {
     position: fixed;
@@ -146,10 +146,3 @@ export default {
   }
 }
 </style>
-<!--
-<style>
-body,
-html {
-  margin-left: 5rem;
-}
-</style>-->

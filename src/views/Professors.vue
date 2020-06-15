@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import AddProfessor from "../components/AddProfessor.vue";
+import AddProfessor from "../components/Modals/AddProfessor.vue";
 
 export default {
   components: {

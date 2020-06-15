@@ -1,7 +1,7 @@
 <template>
   <div class="modal-container">
     <div class="modal">
-      <img src="../assets/Professors/add.svg" alt="add" />
+      <img src="../../assets/Professors/add.svg" alt="add" />
       <div class="line"></div>
       <form class="form-data">
         <div class="field1">
@@ -26,17 +26,17 @@
             <form>
               <input type="radio" id="male" name="gender" value="male" />
               <div class="custom-label">
-                <img src="../assets/Professors/Modal/male.svg" alt="male" />
+                <img src="../../assets/Professors/Modal/male.svg" alt="male" />
                 <label for="male">Male</label>
               </div>
               <input type="radio" id="female" name="gender" value="female" />
               <div class="custom-label">
-                <img src="../assets/Professors/Modal/female.svg" alt="male" />
+                <img src="../../assets/Professors/Modal/female.svg" alt="male" />
                 <label for="female">Female</label>
               </div>
               <input type="radio" id="other" name="gender" value="other" />
               <div class="custom-label">
-                <img src="../assets/Professors/other.svg" alt="male" />
+                <img src="../../assets/Professors/other.svg" alt="male" />
                 <label for="other">Other</label>
               </div>
             </form>
@@ -46,7 +46,7 @@
       </form>
     </div>
     <img
-      src="../assets/Common/delete.svg"
+      src="../../assets/Common/delete.svg"
       alt="cancel"
       @click="$store.state.showProfessorModal=false"
     />
@@ -54,7 +54,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../scss/modal";
+@import "../../scss/modal";
 .modal {
   form {
     width: 90%;
@@ -72,12 +72,12 @@
         @media (max-width: 991px) {
           width: 88%;
         }
-        background-image: url("../assets/Professors/Modal/name.svg");
+        background-image: url("../../assets/Professors/Modal/name.svg");
       }
     }
     .field2 {
       input {
-        background-image: url("../assets/Professors/Modal/designation.svg");
+        background-image: url("../../assets/Professors/Modal/designation.svg");
       }
     }
     .field3 {

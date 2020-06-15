@@ -1,15 +1,15 @@
 <template>
   <header>
-    <img src="../assets/Header/Logo.png" class="logo" alt="logo" />
+    <img src="../../assets/Header/Logo.png" class="logo" alt="logo" />
     <a class="logout">
-      <img src="../assets/Header/exit.svg" alt="exit" />
+      <img src="../../assets/Header/exit.svg" alt="exit" />
       <span>Logout</span>
     </a>
   </header>
 </template>
 
 <style lang="scss" scoped>
-@import "../scss/colors";
+@import "../../scss/colors";
 
 header {      
   position: fixed;  

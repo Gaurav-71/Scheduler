@@ -132,7 +132,7 @@
 </template>
 
 <script>
-import AddCourse from "../components/AddCourse.vue";
+import AddCourse from "../components/Modals/AddCourse.vue";
 
 export default {
   components: {
