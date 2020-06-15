@@ -1,26 +1,25 @@
 <template>
   <div class="create">
     <ProgressBar />
-    <Mapping />
+    <router-view />
   </div>
 </template>
 
 <script>
 import ProgressBar from "../../components/ProgressBar.vue";
-import Mapping from "../Create/Mapping.vue";
 
 export default {
   components: {
-    ProgressBar,
-    Mapping
+    ProgressBar,    
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import "../../scss/mediaQuery";
 .create {
   margin-top: 6rem;
   margin-left: 5rem;
-  height: calc(100vh - 6rem);
+  min-height: calc(100vh - 6rem);  
 }
 </style>

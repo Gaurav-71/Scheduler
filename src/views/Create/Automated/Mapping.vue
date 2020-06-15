@@ -2,10 +2,15 @@
   <div class="mapping">
     <div class="container">
       <div class="pills-container">
-        <div class="pills">
+        <div class="pills" v-if="$store.state.cycle == 'Odd'" >
           <div class="pill active">Third</div>
           <div class="pill">Fifth</div>
-          <div class="pill">Seventh</div>
+          <div class="pill">Seventh</div>          
+        </div>
+        <div class="pills" v-else>
+          <div class="pill active">Fourth</div>
+          <div class="pill">Sixth</div>
+          <div class="pill">Eight</div>
         </div>
         <input type="text" placeholder="Section" list="section" class="section" />
         <datalist name="section" id="section">
@@ -90,36 +95,37 @@ export default {
   created() {
     this.$store.state.progressCounter = 3;
     this.$store.state.isAutomated = true;
+    this.$store.state.isManual = false;
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../scss/colors";
-@import "../../scss/mediaQuery";
+@import "../../../scss/colors";
+@import "../../../scss/mediaQuery";
 
-.mapping {
+.mapping {  
+  display: flex;
+  justify-content: center;
+  align-items: center;  
   .container {
-    display: grid;
-    grid-template-rows: 17% auto;
-    margin: 0 6rem;
-    border-radius: 0.8rem;
-    @include ipad-portrait {
-      margin: 2rem 2.5rem;
-    }
+    width: 85%;    
+    border-radius: 0.8rem;    
     .pills-container {
       display: flex;
-      width: 100%;
+      width: 100%;  
+      height: 4rem;        
       flex-wrap: wrap;
+      margin-bottom: 1rem;
       @include ipad-portrait {
         justify-content: space-between;
+        height: 6rem;
       }
       .pills {
-        border-radius: 0.8rem;
-        margin-bottom: 1rem;
+        border-radius: 0.8rem;       
         background: rgba($color: $primary-dark, $alpha: 0.2);
         width: 35%;
-        height: calc(100% - 1rem);
+        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -152,15 +158,14 @@ export default {
           background: rgb(21, 127, 135);
         }
       }
-      input {
-        margin-bottom: 1rem;
+      input {        
         border-radius: 0.8rem;
         background: rgba($color: $primary-dark, $alpha: 0.2);
         border: none;
-        outline: none;
+        outline: none;        
       }
       .section {
-        width: 7%;
+        width: 8%;
         text-indent: 15px;
         margin-left: auto;
         @include ipad-portrait {
@@ -174,6 +179,7 @@ export default {
         margin-left: 0.75rem;
         @include ipad-portrait {
           width: 18%;
+         // text-indent: 0px;
         }
       }
     }
@@ -184,6 +190,7 @@ export default {
       overflow: hidden;
       background: white;
       box-shadow: 0 0px 20px rgba(0, 0, 0, 0.25);
+      margin-bottom: 2rem; 
       tr {
         td,
         th {

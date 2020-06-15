@@ -5,12 +5,18 @@ import Login from "../views/Login.vue";
 import Choice from "../views/Choice.vue";
 import Landing from "../views/Landing.vue";
 
-import Sidebar from "../components/Navigation/Sidebar.vue";
 import Create from "../views/Create/Create.vue";
+import Sidebar from "../components/Navigation/Sidebar.vue";
 import Professors from "../views/Professors.vue";
 import Courses from "../views/Courses.vue";
 import Home from "../views/Home.vue";
 import Semester from "../views/Semester.vue";
+
+import Type from "../views/Create/Type.vue";
+import Cycle from "../views/Create/Automated/Cycle.vue";
+import MappingAutomated from "../views/Create/Automated/Mapping.vue";
+import MappingManual from "../views/Create/Manual/Mapping.vue";
+import Class from "../views/Create/Manual/Class.vue";
 
 Vue.use(VueRouter);
 
@@ -31,8 +37,7 @@ const routes = [
     component: Choice,
   },
   {
-    path: "/timetable",
-    name: "Sidebar",
+    path: "/timetable",    
     component: Sidebar,
     children: [
       {
@@ -41,9 +46,35 @@ const routes = [
         component: Home,
       },
       {
-        path: "/create",
-        name: "Create",
+        path: "/create",        
         component: Create,
+        children: [
+          {
+            path: "/",
+            name: "Type",
+            component: Type,
+          },
+          {
+            path: "/cycle",
+            name: "Cycle",
+            component: Cycle,
+          },
+          {
+            path: "/mapping/automated",
+            name: "MappingAutomated",
+            component: MappingAutomated,
+          },
+          {
+            path: "/mapping/manual",
+            name: "MappingManual",
+            component: MappingManual,
+          },
+          {
+            path: "/class",
+            name: "Class",
+            component: Class,
+          },          
+        ],
       },
       {
         path: "/professors",

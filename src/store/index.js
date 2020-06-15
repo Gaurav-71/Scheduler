@@ -9,6 +9,8 @@ export default new Vuex.Store({
     showProfessorModal: false,
     showCourseModal: false,
     isAutomated: false,
+    isManual: false,
+    cycle: null,
     courses: [
       {
         name: "Engineering Mathematics-IV",
@@ -224,24 +226,6 @@ export default new Vuex.Store({
         practical: 0,
         type: "Theory",
         semester: "eight",
-      },
-      {
-        name: "Microprocessors and Microcontrollers",
-        code: "CS43",
-        lecture: 3,
-        tutorial: 0,
-        practical: 1,
-        type: "Theory",
-        semester: "four",
-      },
-      {
-        name: "Design and Analysis of Algorithms",
-        code: "CS42",
-        lecture: 3,
-        tutorial: 1,
-        practical: 0,
-        type: "Theory",
-        semester: "four",
       },
       {
         name: "Microprocessors and Microcontrollers",

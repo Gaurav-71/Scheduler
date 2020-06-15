@@ -16,8 +16,14 @@
         v-bind:class="{'active-img':$store.state.progressCounter>2}"
       />
       <p v-if="$store.state.progressCounter == 1">Step 2</p>
-      <p v-if="$store.state.isAutomated" v-bind:class="{'active-p':$store.state.progressCounter==2}">Cycle</p>
-      <p v-else v-bind:class="{'active-p':$store.state.progressCounter==2}">Class</p>
+      <p
+        v-if="$store.state.isAutomated  && $store.state.progressCounter != 1"
+        v-bind:class="{'active-p':$store.state.progressCounter==2}"
+      >Cycle</p>
+      <p
+        v-if="$store.state.isManual && $store.state.progressCounter != 1"
+        v-bind:class="{'active-p':$store.state.progressCounter==2}"
+      >Class</p>
     </div>
     <div class="line" v-bind:class="{'active-line':$store.state.progressCounter>2}"></div>
     <div class="step" style="text-align: left;">
@@ -26,9 +32,8 @@
         alt="mapping"
         v-bind:class="{'active-img':$store.state.progressCounter>3}"
       />
-      <p v-if="$store.state.progressCounter == 1">Step 3</p>      
-      <p v-if="$store.state.isAutomated" v-bind:class="{'active-p':$store.state.progressCounter==3}">Mapping</p>
-      <p v-else v-bind:class="{'active-p':$store.state.progressCounter==3}">Room</p>
+      <p v-if="$store.state.progressCounter == 1">Step 3</p>
+      <p v-if="$store.state.progressCounter != 1" v-bind:class="{'active-p':$store.state.progressCounter==3}">Mapping</p>
     </div>
   </div>
 </template>

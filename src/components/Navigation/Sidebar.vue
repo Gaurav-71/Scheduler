@@ -4,7 +4,7 @@
     <nav>
       <ul>
         <li>
-          <router-link to="/timetable/" class="router-link">
+          <router-link to="/timetable" class="router-link">
             <img src="../../assets/Sidebar/home.svg" alt="home" />
             <span>Home</span>
           </router-link>
