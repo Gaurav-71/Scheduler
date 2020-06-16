@@ -28,10 +28,9 @@
 export default {
   methods: {
     route(page) {
-      if (page == 1) {        
+      if (page == 1) {
         this.$router.push("cycle");
-      }
-      else if(page==2){
+      } else if (page == 2) {
         this.$router.push("class");
       }
     }
@@ -45,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../scss/colors";
+@import "../../scss/create-cards";
 @import "../../scss/mediaQuery";
 
 .type {
@@ -55,12 +54,6 @@ export default {
   align-items: center;
   .card {
     text-align: center;
-    width: 65%;
-    height: 22rem;
-    background: white;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     @include ipad-portrait {
       margin-bottom: 2rem;
       height: 36.5rem;
@@ -72,13 +65,6 @@ export default {
     img {
       width: 65px;
       height: 65px;
-    }
-    h1 {
-      background-image: $gradient;
-      color: white;
-      padding: 1.5rem;
-      margin: 0;
-      font-weight: lighter;
     }
     .child-container {
       display: flex;
@@ -131,7 +117,7 @@ export default {
         }
       }
     }
-  }
+  }  
 }
 </style>
 

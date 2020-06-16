@@ -22,7 +22,7 @@
           <option value="B"></option>
           <option value="C"></option>
         </datalist>
-        <input type="text" placeholder="Enter classroom no.">
+        <input type="text" placeholder="Enter classroom no." />
       </form>
     </div>
     <div class="btn" @click="route()">start mapping</div>
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../scss/colors";
+@import "../../../scss/create-cards";
 @import "../../../scss/mediaQuery";
 .class {
   margin-top: 2.5rem;
@@ -54,24 +54,9 @@ export default {
   align-items: center;
   flex-direction: column;
   .card {
-    text-align: left;
-    width: 65%;
-    height: 22rem;
-    background: white;
-    border-radius: 1rem;
-    overflow: hidden;
     text-align: center;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     @include ipad-portrait {
       height: 31rem;
-    }
-    h1 {
-      background-image: $gradient;
-      color: white;
-      padding: 1.5rem;
-      margin: 0;
-      font-weight: lighter;
-      text-align: center;
     }
     img {
       width: 80px;
@@ -87,29 +72,8 @@ export default {
         border: none;
         padding: 12px 15px;
         margin: 1rem 1rem;
-      }      
+      }
     }
-  }
-  .btn {
-    margin: 0.7rem;
-    margin-top: 2rem;
-    border-radius: 20px;
-    border: 1px solid $primary-light;
-    background-image: $gradient;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-  }
-  .btn:active {
-    transform: scale(0.95);
-  }
-  .btn:focus {
-    outline: none;
   }
 }
 </style>

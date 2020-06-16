@@ -66,7 +66,7 @@
             </datalist>
           </td>
         </tr>
-      </table>      
+      </table>
     </div>
   </div>
 </template>
@@ -82,8 +82,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../scss/colors";
-@import "../../../scss/mediaQuery";
+
+@import "../../../scss/table";
 
 .mapping {
   display: flex;
@@ -91,62 +91,9 @@ export default {
   align-items: center;
   .container {
     width: 85%;
-    border-radius: 0.8rem;    
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      border-radius: 0.8rem;
-      overflow: hidden;
-      background: white;
-      box-shadow: 0 0px 20px rgba(0, 0, 0, 0.25);     
-      margin-bottom: 2rem; 
-      tr {
-        td,
-        th {
-          text-align: center;
-          padding: 0.8rem;
-          font-size: small;
-          font-weight: lighter;
-          input {
-            width: calc(100% - 5px);
-            height: 30px;
-            margin: 0;
-            border: none;
-            background: none;
-            outline: none;
-            text-align: center;
-          }
-          ::-webkit-input-placeholder {
-            text-align: center;
-            color: darkslategrey;
-          }
-          :-moz-placeholder {
-            text-align: center;
-            color: darkslategrey;
-          }
-        }
-        th {
-          font-size: large;
-          font-weight: bold;
-          color: $primary;
-          padding: 1.3rem;
-        }
-        .data-input {
-          padding: 0;
-        }
-      }
-      tr:nth-child(odd) {
-        //background-color: #dddddd;
-        background: rgba($color: $primary-dark, $alpha: 0.2);
-      }
-      tr:nth-child(1) {
-        background: $gradient;
-        border-top-left-radius: 0.8rem;
-        border-top-right-radius: 0.8rem;
-        th {
-          color: white;
-        }
-      }
+    border-radius: 0.8rem;
+    .data-input {
+      padding: 0;
     }
   }
 }

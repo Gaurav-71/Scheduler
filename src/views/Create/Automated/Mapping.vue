@@ -2,10 +2,10 @@
   <div class="mapping">
     <div class="container">
       <div class="pills-container">
-        <div class="pills" v-if="$store.state.cycle == 'Odd'" >
+        <div class="pills" v-if="$store.state.cycle == 'Odd'">
           <div class="pill active">Third</div>
           <div class="pill">Fifth</div>
-          <div class="pill">Seventh</div>          
+          <div class="pill">Seventh</div>
         </div>
         <div class="pills" v-else>
           <div class="pill active">Fourth</div>
@@ -101,20 +101,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../scss/colors";
-@import "../../../scss/mediaQuery";
+@import "../../../scss/table";
 
-.mapping {  
+.mapping {
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   .container {
-    width: 85%;    
-    border-radius: 0.8rem;    
+    width: 85%;
+    border-radius: 0.8rem;
     .pills-container {
       display: flex;
-      width: 100%;  
-      height: 4rem;        
+      width: 100%;
+      height: 4rem;
       flex-wrap: wrap;
       margin-bottom: 1rem;
       @include ipad-portrait {
@@ -122,7 +121,7 @@ export default {
         height: 6rem;
       }
       .pills {
-        border-radius: 0.8rem;       
+        border-radius: 0.8rem;
         background: rgba($color: $primary-dark, $alpha: 0.2);
         width: 35%;
         height: 100%;
@@ -158,11 +157,11 @@ export default {
           background: rgb(21, 127, 135);
         }
       }
-      input {        
+      input {
         border-radius: 0.8rem;
         background: rgba($color: $primary-dark, $alpha: 0.2);
         border: none;
-        outline: none;        
+        outline: none;
       }
       .section {
         width: 8%;
@@ -179,65 +178,12 @@ export default {
         margin-left: 0.75rem;
         @include ipad-portrait {
           width: 18%;
-         // text-indent: 0px;
+          // text-indent: 0px;
         }
       }
     }
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      border-radius: 0.8rem;
-      overflow: hidden;
-      background: white;
-      box-shadow: 0 0px 20px rgba(0, 0, 0, 0.25);
-      margin-bottom: 2rem; 
-      tr {
-        td,
-        th {
-          text-align: center;
-          padding: 0.8rem;
-          font-size: small;
-          font-weight: lighter;
-          input {
-            width: calc(100% - 5px);
-            height: 30px;
-            margin: 0;
-            border: none;
-            background: none;
-            outline: none;
-            text-align: center;
-          }
-          ::-webkit-input-placeholder {
-            text-align: center;
-            color: darkslategrey;
-          }
-          :-moz-placeholder {
-            text-align: center;
-            color: darkslategrey;
-          }
-        }
-        th {
-          font-size: large;
-          font-weight: bold;
-          color: $primary;
-          padding: 1.3rem;
-        }
-        .data-input {
-          padding: 0;
-        }
-      }
-      tr:nth-child(odd) {
-        //background-color: #dddddd;
-        background: rgba($color: $primary-dark, $alpha: 0.2);
-      }
-      tr:nth-child(1) {
-        background: $gradient;
-        border-top-left-radius: 0.8rem;
-        border-top-right-radius: 0.8rem;
-        th {
-          color: white;
-        }
-      }
+    .data-input {
+      padding: 0;
     }
   }
 }

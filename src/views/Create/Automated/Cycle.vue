@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../scss/colors";
+@import "../../../scss/create-cards";
 @import "../../../scss/mediaQuery";
 
 .cycle {
@@ -52,22 +52,8 @@ export default {
   flex-direction: column;
   .card {
     text-align: left;
-    width: 65%;
-    height: 22rem;
-    background: white;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     @include ipad-portrait {
       height: 25rem;
-    }
-    h1 {
-      background-image: $gradient;
-      color: white;
-      padding: 1.5rem;
-      margin: 0;
-      font-weight: lighter;
-      text-align: center;
     }
     form {
       padding: 1rem 3rem;
@@ -85,27 +71,6 @@ export default {
       line-height: 25px;
       color: $primary-dark;
     }
-  }
-  .btn {
-    margin: 0.7rem;
-    margin-top: 2rem;
-    border-radius: 20px;
-    border: 1px solid $primary-light;
-    background-image: $gradient;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    cursor: pointer;
-  }
-  .btn:active {
-    transform: scale(0.95);
-  }
-  .btn:focus {
-    outline: none;
   }
 }
 </style>
