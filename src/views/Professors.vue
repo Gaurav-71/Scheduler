@@ -110,7 +110,7 @@ export default {
         padding-bottom: 1.1rem;
         img {
           width: 80px;
-          width: 80px;
+          height: 80px;
         }
         .details {
           padding: 1.4rem 0 0 1rem;
