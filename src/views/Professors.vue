@@ -110,6 +110,7 @@ export default {
         padding-bottom: 1.1rem;
         img {
           width: 80px;
+          width: 80px;
         }
         .details {
           padding: 1.4rem 0 0 1rem;
@@ -139,6 +140,7 @@ export default {
         border-bottom-right-radius: 0.9rem;
         img {
           width: 30px;
+          height: 30px;
           margin: 0 0.5rem;
           cursor: pointer;
         }

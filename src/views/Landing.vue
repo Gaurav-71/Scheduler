@@ -55,7 +55,7 @@ export default {
     margin-bottom: 1rem;
   }
   button {
-    margin-top: 2rem;
+    margin-top: 1rem;
     border-radius: 20px;
     border: 1px solid $primary-light;
     background-color: $primary-light;
@@ -75,7 +75,7 @@ export default {
     outline: none;
   }
   footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;

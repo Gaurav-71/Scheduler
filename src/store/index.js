@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     progressCounter: 1,
+    progressSteps: ["Type","Step 2","Step 3"],
     showProfessorModal: false,
     showCourseModal: false,
     isAutomated: false,
@@ -233,7 +234,7 @@ export default new Vuex.Store({
         lecture: 3,
         tutorial: 0,
         practical: 1,
-        type: "Theory",
+        type: "Lab",
         semester: "four",
       },
       {
@@ -242,10 +243,10 @@ export default new Vuex.Store({
         lecture: 3,
         tutorial: 1,
         practical: 0,
-        type: "Theory",
+        type: "Lab",
         semester: "four",
       },
-    ],
+    ], 
   },
   mutations: {},
   actions: {},

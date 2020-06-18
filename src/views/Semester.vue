@@ -271,6 +271,7 @@ export default {
       align-items: center;
       img {
         width: 30px;
+        height: 30px;
       }
       .btn {
         margin: 0.7rem;

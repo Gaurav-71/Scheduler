@@ -35,6 +35,7 @@ header {
     cursor: pointer;    
     img {
       width: 35px;
+      height: 35px;
       border: 2px solid $background;
       border-radius: 50%;
       box-shadow: 0px 0 5px black;            

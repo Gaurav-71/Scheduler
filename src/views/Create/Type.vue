@@ -36,9 +36,8 @@ export default {
     }
   },
   created() {
-    this.$store.state.progressCounter = 1;
-    this.$store.state.isManual = false;
-    this.$store.state.isAutomated = false;
+    this.$store.state.progressCounter = 1;   
+    this.$store.state.progressSteps = ["Type","Step 2","Step 3"]; 
   }
 };
 </script>

@@ -33,9 +33,8 @@ export default {
     }
   },
   created() {
-    this.$store.state.progressCounter = 2;
-    this.$store.state.isAutomated = true;
-    this.$store.state.isManual = false;
+    this.$store.state.progressCounter = 2;    
+    this.$store.state.progressSteps[1] = "Cycle";
   }
 };
 </script>

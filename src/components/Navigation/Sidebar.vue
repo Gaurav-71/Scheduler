@@ -106,6 +106,7 @@ export default {
           cursor: pointer;
           img {
             width: 45px;
+            width: 45px;
           }
           span {
             display: none;

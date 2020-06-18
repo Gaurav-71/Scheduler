@@ -108,6 +108,7 @@
             margin: 0 2.1rem 0 0.3rem;
             img {
               width: 40px;
+              height: 40px;
               margin: 0.3rem;
               @media (max-width: 991px) {
                 width: 35px;

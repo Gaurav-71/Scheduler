@@ -38,8 +38,7 @@ export default {
   },
   created() {
     this.$store.state.progressCounter = 2;
-    this.$store.state.isManual = true;
-    this.$store.state.isAutomated = false;
+    this.$store.state.progressSteps[1] = "Class";
   }
 };
 </script>
