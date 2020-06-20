@@ -3,7 +3,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  created(){
+    this.$store.state.sidebarCounter = 1;
+  }
+};
 </script>
 
 <style lang="scss" scoped>

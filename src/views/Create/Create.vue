@@ -11,6 +11,9 @@ import ProgressBar from "../../components/ProgressBar.vue";
 export default {
   components: {
     ProgressBar,    
+  },
+  created(){
+    this.$store.state.sidebarCounter = 2;
   }
 };
 </script>

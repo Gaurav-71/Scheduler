@@ -3,37 +3,37 @@
     <Header />
     <nav>
       <ul>
-        <li>
+        <li v-bind:class="{'active':$store.state.sidebarCounter == '1'}">
           <router-link to="/timetable" class="router-link">
             <img src="../../assets/Sidebar/home.svg" alt="home" />
             <span>Home</span>
           </router-link>
         </li>
-        <li>
+        <li v-bind:class="{'active':$store.state.sidebarCounter == '2'}">
           <router-link to="/create" class="router-link">
             <img src="../../assets/Sidebar/create.svg" alt="create" />
             <span>Create</span>
           </router-link>
         </li>
-        <li>
+        <li v-bind:class="{'active':$store.state.sidebarCounter == '3'}">
           <router-link to="#" class="router-link">
             <img src="../../assets/Sidebar/view.svg" alt="view" />
             <span>View</span>
           </router-link>
         </li>
-        <li>
+        <li v-bind:class="{'active':$store.state.sidebarCounter == '4'}">
           <router-link to="/professors" class="router-link">
             <img src="../../assets/Sidebar/professor.svg" alt="professor" />
             <span>Professors</span>
           </router-link>
         </li>
-        <li>
+        <li v-bind:class="{'active':$store.state.sidebarCounter == '5'}">
           <router-link to="/courses" class="router-link">
             <img src="../../assets/Sidebar/courses.svg" alt="courses" />
             <span>Courses</span>
           </router-link>
         </li>
-        <li>
+        <li v-bind:class="{'active':$store.state.sidebarCounter == '6'}">
           <router-link to="#" class="router-link">
             <img src="../../assets/Sidebar/settings.svg" alt="settings" />
             <span>Settings</span>
@@ -57,20 +57,7 @@ import Header from "../Navigation/Header.vue";
 export default {
   components: {
     Header
-  },
-  data() {
-    return {
-      activeView: [0, 0, 0, 0, 0, 0]
-    };
-  },
-  methods: {
-    makeActive(viewNumber) {
-      for (let i = 0; i <= 6; i++) {
-        this.activeView[i] = 0;
-      }
-      this.activeView[viewNumber] = 1;
-    }
-  }
+  },    
 };
 </script>
 
@@ -113,16 +100,14 @@ export default {
           }
         }
         .router-link:hover {
-          background: $primary-dark;
+          background: rgba($primary-dark,0.5);
           border-left: 3px solid red;
         }
       }
       .active {
-        background: $primary-dark;
-        img {
-          border: 3px solid $sidebar-menu-text;
-          border-radius: 1rem;
-        }
+        background: rgba($primary-dark,0.5);
+        box-sizing: border-box;
+        border-left: 3px solid $sidebar-menu-text;        
       }
     }
   }

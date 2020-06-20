@@ -28,11 +28,12 @@
 <script>
 export default {
   methods: {
-    route() {      
+    route() {
       this.$router.push("mapping/automated");
     }
   },
   created() {
+    this.$store.state.sidebarCounter = 2;
     this.$store.state.progressCounter = 2;
     this.$store.state.progressSteps[1] = "Cycle";
   }

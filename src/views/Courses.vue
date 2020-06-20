@@ -137,6 +137,9 @@ import AddCourse from "../components/Modals/AddCourse.vue";
 export default {
   components: {
     AddCourse
+  },
+  created(){
+    this.$store.state.sidebarCounter = 5;
   }
 };
 </script>

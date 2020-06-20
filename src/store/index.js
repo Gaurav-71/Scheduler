@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    sidebarCounter: 1,
     progressCounter: 1,
     progressSteps: ["Type", "Step 2", "Step 3"],
     showProfessorModal: false,

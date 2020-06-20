@@ -132,6 +132,7 @@ export default {
     }
   },
   created() {
+    this.$store.state.sidebarCounter = 2;
     this.$store.state.progressCounter = 3;
     this.$store.state.progressSteps[1] = "Cycle";
     this.$store.state.progressSteps[2] = "Mapping";

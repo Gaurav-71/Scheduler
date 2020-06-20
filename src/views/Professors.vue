@@ -83,6 +83,9 @@ import AddProfessor from "../components/Modals/AddProfessor.vue";
 export default {
   components: {
     AddProfessor
+  },
+  created(){
+    this.$store.state.sidebarCounter = 4;
   }
 };
 </script>
