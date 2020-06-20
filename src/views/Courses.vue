@@ -3,7 +3,7 @@
     <div class="container">
       <div class="search-bar">
         <input type="search" placeholder="Search Courses" />
-        <img src="../assets/Courses/add.svg" alt="add" @click="$store.state.showCourseModal=true" />
+        <img src="../assets/Courses/add.svg" alt="add" title="Add New Course" @click="$store.state.showCourseModal=true" />
         <transition name="fade" appear>
           <AddCourse v-if="$store.state.showCourseModal" />
         </transition>
@@ -12,7 +12,7 @@
         <div v-for="(course,index) in $store.state.courses" :key="index">
           <div v-if="index!=4" class="card">
             <div class="actions">
-              <img src="../assets/Common/edit.svg" alt="edit" />
+              <img src="../assets/Common/edit.svg" alt="edit" title="Edit Course Details" />
               <div class="semester">
                 <img src="../assets/Courses/three.svg" alt="three" v-if="course.semester=='three'" />
                 <img
@@ -37,7 +37,7 @@
                   v-else-if="course.semester=='eight'"
                 />
               </div>
-              <img src="../assets/Common/delete.svg" alt="delete" />
+              <img src="../assets/Common/delete.svg" alt="delete" title="Delete Course" />
             </div>
             <div class="details">
               <h3>{{course.name}}</h3>
@@ -48,8 +48,8 @@
             <div class="actions-edit">
               <img src="../assets/Common/edit.svg" alt="edit" />
               <div class="actions-group">
-                <img src="../assets/Common/save.svg" alt="save" />
-                <img src="../assets/Common/cancel.svg" alt="cancel" />
+                <img src="../assets/Common/save.svg" alt="save" title="Save Edited Details" />
+                <img src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing"/>
               </div>
             </div>
             <div class="details-edit">

@@ -6,6 +6,7 @@
         <img
           src="../assets/Professors/add.svg"
           alt="add"
+          title="Add New Professor"
           @click="$store.state.showProfessorModal = true"
         />
         <transition name="fade" appear>
@@ -33,8 +34,8 @@
               </div>
             </div>
             <div class="actions">
-              <img src="../assets/Common/edit.svg" alt="edit" />
-              <img src="../assets/Common/delete.svg" alt="delete" />
+              <img src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details" />
+              <img src="../assets/Common/delete.svg" alt="delete" title="Delete Professor"/>
             </div>
           </div>
           <div v-else class="card">
@@ -66,8 +67,8 @@
                 />
                 <label for="other">Other</label>
               </form>
-              <img src="../assets/Common/save.svg" alt="save" />
-              <img src="../assets/Common/cancel.svg" alt="cancel" />
+              <img src="../assets/Common/save.svg" alt="save" title="Save Edited Details" />
+              <img src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing"/>
             </div>
           </div>
         </div>
