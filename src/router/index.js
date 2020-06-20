@@ -10,7 +10,6 @@ import Sidebar from "../components/Navigation/Sidebar.vue";
 import Professors from "../views/Professors.vue";
 import Courses from "../views/Courses.vue";
 import Home from "../views/Home.vue";
-import Semester from "../views/Semester.vue";
 
 import Type from "../views/Create/Type.vue";
 import Cycle from "../views/Create/Automated/Cycle.vue";
@@ -37,7 +36,7 @@ const routes = [
     component: Choice,
   },
   {
-    path: "/timetable",    
+    path: "/timetable",
     component: Sidebar,
     children: [
       {
@@ -46,7 +45,7 @@ const routes = [
         component: Home,
       },
       {
-        path: "/create",        
+        path: "/create",
         component: Create,
         children: [
           {
@@ -73,7 +72,7 @@ const routes = [
             path: "/class",
             name: "Class",
             component: Class,
-          },          
+          },
         ],
       },
       {
@@ -85,11 +84,6 @@ const routes = [
         path: "/courses",
         name: "Courses",
         component: Courses,
-      },
-      {
-        path: "/semester",
-        name: "Semester",
-        component: Semester,
       },
     ],
   },

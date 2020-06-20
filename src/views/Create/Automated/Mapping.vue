@@ -3,16 +3,46 @@
     <div class="container">
       <div class="pills-container">
         <div class="pills" v-if="$store.state.cycle == 'Odd'">
-          <div class="pill active">Third</div>
-          <div class="pill">Fifth</div>
-          <div class="pill">Seventh</div>
+          <div
+            class="pill"
+            @click="changeSemester(3)"
+            v-bind:class="{'active':$store.state.semester == '3'}"
+          >Third</div>
+          <div
+            class="pill"
+            @click="changeSemester(5)"
+            v-bind:class="{'active':$store.state.semester == 5}"
+          >Fifth</div>
+          <div
+            class="pill"
+            @click="changeSemester(7)"
+            v-bind:class="{'active':$store.state.semester == 7}"
+          >Seventh</div>
         </div>
         <div class="pills" v-else>
-          <div class="pill active">Fourth</div>
-          <div class="pill">Sixth</div>
-          <div class="pill">Eight</div>
+          <div
+            class="pill"
+            @click="changeSemester(4)"
+            v-bind:class="{'active':$store.state.semester == 4}"
+          >Fourth</div>
+          <div
+            class="pill"
+            @click="changeSemester(6)"
+            v-bind:class="{'active':$store.state.semester == 6}"
+          >Sixth</div>
+          <div
+            class="pill"
+            @click="changeSemester(8)"
+            v-bind:class="{'active':$store.state.semester == 8}"
+          >Eight</div>
         </div>
-        <input type="text" placeholder="Section" list="section" class="section" />
+        <input
+          type="text"
+          placeholder="Section"
+          list="section"
+          class="section"
+          v-model="$store.state.section"
+        />
         <datalist name="section" id="section">
           <option value="A"></option>
           <option value="B"></option>
@@ -20,85 +50,97 @@
         </datalist>
         <input type="text" placeholder="Classroom no." class="classroom" />
       </div>
-      <table>
-        <tr>
-          <th>Course</th>
-          <th>Course Code</th>
-          <th>Course Type</th>
-          <th>Professor</th>
-        </tr>
-        <tr v-for="(courses,index) in $store.state.tempCourses" :key="index">
-          <td class="course-name">{{courses.name}}</td>
-          <td>{{courses.code}}</td>
-          <td>{{courses.type}}</td>
-          <td v-if="courses.type == 'Theory'" class="data-input">
-            <input type="text" placeholder="Select Professor" list="semesters" />
-            <datalist id="semesters">
-              <option value="First Semester"></option>
-              <option value="Second Semester"></option>
-              <option value="Third Semester"></option>
-              <option value="Fourth Semester"></option>
-              <option value="Fifth Semester"></option>
-              <option value="Sixth Semester"></option>
-              <option value="Seventh Semester"></option>
-              <option value="Eight Semester"></option>
-            </datalist>
-          </td>
-          <td v-else class="data-input">
-            <input type="text" placeholder="Select Professor 1" list="semesters" />
-            <datalist id="semesters">
-              <option value="First Semester"></option>
-              <option value="Second Semester"></option>
-              <option value="Third Semester"></option>
-              <option value="Fourth Semester"></option>
-              <option value="Fifth Semester"></option>
-              <option value="Sixth Semester"></option>
-              <option value="Seventh Semester"></option>
-              <option value="Eight Semester"></option>
-            </datalist>
-            <br />
-            <input type="text" placeholder="Select Professor 2" list="semesters" />
-            <datalist id="semesters">
-              <option value="First Semester"></option>
-              <option value="Second Semester"></option>
-              <option value="Third Semester"></option>
-              <option value="Fourth Semester"></option>
-              <option value="Fifth Semester"></option>
-              <option value="Sixth Semester"></option>
-              <option value="Seventh Semester"></option>
-              <option value="Eight Semester"></option>
-            </datalist>
-            <br />
-            <input type="text" placeholder="Select Professor 3" list="semesters" />
-            <datalist id="semesters">
-              <option value="First Semester"></option>
-              <option value="Second Semester"></option>
-              <option value="Third Semester"></option>
-              <option value="Fourth Semester"></option>
-              <option value="Fifth Semester"></option>
-              <option value="Sixth Semester"></option>
-              <option value="Seventh Semester"></option>
-              <option value="Eight Semester"></option>
-            </datalist>
-          </td>
-        </tr>
-      </table>      
+      <mappingTable
+        v-if="$store.state.semester == 3 && $store.state.section == 'A'"
+        :sectionObject="$store.state.sec3a"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 3 && $store.state.section == 'B'"
+        :sectionObject="$store.state.sec3b"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 3 && $store.state.section == 'C'"
+        :sectionObject="$store.state.sec3c"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 4 && $store.state.section == 'A'"
+        :sectionObject="$store.state.sec4a"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 4 && $store.state.section == 'B'"
+        :sectionObject="$store.state.sec4b"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 4 && $store.state.section == 'C'"
+        :sectionObject="$store.state.sec4c"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 5 && $store.state.section == 'A'"
+        :sectionObject="$store.state.sec5a"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 5 && $store.state.section == 'B'"
+        :sectionObject="$store.state.sec5b"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 5 && $store.state.section == 'C'"
+        :sectionObject="$store.state.sec5c"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 6 && $store.state.section == 'A'"
+        :sectionObject="$store.state.sec6a"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 6 && $store.state.section == 'B'"
+        :sectionObject="$store.state.sec6b"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 6 && $store.state.section == 'C'"
+        :sectionObject="$store.state.sec6c"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 7 && $store.state.section == 'A'"
+        :sectionObject="$store.state.sec7a"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 7 && $store.state.section == 'B'"
+        :sectionObject="$store.state.sec7b"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 8 && $store.state.section == 'A'"
+        :sectionObject="$store.state.sec8a"
+      />
+      <mappingTable
+        v-if="$store.state.semester == 8 && $store.state.section == 'B'"
+        :sectionObject="$store.state.sec8b"
+      />
     </div>
     <div class="btn" @click="route()">next</div>
   </div>
 </template>
 
 <script>
+import mappingTable from "../../../components/mappingTable";
+
 export default {
+  components: {
+    mappingTable
+  },
+  methods: {
+    changeSemester(sem) {
+      this.$store.state.semester = sem;
+    }
+  },
   created() {
     this.$store.state.progressCounter = 3;
+    this.$store.state.progressSteps[1] = "Cycle";
     this.$store.state.progressSteps[2] = "Mapping";
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../../scss/table";
+@import "../../../scss/mediaQuery";
 @import "../../../scss/create-cards";
 
 .mapping {
@@ -161,6 +203,9 @@ export default {
         background: rgba($color: $primary-dark, $alpha: 0.2);
         border: none;
         outline: none;
+      }
+      input::-webkit-calendar-picker-indicator {
+        opacity: 100;
       }
       .section {
         width: 8%;

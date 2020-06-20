@@ -3,7 +3,7 @@
     <Header />
     <div class="container" id="container" :class="{'right-panel-active':shiftView}">
       <div class="form-container sign-up-container">
-        <form action="#">
+        <form>
           <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
           <h1 style="margin: 1rem;">Create Account</h1>
           <input type="text" placeholder="Name" class="name" />
@@ -14,7 +14,7 @@
         </form>
       </div>
       <div class="form-container sign-in-container">
-        <form action="#">
+        <form>
           <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
           <h1 style="margin: 1rem;">Sign in</h1>
           <input type="email" placeholder="Email" class="email" />

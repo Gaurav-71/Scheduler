@@ -1,12 +1,12 @@
-@import "../../../scss/colors";
-@import "../../../scss/mediaQuery";
+@import "./colors";
+@import "./mediaQuery";
 table {
   border-collapse: collapse;
   width: 100%;
   border-radius: 0.8rem;
   overflow: hidden;
   background: white;
-  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.25);  
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.25);
   tr {
     td,
     th {
@@ -17,19 +17,44 @@ table {
       input {
         width: calc(100% - 5px);
         height: 30px;
-        margin: 0;
-        border: none;
+        margin: 0.5rem 0;
+        border: 0.5px solid black;
         background: none;
         outline: none;
-        text-align: center;
+        text-align: left;
+        text-indent: 10px;
       }
       ::-webkit-input-placeholder {
-        text-align: center;
         color: darkslategrey;
       }
       :-moz-placeholder {
-        text-align: center;
         color: darkslategrey;
+      }
+    }
+    .data-input {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      .custom-input {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        img {
+          width: 30px;
+          height: 30px;
+          margin: 0.5rem;
+          cursor: pointer;
+        }
+        img:active {
+          transform: scale(0.95);
+        }        
+        .block {
+          width: 30px;
+          height: 30px;
+          margin: 0.5rem 0.7rem;
+        }
       }
     }
     th {

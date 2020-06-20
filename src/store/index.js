@@ -6,12 +6,12 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     progressCounter: 1,
-    progressSteps: ["Type","Step 2","Step 3"],
+    progressSteps: ["Type", "Step 2", "Step 3"],
     showProfessorModal: false,
     showCourseModal: false,
-    isAutomated: false,
-    isManual: false,
     cycle: null,
+    semester: null,
+    section: null,
     courses: [
       {
         name: "Engineering Mathematics-IV",
@@ -220,33 +220,243 @@ export default new Vuex.Store({
         semester: "six",
       },
       {
-        name: "Design and Analysis of Algorithms",
-        code: "CS42",
-        lecture: 3,
-        tutorial: 1,
+        name: "Data Communication",
+        code: "CS44",
+        lecture: 4,
+        tutorial: 0,
         practical: 0,
         type: "Theory",
         semester: "eight",
       },
       {
-        name: "Microprocessors and Microcontrollers",
-        code: "CS43",
+        name: "Computer Organization",
+        code: "CS45",
         lecture: 3,
+        tutorial: 1,
+        practical: 0,
+        type: "Theory",
+        semester: "four",
+      },
+      {
+        name: "Software Engineering",
+        code: "CS46",
+        lecture: 3,
+        tutorial: 0,
+        practical: 0,
+        type: "Theory",
+        semester: "four",
+      },
+      {
+        name: "Algorithms Lab",
+        code: "CSL47",
+        lecture: 0,
         tutorial: 0,
         practical: 1,
         type: "Lab",
         semester: "four",
       },
       {
-        name: "Design and Analysis of Algorithms",
-        code: "CS42",
-        lecture: 3,
-        tutorial: 1,
-        practical: 0,
+        name: "Python Lab",
+        code: "CSL48",
+        lecture: 0,
+        tutorial: 0,
+        practical: 1,
         type: "Lab",
         semester: "four",
       },
-    ], 
+    ],
+    sec3a: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec3b: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec3c: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec4a: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec4b: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec4c: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec5a: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec5b: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec5c: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec6a: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec6b: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec6c: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec7a: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec7b: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },    
+    sec8a: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },
+    sec8b: {
+      newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+    },    
   },
   mutations: {},
   actions: {},

@@ -16,7 +16,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/semester" class="router-link">
+          <router-link to="#" class="router-link">
             <img src="../../assets/Sidebar/view.svg" alt="view" />
             <span>View</span>
           </router-link>

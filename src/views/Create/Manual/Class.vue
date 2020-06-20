@@ -5,10 +5,13 @@
       <img src="../../../assets/Semester/source/semester.svg" alt="semester" />
       <p>Select the semester, section and room of the class you want to schedule a new Timetable</p>
       <form action="#">
-        <input list="semesters" name="semester" placeholder="Select Semester" />
-        <datalist id="semesters">
-          <option value="First Semester"></option>
-          <option value="Second Semester"></option>
+        <input
+          list="semesters"
+          name="semester"
+          placeholder="Select Semester"
+          v-model="$store.state.semester"
+        />
+        <datalist id="semesters">          
           <option value="Third Semester"></option>
           <option value="Fourth Semester"></option>
           <option value="Fifth Semester"></option>
@@ -16,7 +19,12 @@
           <option value="Seventh Semester"></option>
           <option value="Eight Semester"></option>
         </datalist>
-        <input list="sections" name="section" placeholder="Select Section" />
+        <input
+          list="sections"
+          name="section"
+          placeholder="Select Section"
+          v-model="$store.state.section"
+        />
         <datalist id="sections">
           <option value="A"></option>
           <option value="B"></option>
