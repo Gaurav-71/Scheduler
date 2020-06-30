@@ -12,10 +12,8 @@ import Courses from "../views/Courses.vue";
 import Home from "../views/Home.vue";
 
 import Type from "../views/Create/Type.vue";
-import Cycle from "../views/Create/Automated/Cycle.vue";
-import MappingAutomated from "../views/Create/Automated/Mapping.vue";
-import MappingManual from "../views/Create/Manual/Mapping.vue";
-import Class from "../views/Create/Manual/Class.vue";
+import Cycle from "../views/Create/Cycle.vue";
+import MappingAutomated from "../views/Create/Mapping.vue";
 
 Vue.use(VueRouter);
 
@@ -62,16 +60,6 @@ const routes = [
             path: "/mapping/automated",
             name: "MappingAutomated",
             component: MappingAutomated,
-          },
-          {
-            path: "/mapping/manual",
-            name: "MappingManual",
-            component: MappingManual,
-          },
-          {
-            path: "/class",
-            name: "Class",
-            component: Class,
           },
         ],
       },

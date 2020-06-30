@@ -55,72 +55,92 @@
         :sectionObject="$store.state.sec3a"
       />
       <mappingTable
-        v-if="$store.state.semester == 3 && $store.state.section == 'B'"
+        v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
         :sectionObject="$store.state.sec3b"
       />
       <mappingTable
-        v-if="$store.state.semester == 3 && $store.state.section == 'C'"
+        v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
         :sectionObject="$store.state.sec3c"
       />
       <mappingTable
-        v-if="$store.state.semester == 4 && $store.state.section == 'A'"
+        v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
         :sectionObject="$store.state.sec4a"
       />
       <mappingTable
-        v-if="$store.state.semester == 4 && $store.state.section == 'B'"
+        v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
         :sectionObject="$store.state.sec4b"
       />
       <mappingTable
-        v-if="$store.state.semester == 4 && $store.state.section == 'C'"
+        v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
         :sectionObject="$store.state.sec4c"
       />
       <mappingTable
-        v-if="$store.state.semester == 5 && $store.state.section == 'A'"
+        v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
         :sectionObject="$store.state.sec5a"
       />
       <mappingTable
-        v-if="$store.state.semester == 5 && $store.state.section == 'B'"
+        v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
         :sectionObject="$store.state.sec5b"
       />
       <mappingTable
-        v-if="$store.state.semester == 5 && $store.state.section == 'C'"
+        v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
         :sectionObject="$store.state.sec5c"
       />
       <mappingTable
-        v-if="$store.state.semester == 6 && $store.state.section == 'A'"
+        v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
         :sectionObject="$store.state.sec6a"
       />
       <mappingTable
-        v-if="$store.state.semester == 6 && $store.state.section == 'B'"
+        v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
         :sectionObject="$store.state.sec6b"
       />
       <mappingTable
-        v-if="$store.state.semester == 6 && $store.state.section == 'C'"
+        v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
         :sectionObject="$store.state.sec6c"
       />
       <mappingTable
-        v-if="$store.state.semester == 7 && $store.state.section == 'A'"
+        v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
         :sectionObject="$store.state.sec7a"
       />
       <mappingTable
-        v-if="$store.state.semester == 7 && $store.state.section == 'B'"
+        v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
         :sectionObject="$store.state.sec7b"
       />
       <mappingTable
-        v-if="$store.state.semester == 8 && $store.state.section == 'A'"
+        v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
         :sectionObject="$store.state.sec8a"
       />
       <mappingTable
-        v-if="$store.state.semester == 8 && $store.state.section == 'B'"
+        v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
         :sectionObject="$store.state.sec8b"
       />
+      <div v-else>
+        <table>
+          <tr>
+            <th>
+              <h1 style="margin:0;font-weight:lighter;">Mapping</h1>
+            </th>
+          </tr>
+          <tr>
+            <td class="instructions">
+              <ul>
+                <li>This section lets you map the subjects of the respective semester to the respective professors.</li>
+                <li>Please select the semester and section from the status bar above to proceed.</li>
+                <li>
+                  <b>Note : </b> Please fill all the details to move to the next step
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
     <div class="btn" @click="route()">next</div>
   </div>
 </template>
 
 <script>
-import mappingTable from "../../../components/mappingTable";
+import mappingTable from "../../components/mappingTable";
 
 export default {
   components: {
@@ -141,8 +161,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../scss/mediaQuery";
-@import "../../../scss/create-cards";
+@import "../../scss/mediaQuery";
+@import "../../scss/create-cards";
+@import "../../scss/table";
 
 .mapping {
   display: flex;
@@ -211,7 +232,7 @@ export default {
       .section {
         width: 8%;
         text-indent: 15px;
-        margin-left: auto;
+        margin-left: 0.75rem;
         @include ipad-portrait {
           margin-left: 0.75rem;
           width: 15%;
@@ -220,15 +241,25 @@ export default {
       .classroom {
         width: 10%;
         text-indent: 5px;
-        margin-left: 0.75rem;
+        margin-left: auto;
         @include ipad-portrait {
           width: 18%;
-          // text-indent: 0px;
+          margin-left: 0.75rem;
         }
       }
     }
     .data-input {
       padding: 0;
+    }
+    .instructions {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      font-size: 1.2rem;
+      ul{
+        li{
+          margin: 1rem 0;
+        }
+      }
     }
   }
 }

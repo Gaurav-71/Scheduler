@@ -41,8 +41,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../../scss/create-cards";
-@import "../../../scss/mediaQuery";
+@import "../../scss/create-cards";
+@import "../../scss/mediaQuery";
 
 .cycle {
   margin-top: 2.5rem;

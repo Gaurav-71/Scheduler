@@ -49,6 +49,7 @@
       src="../../assets/Common/delete.svg"
       alt="cancel"
       @click="$store.state.showProfessorModal=false"
+      class="cancel"
     />
   </div>
 </template>

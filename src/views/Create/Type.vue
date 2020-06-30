@@ -29,10 +29,11 @@ export default {
   methods: {
     route(page) {
       if (page == 1) {
-        this.$router.push("cycle");
+        this.$store.state.createType = "Automated";
       } else if (page == 2) {
-        this.$router.push("class");
+        this.$store.state.createType = "Manual";
       }
+      this.$router.push("cycle");
     }
   },
   created() {    

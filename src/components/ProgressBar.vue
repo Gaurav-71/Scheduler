@@ -4,29 +4,29 @@
       <img
         src="../assets/ProgressBar/automated.svg"
         alt="automated"
-        v-bind:class="{'active-img':$store.state.progressCounter>1}"
+        v-bind:class="{'active-img':$store.state.progressCounter>=1}"
       />
-      <p v-bind:class="{'active-p':$store.state.progressCounter==1}">{{$store.state.progressSteps[0]}}</p>
+      <p v-bind:class="{'active-p':$store.state.progressCounter==1}">Type</p>
     </div>
     <div class="line" v-bind:class="{'active-line':$store.state.progressCounter>1}"></div>
     <div class="step" style="text-align: center;">
       <img
         src="../assets/ProgressBar/semester.svg"
         alt="semester"
-        v-bind:class="{'active-img':$store.state.progressCounter>2}"
+        v-bind:class="{'active-img':$store.state.progressCounter>=2}"
       />      
       <p        
         v-bind:class="{'active-p':$store.state.progressCounter==2}"
-      >{{$store.state.progressSteps[1]}}</p>      
+      >Cycle</p>      
     </div>
     <div class="line" v-bind:class="{'active-line':$store.state.progressCounter>2}"></div>
     <div class="step" style="text-align: left;">
       <img
         src="../assets/ProgressBar/mapping.svg"
         alt="mapping"
-        v-bind:class="{'active-img':$store.state.progressCounter>3}"
+        v-bind:class="{'active-img':$store.state.progressCounter>=3}"
       />      
-      <p v-bind:class="{'active-p':$store.state.progressCounter==3}">{{$store.state.progressSteps[2]}}</p>
+      <p v-bind:class="{'active-p':$store.state.progressCounter==3}">Mapping</p>
     </div>
   </div>
 </template>

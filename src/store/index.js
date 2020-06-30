@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     sidebarCounter: 1,
     progressCounter: 1,
-    progressSteps: ["Type", "Step 2", "Step 3"],
+    createType: "",
     showProfessorModal: false,
     showCourseModal: false,
     cycle: null,
@@ -433,7 +433,7 @@ export default new Vuex.Store({
       decrementNewProfessors: function(index) {
         return this.newProfessor[index] - 1;
       },
-    },    
+    },
     sec8a: {
       newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
       getProfessors: function(index) {
@@ -457,7 +457,7 @@ export default new Vuex.Store({
       decrementNewProfessors: function(index) {
         return this.newProfessor[index] - 1;
       },
-    },    
+    },
   },
   mutations: {},
   actions: {},

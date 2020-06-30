@@ -1,7 +1,7 @@
 <template>
   <div class="modal-container">
     <div class="modal">
-      <img src="../../assets/Courses/add.svg" alt="add" />
+      <img src="../../assets/Courses/add.svg" alt="add" class="add-course"/>
       <div class="line"></div>
       <form class="form-data">
         <div class="row">
@@ -85,7 +85,7 @@
         </div>
       </form>
     </div>
-    <img src="../../assets/Common/delete.svg" alt="cancel" @click="$store.state.showCourseModal=false" />
+    <img src="../../assets/Common/delete.svg" alt="cancel" @click="$store.state.showCourseModal=false" class="cancel" />
   </div>
 </template>
 
