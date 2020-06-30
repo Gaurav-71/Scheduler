@@ -17,6 +17,8 @@ import Cycle from "../views/Create/Automated/Cycle.vue";
 import MappingAutomated from "../views/Create/Automated/Mapping.vue";
 import MappingManual from "../views/Create/Manual/Mapping.vue";
 import Class from "../views/Create/Manual/Class.vue";
+import Reset from "../views/Reset.vue";
+import store from "../store/index.js";
 
 Vue.use(VueRouter);
 
@@ -24,29 +26,44 @@ const routes = [
   {
     path: "/",
     name: "Landing",
+    redirect: "/landing/login/choice",
     component: Landing,
   },
   {
-    path: "/login",
+    path: "/landing/login",
     name: "Login",
     component: Login,
   },
   {
-    path: "/choice",
-    name: "Choice",
-    component: Choice,
+    path: "/landing/reset",
+    name: "Reset",
+    component: Reset,
   },
   {
-    path: "/timetable",    
+    path: "/landing/login/choice",
+    name: "Choice",
+    component: Choice,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/landing/login/choice/timetable",    
     component: Sidebar,
+    meta: {
+      requiresAuth: true
+    },
     children: [
       {
-        path: "/",
+        path: "/landing/login/choice/timetable/home",
         name: "Home",
         component: Home,
+        meta: {
+          requiresAuth: true
+        }
       },
       {
-        path: "/create",        
+        path: "/landing/login/choice/timetable/create",        
         component: Create,
         children: [
           {
@@ -55,41 +72,50 @@ const routes = [
             component: Type,
           },
           {
-            path: "/cycle",
+            path: "/landing/login/choice/timetable/cycle",
             name: "Cycle",
             component: Cycle,
           },
           {
-            path: "/mapping/automated",
+            path: "/landing/login/choice/timetable/mapping/automated",
             name: "MappingAutomated",
             component: MappingAutomated,
           },
           {
-            path: "/mapping/manual",
+            path: "/landing/login/choice/timetable/mapping/manual",
             name: "MappingManual",
             component: MappingManual,
           },
           {
-            path: "/class",
+            path: "/landing/login/choice/timetable/class",
             name: "Class",
             component: Class,
           },          
         ],
       },
       {
-        path: "/professors",
+        path: "/landing/login/choice/timetable/professors",
         name: "Professors",
         component: Professors,
+        meta: {
+          requiresAuth: true
+        }
       },
       {
-        path: "/courses",
+        path: "/landing/login/choice/timetable/courses",
         name: "Courses",
         component: Courses,
+        meta: {
+          requiresAuth: true
+        }
       },
       {
-        path: "/semester",
+        path: "/landing/login/choice/timetable/semester",
         name: "Semester",
         component: Semester,
+        meta: {
+          requiresAuth: true
+        }
       },
     ],
   },
@@ -100,5 +126,15 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+router.beforeEach((to,from,next)=> {
+  const requiresAuth = to.matched.some(record=>record.meta.requiresAuth);
+  const loggedIn = store.state.isLoggedIn;
+if(requiresAuth && !loggedIn){
+  next("/landing/login");
+}
+else{
+  next();
+}
+})
 
 export default router;

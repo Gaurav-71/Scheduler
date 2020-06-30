@@ -21,7 +21,12 @@ export default {
   },
   methods: {
     route() {
-      this.$router.push("login");
+      this.$router.push("landing/login");
+    }
+  },
+  created() {
+    if (JSON.parse(localStorage.getItem("loggedUser"))) {
+      this.$store.state.isLoggedIn = true;
     }
   }
 };

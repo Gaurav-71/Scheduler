@@ -4,31 +4,31 @@
     <nav>
       <ul>
         <li>
-          <router-link to="/timetable" class="router-link">
+          <router-link to="/landing/login/choice/timetable/home" class="router-link">
             <img src="../../assets/Sidebar/home.svg" alt="home" />
             <span>Home</span>
           </router-link>
         </li>
         <li>
-          <router-link to="/create" class="router-link">
+          <router-link to="/landing/login/choice/timetable/create" class="router-link">
             <img src="../../assets/Sidebar/create.svg" alt="create" />
             <span>Create</span>
           </router-link>
         </li>
         <li>
-          <router-link to="/semester" class="router-link">
+          <router-link to="/landing/login/choice/timetable/semester" class="router-link">
             <img src="../../assets/Sidebar/view.svg" alt="view" />
             <span>View</span>
           </router-link>
         </li>
         <li>
-          <router-link to="/professors" class="router-link">
+          <router-link to="/landing/login/choice/timetable/professors" class="router-link">
             <img src="../../assets/Sidebar/professor.svg" alt="professor" />
             <span>Professors</span>
           </router-link>
         </li>
         <li>
-          <router-link to="/courses" class="router-link">
+          <router-link to="/landing/login/choice/timetable/courses" class="router-link">
             <img src="../../assets/Sidebar/courses.svg" alt="courses" />
             <span>Courses</span>
           </router-link>

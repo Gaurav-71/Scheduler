@@ -3,24 +3,24 @@
     <Header />
     <div class="container" id="container" :class="{'right-panel-active':shiftView}">
       <div class="form-container sign-up-container">
-        <form action="#">
+        <form @submit.prevent="signUp">
           <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
           <h1 style="margin: 1rem;">Create Account</h1>
           <input type="text" placeholder="Name" class="name" />
-          <input type="email" placeholder="Email" class="email" />
-          <input type="password" placeholder="Password" class="password" />
-          <input type="password" placeholder="Confirm Password" class="confirm-password" />
-          <button @click="signUp">Sign Up</button>
+          <input v-model="email" type="email" placeholder="Email" class="email" />
+          <input v-model="password" type="password" placeholder="Password" class="password" />
+          <input v-model="confirmpassword" type="password" placeholder="Confirm Password" class="confirm-password" />
+          <button type="submit" @click="signUp">Sign Up</button>
         </form>
       </div>
       <div class="form-container sign-in-container">
-        <form action="#">
+        <form @submit.prevent="signIn">
           <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
           <h1 style="margin: 1rem;">Sign in</h1>
-          <input type="email" placeholder="Email" class="email" />
-          <input type="password" placeholder="Password" class="password" />
-          <a href="#">Forgot your password?</a>
-          <button @click="signIn">Sign In</button>
+          <input v-model="email" type="email" placeholder="Email" class="email" />
+          <input v-model="password" type="password" placeholder="Password" class="password" />
+          <button type="submit" @click="signIn">Sign In</button>
+          <router-link to="/landing/reset" class="forgot-pass">Forgot your password?</router-link>
         </form>
       </div>
       <div class="overlay-container">
@@ -28,12 +28,12 @@
           <div class="overlay-panel overlay-left">
             <h1>Welcome Back!</h1>
             <p>To keep connected with us please login with your credentials</p>
-            <button class="ghost" id="signIn" @click="shiftView=false">Sign In</button>
+            <button class="ghost" @click="shiftView=false">Sign In</button>
           </div>
           <div class="overlay-panel overlay-right">
             <h1>Hello!</h1>
             <p>Enter your details and start your journey with us</p>
-            <button class="ghost" id="signUp" @click="shiftView=true">Sign Up</button>
+            <button class="ghost" @click="shiftView=true">Sign Up</button>
           </div>
         </div>
       </div>
@@ -43,7 +43,6 @@
 
 <script>
 import Header from "@/components/Navigation/Header.vue";
-
 export default {
   name: "Login",
   components: {
@@ -51,17 +50,54 @@ export default {
   },
   data() {
     return {
-      shiftView: false
+      shiftView: false,
+      email: "",
+      password: "",
+      confirmpassword: ""
     };
   },
   methods: {
     signIn() {
-      this.$router.push("choice");
+      let data = { email: this.email, password: this.password };
+      this.$store
+        .dispatch("signin", data)
+        .then(() => {
+          this.$router.push("/landing/login/choice");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      (this.email = ""), (this.password = "");
     },
     signUp() {
-      this.$router.push("choice");
+      let data = { email: this.email, password: this.password };
+      if(this.password!==this.confirmpassword) {
+        alert("Passwords do not match,please try again");
+        this.password="";
+        this.confirmpassword="";
+      }
+      else{
+      this.$store
+        .dispatch("signup", data)
+        .then(() => {
+          this.$router.push("/landing/login/choice");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      this.email = "";
+      this.password = "";
+      this.confirmpassword = "";
     }
-  }
+    }
+  },
+  mounted() {
+    let user = JSON.parse(localStorage.getItem("loggedUser"));
+    if (user) {
+      this.$store.state.user = user;
+      this.$router.push("/landing/login/choice");
+      }
+    }
 };
 </script>
 
