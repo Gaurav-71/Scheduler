@@ -3,11 +3,33 @@
     <img src="../../assets/Header/Logo.png" class="logo" alt="logo" />
     <a class="logout">
       <img src="../../assets/Header/exit.svg" alt="exit" />
-      <span>Logout</span>
+      <button @click="logOut" class="logoutBtn"><span>Logout</span></button>
     </a>
   </header>
 </template>
-
+<script>
+export default {
+  name: "Header",
+  methods: {
+    logOut() {
+      this.$store
+        .dispatch("logout")
+        .then(() => {
+          this.$store.state.isLoggedIn = false;
+          this.$router.push("/landing/login");
+        })
+        .catch(err => {
+          alert(err);
+        });
+    }
+  },
+  created() {
+    if (JSON.parse(localStorage.getItem("loggedUser"))) {
+      this.$store.state.isLoggedIn = true;
+    }
+  }
+};
+</script>
 <style lang="scss" scoped>
 @import "../../scss/colors";
 
@@ -51,5 +73,8 @@ header {
       text-shadow: 1px 0.5px 1px black;
     }
   }  
+  .logoutBtn {
+    color: green;
+  }
 }
 </style>

@@ -34,7 +34,7 @@ export default {
   methods: {
     route(page) {
       if (page == 1) {
-        this.$router.push("timetable");
+        this.$router.push("/landing/login/choice/timetable/home");
       }
     }
   }
