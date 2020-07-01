@@ -90,7 +90,12 @@ export default {
     signUp() {
       let data = { email: this.email, password: this.password };
       if (this.password !== this.confirmpassword) {
-        alert("Passwords do not match,please try again");
+        let customErr = {
+          message: "Passwords do not match, please retry",
+          code: "auth/password-mismatch"
+        };
+        this.error.message = customErr;
+        this.error.isVisible = true;
         this.password = "";
         this.confirmpassword = "";
       } else {
@@ -100,7 +105,8 @@ export default {
             this.$router.push("/choice");
           })
           .catch(err => {
-            alert(err.message);
+            this.error.message = err;
+            this.error.isVisible = true;
           });
         this.email = "";
         this.password = "";
