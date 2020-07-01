@@ -1,7 +1,7 @@
 <template>
   <header>
     <img src="../../assets/Header/Logo.png" class="logo" alt="logo" />
-    <a class="logout">
+    <a v-if="$store.state.isLoggedIn" class="logout">
       <img src="../../assets/Header/exit.svg" alt="exit" />
       <button @click="logOut" class="logoutBtn"><span>Logout</span></button>
     </a>
@@ -15,7 +15,7 @@ export default {
       this.$store
         .dispatch("logout")
         .then(() => {
-          this.$store.state.isLoggedIn = false;
+          this.$store.state.isLoggedIn = false;          
           this.$router.push("/landing/login");
         })
         .catch(err => {
@@ -23,7 +23,7 @@ export default {
         });
     }
   },
-  created() {
+  created() { // important dont remove
     if (JSON.parse(localStorage.getItem("loggedUser"))) {
       this.$store.state.isLoggedIn = true;
     }

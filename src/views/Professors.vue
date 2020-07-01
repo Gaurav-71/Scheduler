@@ -85,7 +85,8 @@ export default {
     AddProfessor
   },
   created(){
-    this.$store.state.sidebarCounter = 4;
+    this.$store.state.sidebarCounter = 4;    
+    localStorage.setItem("currentRoute",this.$route.path);  
   }
 };
 </script>

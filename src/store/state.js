@@ -10,10 +10,10 @@ export default {
       isManual: false,
       cycle: null,
       user: JSON.parse(localStorage.getItem("loggedUser")),
-      isLoggedIn: false,
+      isLoggedIn: false,      
       postSubscription: null,
       isLoggingIn: true,
-      currentUser: localStorage.getItem("currentUser"),
+      currentUser: localStorage.getItem("currentUser"),      
       courses: [
         {
           name: "Engineering Mathematics-IV",

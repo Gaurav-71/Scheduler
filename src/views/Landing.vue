@@ -26,7 +26,7 @@ export default {
   },
   created() {
     if (JSON.parse(localStorage.getItem("loggedUser"))) {
-      this.$store.state.isLoggedIn = true;
+      this.$router.push("landing/login/choice");
     }
   }
 };

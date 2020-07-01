@@ -65,7 +65,7 @@ export default {
           this.$router.push("/landing/login/choice");
         })
         .catch(err => {
-          console.log(err);
+          alert(err);
         });
       (this.email = ""), (this.password = "");
     },
@@ -83,7 +83,7 @@ export default {
           this.$router.push("/landing/login/choice");
         })
         .catch(err => {
-          console.log(err);
+          alert(err);
         });
       this.email = "";
       this.password = "";
@@ -95,7 +95,7 @@ export default {
     let user = JSON.parse(localStorage.getItem("loggedUser"));
     if (user) {
       this.$store.state.user = user;
-      this.$router.push("/landing/login/choice");
+      this.$router.push(localStorage.getItem("currentRoute"));
       }
     }
 };

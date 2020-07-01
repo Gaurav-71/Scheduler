@@ -38,8 +38,8 @@ export default {
   },
   created() {    
     this.$store.state.sidebarCounter = 2;
-    this.$store.state.progressCounter = 1;   
-    this.$store.state.progressSteps = ["Type","Step 2","Step 3"]; 
+    this.$store.state.progressCounter = 1;           
+    localStorage.setItem("currentRoute",this.$route.path);  
   }
 };
 </script>

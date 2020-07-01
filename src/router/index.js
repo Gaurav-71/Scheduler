@@ -22,8 +22,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Landing",
-    redirect: "/landing/login/choice",
+    name: "Landing",        
     component: Landing,
   },
   {

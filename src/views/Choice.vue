@@ -37,6 +37,9 @@ export default {
         this.$router.push("/landing/login/choice/timetable/home");
       }
     }
+  },
+  created(){
+    localStorage.setItem("currentRoute",this.$route.path);
   }
 };
 </script>

@@ -139,7 +139,8 @@ export default {
     AddCourse
   },
   created(){
-    this.$store.state.sidebarCounter = 5;
+    this.$store.state.sidebarCounter = 5;    
+    localStorage.setItem("currentRoute",this.$route.path);  
   }
 };
 </script>

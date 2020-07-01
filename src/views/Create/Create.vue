@@ -13,7 +13,8 @@ export default {
     ProgressBar,    
   },
   created(){
-    this.$store.state.sidebarCounter = 2;
+    this.$store.state.sidebarCounter = 2;    
+    localStorage.setItem("currentRoute",this.$route.path);  
   }
 };
 </script>

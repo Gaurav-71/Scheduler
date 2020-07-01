@@ -34,8 +34,8 @@ export default {
   },
   created() {
     this.$store.state.sidebarCounter = 2;
-    this.$store.state.progressCounter = 2;
-    this.$store.state.progressSteps[1] = "Cycle";
+    this.$store.state.progressCounter = 2;    
+    localStorage.setItem("currentRoute",this.$route.path);
   }
 };
 </script>
