@@ -9,7 +9,12 @@
           <input type="text" placeholder="Name" class="name" />
           <input v-model="email" type="email" placeholder="Email" class="email" />
           <input v-model="password" type="password" placeholder="Password" class="password" />
-          <input v-model="confirmpassword" type="password" placeholder="Confirm Password" class="confirm-password" />
+          <input
+            v-model="confirmpassword"
+            type="password"
+            placeholder="Confirm Password"
+            class="confirm-password"
+          />
           <button type="submit" @click="signUp">Sign Up</button>
         </form>
       </div>
@@ -62,33 +67,33 @@ export default {
       this.$store
         .dispatch("signin", data)
         .then(() => {
-          this.$router.push("/landing/login/choice");
+          this.$router.push("/choice").catch(err => {
+            console.log(err);
+          });
         })
         .catch(err => {
           alert(err);
         });
-      (this.email = ""), (this.password = "");
     },
     signUp() {
       let data = { email: this.email, password: this.password };
-      if(this.password!==this.confirmpassword) {
+      if (this.password !== this.confirmpassword) {
         alert("Passwords do not match,please try again");
-        this.password="";
-        this.confirmpassword="";
+        this.password = "";
+        this.confirmpassword = "";
+      } else {
+        this.$store
+          .dispatch("signup", data)
+          .then(() => {
+            this.$router.push("/choice");
+          })
+          .catch(err => {
+            this.email = "";
+            this.password = "";
+            this.confirmpassword = "";
+            alert(err.message);
+          });
       }
-      else{
-      this.$store
-        .dispatch("signup", data)
-        .then(() => {
-          this.$router.push("/landing/login/choice");
-        })
-        .catch(err => {
-          alert(err);
-        });
-      this.email = "";
-      this.password = "";
-      this.confirmpassword = "";
-    }
     }
   },
   mounted() {
@@ -96,8 +101,8 @@ export default {
     if (user) {
       this.$store.state.user = user;
       this.$router.push(localStorage.getItem("currentRoute"));
-      }
     }
+  }
 };
 </script>
 

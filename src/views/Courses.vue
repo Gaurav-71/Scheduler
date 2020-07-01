@@ -3,7 +3,12 @@
     <div class="container">
       <div class="search-bar">
         <input type="search" placeholder="Search Courses" />
-        <img src="../assets/Courses/add.svg" alt="add" title="Add New Course" @click="$store.state.showCourseModal=true" />
+        <img
+          src="../assets/Courses/add.svg"
+          alt="add"
+          title="Add New Course"
+          @click="$store.state.showCourseModal=true"
+        />
         <transition name="fade" appear>
           <AddCourse v-if="$store.state.showCourseModal" />
         </transition>
@@ -49,7 +54,7 @@
               <img src="../assets/Common/edit.svg" alt="edit" />
               <div class="actions-group">
                 <img src="../assets/Common/save.svg" alt="save" title="Save Edited Details" />
-                <img src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing"/>
+                <img src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing" />
               </div>
             </div>
             <div class="details-edit">
@@ -138,9 +143,9 @@ export default {
   components: {
     AddCourse
   },
-  created(){
-    this.$store.state.sidebarCounter = 5;    
-    localStorage.setItem("currentRoute",this.$route.path);  
+  created() {
+    this.$store.state.sidebarCounter = 5;
+    localStorage.setItem("currentRoute", this.$route.path);
   }
 };
 </script>

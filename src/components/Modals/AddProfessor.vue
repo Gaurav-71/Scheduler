@@ -114,7 +114,7 @@
               @media (max-width: 991px) {
                 width: 35px;
               }
-              cursor:default;
+              cursor: default;
             }
             label {
               font-weight: lighter;

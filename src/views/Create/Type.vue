@@ -29,17 +29,14 @@ export default {
   methods: {
     route(page) {
       if (page == 1) {
-        this.$store.state.createType = "Automated";
-      } else if (page == 2) {
-        this.$store.state.createType = "Manual";
+        this.$router.push("/timetable/create/cycle");
       }
-      this.$router.push("cycle");
     }
   },
-  created() {    
+  created() {
     this.$store.state.sidebarCounter = 2;
-    this.$store.state.progressCounter = 1;           
-    localStorage.setItem("currentRoute",this.$route.path);  
+    this.$store.state.progressCounter = 1;
+    localStorage.setItem("currentRoute", this.$route.path);
   }
 };
 </script>
@@ -118,7 +115,7 @@ export default {
         }
       }
     }
-  }  
+  }
 }
 </style>
 

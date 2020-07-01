@@ -22,44 +22,44 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "Landing",        
+    name: "Landing",
     component: Landing,
   },
   {
-    path: "/landing/login",
+    path: "/login",
     name: "Login",
     component: Login,
   },
   {
-    path: "/landing/reset",
+    path: "/reset",
     name: "Reset",
     component: Reset,
   },
   {
-    path: "/landing/login/choice",
+    path: "/choice",
     name: "Choice",
     component: Choice,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
-    path: "/landing/login/choice/timetable",    
+    path: "/timetable",
     component: Sidebar,
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
     },
     children: [
       {
-        path: "/landing/login/choice/timetable/home",
+        path: "/",
         name: "Home",
         component: Home,
         meta: {
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       },
       {
-        path: "/landing/login/choice/timetable/create",        
+        path: "/timetable/create",
         component: Create,
         children: [
           {
@@ -68,32 +68,32 @@ const routes = [
             component: Type,
           },
           {
-            path: "/landing/login/choice/timetable/cycle",
+            path: "/timetable/create/cycle",
             name: "Cycle",
             component: Cycle,
           },
           {
-            path: "/landing/login/choice/timetable/mapping/automated",
+            path: "/timetable/create/automated/mapping",
             name: "MappingAutomated",
             component: MappingAutomated,
-          },      
+          },
         ],
       },
       {
-        path: "/landing/login/choice/timetable/professors",
+        path: "/timetable/professors",
         name: "Professors",
         component: Professors,
         meta: {
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       },
       {
-        path: "/landing/login/choice/timetable/courses",
+        path: "/timetable/courses",
         name: "Courses",
         component: Courses,
         meta: {
-          requiresAuth: true
-        }
+          requiresAuth: true,
+        },
       },
     ],
   },
@@ -104,15 +104,14 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
-router.beforeEach((to,from,next)=> {
-  const requiresAuth = to.matched.some(record=>record.meta.requiresAuth);
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   const loggedIn = store.state.isLoggedIn;
-if(requiresAuth && !loggedIn){
-  next("/landing/login");
-}
-else{
-  next();
-}
-})
+  if (requiresAuth && !loggedIn) {
+    next("/login");
+  } else {
+    next();
+  }
+});
 
 export default router;

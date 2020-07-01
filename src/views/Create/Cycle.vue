@@ -29,13 +29,13 @@
 export default {
   methods: {
     route() {
-      this.$router.push("mapping/automated");
+      this.$router.push("/timetable/create/automated/mapping");
     }
   },
   created() {
     this.$store.state.sidebarCounter = 2;
-    this.$store.state.progressCounter = 2;    
-    localStorage.setItem("currentRoute",this.$route.path);
+    this.$store.state.progressCounter = 2;
+    localStorage.setItem("currentRoute", this.$route.path);
   }
 };
 </script>

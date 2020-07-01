@@ -21,12 +21,12 @@ export default {
   },
   methods: {
     route() {
-      this.$router.push("landing/login");
+      this.$router.push("/login");
     }
   },
   created() {
     if (JSON.parse(localStorage.getItem("loggedUser"))) {
-      this.$router.push("landing/login/choice");
+      this.$router.push("/choice");
     }
   }
 };

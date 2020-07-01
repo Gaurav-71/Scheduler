@@ -4,9 +4,9 @@
 
 <script>
 export default {
-  created(){
-    this.$store.state.sidebarCounter = 1;    
-    localStorage.setItem("currentRoute",this.$route.path);  
+  created() {
+    this.$store.state.sidebarCounter = 1;
+    localStorage.setItem("currentRoute", this.$route.path);
   }
 };
 </script>
@@ -14,6 +14,6 @@ export default {
 <style lang="scss" scoped>
 .home {
   margin-top: 5.7rem;
-  margin-left: 5rem;  
+  margin-left: 5rem;
 }
 </style>

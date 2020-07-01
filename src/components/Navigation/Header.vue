@@ -3,7 +3,9 @@
     <img src="../../assets/Header/Logo.png" class="logo" alt="logo" />
     <a v-if="$store.state.isLoggedIn" class="logout">
       <img src="../../assets/Header/exit.svg" alt="exit" />
-      <button @click="logOut" class="logoutBtn"><span>Logout</span></button>
+      <button @click="logOut" class="logoutBtn">
+        <span>Logout</span>
+      </button>
     </a>
   </header>
 </template>
@@ -15,15 +17,16 @@ export default {
       this.$store
         .dispatch("logout")
         .then(() => {
-          this.$store.state.isLoggedIn = false;          
-          this.$router.push("/landing/login");
+          this.$store.state.isLoggedIn = false;
+          this.$router.push("/login");
         })
         .catch(err => {
           alert(err);
         });
     }
   },
-  created() { // important dont remove
+  created() {
+    // important dont remove
     if (JSON.parse(localStorage.getItem("loggedUser"))) {
       this.$store.state.isLoggedIn = true;
     }
@@ -33,17 +36,17 @@ export default {
 <style lang="scss" scoped>
 @import "../../scss/colors";
 
-header {      
-  position: fixed;  
+header {
+  position: fixed;
   height: 4.5rem;
-  width: 100vw;  
+  width: 100vw;
   background-image: $gradient;
   z-index: 101;
   top: 0;
   left: 0;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   .logo {
     width: 14rem;
   }
@@ -54,25 +57,25 @@ header {
     justify-content: center;
     align-items: center;
     color: white;
-    cursor: pointer;    
+    cursor: pointer;
     img {
       width: 35px;
       height: 35px;
       border: 2px solid $background;
       border-radius: 50%;
-      box-shadow: 0px 0 5px black;            
+      box-shadow: 0px 0 5px black;
     }
     span {
-      display: none;      
+      display: none;
     }
   }
-  .logout:hover {      
+  .logout:hover {
     span {
       display: block;
       margin-left: 0.7rem;
       text-shadow: 1px 0.5px 1px black;
     }
-  }  
+  }
   .logoutBtn {
     color: green;
   }

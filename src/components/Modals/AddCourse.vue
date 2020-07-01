@@ -1,7 +1,7 @@
 <template>
   <div class="modal-container">
     <div class="modal">
-      <img src="../../assets/Courses/add.svg" alt="add" class="add-course"/>
+      <img src="../../assets/Courses/add.svg" alt="add" class="add-course" />
       <div class="line"></div>
       <form class="form-data">
         <div class="row">
@@ -85,7 +85,12 @@
         </div>
       </form>
     </div>
-    <img src="../../assets/Common/delete.svg" alt="cancel" @click="$store.state.showCourseModal=false" class="cancel" />
+    <img
+      src="../../assets/Common/delete.svg"
+      alt="cancel"
+      @click="$store.state.showCourseModal=false"
+      class="cancel"
+    />
   </div>
 </template>
 
@@ -98,7 +103,7 @@
     margin: 1rem;
     .row {
       width: 100%;
-     // height: 100%;
+      // height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -109,10 +114,10 @@
         flex-direction: column;
         justify-content: left;
         align-items: center;
-        margin: .7rem 0;
+        margin: 0.7rem 0;
         label {
           margin: 0 0 0 2.5rem;
-          width: 100%;          
+          width: 100%;
           font-weight: bold;
           color: $primary-dark;
         }

@@ -14,10 +14,8 @@
         src="../assets/ProgressBar/semester.svg"
         alt="semester"
         v-bind:class="{'active-img':$store.state.progressCounter>=2}"
-      />      
-      <p        
-        v-bind:class="{'active-p':$store.state.progressCounter==2}"
-      >Cycle</p>      
+      />
+      <p v-bind:class="{'active-p':$store.state.progressCounter==2}">Cycle</p>
     </div>
     <div class="line" v-bind:class="{'active-line':$store.state.progressCounter>2}"></div>
     <div class="step" style="text-align: left;">
@@ -25,7 +23,7 @@
         src="../assets/ProgressBar/mapping.svg"
         alt="mapping"
         v-bind:class="{'active-img':$store.state.progressCounter>=3}"
-      />      
+      />
       <p v-bind:class="{'active-p':$store.state.progressCounter==3}">Mapping</p>
     </div>
   </div>

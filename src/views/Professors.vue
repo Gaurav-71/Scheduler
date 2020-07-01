@@ -35,7 +35,7 @@
             </div>
             <div class="actions">
               <img src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details" />
-              <img src="../assets/Common/delete.svg" alt="delete" title="Delete Professor"/>
+              <img src="../assets/Common/delete.svg" alt="delete" title="Delete Professor" />
             </div>
           </div>
           <div v-else class="card">
@@ -68,7 +68,7 @@
                 <label for="other">Other</label>
               </form>
               <img src="../assets/Common/save.svg" alt="save" title="Save Edited Details" />
-              <img src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing"/>
+              <img src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing" />
             </div>
           </div>
         </div>
@@ -84,9 +84,9 @@ export default {
   components: {
     AddProfessor
   },
-  created(){
-    this.$store.state.sidebarCounter = 4;    
-    localStorage.setItem("currentRoute",this.$route.path);  
+  created() {
+    this.$store.state.sidebarCounter = 4;
+    localStorage.setItem("currentRoute", this.$route.path);
   }
 };
 </script>

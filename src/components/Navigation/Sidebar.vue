@@ -4,31 +4,31 @@
     <nav>
       <ul>
         <li v-bind:class="{'active':$store.state.sidebarCounter == '1'}">
-          <router-link to="/landing/login/choice/timetable/home" class="router-link">
+          <router-link to="/timetable" class="router-link">
             <img src="../../assets/Sidebar/home.svg" alt="home" />
             <span>Home</span>
           </router-link>
         </li>
         <li v-bind:class="{'active':$store.state.sidebarCounter == '2'}">
-          <router-link to="/landing/login/choice/timetable/create" class="router-link">
+          <router-link to="/timetable/create" class="router-link">
             <img src="../../assets/Sidebar/create.svg" alt="create" />
             <span>Create</span>
           </router-link>
         </li>
         <li v-bind:class="{'active':$store.state.sidebarCounter == '3'}">
-          <router-link to="/landing/login/choice/timetable/semester" class="router-link">
+          <router-link to="#" class="router-link">
             <img src="../../assets/Sidebar/view.svg" alt="view" />
             <span>View</span>
           </router-link>
         </li>
         <li v-bind:class="{'active':$store.state.sidebarCounter == '4'}">
-          <router-link to="/landing/login/choice/timetable/professors" class="router-link">
+          <router-link to="/timetable/professors" class="router-link">
             <img src="../../assets/Sidebar/professor.svg" alt="professor" />
             <span>Professors</span>
           </router-link>
         </li>
         <li v-bind:class="{'active':$store.state.sidebarCounter == '5'}">
-          <router-link to="/landing/login/choice/timetable/courses" class="router-link">
+          <router-link to="/timetable/courses" class="router-link">
             <img src="../../assets/Sidebar/courses.svg" alt="courses" />
             <span>Courses</span>
           </router-link>
@@ -40,7 +40,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="#" class="router-link">
+          <router-link to="/choice" class="router-link">
             <img src="../../assets/Sidebar/exit.svg" alt="exit" />
             <span>Exit Time Table</span>
           </router-link>
@@ -57,7 +57,7 @@ import Header from "../Navigation/Header.vue";
 export default {
   components: {
     Header
-  },    
+  }
 };
 </script>
 
@@ -100,14 +100,14 @@ export default {
           }
         }
         .router-link:hover {
-          background: rgba($primary-dark,0.5);
+          background: rgba($primary-dark, 0.5);
           border-left: 3px solid red;
         }
       }
       .active {
-        background: rgba($primary-dark,0.5);
+        background: rgba($primary-dark, 0.5);
         box-sizing: border-box;
-        border-left: 3px solid $sidebar-menu-text;        
+        border-left: 3px solid $sidebar-menu-text;
       }
     }
   }

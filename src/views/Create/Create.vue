@@ -10,11 +10,11 @@ import ProgressBar from "../../components/ProgressBar.vue";
 
 export default {
   components: {
-    ProgressBar,    
+    ProgressBar
   },
-  created(){
-    this.$store.state.sidebarCounter = 2;    
-    localStorage.setItem("currentRoute",this.$route.path);  
+  created() {
+    this.$store.state.sidebarCounter = 2;
+    localStorage.setItem("currentRoute", this.$route.path);
   }
 };
 </script>
@@ -24,6 +24,6 @@ export default {
 .create {
   margin-top: 6rem;
   margin-left: 5rem;
-  min-height: calc(100vh - 6rem);  
+  min-height: calc(100vh - 6rem);
 }
 </style>

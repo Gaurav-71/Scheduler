@@ -127,7 +127,7 @@
                 <li>This section lets you map the subjects of the respective semester to the respective professors.</li>
                 <li>Please select the semester and section from the status bar above to proceed.</li>
                 <li>
-                  <b>Note : </b> Please fill all the details to move to the next step
+                  <b>Note :</b> Please fill all the details to move to the next step
                 </li>
               </ul>
             </td>
@@ -153,8 +153,8 @@ export default {
   },
   created() {
     this.$store.state.sidebarCounter = 2;
-    this.$store.state.progressCounter = 3;    
-    localStorage.setItem("currentRoute",this.$route.path);  
+    this.$store.state.progressCounter = 3;
+    localStorage.setItem("currentRoute", this.$route.path);
   }
 };
 </script>
@@ -254,8 +254,8 @@ export default {
       padding: 1rem 1.5rem;
       text-align: left;
       font-size: 1.2rem;
-      ul{
-        li{
+      ul {
+        li {
           margin: 1rem 0;
         }
       }

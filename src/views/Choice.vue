@@ -34,12 +34,12 @@ export default {
   methods: {
     route(page) {
       if (page == 1) {
-        this.$router.push("/landing/login/choice/timetable/home");
+        this.$router.push("/timetable");
       }
     }
   },
-  created(){
-    localStorage.setItem("currentRoute",this.$route.path);
+  created() {
+    localStorage.setItem("currentRoute", this.$route.path);
   }
 };
 </script>
