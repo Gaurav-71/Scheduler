@@ -15,7 +15,7 @@
             placeholder="Confirm Password"
             class="confirm-password"
           />
-          <button type="submit" @click="signUp">Sign Up</button>
+          <button type="button" @click="signUp">Sign Up</button>
         </form>
       </div>
       <div class="form-container sign-in-container">
@@ -24,7 +24,7 @@
           <h1 style="margin: 1rem;">Sign in</h1>
           <input v-model="email" type="email" placeholder="Email" class="email" />
           <input v-model="password" type="password" placeholder="Password" class="password" />
-          <button type="submit" @click="signIn">Sign In</button>
+          <button type="button" @click="signIn">Sign In</button>
           <router-link to="/landing/reset" class="forgot-pass">Forgot your password?</router-link>
         </form>
       </div>
@@ -43,22 +43,32 @@
         </div>
       </div>
     </div>
+    <transition name="fade" appear>
+      <Error :obj="error" />
+    </transition>
   </div>
 </template>
 
 <script>
 import Header from "@/components/Navigation/Header.vue";
+import Error from "../components/Modals/Error.vue";
+
 export default {
   name: "Login",
   components: {
-    Header
+    Header,
+    Error
   },
   data() {
     return {
       shiftView: false,
       email: "",
       password: "",
-      confirmpassword: ""
+      confirmpassword: "",
+      error: {
+        isVisible: false,
+        message: ""
+      }
     };
   },
   methods: {
@@ -68,11 +78,13 @@ export default {
         .dispatch("signin", data)
         .then(() => {
           this.$router.push("/choice").catch(err => {
-            console.log(err);
+            console.log(err.message);
           });
         })
         .catch(err => {
-          alert(err);
+          this.error.message = err;
+          this.error.isVisible = true;
+          this.password = "";
         });
     },
     signUp() {
@@ -88,11 +100,11 @@ export default {
             this.$router.push("/choice");
           })
           .catch(err => {
-            this.email = "";
-            this.password = "";
-            this.confirmpassword = "";
             alert(err.message);
           });
+        this.email = "";
+        this.password = "";
+        this.confirmpassword = "";
       }
     }
   },
