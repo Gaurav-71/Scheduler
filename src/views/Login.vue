@@ -25,7 +25,7 @@
           <input v-model="email" type="email" placeholder="Email" class="email" />
           <input v-model="password" type="password" placeholder="Password" class="password" />
           <button type="button" @click="signIn">Sign In</button>
-          <router-link to="/landing/reset" class="forgot-pass">Forgot your password?</router-link>
+          <router-link to="/reset" class="forgot-pass">Forgot your password?</router-link>
         </form>
       </div>
       <div class="overlay-container">

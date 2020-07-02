@@ -18,8 +18,7 @@
 
 <script>
 export default {
-  props: {
-    v: Boolean,
+  props: {    
     obj: {
       isVisible: Boolean,
       message: String
