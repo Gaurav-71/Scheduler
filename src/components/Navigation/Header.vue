@@ -1,11 +1,9 @@
 <template>
   <header>
     <img src="../../assets/Header/Logo.png" class="logo" alt="logo" />
-    <a v-if="$store.state.isLoggedIn" class="logout">
-      <img src="../../assets/Header/exit.svg" alt="exit" />
-      <button @click="logOut" class="logoutBtn">
-        <span>Logout</span>
-      </button>
+    <a v-if="$store.state.isLoggedIn" class="signout">
+      <img src="../../assets/Header/signout.svg" alt="signout" />
+      <span @click="logOut">Sign out</span>
     </a>
   </header>
 </template>
@@ -50,7 +48,7 @@ header {
   .logo {
     width: 14rem;
   }
-  .logout {
+  .signout {
     position: fixed;
     right: 2rem;
     display: flex;
@@ -59,25 +57,24 @@ header {
     color: white;
     cursor: pointer;
     img {
-      width: 35px;
-      height: 35px;
-      border: 2px solid $background;
-      border-radius: 50%;
-      box-shadow: 0px 0 5px black;
+      width: 25px;
+      height: 25px;      
     }
     span {
       display: none;
     }
   }
-  .logout:hover {
+  .signout:hover {
+    background: rgba($primary-light,0.75);
+    padding: 0.8rem 1rem;
+    border-radius: 1rem;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
     span {
       display: block;
       margin-left: 0.7rem;
       text-shadow: 1px 0.5px 1px black;
     }
-  }
-  .logoutBtn {
-    color: green;
   }
 }
 </style>
