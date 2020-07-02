@@ -16,7 +16,7 @@
           <input v-model="email" type="email" placeholder="Email" class="email" />
           <button @click="resetPassword" class="btn">Reset</button>
         </div>
-        <Loading :message="loadingMessage" v-else />
+        <Loading :message="'Sending an email to reset your password'" v-else />
       </div>
     </transition>
     <transition name="fade" appear>

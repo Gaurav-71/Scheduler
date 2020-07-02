@@ -7,6 +7,7 @@ export default {
   showCourseModal: false,
   cycle: null,
   isLoggedIn: false,
+  isLoggingIn: true,
   postSubscription: null,
   user: JSON.parse(localStorage.getItem("loggedUser")),
   currentUser: localStorage.getItem("currentUser"),

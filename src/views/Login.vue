@@ -1,31 +1,37 @@
 <template>
   <div class="login">
     <Header />
-    <div class="container" id="container" :class="{'right-panel-active':shiftView}">
+    <div class="container" :class="{'right-panel-active':shiftView}">
       <div class="form-container sign-up-container">
         <form @submit.prevent="signUp">
           <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
           <h1 style="margin: 1rem;">Create Account</h1>
-          <input type="text" placeholder="Name" class="name" />
-          <input v-model="email" type="email" placeholder="Email" class="email" />
-          <input v-model="password" type="password" placeholder="Password" class="password" />
-          <input
-            v-model="confirmpassword"
-            type="password"
-            placeholder="Confirm Password"
-            class="confirm-password"
-          />
-          <button type="button" @click="signUp">Sign Up</button>
+          <div v-if="$store.state.isLoggingIn" class="form-fields">
+            <input type="text" placeholder="Name" class="name" />
+            <input v-model="email" type="email" placeholder="Email" class="email" />
+            <input v-model="password" type="password" placeholder="Password" class="password" />
+            <input
+              v-model="confirmpassword"
+              type="password"
+              placeholder="Confirm Password"
+              class="confirm-password"
+            />
+            <button type="button" @click="signUp">Sign Up</button>
+          </div>
+          <Loading :message="'Verifying and creating new account'" v-else />
         </form>
       </div>
       <div class="form-container sign-in-container">
         <form @submit.prevent="signIn">
           <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
           <h1 style="margin: 1rem;">Sign in</h1>
-          <input v-model="email" type="email" placeholder="Email" class="email" />
-          <input v-model="password" type="password" placeholder="Password" class="password" />
-          <button type="button" @click="signIn">Sign In</button>
-          <router-link to="/reset" class="forgot-pass">Forgot your password?</router-link>
+          <div v-if="$store.state.isLoggingIn" class="form-fields">
+            <input v-model="email" type="email" placeholder="Email" class="email" />
+            <input v-model="password" type="password" placeholder="Password" class="password" />
+            <button type="button" @click="signIn">Sign In</button>
+            <router-link to="/reset" class="forgot-pass">Forgot your password?</router-link>
+          </div>
+          <Loading :message="'Verifying User Credentials'" v-else />
         </form>
       </div>
       <div class="overlay-container">
@@ -52,19 +58,21 @@
 <script>
 import Header from "@/components/Navigation/Header.vue";
 import Error from "../components/Modals/Error.vue";
+import Loading from "../components/Loading/Pulse.vue";
 
 export default {
   name: "Login",
   components: {
     Header,
-    Error
+    Error,
+    Loading
   },
   data() {
     return {
       shiftView: false,
       email: "",
       password: "",
-      confirmpassword: "",
+      confirmpassword: "",      
       error: {
         isVisible: false,
         message: ""
@@ -107,6 +115,7 @@ export default {
           .catch(err => {
             this.error.message = err;
             this.error.isVisible = true;
+            this.$store.state.isLoggingIn = true;
           });
         this.email = "";
         this.password = "";
@@ -234,6 +243,13 @@ export default {
         padding: 0 50px;
         height: 100%;
         text-align: center;
+        .form-fields {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          width: 100%;
+        }
       }
     }
     .sign-in-container {

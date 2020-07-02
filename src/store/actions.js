@@ -1,6 +1,7 @@
 import { auth } from "../main.js";
 export default {
   async signin({ commit }, payload) {
+    this.state.isLoggingIn = false;
     try {
       let response = await auth.signInWithEmailAndPassword(
         payload.email,
@@ -10,7 +11,7 @@ export default {
       localStorage.setItem("currentUser", payload.email);
       commit("signin", response.user);
     } catch (err) {
-      console.log("in signin catch block");
+      this.state.isLoggingIn = true;
       throw err;
     }
   },
@@ -20,23 +21,11 @@ export default {
     localStorage.removeItem("currentUser");
     localStorage.removeItem("currentRoute");
     this.state.currentUser = "";
+    this.state.isLoggingIn = true;
     context.commit("logout");
-  } /*
-    async signup({ commit }, payload) {      
-      let response;
-      try {
-        response = await auth.createUserWithEmailAndPassword(
-          payload.email,
-          payload.password
-        );
-      } catch (err) {
-        console.log("in register catch block");
-      }
-      this.state.currentUser = payload.email;
-      localStorage.setItem("currentUser", payload.email);
-      commit("signup", response.user);
-    },*/,
+  },
   async signup({ commit }, payload) {
+    this.state.isLoggingIn = false;
     let response = await auth.createUserWithEmailAndPassword(
       payload.email,
       payload.password
