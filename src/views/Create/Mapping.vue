@@ -155,6 +155,10 @@ export default {
     this.$store.state.sidebarCounter = 2;
     this.$store.state.progressCounter = 3;
     localStorage.setItem("currentRoute", this.$route.path);
+    localStorage.setItem("createRouteTracker", this.$route.path);
+    this.$store.state.createRouteTracker = localStorage.getItem(
+      "createRouteTracker"
+    );
   }
 };
 </script>

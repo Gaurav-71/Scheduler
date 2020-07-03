@@ -1,9 +1,9 @@
 <template>
   <header>
     <img src="../../assets/Header/Logo.png" class="logo" alt="logo" />
-    <a v-if="$store.state.isLoggedIn" class="signout">
+    <a v-if="$store.state.isLoggedIn" @click="logOut" class="signout">
       <img src="../../assets/Header/signout.svg" alt="signout" />
-      <span @click="logOut">Sign out</span>
+      <span>Sign out</span>
     </a>
   </header>
 </template>

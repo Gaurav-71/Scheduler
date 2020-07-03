@@ -7,8 +7,14 @@
           <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
           <h1 style="margin: 1rem;">Create Account</h1>
           <div v-if="$store.state.isLoggingIn" class="form-fields">
-            <input type="text" placeholder="Name" class="name" />
-            <input v-model="email" type="email" placeholder="Email" class="email" />
+            <input type="text" placeholder="Name" class="name" autocomplete="on" />
+            <input
+              v-model="email"
+              type="email"
+              placeholder="Email"
+              class="email"
+              autocomplete="off"
+            />
             <input v-model="password" type="password" placeholder="Password" class="password" />
             <input
               v-model="confirmpassword"
@@ -22,7 +28,7 @@
         </form>
       </div>
       <div class="form-container sign-in-container">
-        <form @submit.prevent="signIn">
+        <form @submit.prevent="signIn" autocomplete="on">
           <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
           <h1 style="margin: 1rem;">Sign in</h1>
           <div v-if="$store.state.isLoggingIn" class="form-fields">
@@ -72,7 +78,7 @@ export default {
       shiftView: false,
       email: "",
       password: "",
-      confirmpassword: "",      
+      confirmpassword: "",
       error: {
         isVisible: false,
         message: ""

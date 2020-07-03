@@ -11,6 +11,7 @@ export default {
   postSubscription: null,
   user: JSON.parse(localStorage.getItem("loggedUser")),
   currentUser: localStorage.getItem("currentUser"),
+  createRouteTracker: localStorage.getItem("createRouteTracker"),
   courses: [
     {
       name: "Engineering Mathematics-IV",

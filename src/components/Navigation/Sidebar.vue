@@ -10,7 +10,7 @@
           </router-link>
         </li>
         <li v-bind:class="{'active':$store.state.sidebarCounter == '2'}">
-          <router-link to="/timetable/create" class="router-link">
+          <router-link :to="$store.state.createRouteTracker" class="router-link">
             <img src="../../assets/Sidebar/create.svg" alt="create" />
             <span>Create</span>
           </router-link>
@@ -101,7 +101,7 @@ export default {
         }
         .router-link:hover {
           background: rgba($primary-dark, 0.5);
-          border-left: 3px solid red;
+          border-left: 3px solid $sidebar-menu-text;
         }
       }
       .active {

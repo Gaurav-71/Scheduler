@@ -40,6 +40,10 @@ export default {
   },
   created() {
     localStorage.setItem("currentRoute", this.$route.path);
+    localStorage.setItem("createRouteTracker", "/timetable/create");
+    this.$store.state.createRouteTracker = localStorage.getItem(
+      "createRouteTracker"
+    );
   }
 };
 </script>

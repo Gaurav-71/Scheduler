@@ -37,6 +37,9 @@ export default {
     this.$store.state.sidebarCounter = 2;
     this.$store.state.progressCounter = 1;
     localStorage.setItem("currentRoute", this.$route.path);
+    this.$store.state.createRouteTracker = localStorage.getItem(
+      "createRouteTracker"
+    );
   }
 };
 </script>

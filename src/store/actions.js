@@ -20,6 +20,7 @@ export default {
     localStorage.removeItem("loggedUser");
     localStorage.removeItem("currentUser");
     localStorage.removeItem("currentRoute");
+    localStorage.removeItem("createRouteTracker");
     this.state.currentUser = "";
     this.state.isLoggingIn = true;
     context.commit("logout");

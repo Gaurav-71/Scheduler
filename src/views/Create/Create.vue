@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ProgressBar from "../../components/ProgressBar.vue";
+import ProgressBar from "../../components/Navigation/ProgressBar.vue";
 
 export default {
   components: {
@@ -15,6 +15,9 @@ export default {
   created() {
     this.$store.state.sidebarCounter = 2;
     localStorage.setItem("currentRoute", this.$route.path);
+    this.$store.state.createRouteTracker = localStorage.getItem(
+      "createRouteTracker"
+    );
   }
 };
 </script>
