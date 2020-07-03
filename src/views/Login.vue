@@ -3,18 +3,12 @@
     <Header />
     <div class="container" :class="{'right-panel-active':shiftView}">
       <div class="form-container sign-up-container">
-        <form @submit.prevent="signUp">
+        <form @submit.prevent="signUp" autocomplete="off">
           <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
           <h1 style="margin: 1rem;">Create Account</h1>
           <div v-if="$store.state.isLoggingIn" class="form-fields">
-            <input type="text" placeholder="Name" class="name" autocomplete="on" />
-            <input
-              v-model="email"
-              type="email"
-              placeholder="Email"
-              class="email"
-              autocomplete="off"
-            />
+            <input type="text" placeholder="Name" class="name" />
+            <input v-model="email" type="email" placeholder="Email" class="email" />
             <input v-model="password" type="password" placeholder="Password" class="password" />
             <input
               v-model="confirmpassword"
@@ -32,8 +26,14 @@
           <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
           <h1 style="margin: 1rem;">Sign in</h1>
           <div v-if="$store.state.isLoggingIn" class="form-fields">
-            <input v-model="email" type="email" placeholder="Email" class="email" />
-            <input v-model="password" type="password" placeholder="Password" class="password" />
+            <input v-model="email" type="email" placeholder="Email" class="email" autocomplete="on" />
+            <input
+              v-model="password"
+              type="password"
+              placeholder="Password"
+              class="password"
+              autocomplete="on"
+            />
             <button type="button" @click="signIn">Sign In</button>
             <router-link to="/reset" class="forgot-pass">Forgot your password?</router-link>
           </div>
@@ -64,7 +64,7 @@
 <script>
 import Header from "@/components/Navigation/Header.vue";
 import Error from "../components/Modals/Error.vue";
-import Loading from "../components/Loading/Pulse.vue";
+import Loading from "../components/Loading/Circle.vue";
 
 export default {
   name: "Login",
@@ -175,13 +175,14 @@ export default {
       margin: 15px 0;
     }
     a:hover {
-      color: rgb(199, 49, 49);
+      color: rgb(230, 44, 44);
+      font-weight: bold;
     }
     button {
       margin-top: 1rem;
       border-radius: 20px;
       border: 1px solid $primary-light;
-      background-color: $primary-light;
+      background-image: $gradient;
       color: #ffffff;
       font-size: 12px;
       font-weight: bold;
@@ -198,6 +199,7 @@ export default {
       outline: none;
     }
     .ghost {
+      background-image: none;
       background-color: transparent;
       border-color: #ffffff;
     }
