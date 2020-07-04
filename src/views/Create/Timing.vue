@@ -1,5 +1,5 @@
 <template>
-  <div class="mapping">
+  <div class="timing">
     <div class="container">
       <div class="pills-container">
         <div class="pills" v-if="$store.state.cycle == 'Odd'">
@@ -47,84 +47,83 @@
           <option value="A"></option>
           <option value="B"></option>
           <option value="C"></option>
-        </datalist>
-        <input type="text" placeholder="Classroom no." class="classroom" />
+        </datalist>        
       </div>
-      <mappingTable
+      <TimingTable
         v-if="$store.state.semester == 3 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec3a"
+        :timingObject="$store.state.sec3a"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec3b"
+        :timingObject="$store.state.sec3b"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
-        :sectionObject="$store.state.sec3c"
+        :timingObject="$store.state.sec3c"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec4a"
+        :timingObject="$store.state.sec4a"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec4b"
+        :timingObject="$store.state.sec4b"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
-        :sectionObject="$store.state.sec4c"
+        :timingObject="$store.state.sec4c"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec5a"
+        :timingObject="$store.state.sec5a"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec5b"
+        :timingObject="$store.state.sec5b"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
-        :sectionObject="$store.state.sec5c"
+        :timingObject="$store.state.sec5c"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec6a"
+        :timingObject="$store.state.sec6a"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec6b"
+        :timingObject="$store.state.sec6b"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
-        :sectionObject="$store.state.sec6c"
+        :timingObject="$store.state.sec6c"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec7a"
+        :timingObject="$store.state.sec7a"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec7b"
+        :timingObject="$store.state.sec7b"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec8a"
+        :timingObject="$store.state.sec8a"
       />
-      <mappingTable
+      <TimingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec8b"
+        :timingObject="$store.state.sec8b"
       />
       <div v-else>
         <table>
           <tr>
             <th>
-              <h1 style="margin:0;font-weight:lighter;">Mapping : Courses & Professors</h1>
+              <h1 style="margin:0;font-weight:lighter;">Mapping : Lab & Tutorials</h1>
             </th>
           </tr>
           <tr>
             <td class="instructions">
               <ul>
-                <li>This section lets you map the subjects of the respective semester to the respective professors.</li>
+                <li>This section lets you add custom timings for labs and tutorials.</li>
                 <li>Please select the semester and section from the status bar above to proceed.</li>
                 <li>
                   <b>Note :</b> Please fill all the details to move to the next step
@@ -140,18 +139,18 @@
 </template>
 
 <script>
-import mappingTable from "../../components/Tables/mappingTable";
+import TimingTable from "../../components/Tables/TimingTable";
 
 export default {
   components: {
-    mappingTable
+    TimingTable
   },
   methods: {
     changeSemester(sem) {
       this.$store.state.semester = sem;
     },
-    route() {
-      this.$router.push("/timetable/create/automated/mapping/timing");
+    route(){
+      alert("Dheeraj and divya automate this shiz lezgooo !!!");
     }
   },
   created() {
@@ -171,7 +170,7 @@ export default {
 @import "../../scss/table";
 @import "../../scss/pills";
 
-.mapping {
+.timing {
   display: flex;
   justify-content: center;
   align-items: center;

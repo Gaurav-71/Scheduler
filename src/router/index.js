@@ -14,6 +14,7 @@ import Home from "../views/Home.vue";
 import Type from "../views/Create/Type.vue";
 import Cycle from "../views/Create/Cycle.vue";
 import MappingAutomated from "../views/Create/Mapping.vue";
+import Timing from "../views/Create/Timing.vue";
 import Reset from "../views/Reset.vue";
 import store from "../store/index.js";
 
@@ -76,6 +77,11 @@ const routes = [
             path: "/timetable/create/automated/mapping",
             name: "MappingAutomated",
             component: MappingAutomated,
+          },
+          {
+            path: "/timetable/create/automated/mapping/timing",
+            name: "Timing",
+            component: Timing,
           },
         ],
       },

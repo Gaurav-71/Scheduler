@@ -15,7 +15,7 @@
           <input type="text" placeholder="Select Professor" list="allProfessors" />
           <datalist id="allProfessors"></datalist>
           <img
-            src="../assets/Common/add.svg"
+            src="../../assets/Common/add.svg"
             alt="add professor"
             title="Add a professor"
             @click="addProfessor(index)"
@@ -25,7 +25,7 @@
           <input type="text" placeholder="Select Professor" list="allProfessors" />
           <datalist id="allProfessors"></datalist>
           <img
-            src="../assets/Common/delete.svg"
+            src="../../assets/Common/delete.svg"
             alt="delete professor"
             title="Remove Professor"
             v-if="sectionObject.getProfessors(index) == 2"
@@ -37,7 +37,7 @@
           <input type="text" placeholder="Select Professor" list="allProfessors" />
           <datalist id="allProfessors"></datalist>
           <img
-            src="../assets/Common/delete.svg"
+            src="../../assets/Common/delete.svg"
             alt="delete professor"
             title="Remove Professor"
             v-if="sectionObject.getProfessors(index) == 3"
@@ -49,7 +49,7 @@
           <input type="text" placeholder="Select Professor" list="allProfessors" />
           <datalist id="allProfessors"></datalist>
           <img
-            src="../assets/Common/delete.svg"
+            src="../../assets/Common/delete.svg"
             alt="delete professor"
             title="Remove Professor"
             v-if="sectionObject.getProfessors(index) == 4"
@@ -100,5 +100,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/table";
+@import "../../scss/table";
 </style>

@@ -92,7 +92,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/common";
+@import "../scss/searchBar";
 
 .professors {
   margin-top: 4.5rem;
