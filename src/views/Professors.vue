@@ -2,7 +2,7 @@
   <div class="professors">
     <div class="container">
       <div class="search-bar">
-        <input type="search" placeholder="Search Professors" />
+        <input type="search" placeholder="Search Professors" v-model="search" />
         <img
           src="../assets/Professors/add.svg"
           alt="add"
@@ -14,10 +14,14 @@
         </transition>
       </div>
       <div class="results">
-        <div v-for="(professor,index) in this.$store.state.professorList" :key="index">
+        <div v-for="(professor,index) in searchProfessors" :key="index">
           <div v-if="true" class="card">
             <div class="card-container">
-              <img src="../assets/Professors/male.svg" alt="male" v-if="professor.detail.Gender=='M'" />
+              <img
+                src="../assets/Professors/male.svg"
+                alt="male"
+                v-if="professor.detail.Gender=='M'"
+              />
               <img
                 src="../assets/Professors/female.svg"
                 alt="female"
@@ -35,7 +39,12 @@
             </div>
             <div class="actions">
               <img src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details" />
-              <img src="../assets/Common/delete.svg" @click="removeProfessor(professor.id)" alt="delete" title="Delete Professor" />
+              <img
+                src="../assets/Common/delete.svg"
+                @click="removeProfessor(professor.id)"
+                alt="delete"
+                title="Delete Professor"
+              />
             </div>
           </div>
           <div v-else class="card">
@@ -48,7 +57,13 @@
             </div>
             <div class="actions-edit">
               <form>
-                <input type="radio" id="male" name="gender" value="male" v-model="professor.detail.Gender" />
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="male"
+                  v-model="professor.detail.Gender"
+                />
                 <label for="male">Male</label>
                 <input
                   type="radio"
@@ -79,41 +94,46 @@
 
 <script>
 import AddProfessor from "../components/Modals/AddProfessor.vue";
-import { mapGetters } from "vuex";
 export default {
   components: {
     AddProfessor
   },
   data() {
     return {
-      unsubscribe : null
-    }
+      search: "",
+      unsubscribe: null
+    };
   },
   created() {
     this.$store.state.sidebarCounter = 4;
     localStorage.setItem("currentRoute", this.$route.path);
   },
+  methods: {
+    removeProfessor(id) {
+      this.$store
+        .dispatch("removeProfessor", id)
+        .then(() => {})
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
   computed: {
-    ...mapGetters(["getProfessorList"]),
+    searchProfessors: function() {
+      return this.$store.getters.getProfessorList.filter(professor => {
+        return professor.detail.Name.match(this.search);
+      });
+    }
   },
   mounted() {
     this.$store
       .dispatch("loadProfessorList")
-      .then((repsonse) => {
-        this.unsubscribe = repsonse;
+      .then(resp => {
+        this.unsubscribe = resp;
       })
-      .catch((err) => {
-        console.log(err);
-      })
-  },
-  methods: {
-    removeProfessor(id){
-      this.$store.dispatch("removeProfessor",id)
-      .then(()=>{})
       .catch(err => {
-        console.log(err);
+        alert(err);
       });
-    }
   }
 };
 </script>

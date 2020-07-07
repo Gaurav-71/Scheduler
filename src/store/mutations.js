@@ -13,9 +13,7 @@ export default {
     state.isLoggedIn = true;
     localStorage.setItem("loggedUser", JSON.stringify(user));
   },
-  loadProfessorList: (state,items) => { 
-    state.professorList = [];
-    state.professorList = items;
-    console.log(state.professorList);
+  loadProfessorList: (state,items) => {     
+    state.professorList = items;    
   }
 };
