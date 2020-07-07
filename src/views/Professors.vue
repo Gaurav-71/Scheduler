@@ -119,9 +119,10 @@ export default {
     }
   },
   computed: {
-    searchProfessors: function() {
+    searchProfessors: function() {      
       return this.$store.getters.getProfessorList.filter(professor => {
-        return professor.detail.Name.match(this.search);
+        let professorLowerCase = professor.detail.Name.toLowerCase(); 
+        return professorLowerCase.match(this.search.toLowerCase());
       });
     }
   },
