@@ -131,15 +131,15 @@ export default {
     try{
       console.log(commit);
       let newData = {
-        Name: this.Name,
-        Code: this.Code,
-        Semester: this.Semester,
+        Name: data.Name,
+        Code: data.Code,
+        Semester: data.Semester,
         Credits: {
-          Throry: this.Theory,
-          Tutorial: this.Tutorial,
-          Lab: this.Lab
+          Theory: data.Credits.Theory,
+          Tutorial: data.Credits.Tutorial,
+          Lab: data.Credits.Lab
         },
-        Type: this.Type
+        Type: data.Type
       }
       await db.collection("Courses").doc(data.id).update(newData);
     }

@@ -95,14 +95,14 @@
                 <input
                   type="text"
                   name="name"
-                  v-model="course.detail.Name"
+                  v-model="name"
                   style="width: 7rem"
                 />
                 <label for="code">Code :</label>
                 <input
                   type="text"
                   name="code"
-                  v-model="course.detail.Code"
+                  v-model="code"
                   style="width:2rem;"
                 />
               </div>
@@ -112,7 +112,7 @@
                   list="semesters"
                   name="semester"
                   style="width: 3rem;"
-                  v-model="course.detail.Semester"
+                  v-model="semester"
                 />
                 <datalist id="semesters">
                   <option value="3"></option>
@@ -126,7 +126,7 @@
                 <input
                   list="type"
                   name="type"
-                  v-model="course.detail.Type"
+                  v-model="type"
                   style="width: 5rem"
                 />
                 <datalist id="type">
@@ -146,7 +146,7 @@
                   step="1"
                   value="0"
                   style="width: 2rem"
-                  v-model="course.detail.Credits.Theory"
+                  v-model="theoryCredits"
                 />
                 <label for="tutorial">T:</label>
                 <input
@@ -158,7 +158,7 @@
                   step="1"
                   value="0"
                   style="width: 2rem"
-                  v-model="course.detail.Credits.Tutorial"
+                  v-model="tutorialCredits"
                 />
                 <label for="practical">P:</label>
                 <input
@@ -170,7 +170,7 @@
                   step="1"
                   value="0"
                   style="width: 2rem"
-                  v-model="course.detail.Credits.Lab"
+                  v-model="labCredits"
                 />
               </div>
             </div>
