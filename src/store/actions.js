@@ -40,9 +40,17 @@ export default {
     let response = db.collection("Teachers").onSnapshot((snapshot) => {
       let items = [];
       snapshot.forEach((doc) => {
-        let data = { id: doc.id, detail: doc.data() };
+        let data = { id: doc.id, detail: doc.data() ,isEditing:false};
         items.push(data);
       });
+      items.sort(function(a, b){
+        var nameA=a.detail.Name, nameB=b.detail.Name;
+        if (nameA < nameB) //sort string ascending
+            return -1 
+        if (nameA > nameB)
+            return 1
+        return 0 //default return value (no sorting)
+      })
       context.commit("loadProfessorList", items);
     });
     return response;
@@ -66,4 +74,18 @@ export default {
       console.log(err);
     }
   },
+  async updateProfessorBio({ commit },data) {
+    try{
+      console.log(commit);
+      let newData = {
+        Name : data.Name,
+        Designation : data.Designation,
+        Gender : data.Gender
+      }
+      await db.collection("Teachers").doc(data.id).update(newData);
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
 };

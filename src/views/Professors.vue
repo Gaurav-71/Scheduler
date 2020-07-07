@@ -15,7 +15,7 @@
       </div>
       <div class="results">
         <div v-for="(professor,index) in searchProfessors" :key="index">
-          <div v-if="true" class="card">
+          <div v-if="!professor.isEditing" class="card">
             <div class="card-container">
               <img
                 src="../assets/Professors/male.svg"
@@ -38,7 +38,7 @@
               </div>
             </div>
             <div class="actions">
-              <img src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details" />
+              <img @click="edit(professor)" src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details" />
               <img
                 src="../assets/Common/delete.svg"
                 @click="removeProfessor(professor.id)"
@@ -51,8 +51,8 @@
             <div class="card-container">
               <img src="../assets/Common/edit.svg" alt="edit-mode" />
               <div class="details-edit">
-                <input type="text" v-model="professor.detail.Name" />
-                <input type="text" v-model="professor.detail.Designation" />
+                <input type="text" v-model="name" />
+                <input type="text" v-model="designation" />
               </div>
             </div>
             <div class="actions-edit">
@@ -61,29 +61,29 @@
                   type="radio"
                   id="male"
                   name="gender"
-                  value="male"
-                  v-model="professor.detail.Gender"
+                  value="M"
+                  v-model="gender"
                 />
                 <label for="male">Male</label>
                 <input
                   type="radio"
                   id="female"
                   name="gender"
-                  value="female"
-                  v-model="professor.detail.Gender"
+                  value="F"
+                  v-model="gender"
                 />
                 <label for="female">Female</label>
                 <input
                   type="radio"
                   id="other"
                   name="gender"
-                  value="other"
-                  v-model="professor.detail.Gender"
+                  value="O"
+                  v-model="gender"
                 />
                 <label for="other">Other</label>
               </form>
-              <img src="../assets/Common/save.svg" alt="save" title="Save Edited Details" />
-              <img src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing" />
+              <img @click="saveDetails(professor)" src="../assets/Common/save.svg" alt="save" title="Save Edited Details" />
+              <img @click="professor.isEditing = false" src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing" />
             </div>
           </div>
         </div>
@@ -101,7 +101,10 @@ export default {
   data() {
     return {
       search: "",
-      unsubscribe: null
+      unsubscribe: null,
+      name:"",
+      designation:"",
+      gender:"",
     };
   },
   created() {
@@ -116,6 +119,28 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    edit(professor){
+      professor.isEditing = true;
+      this.name = professor.detail.Name;
+      this.designation = professor.detail.Designation;
+      this.gender = professor.detail.Gender;
+    },
+    saveDetails(professor){
+      let data = {
+        id:professor.id,
+        Name : this.name,
+        Designation : this.designation,
+        Gender : this.gender
+      }
+      this.$store.dispatch("updateProfessorBio",data)
+        .then(() => {
+          this.name = "";
+          this.designation = "";
+          this.gender = "";
+          professor.isEditing = false;        
+        })
+        .catch((err) => {console.log(err);})
     }
   },
   computed: {
