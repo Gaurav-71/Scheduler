@@ -14,7 +14,6 @@ export default {
     localStorage.setItem("loggedUser", JSON.stringify(user));
   },
   loadProfessorList: (state,items) => { 
-    state.professorList = [];
     state.professorList = items;
     console.log(state.professorList);
   }

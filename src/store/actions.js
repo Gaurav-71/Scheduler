@@ -37,15 +37,18 @@ export default {
     commit("signup", response.user);
   },
   async loadProfessorList(context) {
-    let response = db.collection("Teachers").onSnapshot((snapshot)=> {
-      let items = []
-      snapshot.forEach(doc => {
-        let data ={ id : doc.id,detail : doc.data()}
-        items.push(data);
+    try{
+      let response = db.collection("Teachers").onSnapshot((snapshot)=> {
+        let items = []
+        snapshot.forEach(doc => {
+          let data ={ id : doc.id,detail : doc.data()}
+          items.push(data);
+        });
+        context.commit("loadProfessorList",items);
       });
-      context.commit("loadProfessorList",items);
-    });
-    return response;
+      return response;
+    }
+    catch(err){console.log(err);}
   },
   async addProfessor({commit},data) {
     try{

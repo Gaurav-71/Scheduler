@@ -2,7 +2,8 @@
   <div class="professors">
     <div class="container">
       <div class="search-bar">
-        <input type="search" placeholder="Search Professors" />
+        <input type="search" placeholder="Search Professors" v-model="search" />
+        
         <img
           src="../assets/Professors/add.svg"
           alt="add"
@@ -14,7 +15,7 @@
         </transition>
       </div>
       <div class="results">
-        <div v-for="(professor,index) in this.$store.state.professorList" :key="index">
+        <div v-for="(professor,index) in filteredNames()" :key="index">
           <div v-if="true" class="card">
             <div class="card-container">
               <img src="../assets/Professors/male.svg" alt="male" v-if="professor.detail.Gender=='M'" />
@@ -86,7 +87,9 @@ export default {
   },
   data() {
     return {
-      unsubscribe : null
+      unsubscribe : null,
+      search : " ",
+      names : []
     }
   },
   created() {
@@ -95,6 +98,12 @@ export default {
   },
   computed: {
     ...mapGetters(["getProfessorList"]),
+    filteredNames() {
+      this.names= this.$store.state.professorList;
+      return this.names.filter((professor) => {
+        return professor.name.match(this.search);
+      });
+    }
   },
   mounted() {
     this.$store
@@ -104,7 +113,7 @@ export default {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   },
   methods: {
     removeProfessor(id){
@@ -113,8 +122,8 @@ export default {
       .catch(err => {
         console.log(err);
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
