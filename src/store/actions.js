@@ -40,7 +40,8 @@ export default {
     let response = db.collection("Teachers").onSnapshot((snapshot)=> {
       let items = []
       snapshot.forEach(doc => {
-        items.push(doc.data());
+        let data ={ id : doc.id,detail : doc.data()}
+        items.push(data);
       });
       context.commit("loadProfessorList",items);
     });
@@ -50,6 +51,15 @@ export default {
     try{
       console.log(commit);
       await db.collection("Teachers").add(data);
+    }
+    catch(err){
+      console.log(err);
+    }
+  },
+  async removeProfessor({commit},id) {
+    try{
+      console.log(commit);
+      await db.collection("Teachers").doc(id).delete();
     }
     catch(err){
       console.log(err);

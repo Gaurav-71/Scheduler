@@ -17,45 +17,45 @@
         <div v-for="(professor,index) in this.$store.state.professorList" :key="index">
           <div v-if="true" class="card">
             <div class="card-container">
-              <img src="../assets/Professors/male.svg" alt="male" v-if="professor.Gender=='M'" />
+              <img src="../assets/Professors/male.svg" alt="male" v-if="professor.detail.Gender=='M'" />
               <img
                 src="../assets/Professors/female.svg"
                 alt="female"
-                v-else-if="professor.Gender=='F'"
+                v-else-if="professor.detail.Gender=='F'"
               />
               <img
                 src="../assets/Professors/other.svg"
                 alt="male"
-                v-else-if="professor.Gender=='O'"
+                v-else-if="professor.detail.Gender=='O'"
               />
               <div class="details">
-                <h3>{{professor.Name}}</h3>
-                <h5>{{professor.Designation}}</h5>
+                <h3>{{professor.detail.Name}}</h3>
+                <h5>{{professor.detail.Designation}}</h5>
               </div>
             </div>
             <div class="actions">
               <img src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details" />
-              <img src="../assets/Common/delete.svg" alt="delete" title="Delete Professor" />
+              <img src="../assets/Common/delete.svg" @click="removeProfessor(professor.id)" alt="delete" title="Delete Professor" />
             </div>
           </div>
           <div v-else class="card">
             <div class="card-container">
               <img src="../assets/Common/edit.svg" alt="edit-mode" />
               <div class="details-edit">
-                <input type="text" v-model="professor.Name" />
-                <input type="text" v-model="professor.Designation" />
+                <input type="text" v-model="professor.detail.Name" />
+                <input type="text" v-model="professor.detail.Designation" />
               </div>
             </div>
             <div class="actions-edit">
               <form>
-                <input type="radio" id="male" name="gender" value="male" v-model="professor.Gender" />
+                <input type="radio" id="male" name="gender" value="male" v-model="professor.detail.Gender" />
                 <label for="male">Male</label>
                 <input
                   type="radio"
                   id="female"
                   name="gender"
                   value="female"
-                  v-model="professor.Gender"
+                  v-model="professor.detail.Gender"
                 />
                 <label for="female">Female</label>
                 <input
@@ -63,7 +63,7 @@
                   id="other"
                   name="gender"
                   value="other"
-                  v-model="professor.Gender"
+                  v-model="professor.detail.Gender"
                 />
                 <label for="other">Other</label>
               </form>
@@ -105,6 +105,15 @@ export default {
       .catch((err) => {
         console.log(err);
       })
+  },
+  methods: {
+    removeProfessor(id){
+      this.$store.dispatch("removeProfessor",id)
+      .then(()=>{})
+      .catch(err => {
+        console.log(err);
+      });
+    }
   }
 };
 </script>
