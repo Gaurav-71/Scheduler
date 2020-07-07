@@ -46,7 +46,7 @@
               </div>
             </form>
           </div>
-          <div class="btn" @click="addProfessor()">Save</div>
+          <div class="btn" @click="addProfessor">Save</div>
         </div>
       </form>
     </div>

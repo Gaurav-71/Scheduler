@@ -7,31 +7,29 @@
         <div class="row">
           <div class="field">
             <label for="name">Course name</label>
-            <input type="text" name="name" placeholder="Enter name" class="name" />
+            <input type="text" name="name" placeholder="Enter name" class="name" v-model="name"/>
           </div>
           <div class="field">
             <label for="code">Course code</label>
-            <input type="text" name="code" placeholder="Enter code" class="code" />
+            <input type="text" name="code" placeholder="Enter code" class="code" v-model="code"/>
           </div>
         </div>
         <div class="row">
           <div class="field">
             <label for="semester">Semester</label>
-            <input list="semesters" name="semester" placeholder="Enter semester" class="sem" />
+            <input list="semesters" name="semester" placeholder="Enter semester" class="sem" v-model="semester"/>
             <datalist id="semesters">
-              <option value="First Semester"></option>
-              <option value="Second Semester"></option>
-              <option value="Third Semester"></option>
-              <option value="Fourth Semester"></option>
-              <option value="Fifth Semester"></option>
-              <option value="Sixth Semester"></option>
-              <option value="Seventh Semester"></option>
-              <option value="Eight Semester"></option>
+              <option value=3></option>
+              <option value=4></option>
+              <option value=5></option>
+              <option value=6></option>
+              <option value=7></option>
+              <option value=8></option>
             </datalist>
           </div>
           <div class="field">
             <label for="type">Course type</label>
-            <input list="type" name="type" placeholder="Enter course type" class="type" />
+            <input list="type" name="type" placeholder="Enter course type" class="type" v-model="type"/>
             <datalist id="type">
               <option value="Theory"></option>
               <option value="Lab"></option>
@@ -52,6 +50,7 @@
                   step="1"
                   value="0"
                   class="lecture"
+                  v-model="theoryCredits"
                 />
                 <label for="lecture">Lecture</label>
               </div>
@@ -64,6 +63,7 @@
                   step="1"
                   value="0"
                   class="tutorial"
+                  v-model="tutorialCredits"
                 />
                 <label for="tutorial">Tutorial</label>
               </div>
@@ -76,12 +76,13 @@
                   step="1"
                   value="0"
                   class="lab"
+                  v-model="labCredits"
                 />
                 <label for="practicals">Practicals</label>
               </div>
             </div>
           </div>
-          <div class="btn" @click="$store.state.showCourseModal=false">Save</div>
+          <div class="btn" @click="addCourse">Save</div>
         </div>
       </form>
     </div>
@@ -93,6 +94,52 @@
     />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: "",
+      code: "",
+      type: "",
+      semester: 0,
+      theoryCredits: 0,
+      tutorialCredits: 0,
+      labCredits: 0
+    };
+  },
+  methods: {
+    addCourse() {
+      this.$store.state.showCourseModal = false;
+      let data = {
+        Name: this.name,
+        Code: this.code,
+        Semester: this.semester,
+        Credits: {
+          Theory: this.theoryCredits,
+          Tutorial: this.tutorialCredits,
+          Lab: this.labCredits
+        },
+        Type: this.type
+      };
+      this.$store
+        .dispatch("addCourse", data)
+        .then(() => {})
+        .catch(err => {
+          console.log(err);
+        });
+      this.name = "";
+      this.code = "";
+      this.type = "";
+      this.semester = 0;
+      this.theoryCredits = 0;
+      this.tutorialCredits = 0;
+      this.labCredits = 0;
+    }
+  }
+};
+</script>
+
 
 <style lang="scss" scoped>
 @import "../../scss/modal";

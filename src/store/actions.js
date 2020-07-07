@@ -87,5 +87,64 @@ export default {
     catch(err){
       console.log(err);
     }
+  },
+
+  async loadCourseList(context) {
+    let response = db.collection("Courses").onSnapshot((snapshot) => {
+      let items = [];
+      snapshot.forEach((doc) => {
+        let data = { id: doc.id, detail: doc.data() ,isEditing:false};
+        items.push(data);
+      });
+      items.sort(function(a, b){
+        var semA=a.detail.Semester, semB=b.detail.Semester;
+        if (semA < semB) //sort string ascending
+            return -1 
+        if (semA > semB)
+            return 1
+        return 0 //default return value (no sorting)
+      });
+      context.commit("loadCourseList", items);
+    });
+    return response;
+  },
+  async addCourse({ commit }, data) {
+    try {
+      console.log(commit);
+      await db.collection("Courses").add(data);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async removeCourse({ commit }, id) {
+    try {
+      console.log(commit);
+      await db
+        .collection("Courses")
+        .doc(id)
+        .delete();
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async updateCourseDetails({ commit }, data) {
+    try{
+      console.log(commit);
+      let newData = {
+        Name: this.Name,
+        Code: this.Code,
+        Semester: this.Semester,
+        Credits: {
+          Throry: this.Theory,
+          Tutorial: this.Tutorial,
+          Lab: this.Lab
+        },
+        Type: this.Type
+      }
+      await db.collection("Courses").doc(data.id).update(newData);
+    }
+    catch(err){
+      console.log(err);
+    }
   }
 };

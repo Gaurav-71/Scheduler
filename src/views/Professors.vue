@@ -14,31 +14,36 @@
         </transition>
       </div>
       <div class="results">
-        <div v-for="(professor,index) in searchProfessors" :key="index">
+        <div v-for="(professor, index) in searchProfessors" :key="index">
           <div v-if="!professor.isEditing" class="card">
             <div class="card-container">
               <img
                 src="../assets/Professors/male.svg"
                 alt="male"
-                v-if="professor.detail.Gender=='M'"
+                v-if="professor.detail.Gender == 'M'"
               />
               <img
                 src="../assets/Professors/female.svg"
                 alt="female"
-                v-else-if="professor.detail.Gender=='F'"
+                v-else-if="professor.detail.Gender == 'F'"
               />
               <img
                 src="../assets/Professors/other.svg"
                 alt="male"
-                v-else-if="professor.detail.Gender=='O'"
+                v-else-if="professor.detail.Gender == 'O'"
               />
               <div class="details">
-                <h3>{{professor.detail.Name}}</h3>
-                <h5>{{professor.detail.Designation}}</h5>
+                <h3>{{ professor.detail.Name }}</h3>
+                <h5>{{ professor.detail.Designation }}</h5>
               </div>
             </div>
             <div class="actions">
-              <img @click="edit(professor)" src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details" />
+              <img
+                @click="edit(professor)"
+                src="../assets/Common/edit.svg"
+                alt="edit"
+                title="Edit Professor Details"
+              />
               <img
                 src="../assets/Common/delete.svg"
                 @click="removeProfessor(professor.id)"
@@ -82,8 +87,18 @@
                 />
                 <label for="other">Other</label>
               </form>
-              <img @click="saveDetails(professor)" src="../assets/Common/save.svg" alt="save" title="Save Edited Details" />
-              <img @click="professor.isEditing = false" src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing" />
+              <img
+                @click="saveDetails(professor)"
+                src="../assets/Common/save.svg"
+                alt="save"
+                title="Save Edited Details"
+              />
+              <img
+                @click="professor.isEditing = false"
+                src="../assets/Common/cancel.svg"
+                alt="cancel"
+                title="Cancel Editing"
+              />
             </div>
           </div>
         </div>
@@ -96,15 +111,15 @@
 import AddProfessor from "../components/Modals/AddProfessor.vue";
 export default {
   components: {
-    AddProfessor
+    AddProfessor,
   },
   data() {
     return {
       search: "",
       unsubscribe: null,
-      name:"",
-      designation:"",
-      gender:"",
+      name: "",
+      designation: "",
+      gender: "",
     };
   },
   created() {
@@ -116,51 +131,54 @@ export default {
       this.$store
         .dispatch("removeProfessor", id)
         .then(() => {})
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },
-    edit(professor){
+    edit(professor) {
       professor.isEditing = true;
       this.name = professor.detail.Name;
       this.designation = professor.detail.Designation;
       this.gender = professor.detail.Gender;
     },
-    saveDetails(professor){
+    saveDetails(professor) {
       let data = {
-        id:professor.id,
-        Name : this.name,
-        Designation : this.designation,
-        Gender : this.gender
-      }
-      this.$store.dispatch("updateProfessorBio",data)
+        id: professor.id,
+        Name: this.name,
+        Designation: this.designation,
+        Gender: this.gender,
+      };
+      this.$store
+        .dispatch("updateProfessorBio", data)
         .then(() => {
           this.name = "";
           this.designation = "";
           this.gender = "";
-          professor.isEditing = false;        
+          professor.isEditing = false;
         })
-        .catch((err) => {console.log(err);})
-    }
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
   computed: {
-    searchProfessors: function() {      
-      return this.$store.getters.getProfessorList.filter(professor => {
-        let professorLowerCase = professor.detail.Name.toLowerCase(); 
+    searchProfessors: function() {
+      return this.$store.getters.getProfessorList.filter((professor) => {
+        let professorLowerCase = professor.detail.Name.toLowerCase();
         return professorLowerCase.match(this.search.toLowerCase());
       });
-    }
+    },
   },
   mounted() {
     this.$store
       .dispatch("loadProfessorList")
-      .then(resp => {
+      .then((resp) => {
         this.unsubscribe = resp;
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err);
       });
-  }
+  },
 };
 </script>
 

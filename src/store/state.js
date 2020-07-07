@@ -13,7 +13,7 @@ export default {
   currentUser: localStorage.getItem("currentUser"),
   createRouteTracker: localStorage.getItem("createRouteTracker"),
   professorList: [],
-  professorNames:[],
+  courseList :[],
   courses: [
     {
       name: "Engineering Mathematics-IV",

@@ -7,62 +7,104 @@
           src="../assets/Courses/add.svg"
           alt="add"
           title="Add New Course"
-          @click="$store.state.showCourseModal=true"
+          @click="$store.state.showCourseModal = true"
         />
         <transition name="fade" appear>
           <AddCourse v-if="$store.state.showCourseModal" />
         </transition>
       </div>
       <div class="results">
-        <div v-for="(course,index) in $store.state.courses" :key="index">
-          <div v-if="index!=4" class="card">
+        <div v-for="(course, index) in searchCourses" :key="index">
+          <div v-if="!course.isEditing" class="card">
             <div class="actions">
-              <img src="../assets/Common/edit.svg" alt="edit" title="Edit Course Details" />
+              <img
+                src="../assets/Common/edit.svg"
+                alt="edit"
+                title="Edit Course Details"
+                @click="edit(course)"
+              />
               <div class="semester">
-                <img src="../assets/Courses/three.svg" alt="three" v-if="course.semester=='three'" />
+                <img
+                  src="../assets/Courses/three.svg"
+                  alt="three"
+                  v-if="course.detail.Semester == 3"
+                />
                 <img
                   src="../assets/Courses/four.svg"
                   alt="four"
-                  v-else-if="course.semester=='four'"
+                  v-else-if="course.detail.Semester == 4"
                 />
                 <img
                   src="../assets/Courses/five.svg"
                   alt="five"
-                  v-else-if="course.semester=='five'"
+                  v-else-if="course.detail.Semester == 5"
                 />
-                <img src="../assets/Courses/six.svg" alt="six" v-else-if="course.semester=='six'" />
+                <img
+                  src="../assets/Courses/six.svg"
+                  alt="six"
+                  v-else-if="course.detail.Semester == 6"
+                />
                 <img
                   src="../assets/Courses/seven.svg"
                   alt="seven"
-                  v-else-if="course.semester=='seven'"
+                  v-else-if="course.detail.Semester == 7"
                 />
                 <img
                   src="../assets/Courses/eight.svg"
                   alt="eight"
-                  v-else-if="course.semester=='eight'"
+                  v-else-if="course.detail.Semester == 8"
                 />
               </div>
-              <img src="../assets/Common/delete.svg" alt="delete" title="Delete Course" />
+              <img
+                src="../assets/Common/delete.svg"
+                @click="removeCourse(course.id)"
+                alt="delete"
+                title="Delete Course"
+              />
             </div>
             <div class="details">
-              <h3>{{course.name}}</h3>
-              <h4>{{course.code}} | {{course.lecture}}:{{course.tutorial}}:{{course.practical}} | {{course.type}}</h4>
+              <h3>{{ course.detail.Name }}</h3>
+              <h4>
+                {{ course.detail.Code }} | {{ course.detail.Credits.Theory }}:{{
+                  course.detail.Credits.Tutorial
+                }}:{{ course.detail.Credits.Lab }} | {{ course.detail.Type }}
+              </h4>
             </div>
           </div>
           <div v-else class="card">
             <div class="actions-edit">
               <img src="../assets/Common/edit.svg" alt="edit" />
               <div class="actions-group">
-                <img src="../assets/Common/save.svg" alt="save" title="Save Edited Details" />
-                <img src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing" />
+                <img
+                  @click="saveDetails(course)"
+                  src="../assets/Common/save.svg"
+                  alt="save"
+                  title="Save Edited Details"
+                />
+                <img
+                  @click="course.isEditing = false"
+                  src="../assets/Common/cancel.svg"
+                  alt="cancel"
+                  title="Cancel Editing"
+                />
               </div>
             </div>
             <div class="details-edit">
               <div class="row">
                 <label for="name">Name :</label>
-                <input type="text" name="name" v-model="course.name" style="width: 7rem" />
+                <input
+                  type="text"
+                  name="name"
+                  v-model="course.detail.Name"
+                  style="width: 7rem"
+                />
                 <label for="code">Code :</label>
-                <input type="text" name="code" v-model="course.code" style="width:2rem;" />
+                <input
+                  type="text"
+                  name="code"
+                  v-model="course.detail.Code"
+                  style="width:2rem;"
+                />
               </div>
               <div class="row">
                 <label for="semester">Semester :</label>
@@ -70,20 +112,23 @@
                   list="semesters"
                   name="semester"
                   style="width: 3rem;"
-                  v-model="course.semester"
+                  v-model="course.detail.Semester"
                 />
                 <datalist id="semesters">
-                  <option value="First Semester"></option>
-                  <option value="Second Semester"></option>
-                  <option value="Third Semester"></option>
-                  <option value="Fourth Semester"></option>
-                  <option value="Fifth Semester"></option>
-                  <option value="Sixth Semester"></option>
-                  <option value="Seventh Semester"></option>
-                  <option value="Eight Semester"></option>
+                  <option value="3"></option>
+                  <option value="4"></option>
+                  <option value="5"></option>
+                  <option value="6"></option>
+                  <option value="7"></option>
+                  <option value="8"></option>
                 </datalist>
                 <label for="type">Type:</label>
-                <input list="type" name="type" v-model="course.type" style="width: 5rem" />
+                <input
+                  list="type"
+                  name="type"
+                  v-model="course.detail.Type"
+                  style="width: 5rem"
+                />
                 <datalist id="type">
                   <option value="Theory"></option>
                   <option value="Lab"></option>
@@ -101,7 +146,7 @@
                   step="1"
                   value="0"
                   style="width: 2rem"
-                  v-model="course.lecture"
+                  v-model="course.detail.Credits.Theory"
                 />
                 <label for="tutorial">T:</label>
                 <input
@@ -113,7 +158,7 @@
                   step="1"
                   value="0"
                   style="width: 2rem"
-                  v-model="course.tutorial"
+                  v-model="course.detail.Credits.Tutorial"
                 />
                 <label for="practical">P:</label>
                 <input
@@ -125,7 +170,7 @@
                   step="1"
                   value="0"
                   style="width: 2rem"
-                  v-model="course.practical"
+                  v-model="course.detail.Credits.Lab"
                 />
               </div>
             </div>
@@ -141,12 +186,92 @@ import AddCourse from "../components/Modals/AddCourse.vue";
 
 export default {
   components: {
-    AddCourse
+    AddCourse,
+  },
+  data() {
+    return {
+      search: "",
+      unsubscribe: null,
+      name: "",
+      code: "",
+      type: "",
+      semester: 0,
+      theoryCredits: 0,
+      tutorialCredits: 0,
+      labCredits: 0,
+    };
   },
   created() {
     this.$store.state.sidebarCounter = 5;
     localStorage.setItem("currentRoute", this.$route.path);
-  }
+  },
+  computed: {
+    searchCourses: function() {
+      return this.$store.getters.getCourseList.filter((course) => {
+        let courseLowerCase = course.detail.Name.toLowerCase();
+        return courseLowerCase.match(this.search.toLowerCase());
+      });
+    },
+  },
+  mounted() {
+    this.$store
+      .dispatch("loadCourseList")
+      .then((resp) => {
+        this.unsubscribe = resp;
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  },
+  methods: {
+    removeCourse(id) {
+      this.$store
+        .dispatch("removeCourse", id)
+        .then(() => {})
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    edit(course) {
+      course.isEditing = true;
+      this.name = course.detail.Name;
+      this.code = course.detail.Code;
+      this.type = course.detail.Type;
+      this.semester = course.detail.Semester;
+      this.theoryCredits = course.detail.Credits.Theory;
+      this.tutorialCredits = course.detail.Credits.Tutorial;
+      this.labCredits = course.detail.Credits.Lab;
+    },
+    saveDetails(course) {
+      let data = {
+        id: course.id,
+        Name: this.name,
+        Code: this.code,
+        Semester: this.semester,
+        Credits: {
+          Theory: this.theoryCredits,
+          Tutorial: this.tutorialCredits,
+          Lab: this.labCredits,
+        },
+        Type: this.type,
+      };
+      this.$store
+        .dispatch("updateCourseDetails", data)
+        .then(() => {
+          this.name = "";
+          this.code = "";
+          this.type = "";
+          this.semester = 0;
+          this.theoryCredits = 0;
+          this.tutorialCredits = 0;
+          this.labCredits = 0;
+          course.isEditing = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  },
 };
 </script>
 
