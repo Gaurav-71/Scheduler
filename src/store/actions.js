@@ -1,4 +1,5 @@
 import { auth } from "../main.js";
+import { db } from "../main.js";
 export default {
   async signin({ commit }, payload) {
     this.state.isLoggingIn = false;
@@ -35,4 +36,23 @@ export default {
     localStorage.setItem("currentUser", payload.email);
     commit("signup", response.user);
   },
+  async loadProfessorList(context) {
+    let response = db.collection("Teachers").onSnapshot((snapshot)=> {
+      let items = []
+      snapshot.forEach(doc => {
+        items.push(doc.data());
+      });
+      context.commit("loadProfessorList",items);
+    });
+    return response;
+  },
+  async addProfessor({commit},data) {
+    try{
+      console.log(commit);
+      await db.collection("Teachers").add(data);
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
 };

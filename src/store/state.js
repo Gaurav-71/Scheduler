@@ -12,6 +12,7 @@ export default {
   user: JSON.parse(localStorage.getItem("loggedUser")),
   currentUser: localStorage.getItem("currentUser"),
   createRouteTracker: localStorage.getItem("createRouteTracker"),
+  professorList: [],
   courses: [
     {
       name: "Engineering Mathematics-IV",

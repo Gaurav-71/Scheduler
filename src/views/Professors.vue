@@ -14,23 +14,23 @@
         </transition>
       </div>
       <div class="results">
-        <div v-for="(professor,index) in $store.state.professors" :key="index">
-          <div v-if="index!=2" class="card">
+        <div v-for="(professor,index) in this.$store.state.professorList" :key="index">
+          <div v-if="true" class="card">
             <div class="card-container">
-              <img src="../assets/Professors/male.svg" alt="male" v-if="professor.gender=='male'" />
+              <img src="../assets/Professors/male.svg" alt="male" v-if="professor.Gender=='M'" />
               <img
                 src="../assets/Professors/female.svg"
                 alt="female"
-                v-else-if="professor.gender=='female'"
+                v-else-if="professor.Gender=='F'"
               />
               <img
                 src="../assets/Professors/other.svg"
                 alt="male"
-                v-else-if="professor.gender=='other'"
+                v-else-if="professor.Gender=='O'"
               />
               <div class="details">
-                <h3>{{professor.name}}</h3>
-                <h5>{{professor.designation}}</h5>
+                <h3>{{professor.Name}}</h3>
+                <h5>{{professor.Designation}}</h5>
               </div>
             </div>
             <div class="actions">
@@ -42,20 +42,20 @@
             <div class="card-container">
               <img src="../assets/Common/edit.svg" alt="edit-mode" />
               <div class="details-edit">
-                <input type="text" v-model="professor.name" />
-                <input type="text" v-model="professor.designation" />
+                <input type="text" v-model="professor.Name" />
+                <input type="text" v-model="professor.Designation" />
               </div>
             </div>
             <div class="actions-edit">
               <form>
-                <input type="radio" id="male" name="gender" value="male" v-model="professor.gender" />
+                <input type="radio" id="male" name="gender" value="male" v-model="professor.Gender" />
                 <label for="male">Male</label>
                 <input
                   type="radio"
                   id="female"
                   name="gender"
                   value="female"
-                  v-model="professor.gender"
+                  v-model="professor.Gender"
                 />
                 <label for="female">Female</label>
                 <input
@@ -63,7 +63,7 @@
                   id="other"
                   name="gender"
                   value="other"
-                  v-model="professor.gender"
+                  v-model="professor.Gender"
                 />
                 <label for="other">Other</label>
               </form>
@@ -79,14 +79,32 @@
 
 <script>
 import AddProfessor from "../components/Modals/AddProfessor.vue";
-
+import { mapGetters } from "vuex";
 export default {
   components: {
     AddProfessor
   },
+  data() {
+    return {
+      unsubscribe : null
+    }
+  },
   created() {
     this.$store.state.sidebarCounter = 4;
     localStorage.setItem("currentRoute", this.$route.path);
+  },
+  computed: {
+    ...mapGetters(["getProfessorList"]),
+  },
+  mounted() {
+    this.$store
+      .dispatch("loadProfessorList")
+      .then((repsonse) => {
+        this.unsubscribe = repsonse;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 };
 </script>
