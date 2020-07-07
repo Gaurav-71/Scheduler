@@ -12,7 +12,12 @@
         <div class="field2">
           <label for="designation">Designation</label>
           <br />
-          <input v-model="designation" list="designation" name="designation" placeholder="Enter designation" />
+          <input
+            v-model="designation"
+            list="designation"
+            name="designation"
+            placeholder="Enter designation"
+          />
           <datalist id="designation">
             <option value="Head Of Department"></option>
             <option value="Professor"></option>
@@ -24,17 +29,17 @@
           <div class="col1">
             <label>Gender</label>
             <form>
-              <input type="radio" id="male" name="gender" value="M" v-model="gender"/>
+              <input type="radio" id="male" name="gender" value="M" v-model="gender" />
               <div class="custom-label">
                 <img src="../../assets/Professors/Modal/male.svg" alt="male" />
                 <label for="male">Male</label>
               </div>
-              <input type="radio" id="female" name="gender" value="F" v-model="gender"/>
+              <input type="radio" id="female" name="gender" value="F" v-model="gender" />
               <div class="custom-label">
                 <img src="../../assets/Professors/Modal/female.svg" alt="male" />
                 <label for="female">Female</label>
               </div>
-              <input type="radio" id="other" name="gender" value="O" v-model="gender"/>
+              <input type="radio" id="other" name="gender" value="O" v-model="gender" />
               <div class="custom-label">
                 <img src="../../assets/Professors/other.svg" alt="male" />
                 <label for="other">Other</label>
@@ -57,32 +62,38 @@
 <script>
 export default {
   data() {
-    return{
-      name:"",
-      gender:"",
-      designation:"",
-    }
+    return {
+      name: "",
+      gender: "",
+      designation: ""
+    };
   },
   methods: {
     addProfessor() {
-      this.$store.state.showProfessorModal=false;
+      this.$store.state.showProfessorModal = false;
       let data = {
-        Name : this.name,
-        Gender : this.gender,
-        Designation : this.designation,
-        Monday : ["","","","","","",""],
-        Tuesday : ["","","","","","",""],
-        Wednesday : ["","","","","","",""],
-        Thursday : ["","","","","","",""],
-        Friday : ["","","","","","",""],
-        Saturday : ["","","","","","",""],
+        Name: this.name,
+        Gender: this.gender,
+        Designation: this.designation,
+        Monday: ["", "", "", "", "", "", ""],
+        Tuesday: ["", "", "", "", "", "", ""],
+        Wednesday: ["", "", "", "", "", "", ""],
+        Thursday: ["", "", "", "", "", "", ""],
+        Friday: ["", "", "", "", "", "", ""],
+        Saturday: ["", "", "", "", "", "", ""]
       };
-      this.$store.dispatch("addProfessor",data)
-        .then(()=>{})
-        .catch((err) => {console.log(err)});
+      this.$store
+        .dispatch("addProfessor", data)
+        .then(() => {})
+        .catch(err => {
+          console.log(err);
+        });
+      this.name = "";
+      this.gender = "";
+      this.designation = "";
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -37,35 +37,33 @@ export default {
     commit("signup", response.user);
   },
   async loadProfessorList(context) {
-    try{
-      let response = db.collection("Teachers").onSnapshot((snapshot)=> {
-        let items = []
-        snapshot.forEach(doc => {
-          let data ={ id : doc.id,detail : doc.data()}
-          items.push(data);
-        });
-        context.commit("loadProfessorList",items);
+    let response = db.collection("Teachers").onSnapshot((snapshot) => {
+      let items = [];
+      snapshot.forEach((doc) => {
+        let data = { id: doc.id, detail: doc.data() };
+        items.push(data);
       });
-      return response;
-    }
-    catch(err){console.log(err);}
+      context.commit("loadProfessorList", items);
+    });
+    return response;
   },
-  async addProfessor({commit},data) {
-    try{
+  async addProfessor({ commit }, data) {
+    try {
       console.log(commit);
       await db.collection("Teachers").add(data);
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
     }
   },
-  async removeProfessor({commit},id) {
-    try{
+  async removeProfessor({ commit }, id) {
+    try {
       console.log(commit);
-      await db.collection("Teachers").doc(id).delete();
-    }
-    catch(err){
+      await db
+        .collection("Teachers")
+        .doc(id)
+        .delete();
+    } catch (err) {
       console.log(err);
     }
-  }
+  },
 };
