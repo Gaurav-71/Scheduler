@@ -180,7 +180,8 @@ export default {
       });
   },
   beforeDestroy() {
-    this.unsubscribe()
+    this.unsubscribe();
+    this.$store.state.professorList = [];
   }
 };
 </script>

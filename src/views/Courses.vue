@@ -273,7 +273,8 @@ export default {
     },
   },
   beforeDestroy() {
-    this.unsubscribe()
+    this.unsubscribe();
+    this.$store.state.courseList = [];
   }
 };
 </script>
