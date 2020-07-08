@@ -272,6 +272,9 @@ export default {
         });
     },
   },
+  beforeDestroy() {
+    this.unsubscribe()
+  }
 };
 </script>
 

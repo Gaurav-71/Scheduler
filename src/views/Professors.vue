@@ -179,6 +179,9 @@ export default {
         alert(err);
       });
   },
+  beforeDestroy() {
+    this.unsubscribe()
+  }
 };
 </script>
 
