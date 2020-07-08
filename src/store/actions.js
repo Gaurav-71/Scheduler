@@ -77,12 +77,8 @@ export default {
   async updateProfessorBio({ commit },data) {
     try{
       console.log(commit);
-      let newData = {
-        Name : data.Name,
-        Designation : data.Designation,
-        Gender : data.Gender
-      }
-      await db.collection("Teachers").doc(data.id).update(newData);
+      const {id, ...newData} = data;
+      await db.collection("Teachers").doc(id).update(newData);
     }
     catch(err){
       console.log(err);
@@ -130,18 +126,8 @@ export default {
   async updateCourseDetails({ commit }, data) {
     try{
       console.log(commit);
-      let newData = {
-        Name: data.Name,
-        Code: data.Code,
-        Semester: data.Semester,
-        Credits: {
-          Theory: data.Credits.Theory,
-          Tutorial: data.Credits.Tutorial,
-          Lab: data.Credits.Lab
-        },
-        Type: data.Type
-      }
-      await db.collection("Courses").doc(data.id).update(newData);
+      const {id,...newData} = data;
+      await db.collection("Courses").doc(id).update(newData);
     }
     catch(err){
       console.log(err);
