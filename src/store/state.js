@@ -13,7 +13,7 @@ export default {
   currentUser: localStorage.getItem("currentUser"),
   createRouteTracker: localStorage.getItem("createRouteTracker"),
   professorList: [],
-  courseList :[],
+  courseList: [],
   courses: [
     {
       name: "Engineering Mathematics-IV",
@@ -436,5 +436,31 @@ export default {
     decrementNewProfessors: function(index) {
       return this.newProfessor[index] - 1;
     },
+  },
+
+  allOddCycleSujects: {
+    sec3A: {},
+    sec3B: {},
+    sec3C: {},
+    sec5A: {},
+    sec5B: {},
+    sec5C: {},
+    sec7A: {},
+    sec7B: {},
+    sec7C: {},
+  },
+
+  allEvenCycleClasses: {
+    sec4A: {},
+    sec4B: {},
+    sec4C: {},
+
+    sec6A: {},
+    sec6B: {},
+    sec6C: {},
+
+    sec8A: {},
+    sec8B: {},
+    sec8C: {},
   },
 };

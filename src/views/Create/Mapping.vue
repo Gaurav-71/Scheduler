@@ -162,6 +162,15 @@ export default {
     this.$store.state.createRouteTracker = localStorage.getItem(
       "createRouteTracker"
     );
+  },
+  mounted() {
+    this.$store
+      .dispatch("assignSectionDetails")
+      .then(() => {
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 };
 </script>

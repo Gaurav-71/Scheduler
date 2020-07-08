@@ -12,7 +12,7 @@
       <td>{{courses.type}} | {{courses.lecture}}:{{courses.tutorial}}:{{courses.practical}}</td>
       <td v-if="courses.tutorial > 0 || courses.practical > 0" class="data-input">
         <div class="custom-input">
-          <input type="text" placeholder="Select Professor" list="allProfessors" />
+          <input type="text" placeholder="Select Professor" list="allProfessors"/>
           <datalist id="allProfessors"></datalist>
           <img
             src="../../assets/Common/add.svg"
@@ -95,6 +95,16 @@ export default {
         );
       }
     }
+  },
+  mounted() {
+    let professorNames = this.$store.getters.getProfessorName;
+    let list = document.getElementById('allProfessors');
+    console.log(professorNames);
+    professorNames.forEach(function(item){
+      var option = document.createElement('option');
+      option.value = item;
+      list.appendChild(option);
+    });
   }
 };
 </script>

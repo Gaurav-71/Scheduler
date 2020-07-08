@@ -1,5 +1,6 @@
 import { auth } from "../main.js";
 import { db } from "../main.js";
+
 export default {
   async signin({ commit }, payload) {
     this.state.isLoggingIn = false;
@@ -132,5 +133,54 @@ export default {
     catch(err){
       console.log(err);
     }
+  },
+  async assignSectionDetails(context) {
+    console.log(context);    
+    if(this.state.cycle == "Odd")
+    { let semester = [3,3,3,5,5,5,7,7,7];
+      let classNames = ["sec3A", "sec3B", "sec3C","sec5A","sec5B","sec5C","sec7A","sec7B","sec7C"];
+      for(let i = 0; i<9; i++)
+      {  this.state.allOddCycleClasses[classNames[i]] = {
+          newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+          getProfessors: function(index) {
+            return this.newProfessor[index];
+          },
+          incrementNewProfessors: function(index) {
+            return this.newProfessor[index] + 1;
+          },
+          decrementNewProfessors: function(index) {
+            return this.newProfessor[index] - 1;
+          },
+          subjects : this.state.courseList.filter((subject) => {
+             return subject.detail.Semester == semester[i];
+          }),
+        }
+          
+      }
+    }
+    else
+    {
+      let semester = [4,4,4,6,6,6];
+      let classNames = ["sec4A", "sec4B", "sec4C","sec6A","sec6B","sec6C"];
+      for(let i = 0;i<6;i++)
+      { 
+         this.state.allEvenCycleClasses[classNames[i]]  = {
+          newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+          getProfessors: function(index) {
+            return this.newProfessor[index];
+          },
+          incrementNewProfessors: function(index) {
+            return this.newProfessor[index] + 1;
+          },
+          decrementNewProfessors: function(index) {
+            return this.newProfessor[index] - 1;
+          },
+          subjects : this.state.courseList.filter((subject) => {
+            return subject.detail.Semester == semester[i];
+         })
+        }
+        console.log(this.state.allEvenCycleClasses[classNames[i]]);  
+      }
+    }    
   }
 };

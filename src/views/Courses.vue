@@ -2,7 +2,7 @@
   <div class="professors">
     <div class="container">
       <div class="search-bar">
-        <input type="search" placeholder="Search Courses" />
+        <input type="search" placeholder="Search Courses" v-model="search"/>
         <img
           src="../assets/Courses/add.svg"
           alt="add"
