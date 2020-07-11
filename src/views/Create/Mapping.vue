@@ -53,132 +53,164 @@
       <mappingTable
         v-if="$store.state.semester == 3 && $store.state.section == 'A'"
         :sectionObject="$store.state.allOddCycleClasses.sec3A"
+        :position = 0 @changeOddMapping ="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
         :sectionObject="$store.state.allOddCycleClasses.sec3B"
+        :position = 1 @changeOddMapping ="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
         :sectionObject="$store.state.allOddCycleClasses.sec3C"
+        :position = 2 @changeOddMapping ="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
         :sectionObject="$store.state.allEvenCycleClasses.sec4A"
+        :position = 0 @changeEvenMapping ="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec4B"
+        :position = 1 @changeEvenMapping ="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
         :sectionObject="$store.state.allEvenCycleClasses.sec4C"
+        :position = 2 @changeEvenMapping ="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
         :sectionObject="$store.state.allOddCycleClasses.sec5A"
+        :position = 3 @changeOddMapping ="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
         :sectionObject="$store.state.allOddCycleClasses.sec5B"
+        :position = 4 @changeOddMapping ="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
         :sectionObject="$store.state.allOddCycleClasses.sec5C"
+        :position = 5 @changeOddMapping ="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
         :sectionObject="$store.state.allEvenCycleClasses.sec6A"
+        :position = 3 @changeEvenMapping ="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec6B"
+        :position = 4 @changeEvenMapping ="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
         :sectionObject="$store.state.allEvenCycleClasses.sec6C"
+        :position = 5 @changeEvenMapping ="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
         :sectionObject="$store.state.allOddCycleClasses.sec7A"
+        :position = 6 @changeOddMapping ="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
         :sectionObject="$store.state.allOddCycleClasses.sec7B"
+        :position = 7 @changeOddMapping ="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
         :sectionObject="$store.state.allEvenCycleClasses.sec8a"
+        :position = 6 @changeEvenMapping ="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec8b"
+        :position = 7 @changeEvenMapping ="changeEvenMapping"
       />
       <br>
       <br>
       <TimingTable
         v-if="$store.state.semester == 3 && $store.state.section == 'A'"
-        :timingObject="$store.state.sec3a"
+        :timingObject="$store.state.allOddCycleClasses.sec3A"
+        :position = 0 @changeOddTiming ="changeOddTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
-        :timingObject="$store.state.sec3b"
+        :timingObject="$store.state.allOddCycleClasses.sec3B"
+        :position = 1 @changeOddTiming ="changeOddTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
-        :timingObject="$store.state.sec3c"
+        :timingObject="$store.state.allOddCycleClasses.sec3C"
+        :position = 2 @changeOddTiming ="changeOddTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
-        :timingObject="$store.state.sec4a"
+        :timingObject="$store.state.allEvenCycleClasses.sec4A"
+        :position = 0 @changeEvenTiming ="changeEvenTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
-        :timingObject="$store.state.sec4b"
+        :timingObject="$store.state.allEvenCycleClasses.sec4B"
+        :position = 1 @changeEvenTiming ="changeEvenTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
-        :timingObject="$store.state.sec4c"
+        :timingObject="$store.state.allEvenCycleClasses.sec4C"
+        :position = 2 @changeEvenTiming ="changeEvenTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
-        :timingObject="$store.state.sec5a"
+        :timingObject="$store.state.allOddCycleClasses.sec5A"
+        :position = 3 @changeOddTiming ="changeOddTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
-        :timingObject="$store.state.sec5b"
+        :timingObject="$store.state.allOddCycleClasses.sec5B"
+        :position = 4 @changeOddTiming ="changeOddTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
-        :timingObject="$store.state.sec5c"
+        :timingObject="$store.state.allOddCycleClasses.sec5C"
+        :position = 5 @changeOddTiming ="changeOddTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
-        :timingObject="$store.state.sec6a"
+        :timingObject="$store.state.allEvenCycleClasses.sec6A"
+        :position = 3 @changeEvenTiming ="changeEvenTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
-        :timingObject="$store.state.sec6b"
+        :timingObject="$store.state.allEvenCycleClasses.sec6B"
+        :position = 4 @changeEvenTiming ="changeEvenTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
-        :timingObject="$store.state.sec6c"
+        :timingObject="$store.state.allEvenCycleClasses.sec6C"
+        :position = 5 @changeEvenTiming ="changeEvenTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
-        :timingObject="$store.state.sec7a"
+        :timingObject="$store.state.allOddCycleClasses.sec7A"
+        :position = 6 @changeOddTiming ="changeOddTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
-        :timingObject="$store.state.sec7b"
+        :timingObject="$store.state.allOddCycleClasses.sec7B"
+        :position = 7 @changeOddTiming ="changeOddTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
-        :timingObject="$store.state.sec8a"
+        :timingObject="$store.state.allEvenCycleClasses.sec8A"
+        :position = 6 @changeEvenTiming ="changeEvenTiming"
       />
       <TimingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
-        :timingObject="$store.state.sec8b"
+        :timingObject="$store.state.allEvenCycleClasses.sec8B"
+        :position = 7 @changeEvenTiming ="changeEvenTiming"
       />
       <div v-else>
         <table>
@@ -213,12 +245,32 @@ export default {
     mappingTable,
     TimingTable
   },
+  data(){
+    return {
+      allOddSemSectionsFilledTiming: [false, false, false, false, false, false, false, false],
+      allOddSemSectionsFilledMapping: [false, false, false, false, false, false, false, false],
+      allEvenSemSectionsFilledTiming:[false, false, false, false, false, false ],
+      allEvenSemSectionsFilledMapping:[false, false, false, false, false, false ]
+    }
+  },
   methods: {
     changeSemester(sem) {
       this.$store.state.semester = sem;
     },
     route() {
       this.$router.push("/timetable/create/automated/mapping/timing");
+    },
+    changeEvenTiming(payload) {
+      this.allEvenSemSectionsFilledTiming[payload.index] = payload.trueValue;
+    },
+    changeOddTiming(payload) {
+      this.allOddSemSectionsFilledTiming[payload.index] = payload.trueValue;
+    },
+    changeEvenMapping(payload) {
+      this.allEvenSemSectionsFilledMappping[payload.index] = payload.trueValue;
+    },
+    changeOddMapping(payload) {
+      this.allOddSemSectionsFilledMappping[payload.index] =  payload.trueValue;
     }
   },
   created() {

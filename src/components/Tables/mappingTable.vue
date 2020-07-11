@@ -74,7 +74,9 @@ export default {
   props: {
     sectionObject: {
       type: Object
-    }
+    },
+    position: Number
+    
   },
   methods: {
     addProfessor(index) {
