@@ -6,11 +6,11 @@
       <th>Course Credits</th>
       <th>Professor</th>
     </tr>
-    <tr v-for="(courses,index) in $store.state.tempCourses" :key="index">
-      <td class="course-name">{{courses.name}}</td>
-      <td>{{courses.code}}</td>
-      <td>{{courses.type}} | {{courses.lecture}}:{{courses.tutorial}}:{{courses.practical}}</td>
-      <td v-if="courses.tutorial > 0 || courses.practical > 0" class="data-input">
+    <tr v-for="(courses,index) in this.sectionObject.subjects" :key="index">
+      <td class="course-name">{{courses.detail.Name}}</td>
+      <td>{{courses.detail.Code}}</td>
+      <td>{{courses.detail.Type}} | {{courses.detail.Credits.Theory}}:{{courses.detail.Credits.Tutorial}}:{{courses.detail.Credits.Lab}}</td>
+      <td v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0" class="data-input">
         <div class="custom-input">
           <input type="text" placeholder="Select Professor" list="allProfessors"/>
           <datalist id="allProfessors"></datalist>

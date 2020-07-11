@@ -137,9 +137,9 @@ export default {
   async assignSectionDetails(context) {
     console.log(context);    
     if(this.state.cycle == "Odd")
-    { let semester = [3,3,3,5,5,5,7,7,7];
-      let classNames = ["sec3A", "sec3B", "sec3C","sec5A","sec5B","sec5C","sec7A","sec7B","sec7C"];
-      for(let i = 0; i<9; i++)
+    { let semester = [3,3,3,5,5,5,7,7];
+      let classNames = ["sec3A", "sec3B", "sec3C","sec5A","sec5B","sec5C","sec7A","sec7B"];
+      for(let i = 0; i<8; i++)
       {  this.state.allOddCycleClasses[classNames[i]] = {
           newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
           getProfessors: function(index) {

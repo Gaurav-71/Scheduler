@@ -438,7 +438,7 @@ export default {
     },
   },
 
-  allOddCycleSujects: {
+  allOddCycleClasses: {
     sec3A: {},
     sec3B: {},
     sec3C: {},
@@ -447,7 +447,6 @@ export default {
     sec5C: {},
     sec7A: {},
     sec7B: {},
-    sec7C: {},
   },
 
   allEvenCycleClasses: {
@@ -461,6 +460,5 @@ export default {
 
     sec8A: {},
     sec8B: {},
-    sec8C: {},
   },
 };

@@ -52,67 +52,133 @@
       </div>
       <mappingTable
         v-if="$store.state.semester == 3 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec3a"
+        :sectionObject="$store.state.allOddCycleClasses.sec3A"
       />
       <mappingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec3b"
+        :sectionObject="$store.state.allOddCycleClasses.sec3B"
       />
       <mappingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
-        :sectionObject="$store.state.sec3c"
+        :sectionObject="$store.state.allOddCycleClasses.sec3C"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec4a"
+        :sectionObject="$store.state.allEvenCycleClasses.sec4A"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec4b"
+        :sectionObject="$store.state.allEvenCycleClasses.sec4B"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
-        :sectionObject="$store.state.sec4c"
+        :sectionObject="$store.state.allEvenCycleClasses.sec4C"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec5a"
+        :sectionObject="$store.state.allOddCycleClasses.sec5A"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec5b"
+        :sectionObject="$store.state.allOddCycleClasses.sec5B"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
-        :sectionObject="$store.state.sec5c"
+        :sectionObject="$store.state.allOddCycleClasses.sec5C"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec6a"
+        :sectionObject="$store.state.allEvenCycleClasses.sec6A"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec6b"
+        :sectionObject="$store.state.allEvenCycleClasses.sec6B"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
-        :sectionObject="$store.state.sec6c"
+        :sectionObject="$store.state.allEvenCycleClasses.sec6C"
       />
       <mappingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec7a"
+        :sectionObject="$store.state.allOddCycleClasses.sec7A"
       />
       <mappingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec7b"
+        :sectionObject="$store.state.allOddCycleClasses.sec7B"
       />
       <mappingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
-        :sectionObject="$store.state.sec8a"
+        :sectionObject="$store.state.allEvenCycleClasses.sec8a"
       />
       <mappingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
-        :sectionObject="$store.state.sec8b"
+        :sectionObject="$store.state.allEvenCycleClasses.sec8b"
+      />
+      <br>
+      <br>
+      <TimingTable
+        v-if="$store.state.semester == 3 && $store.state.section == 'A'"
+        :timingObject="$store.state.sec3a"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
+        :timingObject="$store.state.sec3b"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
+        :timingObject="$store.state.sec3c"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
+        :timingObject="$store.state.sec4a"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
+        :timingObject="$store.state.sec4b"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
+        :timingObject="$store.state.sec4c"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
+        :timingObject="$store.state.sec5a"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
+        :timingObject="$store.state.sec5b"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
+        :timingObject="$store.state.sec5c"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
+        :timingObject="$store.state.sec6a"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
+        :timingObject="$store.state.sec6b"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
+        :timingObject="$store.state.sec6c"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
+        :timingObject="$store.state.sec7a"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
+        :timingObject="$store.state.sec7b"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
+        :timingObject="$store.state.sec8a"
+      />
+      <TimingTable
+        v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
+        :timingObject="$store.state.sec8b"
       />
       <div v-else>
         <table>
@@ -124,7 +190,7 @@
           <tr>
             <td class="instructions">
               <ul>
-                <li>This section lets you map the subjects of the respective semester to the respective professors.</li>
+                <li>This section lets you map the subjects of the respective semester to the respective professors and lets you add custom timings for labs and tutorials.</li>
                 <li>Please select the semester and section from the status bar above to proceed.</li>
                 <li>
                   <b>Note :</b> Please fill all the details to move to the next step
@@ -141,10 +207,11 @@
 
 <script>
 import mappingTable from "../../components/Tables/mappingTable";
-
+import TimingTable from "../../components/Tables/TimingTable";
 export default {
   components: {
-    mappingTable
+    mappingTable,
+    TimingTable
   },
   methods: {
     changeSemester(sem) {
