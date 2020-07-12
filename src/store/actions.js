@@ -141,7 +141,7 @@ export default {
       let classNames = ["sec3A", "sec3B", "sec3C","sec5A","sec5B","sec5C","sec7A","sec7B"];
       for(let i = 0; i<8; i++)
       {  this.state.allOddCycleClasses[classNames[i]] = {
-          newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+          newProfessor: [],
           getProfessors: function(index) {
             return this.newProfessor[index];
           },
@@ -155,7 +155,9 @@ export default {
              return subject.detail.Semester == semester[i];
           }),
         }
-          
+        for(let j = 0; j<this.state.allOddCycleClasses[classNames[i]].subjects.length; j++){
+          this.state.allOddCycleClasses[classNames[i]].newProfessor[j].push(1);
+        }          
       }
     }
     else

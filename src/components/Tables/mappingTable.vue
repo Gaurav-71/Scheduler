@@ -16,7 +16,7 @@
           <datalist id="allProfessors"></datalist>
           <img
             src="../../assets/Common/add.svg"
-            alt="add professor"
+            alt="add professor"             
             title="Add a professor"
             @click="addProfessor(index)"
           />
@@ -75,8 +75,12 @@ export default {
     sectionObject: {
       type: Object
     },
-    position: Number
-    
+    position: Number    
+  },
+  data(){
+    return {
+      profs: [],
+    }
   },
   methods: {
     addProfessor(index) {
@@ -96,6 +100,19 @@ export default {
           this.sectionObject.decrementNewProfessors(index)
         );
       }
+    },
+    makeTrue(index){
+      if(this.profs.length < index){
+        for(let i = this.profs.length; i<=index; i++){
+          this.profs.push(false);
+        }
+        this.profs[index] = true;
+      }
+      else{
+        this.profs.push(false);
+        this.profs[index] = true;
+      }
+
     }
   },
   mounted() {
@@ -107,6 +124,25 @@ export default {
       option.value = item;
       list.appendChild(option);
     });
+  },
+  beforeDestroy(){
+    console.log(this.profs);
+    if(false in this.profs){
+      if(this.state.cycle == "Odd"){
+        this.$emit("changeOddMapping", {index: this.position, trueValue: false});
+      }
+      else{
+        this.$emit("changeEvenMapping", {index: this.position, trueValue: false});
+      }
+    }
+    else{
+      if(this.state.cycle == "Odd"){
+        this.$emit("changeOddMapping", {index: this.position, trueValue: true});
+      }
+      else{
+        this.$emit("changeEvenMapping", {index: this.position, trueValue: true});
+      }
+    }
   }
 };
 </script>
