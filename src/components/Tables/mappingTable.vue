@@ -6,23 +6,45 @@
       <th>Course Credits</th>
       <th>Professor</th>
     </tr>
-    <tr v-for="(courses,index) in sectionObject.subjects" :key="index">
-      <td class="course-name">{{courses.detail.Name}}</td>
-      <td>{{courses.detail.Code}}</td>
-      <td>{{courses.detail.Type}} | {{courses.detail.Credits.Theory}}:{{courses.detail.Credits.Tutorial}}:{{courses.detail.Credits.Lab}}</td>
-      <td v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0" class="data-input">
+    <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
+      <td class="course-name">{{ courses.detail.Name }}</td>
+      <td>{{ courses.detail.Code }}</td>
+      <td>
+        {{ courses.detail.Type }} | {{ courses.detail.Credits.Theory }}:{{
+          courses.detail.Credits.Tutorial
+        }}:{{ courses.detail.Credits.Lab }}
+      </td>
+      <td
+        v-if="
+          courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0
+        "
+        class="data-input"
+      >
         <div class="custom-input">
-          <input type="text" placeholder="Select Main Professor" list="allProfessors" v-model="courses.detail.Professors[0]"/>
+          <input
+            type="text"
+            placeholder="Select Main Professor"
+            list="allProfessors"
+            v-model="courses.detail.Professors[0]"
+          />
           <datalist id="allProfessors"></datalist>
           <img
             src="../../assets/Common/add.svg"
-            alt="add professor"             
+            alt="add professor"
             title="Add a professor"
             @click="addProfessor(index)"
           />
         </div>
-        <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 2">
-          <input type="text" placeholder="Select Professor" list="allProfessors" v-model="courses.detail.Professors[1]" />
+        <div
+          class="custom-input"
+          v-if="sectionObject.getProfessors(index) >= 2"
+        >
+          <input
+            type="text"
+            placeholder="Select Professor"
+            list="allProfessors"
+            v-model="courses.detail.Professors[1]"
+          />
           <datalist id="allProfessors"></datalist>
           <img
             src="../../assets/Common/delete.svg"
@@ -33,8 +55,16 @@
           />
           <div v-else class="block"></div>
         </div>
-        <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 3">
-          <input type="text" placeholder="Select Professor" list="allProfessors" v-model="courses.detail.Professors[2]"/>
+        <div
+          class="custom-input"
+          v-if="sectionObject.getProfessors(index) >= 3"
+        >
+          <input
+            type="text"
+            placeholder="Select Professor"
+            list="allProfessors"
+            v-model="courses.detail.Professors[2]"
+          />
           <datalist id="allProfessors"></datalist>
           <img
             src="../../assets/Common/delete.svg"
@@ -45,8 +75,16 @@
           />
           <div v-else class="block"></div>
         </div>
-        <div class="custom-input" v-if="sectionObject.getProfessors(index)>= 4">
-          <input type="text" placeholder="Select Professor" list="allProfessors" v-model="courses.detail.Professors[3]"/>
+        <div
+          class="custom-input"
+          v-if="sectionObject.getProfessors(index) >= 4"
+        >
+          <input
+            type="text"
+            placeholder="Select Professor"
+            list="allProfessors"
+            v-model="courses.detail.Professors[3]"
+          />
           <datalist id="allProfessors"></datalist>
           <img
             src="../../assets/Common/delete.svg"
@@ -60,7 +98,11 @@
       </td>
       <td v-else class="data-input">
         <div class="custom-input">
-          <input type="text" placeholder="Select Professor" list="allProfessors" />
+          <input
+            type="text"
+            placeholder="Select Professor"
+            list="allProfessors"
+          />
           <datalist id="allProfessors"></datalist>
           <div class="block"></div>
         </div>
@@ -73,14 +115,12 @@
 export default {
   props: {
     sectionObject: {
-      type: Object
+      type: Object,
     },
-    position: Number    
+    position: Number,
   },
-  data(){
-    return {
-      profs: [],
-    }
+  data() {
+    return {};
   },
   methods: {
     addProfessor(index) {
@@ -101,49 +141,44 @@ export default {
         );
       }
     },
-    makeTrue(index){
-      if(this.profs.length < index){
-        for(let i = this.profs.length; i<=index; i++){
-          this.profs.push(false);
-        }
-        this.profs[index] = true;
-      }
-      else{
-        this.profs.push(false);
-        this.profs[index] = true;
-      }
-
-    }
   },
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
-    let list = document.getElementById('allProfessors');
+    let list = document.getElementById("allProfessors");
     console.log(professorNames);
-    professorNames.forEach(function(item){
-      var option = document.createElement('option');
+    professorNames.forEach(function(item) {
+      var option = document.createElement("option");
       option.value = item;
       list.appendChild(option);
     });
   },
-  beforeDestroy(){
-    console.log(this.profs);
-    if(false in this.profs){
-      if(this.state.cycle == "Odd"){
-        this.$emit("changeOddMapping", {index: this.position, trueValue: false});
-      }
-      else{
-        this.$emit("changeEvenMapping", {index: this.position, trueValue: false});
-      }
-    }
-    else{
-      if(this.state.cycle == "Odd"){
-        this.$emit("changeOddMapping", {index: this.position, trueValue: true});
-      }
-      else{
-        this.$emit("changeEvenMapping", {index: this.position, trueValue: true});
+  beforeDestroy() {
+    console.log("Dheeraj sucksss");
+    console.log(this.sectionObject);
+    let trueValue = true;
+    for (let i = 0; i < this.sectionObject.subjects.length; i++) {
+      let x = this.sectionObject.newProfessor[i];
+      let indexOfFirstEmptyStrings = this.sectionObject.subjects[i].detail.Professors.indexOf(
+        ""
+      );
+      
+      if (indexOfFirstEmptyStrings < x && indexOfFirstEmptyStrings != -1) {
+        trueValue = false;
+        break;
       }
     }
-  }
+    if (this.$store.state.cycle == "Odd") {
+      this.$emit("changeOddMapping", {
+        index: this.position,
+        trueValue: trueValue,
+      });
+    } else {
+      this.$emit("changeEvenMapping", {
+        index: this.position,
+        trueValue: trueValue,
+      });
+    }
+  },
 };
 </script>
 
