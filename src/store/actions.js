@@ -156,7 +156,19 @@ export default {
           }),
         }
         for(let j = 0; j<this.state.allOddCycleClasses[classNames[i]].subjects.length; j++){
-          this.state.allOddCycleClasses[classNames[i]].newProfessor[j].push(1);
+          let currentSubject = this.state.allOddCycleClasses[classNames[i]].subjects[j];
+          if (currentSubject.detail.Credits.Tutorial > 0){
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail["Professors"] = ["", "", ""];
+          }
+          else if(currentSubject.detail.Credits.Lab > 0){
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail["Professors"] = ["", "", "", ""];
+          }
+          else{
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail["Professors"] = [""];
+          }
         }          
       }
     }
@@ -167,7 +179,7 @@ export default {
       for(let i = 0;i<6;i++)
       { 
          this.state.allEvenCycleClasses[classNames[i]]  = {
-          newProfessor: [1, 1, 1, 1, 1, 1, 1, 1],
+          newProfessor: [],
           getProfessors: function(index) {
             return this.newProfessor[index];
           },
@@ -181,7 +193,21 @@ export default {
             return subject.detail.Semester == semester[i];
          })
         }
-        console.log(this.state.allEvenCycleClasses[classNames[i]]);  
+        for(let j = 0; j<this.state.allEvenCycleClasses[classNames[i]].subjects.length; j++){
+          let currentSubject = this.state.allEvenCycleClasses[classNames[i]].subjects[j];
+          if (currentSubject.detail.Credits.Tutorial > 0){
+            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail["Professors"] = ["", "", ""];
+          }
+          else if(currentSubject.detail.Credits.Lab > 0){
+            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail["Professors"] = ["", "", "", ""];
+          }
+          else{
+            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail["Professors"] = [""];
+          }
+        }  
       }
     }    
   }

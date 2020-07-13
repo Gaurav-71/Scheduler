@@ -442,9 +442,11 @@ export default {
     sec3A: {},
     sec3B: {},
     sec3C: {},
+
     sec5A: {},
     sec5B: {},
     sec5C: {},
+    
     sec7A: {},
     sec7B: {},
   },
