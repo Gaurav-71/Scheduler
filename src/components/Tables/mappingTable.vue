@@ -30,7 +30,7 @@
               type="text"
               placeholder="Select Main Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[0]"
+              v-model="sectionObject.subjects[index].detail.Professors[0]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -45,7 +45,7 @@
               type="text"
               placeholder="Select Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[1]"
+              v-model="sectionObject.subjects[index].detail.Professors[1]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -62,7 +62,7 @@
               type="text"
               placeholder="Select Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[2]"
+              v-model="sectionObject.subjects[index].detail.Professors[2]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -79,7 +79,7 @@
               type="text"
               placeholder="Select Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[3]"
+              v-model="sectionObject.subjects[index].detail.Professors[3]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -174,8 +174,7 @@ export default {
   props: {
     sectionObject: {
       type: Object
-    },
-    position: Number
+    }
   },
   data() {
     return {};
@@ -203,39 +202,12 @@ export default {
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
     let list = document.getElementById("allProfessors");
-    console.log(professorNames);
+    
     professorNames.forEach(function(item) {
       var option = document.createElement("option");
       option.value = item;
       list.appendChild(option);
     });
-  },
-  beforeDestroy() {
-    console.log("Dheeraj sucksss");
-    console.log(this.sectionObject);
-    let trueValue = true;
-    for (let i = 0; i < this.sectionObject.subjects.length; i++) {
-      let x = this.sectionObject.newProfessor[i];
-      let indexOfFirstEmptyStrings = this.sectionObject.subjects[
-        i
-      ].detail.Professors.indexOf("");
-
-      if (indexOfFirstEmptyStrings < x && indexOfFirstEmptyStrings != -1) {
-        trueValue = false;
-        break;
-      }
-    }
-    if (this.$store.state.cycle == "Odd") {
-      this.$emit("changeOddMapping", {
-        index: this.position,
-        trueValue: trueValue
-      });
-    } else {
-      this.$emit("changeEvenMapping", {
-        index: this.position,
-        trueValue: trueValue
-      });
-    }
   }
 };
 </script>

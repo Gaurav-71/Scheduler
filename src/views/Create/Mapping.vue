@@ -58,98 +58,67 @@
       <mappingTable
         v-if="$store.state.semester == 3 && $store.state.section == 'A'"
         :sectionObject="$store.state.allOddCycleClasses.sec3A"
-        :position="0"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
         :sectionObject="$store.state.allOddCycleClasses.sec3B"
-        :position="1"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
         :sectionObject="$store.state.allOddCycleClasses.sec3C"
-        :position="2"
-        @changeOddMapping="changeOddMapping"
+        
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
         :sectionObject="$store.state.allEvenCycleClasses.sec4A"
-        :position="0"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec4B"
-        :position="1"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
         :sectionObject="$store.state.allEvenCycleClasses.sec4C"
-        :position="2"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
         :sectionObject="$store.state.allOddCycleClasses.sec5A"
-        :position="3"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
         :sectionObject="$store.state.allOddCycleClasses.sec5B"
-        :position="4"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
         :sectionObject="$store.state.allOddCycleClasses.sec5C"
-        :position="5"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
         :sectionObject="$store.state.allEvenCycleClasses.sec6A"
-        :position="3"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec6B"
-        :position="4"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
         :sectionObject="$store.state.allEvenCycleClasses.sec6C"
-        :position="5"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
         :sectionObject="$store.state.allOddCycleClasses.sec7A"
-        :position="6"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
         :sectionObject="$store.state.allOddCycleClasses.sec7B"
-        :position="7"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
         :sectionObject="$store.state.allEvenCycleClasses.sec8a"
-        :position="6"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec8b"
-        :position="7"
-        @changeEvenMapping="changeEvenMapping"
       />
       <div v-else>
         <table>
@@ -198,48 +167,13 @@ export default {
     mappingTable
   },
   data() {
-    return {
-      allOddSemSectionsFilledTiming: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      allOddSemSectionsFilledMapping: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      allEvenSemSectionsFilledTiming: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      allEvenSemSectionsFilledMapping: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
-    };
+    return {};
   },
   methods: {
     changeSemester(sem) {
       this.$store.state.semester = sem;
+      if(sem>=7 && this.$store.state.section == 'C')
+        this.$store.state.section = "B";
     },
     changeSection(sec) {
       this.$store.state.section = sec;
@@ -247,20 +181,6 @@ export default {
     route() {
       //this.$router.push("/timetable/create/automated/mapping/timing");
       alert("Automate this shiz bitchazzzz !!!");
-    },
-    changeEvenTiming(payload) {
-      this.allEvenSemSectionsFilledTiming[payload.index] = payload.trueValue;
-    },
-    changeOddTiming(payload) {
-      this.allOddSemSectionsFilledTiming[payload.index] = payload.trueValue;
-    },
-    changeEvenMapping(payload) {
-      console.log(payload);
-      this.allEvenSemSectionsFilledMappping[payload.index] = payload.trueValue;
-    },
-    changeOddMapping(payload) {
-      console.log(payload);
-      this.allOddSemSectionsFilledMappping[payload.index] = payload.trueValue;
     }
   },
   created() {
