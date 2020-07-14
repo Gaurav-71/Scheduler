@@ -24,7 +24,8 @@
         <div class="sent">
           <img src="../assets/Login/Forgot/correct.svg" alt="succesful reset" />
           <h4>Email is sent succesfully, check your email</h4>
-          <button @click="route">Sign In</button>
+          <button v-if="$store.state.isLoggedIn" @click="route">Go to Settings</button>
+          <button v-else @click="route">Sign In</button>
         </div>
       </div>
     </transition>
@@ -80,7 +81,11 @@ export default {
         });
     },
     route() {
-      this.$router.push("/login");
+      if (this.$store.state.isLoggedIn) {
+        this.$router.push("/settings");
+      } else {
+        this.$router.push("/login");
+      }
     },
     afterLeave(el, done) {
       this.isSuccessful = true;

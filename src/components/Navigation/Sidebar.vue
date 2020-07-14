@@ -34,7 +34,7 @@
           </router-link>
         </li>
         <li v-bind:class="{'active':$store.state.sidebarCounter == '6'}">
-          <router-link to="#" class="router-link">
+          <router-link to="/settings" class="router-link">
             <img src="../../assets/Sidebar/settings.svg" alt="settings" />
             <span>Settings</span>
           </router-link>

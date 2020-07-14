@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Login from "../views/Login.vue";
 import Choice from "../views/Choice.vue";
 import Landing from "../views/Landing.vue";
+import Settings from "../views/Settings.vue";
 
 import Create from "../views/Create/Create.vue";
 import Sidebar from "../components/Navigation/Sidebar.vue";
@@ -91,6 +92,14 @@ const routes = [
         path: "/timetable/courses",
         name: "Courses",
         component: Courses,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/settings",
+        name: "Settings",
+        component: Settings,
         meta: {
           requiresAuth: true,
         },
