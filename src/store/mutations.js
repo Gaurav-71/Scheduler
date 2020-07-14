@@ -15,5 +15,9 @@ export default {
   },
   loadProfessorList: (state,items) => {     
     state.professorList = items;    
+  },
+  loadCourseList: (state,items) => {     
+    state.courseList = items;    
   }
+  
 };

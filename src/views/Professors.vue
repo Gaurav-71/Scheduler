@@ -21,16 +21,16 @@
               <img
                 src="../assets/Professors/female.svg"
                 alt="female"
-                v-else-if="professor.detail.Gender=='F'"
+                v-else-if="professor.detail.Gender == 'F'"
               />
               <img
                 src="../assets/Professors/other.svg"
                 alt="male"
-                v-else-if="professor.detail.Gender=='O'"
+                v-else-if="professor.detail.Gender == 'O'"
               />
               <div class="details">
-                <h3>{{professor.detail.Name}}</h3>
-                <h5>{{professor.detail.Designation}}</h5>
+                <h3>{{ professor.detail.Name }}</h3>
+                <h5>{{ professor.detail.Designation }}</h5>
               </div>
             </div>
             <div class="actions">
@@ -42,8 +42,8 @@
             <div class="card-container">
               <img src="../assets/Common/edit.svg" alt="edit-mode" />
               <div class="details-edit">
-                <input type="text" v-model="professor.detail.Name" />
-                <input type="text" v-model="professor.detail.Designation" />
+                <input type="text" v-model="name" />
+                <input type="text" v-model="designation" />
               </div>
             </div>
             <div class="actions-edit">
@@ -54,21 +54,31 @@
                   type="radio"
                   id="female"
                   name="gender"
-                  value="female"
-                  v-model="professor.detail.Gender"
+                  value="F"
+                  v-model="gender"
                 />
                 <label for="female">Female</label>
                 <input
                   type="radio"
                   id="other"
                   name="gender"
-                  value="other"
-                  v-model="professor.detail.Gender"
+                  value="O"
+                  v-model="gender"
                 />
                 <label for="other">Other</label>
               </form>
-              <img src="../assets/Common/save.svg" alt="save" title="Save Edited Details" />
-              <img src="../assets/Common/cancel.svg" alt="cancel" title="Cancel Editing" />
+              <img
+                @click="saveDetails(professor)"
+                src="../assets/Common/save.svg"
+                alt="save"
+                title="Save Edited Details"
+              />
+              <img
+                @click="professor.isEditing = false"
+                src="../assets/Common/cancel.svg"
+                alt="cancel"
+                title="Cancel Editing"
+              />
             </div>
           </div>
         </div>
@@ -82,7 +92,7 @@ import AddProfessor from "../components/Modals/AddProfessor.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
-    AddProfessor
+    AddProfessor,
   },
   data() {
     return {

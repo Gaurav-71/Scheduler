@@ -12,12 +12,35 @@ export default {
   components: {
     ProgressBar
   },
+  data() {
+    return {
+      unsubscribeProfessor : null,
+      unsubscribeCourse : null
+    }
+  },
   created() {
     this.$store.state.sidebarCounter = 2;
     localStorage.setItem("currentRoute", this.$route.path);
     this.$store.state.createRouteTracker = localStorage.getItem(
       "createRouteTracker"
     );
+  },
+  mounted() {
+    this.$store.dispatch("loadProfessorList")
+      .then((response) => {
+        this.unsubscribeProfessor = response;
+      })
+      .catch((err) => {
+        alert(err);
+      });
+    this.$store
+      .dispatch("loadCourseList")
+      .then((response) => {
+        this.unsubscribeCourse = response;
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
 };
 </script>

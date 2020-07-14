@@ -1,47 +1,58 @@
-<template>
-  <table>
-    <tr>
-      <th>Course</th>
-      <th>Course Code</th>      
-      <th>Time</th>
-      <th>Day</th>
-      <th>Lab Name</th>
-    </tr>
-    <tr v-for="(courses,index) in $store.state.tempCoursesLab" :key="index">
-      <td class="course-name">{{courses.name}}</td>
-      <td>{{courses.code}}</td>      
-      <td class="custom-input">
-        <input type="text" placeholder="Select Time" list="time" />
-        <datalist id="time">
-          <option value="9:00 AM"></option>
-          <option value="11:05 AM"></option>
-          <option value="1:45 PM"></option>
-          <option value="2:40 AM"></option>
-        </datalist>
-      </td>
-      <td class="custom-input">
-        <input type="text" placeholder="Select Day" list="day" />
-        <datalist id="day">
-          <option value="Monday"></option>
-          <option value="Tuesday"></option>
-          <option value="Wednesday"></option>
-          <option value="Thursday"></option>
-          <option value="Friday"></option>
-          <option value="Saturday"></option>
-        </datalist>
-      </td>
-      <td class="custom-input">
-        <input type="text" placeholder="Enter Lab Name" list="allProfessors" />        
-      </td>
-    </tr>
-  </table>
-</template>
+<template></template>
 
 <script>
 export default {
   props: {
     timingObject: {
       type: Object
+    },
+    position: Number
+  },
+  data() {
+    return {
+      labs: []
+    };
+  },
+  mounted() {
+    for (var i = 0; i < this.timingObject.subjects.length; i++) {
+      if (this.timingObject.subjects[i].detail.Credits.Lab > 0) {
+        this.labs.push(false);
+        this.labs.push(false);
+        this.labs.push(false);
+      }
+    }
+  },
+  methods: {
+    makeTrue(x) {
+      this.labs[x] = true;
+    }
+  },
+  beforeDestroy() {
+    console.log(this.labs);
+    if (false in this.labs) {
+      if (this.state.cycle == "Odd") {
+        this.$emit("changeOddTiming", {
+          index: this.position,
+          trueValue: false
+        });
+      } else {
+        this.$emit("changeEvenTiming", {
+          index: this.position,
+          trueValue: false
+        });
+      }
+    } else {
+      if (this.state.cycle == "Odd") {
+        this.$emit("changeOddTiming", {
+          index: this.position,
+          trueValue: true
+        });
+      } else {
+        this.$emit("changeEvenTiming", {
+          index: this.position,
+          trueValue: true
+        });
+      }
     }
   }
 };

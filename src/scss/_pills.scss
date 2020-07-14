@@ -8,8 +8,9 @@
   flex-wrap: wrap;
   margin-bottom: 1rem;
   @include ipad-portrait {
-    justify-content: space-between;
+    justify-content: space-around;
     height: 6rem;
+    margin-bottom: 1.8rem;
   }
   .pills {
     border-radius: 0.8rem;
@@ -22,6 +23,7 @@
     @include ipad-portrait {
       width: 58%;
       flex-wrap: wrap;
+      padding: 0.3rem 0;
     }
     .pill {
       width: 4.8rem;
@@ -48,6 +50,40 @@
       background: rgb(21, 127, 135);
     }
   }
+  .section-pills {
+    margin: 0 1rem;
+    border-radius: 0.8rem;
+    background: rgba($color: $primary-dark, $alpha: 0.2);
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    @include ipad-portrait {
+      width: 35%;
+      flex-wrap: wrap;
+      padding: 0.3rem 0;
+    }
+    .pill {
+      width: 2rem;
+      padding: 0.65rem 1rem;
+      margin: 0 1rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      cursor: pointer;
+    }
+    .pill:hover {
+      background: rgba(21, 127, 135, 0.2);
+    }
+    .active {
+      background: rgb(21, 127, 135);
+      color: white;
+      box-shadow: 10px 10px 20px rgba(grey, 0.25);
+    }
+    .active:hover {
+      background: rgb(21, 127, 135);
+    }
+  }
   input {
     border-radius: 0.8rem;
     background: rgba($color: $primary-dark, $alpha: 0.2);
@@ -56,23 +92,5 @@
   }
   input::-webkit-calendar-picker-indicator {
     opacity: 100;
-  }
-  .section {
-    width: 8%;
-    text-indent: 15px;
-    margin-left: 0.75rem;
-    @include ipad-portrait {
-      margin-left: 0.75rem;
-      width: 15%;
-    }
-  }
-  .classroom {
-    width: 10%;
-    text-indent: 5px;
-    margin-left: auto;
-    @include ipad-portrait {
-      width: 18%;
-      margin-left: 0.75rem;
-    }
   }
 }

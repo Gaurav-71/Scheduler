@@ -1,5 +1,6 @@
 import { auth } from "../main.js";
 import { db } from "../main.js";
+
 export default {
   async signin({ commit }, payload) {
     this.state.isLoggingIn = false;
@@ -40,9 +41,17 @@ export default {
     let response = db.collection("Teachers").onSnapshot((snapshot) => {
       let items = [];
       snapshot.forEach((doc) => {
-        let data = { id: doc.id, detail: doc.data() };
+        let data = { id: doc.id, detail: doc.data() ,isEditing:false};
         items.push(data);
       });
+      items.sort(function(a, b){
+        var nameA=a.detail.Name, nameB=b.detail.Name;
+        if (nameA < nameB) //sort string ascending
+            return -1 
+        if (nameA > nameB)
+            return 1
+        return 0 //default return value (no sorting)
+      })
       context.commit("loadProfessorList", items);
     });
     return response;
@@ -66,4 +75,140 @@ export default {
       console.log(err);
     }
   },
+  async updateProfessorBio({ commit },data) {
+    try{
+      console.log(commit);
+      const {id, ...newData} = data;
+      await db.collection("Teachers").doc(id).update(newData);
+    }
+    catch(err){
+      console.log(err);
+    }
+  },
+
+  async loadCourseList(context) {
+    let response = db.collection("Courses").onSnapshot((snapshot) => {
+      let items = [];
+      snapshot.forEach((doc) => {
+        let data = { id: doc.id, detail: doc.data() ,isEditing:false};
+        items.push(data);
+      });
+      items.sort(function(a, b){
+        var semA=a.detail.Semester, semB=b.detail.Semester;
+        if (semA < semB) //sort string ascending
+            return -1 
+        if (semA > semB)
+            return 1
+        return 0 //default return value (no sorting)
+      });
+      context.commit("loadCourseList", items);
+    });
+    return response;
+  },
+  async addCourse({ commit }, data) {
+    try {
+      console.log(commit);
+      await db.collection("Courses").add(data);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async removeCourse({ commit }, id) {
+    try {
+      console.log(commit);
+      await db
+        .collection("Courses")
+        .doc(id)
+        .delete();
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  async updateCourseDetails({ commit }, data) {
+    try{
+      console.log(commit);
+      const {id,...newData} = data;
+      await db.collection("Courses").doc(id).update(newData);
+    }
+    catch(err){
+      console.log(err);
+    }
+  },
+  async assignSectionDetails(context) {
+    console.log(context);    
+    if(this.state.cycle == "Odd")
+    { let semester = [3,3,3,5,5,5,7,7];
+      let classNames = ["sec3A", "sec3B", "sec3C","sec5A","sec5B","sec5C","sec7A","sec7B"];
+      for(let i = 0; i<8; i++)
+      {  this.state.allOddCycleClasses[classNames[i]] = {
+          newProfessor: [],
+          getProfessors: function(index) {
+            return this.newProfessor[index];
+          },
+          incrementNewProfessors: function(index) {
+            return this.newProfessor[index] + 1;
+          },
+          decrementNewProfessors: function(index) {
+            return this.newProfessor[index] - 1;
+          },
+          subjects : this.state.courseList.filter((subject) => {
+             return subject.detail.Semester == semester[i];
+          }),
+        }
+        for(let j = 0; j<this.state.allOddCycleClasses[classNames[i]].subjects.length; j++){
+          let currentSubject = this.state.allOddCycleClasses[classNames[i]].subjects[j];
+          if (currentSubject.detail.Credits.Tutorial > 0){
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail["Professors"] = ["", "", ""];
+          }
+          else if(currentSubject.detail.Credits.Lab > 0){
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail["Professors"] = ["", "", "", ""];
+          }
+          else{
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail["Professors"] = [""];
+          }
+        }          
+      }
+    }
+    else
+    {
+      let semester = [4,4,4,6,6,6];
+      let classNames = ["sec4A", "sec4B", "sec4C","sec6A","sec6B","sec6C"];
+      for(let i = 0;i<6;i++)
+      { 
+         this.state.allEvenCycleClasses[classNames[i]]  = {
+          newProfessor: [],
+          getProfessors: function(index) {
+            return this.newProfessor[index];
+          },
+          incrementNewProfessors: function(index) {
+            return this.newProfessor[index] + 1;
+          },
+          decrementNewProfessors: function(index) {
+            return this.newProfessor[index] - 1;
+          },
+          subjects : this.state.courseList.filter((subject) => {
+            return subject.detail.Semester == semester[i];
+         })
+        }
+        for(let j = 0; j<this.state.allEvenCycleClasses[classNames[i]].subjects.length; j++){
+          let currentSubject = this.state.allEvenCycleClasses[classNames[i]].subjects[j];
+          if (currentSubject.detail.Credits.Tutorial > 0){
+            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail["Professors"] = ["", "", ""];
+          }
+          else if(currentSubject.detail.Credits.Lab > 0){
+            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail["Professors"] = ["", "", "", ""];
+          }
+          else{
+            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail["Professors"] = [""];
+          }
+        }  
+      }
+    }    
+  }
 };
