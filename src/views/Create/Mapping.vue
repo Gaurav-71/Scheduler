@@ -238,16 +238,16 @@ export default {
                 sub.detail.LabSchedule.LabNumber == ""
               ) {
                 this.error.message.message =
-                  "Please fill all the fields for every section of every semester";
+                  "Please fill all the fields for every section of every semester"+classNames[i];
                 this.error.isVisible = true;
                 return false;
               }
             }
 
             let x = sub.detail.Professors.indexOf("");
-            if (sectionObject.newProfessor[i] >= x + 1 && x != -1) {
+            if (sectionObject.newProfessor[i] >= x  && x != -1) {
               this.error.message.message =
-                "Please fill all the fields for every section of every semester";
+                "Please fill all the fields for every section of every semester"+classNames[i];
               this.error.isVisible = true;
               return false;
             }
@@ -275,16 +275,16 @@ export default {
                 sub.detail.LabSchedule.LabNumber == ""
               ) {
                 this.error.message.message =
-                  "Please fill all the fields for every section of every semester";
+                  "Please fill all the fields for every section of every semester"+classNames[i];
                 this.error.isVisible = true;
                 return false;
               }
             }
 
             let x = sub.detail.Professors.indexOf("");
-            if (sectionObject.newProfessor[i] >= x + 1 && x != -1) {
+            if (sectionObject.newProfessor[i] >= x  && x != -1) {
               this.error.message.message =
-                "Please fill all the fields for every section of every semester";
+                "Please fill all the fields for every section of every semester"+classNames[i];
               this.error.isVisible = true;
               return false;
             }
