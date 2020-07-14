@@ -112,7 +112,7 @@ import AddProfessor from "../components/Modals/AddProfessor.vue";
 export default {
   components: {
     AddProfessor,
-  },
+  }, 
   data() {
     return {
       search: "",

@@ -7,155 +7,143 @@
             class="pill"
             @click="changeSemester(3)"
             v-bind:class="{ active: $store.state.semester == 3 }"
-          >Third</div>
+          >
+            Third
+          </div>
           <div
             class="pill"
             @click="changeSemester(5)"
             v-bind:class="{ active: $store.state.semester == 5 }"
-          >Fifth</div>
+          >
+            Fifth
+          </div>
           <div
             class="pill"
             @click="changeSemester(7)"
             v-bind:class="{ active: $store.state.semester == 7 }"
-          >Seventh</div>
+          >
+            Seventh
+          </div>
         </div>
         <div class="pills" v-else>
           <div
             class="pill"
             @click="changeSemester(4)"
             v-bind:class="{ active: $store.state.semester == 4 }"
-          >Fourth</div>
+          >
+            Fourth
+          </div>
           <div
             class="pill"
             @click="changeSemester(6)"
             v-bind:class="{ active: $store.state.semester == 6 }"
-          >Sixth</div>
+          >
+            Sixth
+          </div>
           <div
             class="pill"
             @click="changeSemester(8)"
             v-bind:class="{ active: $store.state.semester == 8 }"
-          >Eight</div>
+          >
+            Eight
+          </div>
         </div>
         <div class="section-pills">
           <div
             class="pill"
             @click="changeSection('A')"
             v-bind:class="{ active: $store.state.section == 'A' }"
-          >A</div>
+          >
+            A
+          </div>
           <div
             class="pill"
             @click="changeSection('B')"
             v-bind:class="{ active: $store.state.section == 'B' }"
-          >B</div>
+          >
+            B
+          </div>
           <div
             v-if="$store.state.semester < 7"
             class="pill"
             @click="changeSection('C')"
             v-bind:class="{ active: $store.state.section == 'C' }"
-          >C</div>
+          >
+            C
+          </div>
         </div>
       </div>
       <mappingTable
         v-if="$store.state.semester == 3 && $store.state.section == 'A'"
         :sectionObject="$store.state.allOddCycleClasses.sec3A"
-        :position="0"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
         :sectionObject="$store.state.allOddCycleClasses.sec3B"
-        :position="1"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
         :sectionObject="$store.state.allOddCycleClasses.sec3C"
-        :position="2"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
         :sectionObject="$store.state.allEvenCycleClasses.sec4A"
-        :position="0"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec4B"
-        :position="1"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
         :sectionObject="$store.state.allEvenCycleClasses.sec4C"
-        :position="2"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
         :sectionObject="$store.state.allOddCycleClasses.sec5A"
-        :position="3"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
         :sectionObject="$store.state.allOddCycleClasses.sec5B"
-        :position="4"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
         :sectionObject="$store.state.allOddCycleClasses.sec5C"
-        :position="5"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
         :sectionObject="$store.state.allEvenCycleClasses.sec6A"
-        :position="3"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec6B"
-        :position="4"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
         :sectionObject="$store.state.allEvenCycleClasses.sec6C"
-        :position="5"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
         :sectionObject="$store.state.allOddCycleClasses.sec7A"
-        :position="6"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
         :sectionObject="$store.state.allOddCycleClasses.sec7B"
-        :position="7"
-        @changeOddMapping="changeOddMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
         :sectionObject="$store.state.allEvenCycleClasses.sec8a"
-        :position="6"
-        @changeEvenMapping="changeEvenMapping"
       />
       <mappingTable
         v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec8b"
-        :position="7"
-        @changeEvenMapping="changeEvenMapping"
       />
       <div v-else>
         <table>
           <tr>
             <th>
-              <h1 style="margin:0;font-weight:lighter;">Mapping : Courses & Professors</h1>
+              <h1 style="margin:0;font-weight:lighter;">
+                Mapping : Courses & Professors
+              </h1>
             </th>
           </tr>
           <tr>
@@ -180,88 +168,139 @@
         </table>
       </div>
     </div>
-    <div v-if="$store.state.semester != null && $store.state.section != null" class="actions">
+    <div
+      v-if="$store.state.semester != null && $store.state.section != null"
+      class="actions"
+    >
       <a class="btn transparent" href="#top">Jump to Top</a>
       <div class="btn" @click="route()">Create Timetable</div>
     </div>
     <p v-if="$store.state.semester != null && $store.state.section != null">
       <b>Note</b> : Please ensure all data fields are filled properly
     </p>
+    <transition name="fade" appear>
+      <Error :obj="error" />
+    </transition>
   </div>
 </template>
 
 <script>
 import mappingTable from "../../components/Tables/mappingTable";
+import Error from "../../components/Modals/Error";
 
 export default {
   components: {
-    mappingTable
+    mappingTable,
+    Error,
   },
   data() {
     return {
-      allOddSemSectionsFilledTiming: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      allOddSemSectionsFilledMapping: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      allEvenSemSectionsFilledTiming: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ],
-      allEvenSemSectionsFilledMapping: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-      ]
+      error: {
+        isVisible: false,
+        message: {
+          code: "420-69/missing-information",
+          message: ""
+        }
+      },
     };
   },
   methods: {
     changeSemester(sem) {
       this.$store.state.semester = sem;
+      if (sem >= 7 && this.$store.state.section == "C")
+        this.$store.state.section = "B";
     },
     changeSection(sec) {
       this.$store.state.section = sec;
     },
     route() {
-      //this.$router.push("/timetable/create/automated/mapping/timing");
-      alert("Automate this shiz bitchazzzz !!!");
+      if (this.$store.state.cycle == "Odd") {
+        let classNames = [
+          "sec3A",
+          "sec3B",
+          "sec3C",
+          "sec5A",
+          "sec5B",
+          "sec5C",
+          "sec7A",
+          "sec7B",
+        ];
+        for (let i = 0; i < 8; i++) {
+          let sectionObject = this.$store.state.allOddCycleClasses[
+            classNames[i]
+          ];
+
+          sectionObject.subjects.forEach((sub) => {
+            if (sub.detail.Credits.Lab > 0) {
+              if (
+                sub.detail.LabSchedule.Time == "" ||
+                sub.detail.LabSchedule.Day == "" ||
+                sub.detail.LabSchedule.LabNumber == ""
+              ) {
+                this.error.message.message =
+                  "Please fill all the fields for every section of every semester";
+                this.error.isVisible = true;
+                return false;
+              }
+            }
+
+            let x = sub.detail.Professors.indexOf("");
+            if (sectionObject.newProfessor[i] >= x + 1 && x != -1) {
+              this.error.message.message =
+                "Please fill all the fields for every section of every semester";
+              this.error.isVisible = true;
+              return false;
+            }
+          });
+          if (this.error.message.message != "") {
+            break;
+          }
+          else{
+            alert("You good bud!");
+          }
+        }
+      } else {
+        let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C","sec8A", "sec8B"];
+
+        for (let i = 0; i < 8; i++) {
+          let sectionObject = this.$store.state.allEvenCycleClasses[
+            classNames[i]
+          ];
+
+          sectionObject.subjects.forEach((sub) => {
+            if (sub.detail.Credits.Lab > 0) {
+              if (
+                sub.detail.LabSchedule.Time == "" ||
+                sub.detail.LabSchedule.Day == "" ||
+                sub.detail.LabSchedule.LabNumber == ""
+              ) {
+                this.error.message.message =
+                  "Please fill all the fields for every section of every semester";
+                this.error.isVisible = true;
+                return false;
+              }
+            }
+
+            let x = sub.detail.Professors.indexOf("");
+            if (sectionObject.newProfessor[i] >= x + 1 && x != -1) {
+              this.error.message.message =
+                "Please fill all the fields for every section of every semester";
+              this.error.isVisible = true;
+              return false;
+            }
+          });
+          if (this.error.message.message != "") {
+            break;
+          }
+          else{
+            alert("youf good bud!");
+          }
+        }
+      }
+
+
+
     },
-    changeEvenTiming(payload) {
-      this.allEvenSemSectionsFilledTiming[payload.index] = payload.trueValue;
-    },
-    changeOddTiming(payload) {
-      this.allOddSemSectionsFilledTiming[payload.index] = payload.trueValue;
-    },
-    changeEvenMapping(payload) {
-      console.log(payload);
-      this.allEvenSemSectionsFilledMappping[payload.index] = payload.trueValue;
-    },
-    changeOddMapping(payload) {
-      console.log(payload);
-      this.allOddSemSectionsFilledMappping[payload.index] = payload.trueValue;
-    }
   },
   created() {
     this.$store.state.sidebarCounter = 2;
@@ -276,11 +315,11 @@ export default {
     this.$store
       .dispatch("assignSectionDetails")
       .then(() => {})
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
-  }
-};
+  },
+};    
 </script>
 
 <style lang="scss" scoped>

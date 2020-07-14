@@ -19,18 +19,13 @@
           courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
         </td>
-        <td
-          v-if="
-          courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0
-        "
-          class="data-input"
-        >
+        <td v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0" class="data-input">
           <div class="custom-input">
             <input
               type="text"
               placeholder="Select Main Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[0]"
+              v-model="sectionObject.subjects[index].detail.Professors[0]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -45,7 +40,7 @@
               type="text"
               placeholder="Select Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[1]"
+              v-model="sectionObject.subjects[index].detail.Professors[1]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -62,7 +57,7 @@
               type="text"
               placeholder="Select Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[2]"
+              v-model="sectionObject.subjects[index].detail.Professors[2]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -79,7 +74,7 @@
               type="text"
               placeholder="Select Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[3]"
+              v-model="sectionObject.subjects[index].detail.Professors[3]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -94,7 +89,7 @@
         </td>
         <td v-else class="data-input">
           <div class="custom-input">
-            <input type="text" placeholder="Select Professor" list="allProfessors" />
+            <input type="text" placeholder="Select Professor" list="allProfessors" v-model="sectionObject.subjects[index].detail.Professors[0]"/>
             <datalist id="allProfessors"></datalist>
             <div class="block"></div>
           </div>
@@ -107,7 +102,7 @@
         <h1>Classroom</h1>
         <h4>Enter the classroom name where you want to accomodate students of class {{$store.state.semester}}{{$store.state.section}}</h4>
       </div>
-      <input type="text" placeholder="Enter classroom" class="classroom" />
+      <input type="text" placeholder="Enter classroom" class="classroom" v-model="sectionObject.roomNumber"/>
     </div>
     <br />
     <div class="heading">
@@ -130,7 +125,7 @@
             type="text"
             placeholder="Select Time"
             list="time"
-            v-on:change="makeTrue((index)*3)"
+            v-model="courses.detail.LabSchedule.Time"
           />
           <datalist id="time">
             <option value="9:00 AM"></option>
@@ -144,7 +139,7 @@
             type="text"
             placeholder="Select Day"
             list="day"
-            v-on:change="makeTrue((index)*3 + 1)"
+            v-model="courses.detail.LabSchedule.Lab"
           />
           <datalist id="day">
             <option value="Monday"></option>
@@ -160,7 +155,7 @@
             type="text"
             placeholder="Enter Lab Name"
             list="allProfessors"
-            v-on:change="makeTrue((index)*3 + 2)"
+            v-model="courses.detail.LabSchedule.LabNumber"
           />
         </td>
       </tr>
@@ -174,8 +169,7 @@ export default {
   props: {
     sectionObject: {
       type: Object
-    },
-    position: Number
+    }
   },
   data() {
     return {};
@@ -203,39 +197,12 @@ export default {
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
     let list = document.getElementById("allProfessors");
-    console.log(professorNames);
+    
     professorNames.forEach(function(item) {
       var option = document.createElement("option");
       option.value = item;
       list.appendChild(option);
     });
-  },
-  beforeDestroy() {
-    console.log("Dheeraj sucksss");
-    console.log(this.sectionObject);
-    let trueValue = true;
-    for (let i = 0; i < this.sectionObject.subjects.length; i++) {
-      let x = this.sectionObject.newProfessor[i];
-      let indexOfFirstEmptyStrings = this.sectionObject.subjects[
-        i
-      ].detail.Professors.indexOf("");
-
-      if (indexOfFirstEmptyStrings < x && indexOfFirstEmptyStrings != -1) {
-        trueValue = false;
-        break;
-      }
-    }
-    if (this.$store.state.cycle == "Odd") {
-      this.$emit("changeOddMapping", {
-        index: this.position,
-        trueValue: trueValue
-      });
-    } else {
-      this.$emit("changeEvenMapping", {
-        index: this.position,
-        trueValue: trueValue
-      });
-    }
   }
 };
 </script>
@@ -271,21 +238,6 @@ export default {
   }
   .classroom-container {
     margin-top: 0.7rem;
-    /*height: 100%;    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;        
-    padding: 0 1rem;
-    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.25);
-    background-image: $gradient;
-    border-radius: 0.8rem;
-    h1 {
-      font-weight: bold;
-      color: white;
-    }
-    h4 {
-      color: black;
-    }*/
   }
 }
 </style>
