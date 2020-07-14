@@ -229,71 +229,80 @@ export default {
           let sectionObject = this.$store.state.allOddCycleClasses[
             classNames[i]
           ];
-
-          sectionObject.subjects.forEach((sub) => {
+          for(let j = 0;j<sectionObject.subjects.length;j++)
+          {
+            let sub = sectionObject.subjects[j];
             if (sub.detail.Credits.Lab > 0) {
               if (
                 sub.detail.LabSchedule.Time == "" ||
                 sub.detail.LabSchedule.Day == "" ||
                 sub.detail.LabSchedule.LabNumber == ""
-              ) {
-                this.error.message.message =
-                  "Please fill all the fields for every section of every semester"+classNames[i];
+              ) { 
+                this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
                 this.error.isVisible = true;
-                return false;
+                break;
               }
             }
-
-            let x = sub.detail.Professors.indexOf("");
-            if (sectionObject.newProfessor[i] >= x  && x != -1) {
-              this.error.message.message =
-                "Please fill all the fields for every section of every semester"+classNames[i];
-              this.error.isVisible = true;
-              return false;
+            if (this.error.message.message != "") {
+              break;
             }
-          });
-          if (this.error.message.message != "") {
-            break;
+            for(let k = 0;k< sectionObject.newProfessor[j];k++)
+            {
+              if(sub.detail.Professors[k] == "")
+              { 
+                this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
+                this.error.isVisible = true;
+                break; 
+              }
+            }
+            if (this.error.message.message != "") {
+              break;
+            }
           }
-          else{
-            alert("You good bud!");
+          if (this.error.message.message != "") {
+              break;
           }
         }
-      } else {
+      } 
+      else 
+      {
         let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C","sec8A", "sec8B"];
-
         for (let i = 0; i < 8; i++) {
           let sectionObject = this.$store.state.allEvenCycleClasses[
             classNames[i]
           ];
-
-          sectionObject.subjects.forEach((sub) => {
+          for(let j = 0;j<sectionObject.subjects.length;j++)
+          {
+            let sub = sectionObject.subjects[j];
             if (sub.detail.Credits.Lab > 0) {
               if (
                 sub.detail.LabSchedule.Time == "" ||
                 sub.detail.LabSchedule.Day == "" ||
                 sub.detail.LabSchedule.LabNumber == ""
-              ) {
-                this.error.message.message =
-                  "Please fill all the fields for every section of every semester"+classNames[i];
+              ) { 
+                this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
                 this.error.isVisible = true;
-                return false;
+                break;
               }
             }
-
-            let x = sub.detail.Professors.indexOf("");
-            if (sectionObject.newProfessor[i] >= x  && x != -1) {
-              this.error.message.message =
-                "Please fill all the fields for every section of every semester"+classNames[i];
-              this.error.isVisible = true;
-              return false;
+            if (this.error.message.message != "") {
+              break;
             }
-          });
-          if (this.error.message.message != "") {
-            break;
+            for(let k = 0;k< sectionObject.newProfessor[j];k++)
+            {
+              if(sub.detail.Professors[k] == "")
+              { 
+                this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
+                this.error.isVisible = true;
+                break; 
+              }
+            }
+            if (this.error.message.message != "") {
+              break;
+            }
           }
-          else{
-            alert("youf good bud!");
+          if (this.error.message.message != "") {
+              break;
           }
         }
       }
