@@ -245,7 +245,7 @@ export default {
             }
 
             let x = sub.detail.Professors.indexOf("");
-            if (sectionObject.newProfessor[i] > x + 1 && x != -1) {
+            if (sectionObject.newProfessor[i] >= x + 1 && x != -1) {
               this.error.message.message =
                 "Please fill all the fields for every section of every semester";
               this.error.isVisible = true;
@@ -255,11 +255,14 @@ export default {
           if (this.error.message.message != "") {
             break;
           }
+          else{
+            alert("You good bud!");
+          }
         }
       } else {
-        let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
+        let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C","sec8A", "sec8B"];
 
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 8; i++) {
           let sectionObject = this.$store.state.allEvenCycleClasses[
             classNames[i]
           ];
@@ -279,7 +282,7 @@ export default {
             }
 
             let x = sub.detail.Professors.indexOf("");
-            if (sectionObject.newProfessor[i] > x + 1 && x != -1) {
+            if (sectionObject.newProfessor[i] >= x + 1 && x != -1) {
               this.error.message.message =
                 "Please fill all the fields for every section of every semester";
               this.error.isVisible = true;
@@ -288,6 +291,9 @@ export default {
           });
           if (this.error.message.message != "") {
             break;
+          }
+          else{
+            alert("youf good bud!");
           }
         }
       }

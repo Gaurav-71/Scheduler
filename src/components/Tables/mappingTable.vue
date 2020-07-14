@@ -19,12 +19,7 @@
           courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
         </td>
-        <td
-          v-if="
-          courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0
-        "
-          class="data-input"
-        >
+        <td v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0" class="data-input">
           <div class="custom-input">
             <input
               type="text"
@@ -94,7 +89,7 @@
         </td>
         <td v-else class="data-input">
           <div class="custom-input">
-            <input type="text" placeholder="Select Professor" list="allProfessors" />
+            <input type="text" placeholder="Select Professor" list="allProfessors" v-model="sectionObject.subjects[index].detail.Professors[0]"/>
             <datalist id="allProfessors"></datalist>
             <div class="block"></div>
           </div>
