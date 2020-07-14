@@ -1,5 +1,5 @@
 <template>
-  <div class="mapping">
+  <div class="mapping" id="top">
     <div class="container">
       <div class="pills-container">
         <div class="pills" v-if="$store.state.cycle == 'Odd'">
@@ -7,70 +7,53 @@
             class="pill"
             @click="changeSemester(3)"
             v-bind:class="{ active: $store.state.semester == 3 }"
-          >
-            Third
-          </div>
+          >Third</div>
           <div
             class="pill"
             @click="changeSemester(5)"
             v-bind:class="{ active: $store.state.semester == 5 }"
-          >
-            Fifth
-          </div>
+          >Fifth</div>
           <div
             class="pill"
             @click="changeSemester(7)"
             v-bind:class="{ active: $store.state.semester == 7 }"
-          >
-            Seventh
-          </div>
+          >Seventh</div>
         </div>
         <div class="pills" v-else>
           <div
             class="pill"
             @click="changeSemester(4)"
             v-bind:class="{ active: $store.state.semester == 4 }"
-          >
-            Fourth
-          </div>
+          >Fourth</div>
           <div
             class="pill"
             @click="changeSemester(6)"
             v-bind:class="{ active: $store.state.semester == 6 }"
-          >
-            Sixth
-          </div>
+          >Sixth</div>
           <div
             class="pill"
             @click="changeSemester(8)"
             v-bind:class="{ active: $store.state.semester == 8 }"
-          >
-            Eight
-          </div>
+          >Eight</div>
         </div>
-        <div
+        <div class="section-pills">
+          <div
             class="pill"
-            @click="changeSction('A')"
+            @click="changeSection('A')"
             v-bind:class="{ active: $store.state.section == 'A' }"
-          >
-            A
-          </div>
+          >A</div>
           <div
             class="pill"
-            @click="changeSction('B')"
+            @click="changeSection('B')"
             v-bind:class="{ active: $store.state.section == 'B' }"
-          >
-            B
-          </div>
+          >B</div>
           <div
-            v-if="$store.state.semester<7"
+            v-if="$store.state.semester < 7"
             class="pill"
-            @click="changeSction('C')"
+            @click="changeSection('C')"
             v-bind:class="{ active: $store.state.section == 'C' }"
-          >
-            C
-          </div>
-        <input type="text" placeholder="Classroom no." class="classroom" />
+          >C</div>
+        </div>
       </div>
       <mappingTable
         v-if="$store.state.semester == 3 && $store.state.section == 'A'"
@@ -168,111 +151,11 @@
         :position="7"
         @changeEvenMapping="changeEvenMapping"
       />
-      <br />
-      <br />
-      <TimingTable
-        v-if="$store.state.semester == 3 && $store.state.section == 'A'"
-        :timingObject="$store.state.allOddCycleClasses.sec3A"
-        :position="0"
-        @changeOddTiming="changeOddTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
-        :timingObject="$store.state.allOddCycleClasses.sec3B"
-        :position="1"
-        @changeOddTiming="changeOddTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
-        :timingObject="$store.state.allOddCycleClasses.sec3C"
-        :position="2"
-        @changeOddTiming="changeOddTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
-        :timingObject="$store.state.allEvenCycleClasses.sec4A"
-        :position="0"
-        @changeEvenTiming="changeEvenTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
-        :timingObject="$store.state.allEvenCycleClasses.sec4B"
-        :position="1"
-        @changeEvenTiming="changeEvenTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
-        :timingObject="$store.state.allEvenCycleClasses.sec4C"
-        :position="2"
-        @changeEvenTiming="changeEvenTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
-        :timingObject="$store.state.allOddCycleClasses.sec5A"
-        :position="3"
-        @changeOddTiming="changeOddTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
-        :timingObject="$store.state.allOddCycleClasses.sec5B"
-        :position="4"
-        @changeOddTiming="changeOddTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
-        :timingObject="$store.state.allOddCycleClasses.sec5C"
-        :position="5"
-        @changeOddTiming="changeOddTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
-        :timingObject="$store.state.allEvenCycleClasses.sec6A"
-        :position="3"
-        @changeEvenTiming="changeEvenTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
-        :timingObject="$store.state.allEvenCycleClasses.sec6B"
-        :position="4"
-        @changeEvenTiming="changeEvenTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
-        :timingObject="$store.state.allEvenCycleClasses.sec6C"
-        :position="5"
-        @changeEvenTiming="changeEvenTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
-        :timingObject="$store.state.allOddCycleClasses.sec7A"
-        :position="6"
-        @changeOddTiming="changeOddTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
-        :timingObject="$store.state.allOddCycleClasses.sec7B"
-        :position="7"
-        @changeOddTiming="changeOddTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
-        :timingObject="$store.state.allEvenCycleClasses.sec8A"
-        :position="6"
-        @changeEvenTiming="changeEvenTiming"
-      />
-      <TimingTable
-        v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
-        :timingObject="$store.state.allEvenCycleClasses.sec8B"
-        :position="7"
-        @changeEvenTiming="changeEvenTiming"
-      />
       <div v-else>
         <table>
           <tr>
             <th>
-              <h1 style="margin:0;font-weight:lighter;">
-                Mapping : Courses & Professors
-              </h1>
+              <h1 style="margin:0;font-weight:lighter;">Mapping : Courses & Professors</h1>
             </th>
           </tr>
           <tr>
@@ -297,17 +180,22 @@
         </table>
       </div>
     </div>
-    <div class="btn" @click="route()">next</div>
+    <div v-if="$store.state.semester != null && $store.state.section != null" class="actions">
+      <a class="btn transparent" href="#top">Jump to Top</a>
+      <div class="btn" @click="route()">Create Timetable</div>
+    </div>
+    <p v-if="$store.state.semester != null && $store.state.section != null">
+      <b>Note</b> : Please ensure all data fields are filled properly
+    </p>
   </div>
 </template>
 
 <script>
 import mappingTable from "../../components/Tables/mappingTable";
-import TimingTable from "../../components/Tables/TimingTable";
+
 export default {
   components: {
-    mappingTable,
-    TimingTable,
+    mappingTable
   },
   data() {
     return {
@@ -319,7 +207,7 @@ export default {
         false,
         false,
         false,
-        false,
+        false
       ],
       allOddSemSectionsFilledMapping: [
         false,
@@ -329,7 +217,7 @@ export default {
         false,
         false,
         false,
-        false,
+        false
       ],
       allEvenSemSectionsFilledTiming: [
         false,
@@ -337,7 +225,7 @@ export default {
         false,
         false,
         false,
-        false,
+        false
       ],
       allEvenSemSectionsFilledMapping: [
         false,
@@ -345,18 +233,20 @@ export default {
         false,
         false,
         false,
-        false,
-      ],
+        false
+      ]
     };
   },
   methods: {
     changeSemester(sem) {
       this.$store.state.semester = sem;
     },
+    changeSection(sec) {
+      this.$store.state.section = sec;
+    },
     route() {
-      
-
-      this.$router.push("/timetable/create/automated/mapping/timing");
+      //this.$router.push("/timetable/create/automated/mapping/timing");
+      alert("Automate this shiz bitchazzzz !!!");
     },
     changeEvenTiming(payload) {
       this.allEvenSemSectionsFilledTiming[payload.index] = payload.trueValue;
@@ -371,7 +261,7 @@ export default {
     changeOddMapping(payload) {
       console.log(payload);
       this.allOddSemSectionsFilledMappping[payload.index] = payload.trueValue;
-    },
+    }
   },
   created() {
     this.$store.state.sidebarCounter = 2;
@@ -386,10 +276,10 @@ export default {
     this.$store
       .dispatch("assignSectionDetails")
       .then(() => {})
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
-  },
+  }
 };
 </script>
 
@@ -418,6 +308,21 @@ export default {
           margin: 1rem 0;
         }
       }
+    }
+  }
+  .actions {
+    display: flex;
+    justify-content: center;
+    .btn {
+      width: 9rem;
+      text-align: center;
+      text-decoration: none;
+    }
+    .transparent {
+      background-image: none;
+      background: rgba($primary, 0.1);
+      border-color: rgba($primary, 0.1);
+      color: black;
     }
   }
 }

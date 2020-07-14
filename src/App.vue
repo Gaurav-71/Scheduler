@@ -20,7 +20,7 @@ export default {
 
 ::-webkit-scrollbar {
   width: 0.35rem;
-  height: 0.35rem;
+  //height: 0.35rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -30,7 +30,7 @@ export default {
 ::-webkit-scrollbar-thumb {
   background-color: #08e1ae;
   background-image: linear-gradient(315deg, #08e1ae 0%, #98de5b 74%);
-  height: 100%;
+  //height: 100%;
 
   /* Center and scale the image nicely */
   background-position: center;

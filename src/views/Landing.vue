@@ -64,6 +64,7 @@ export default {
     border-radius: 20px;
     border: 1px solid $primary-light;
     background-color: $primary-light;
+    background-image: $gradient;
     color: #ffffff;
     font-size: 14px;
     font-weight: 100;

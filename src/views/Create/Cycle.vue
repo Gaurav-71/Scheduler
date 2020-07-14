@@ -30,7 +30,7 @@ export default {
   methods: {
     route() {
       this.$router.push("/timetable/create/automated/mapping");
-    }
+    },
   },
   created() {
     this.$store.state.sidebarCounter = 2;
@@ -39,7 +39,7 @@ export default {
     localStorage.setItem("createRouteTracker", this.$route.path);
     this.$store.state.createRouteTracker = localStorage.getItem(
       "createRouteTracker"
-    );
+    );    
   }
 };
 </script>
