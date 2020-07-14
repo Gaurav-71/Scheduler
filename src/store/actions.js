@@ -157,6 +157,7 @@ export default {
       for (let i = 0; i < 8; i++) {
         this.state.allOddCycleClasses[classNames[i]] = {
           newProfessor: [],
+          roomNumber: "",
           getProfessors: function(index) {
             return this.newProfessor[index];
           },
@@ -165,12 +166,20 @@ export default {
           },
           decrementNewProfessors: function(index) {
             return this.newProfessor[index] - 1;
-          }
+          },
         };
         let subjects = [];
         this.state.courseList.forEach((subject) => {
           if (subject.detail.Semester == semester[i]) {
-            subjects.push(JSON.parse(JSON.stringify(subject)));
+            let sub = JSON.parse(JSON.stringify(subject));
+            if (sub.detail.Credits.Lab > 0) {
+              sub.detail["LabSchedule"] = {
+                Day: "",
+                Time: "",
+                LabNumber: "",
+              };
+            }
+            subjects.push(sub);
           }
         });
         this.state.allOddCycleClasses[classNames[i]]["subjects"] = subjects;
@@ -200,12 +209,12 @@ export default {
         }
       }
     } else {
-      let semester = [4, 4, 4, 6, 6, 6];
-      let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
-      for (let i = 0; i < 6; i++) {
+      let semester = [4, 4, 4, 6, 6, 6, 8, 8];
+      let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C", "sec8A", "sec8B",];
+      for (let i = 0; i < 8; i++) {
         this.state.allEvenCycleClasses[classNames[i]] = {
-          nameOfSection: classNames[i],
           newProfessor: [],
+          roomNumber: "",
           getProfessors: function(index) {
             return this.newProfessor[index];
           },
@@ -216,10 +225,19 @@ export default {
             return this.newProfessor[index] - 1;
           },
         };
+
         let subjects = [];
         this.state.courseList.forEach((subject) => {
           if (subject.detail.Semester == semester[i]) {
-            subjects.push(JSON.parse(JSON.stringify(subject)));
+            let sub = JSON.parse(JSON.stringify(subject));
+            if (sub.detail.Credits.Lab > 0) {
+              sub.detail["LabSchedule"] = {
+                Day: "",
+                Time: "",
+                LabNumber: "",
+              };
+            }
+            subjects.push(sub);
           }
         });
         this.state.allEvenCycleClasses[classNames[i]]["subjects"] = subjects;

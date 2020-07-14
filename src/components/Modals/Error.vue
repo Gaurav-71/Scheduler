@@ -10,7 +10,7 @@
     <img
       src="../../assets/Common/delete.svg"
       alt="cancel"
-      @click="obj.isVisible=false"
+      @click="handleError"
       class="cancel"
     />
   </div>
@@ -21,7 +21,13 @@ export default {
   props: {    
     obj: {
       isVisible: Boolean,
-      message: String
+      message: Object
+    }
+  },
+  methods:{
+    handleError(){
+      this.obj.isVisible=false;
+      this.obj.message.message = "";
     }
   }
 };
@@ -30,7 +36,11 @@ export default {
 <style lang="scss" scoped>
 @import "../../scss/modal";
 .modal-container {
+  position: fixed;
   left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   z-index: 101;
   background: rgba(lightgrey, 0.7);
   .modal {

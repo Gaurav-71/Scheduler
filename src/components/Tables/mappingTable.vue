@@ -107,7 +107,7 @@
         <h1>Classroom</h1>
         <h4>Enter the classroom name where you want to accomodate students of class {{$store.state.semester}}{{$store.state.section}}</h4>
       </div>
-      <input type="text" placeholder="Enter classroom" class="classroom" />
+      <input type="text" placeholder="Enter classroom" class="classroom" v-model="sectionObject.roomNumber"/>
     </div>
     <br />
     <div class="heading">
@@ -130,7 +130,7 @@
             type="text"
             placeholder="Select Time"
             list="time"
-            v-on:change="makeTrue((index)*3)"
+            v-model="courses.detail.LabSchedule.Time"
           />
           <datalist id="time">
             <option value="9:00 AM"></option>
@@ -144,7 +144,7 @@
             type="text"
             placeholder="Select Day"
             list="day"
-            v-on:change="makeTrue((index)*3 + 1)"
+            v-model="courses.detail.LabSchedule.Lab"
           />
           <datalist id="day">
             <option value="Monday"></option>
@@ -160,7 +160,7 @@
             type="text"
             placeholder="Enter Lab Name"
             list="allProfessors"
-            v-on:change="makeTrue((index)*3 + 2)"
+            v-model="courses.detail.LabSchedule.LabNumber"
           />
         </td>
       </tr>
@@ -243,21 +243,6 @@ export default {
   }
   .classroom-container {
     margin-top: 0.7rem;
-    /*height: 100%;    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;        
-    padding: 0 1rem;
-    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.25);
-    background-image: $gradient;
-    border-radius: 0.8rem;
-    h1 {
-      font-weight: bold;
-      color: white;
-    }
-    h4 {
-      color: black;
-    }*/
   }
 }
 </style>
