@@ -125,7 +125,7 @@
             type="text"
             placeholder="Select Time"
             list="time"
-            v-model="courses.detail.LabSchedule.Time"
+            v-model="sectionObject.subjects[index].detail.LabSchedule.Time"
           />
           <datalist id="time">
             <option value="9:00 AM"></option>
@@ -139,7 +139,7 @@
             type="text"
             placeholder="Select Day"
             list="day"
-            v-model="courses.detail.LabSchedule.Lab"
+            v-model="sectionObject.subjects[index].detail.LabSchedule.Day"
           />
           <datalist id="day">
             <option value="Monday"></option>
@@ -155,7 +155,7 @@
             type="text"
             placeholder="Enter Lab Name"
             list="allProfessors"
-            v-model="courses.detail.LabSchedule.LabNumber"
+            v-model="sectionObject.subjects[index].detail.LabSchedule.LabNumber"
           />
         </td>
       </tr>
