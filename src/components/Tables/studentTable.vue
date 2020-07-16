@@ -26,79 +26,81 @@
       </tr>
       <tr>
         <th>Monday</th>
-        <td>SE</td>
-        <td>Maths</td>
+        <td>{{sectionObject.Monday[0]}}</td>
+        <td>{{sectionObject.Monday[1]}}</td>
         <td></td>
-        <td>CO</td>
-        <td>DC</td>
+        <td>{{sectionObject.Monday[2]}}</td>
+        <td>{{sectionObject.Monday[3]}}</td>
         <td></td>
-        <td>DAA</td>
-        <td>MP Lab</td>
-        <td>MP Lab</td>
+        <td>{{sectionObject.Monday[4]}}</td>
+        <td>{{sectionObject.Monday[5]}}</td>
+        <td>{{sectionObject.Monday[6]}}</td>
       </tr>
       <tr>
         <th>Tuesday</th>
-        <td>SE</td>
-        <td>Maths</td>
+        <td>{{sectionObject.Tuesday[0]}}</td>
+        <td>{{sectionObject.Tuesday[1]}}</td>
         <td></td>
-        <td>CO</td>
-        <td>DC</td>
+        <td>{{sectionObject.Tuesday[2]}}</td>
+        <td>{{sectionObject.Tuesday[3]}}</td>
         <td></td>
-        <td>DAA</td>
-        <td>MP Lab</td>
-        <td>MP Lab</td>
+        <td>{{sectionObject.Tuesday[4]}}</td>
+        <td>{{sectionObject.Tuesday[5]}}</td>
+        <td>{{sectionObject.Tuesday[6]}}</td>
       </tr>
       <tr>
         <th>Wednesday</th>
-        <td>SE</td>
-        <td>Maths</td>
-        <td>Break</td>
-        <td>CO</td>
-        <td>DC</td>
-        <td>Break</td>
-        <td>DAA</td>
-        <td>MP Lab</td>
-        <td>MP Lab</td>
+        <td>{{sectionObject.Wednesday[0]}}</td>
+        <td>{{sectionObject.Wednesday[1]}}</td>
+        <td></td>
+        <td>{{sectionObject.Wednesday[2]}}</td>
+        <td>{{sectionObject.Wednesday[3]}}</td>
+        <td></td>
+        <td>{{sectionObject.Wednesday[4]}}</td>
+        <td>{{sectionObject.Wednesday[5]}}</td>
+        <td>{{sectionObject.Wednesday[6]}}</td>
       </tr>
       <tr>
         <th>Thursday</th>
-        <td>SE</td>
-        <td>Maths</td>
+        <td>{{sectionObject.Thursday[0]}}</td>
+        <td>{{sectionObject.Thursday[1]}}</td>
         <td></td>
-        <td>CO</td>
-        <td>DC</td>
+        <td>{{sectionObject.Thursday[2]}}</td>
+        <td>{{sectionObject.Thursday[3]}}</td>
         <td></td>
-        <td>DAA</td>
-        <td>MP Lab</td>
-        <td>MP Lab</td>
+        <td>{{sectionObject.Thursday[4]}}</td>
+        <td>{{sectionObject.Thursday[5]}}</td>
+        <td>{{sectionObject.Thursday[6]}}</td>
       </tr>
       <tr>
         <th>Friday</th>
-        <td>SE</td>
-        <td>Maths</td>
+        <td>{{sectionObject.Friday[0]}}</td>
+        <td>{{sectionObject.Friday[1]}}</td>
         <td></td>
-        <td>CO</td>
-        <td>DC</td>
+        <td>{{sectionObject.Friday[2]}}</td>
+        <td>{{sectionObject.Friday[3]}}</td>
         <td></td>
-        <td>DAA</td>
-        <td>MP Lab</td>
-        <td>MP Lab</td>
+        <td>{{sectionObject.Friday[4]}}</td>
+        <td>{{sectionObject.Friday[5]}}</td>
+        <td>{{sectionObject.Friday[6]}}</td>
       </tr>
       <tr>
         <th>Saturday</th>
-        <td>SE</td>
-        <td>Maths</td>
+        <td>{{sectionObject.Saturday[0]}}</td>
+        <td>{{sectionObject.Saturday[1]}}</td>
         <td></td>
-        <td>CO</td>
-        <td>DC</td>
+        <td>{{sectionObject.Saturday[2]}}</td>
+        <td>{{sectionObject.Saturday[3]}}</td>
         <td></td>
-        <td>DAA</td>
-        <td>MP Lab</td>
-        <td>MP Lab</td>
+        <td>{{sectionObject.Saturday[4]}}</td>
+        <td>{{sectionObject.Saturday[5]}}</td>
+        <td>{{sectionObject.Saturday[6]}}</td>
       </tr>
     </table>
     <br />
     <br />
+    <table>
+    </table>
     <table>
       <tr>
         <th>Subject Code</th>
@@ -107,41 +109,14 @@
         <th>Abbreviation</th>
         <th>Staff</th>
       </tr>
-      <tr>
-        <td>CS41</td>
-        <td>Engineering Maths - IV</td>
-        <td>3:1:0</td>
-        <td>Maths</td>
-        <td>Girinath reddy, long name , fuck this, goodnight</td>
+      <tr v-for="(subject,index) in sectionObject.subjects" :key="index">
+        <td>{{subject.detail.Code}}</td>
+        <td>{{subject.detail.Name}}</td>
+        <td>{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
+        <td>{{subject.detail.Type}}</td>
+        <td>{{subject.detail.Professors[0]}}</td>
       </tr>
-      <tr>
-        <td>CS41</td>
-        <td>Engineering Maths - IV</td>
-        <td>3:1:0</td>
-        <td>Maths</td>
-        <td>Girinath</td>
-      </tr>
-      <tr>
-        <td>CS41</td>
-        <td>Engineering Maths - IV</td>
-        <td>3:1:0</td>
-        <td>Maths</td>
-        <td>Girinath</td>
-      </tr>
-      <tr>
-        <td>CS41</td>
-        <td>Engineering Maths - IV</td>
-        <td>3:1:0</td>
-        <td>Maths</td>
-        <td>Girinath</td>
-      </tr>
-      <tr>
-        <td>CS41</td>
-        <td>Engineering Maths - IV</td>
-        <td>3:1:0</td>
-        <td>Maths</td>
-        <td>Girinath</td>
-      </tr>
+      
     </table>
     <div class="line" v-if="!hideline"></div>
   </div>

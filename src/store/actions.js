@@ -157,6 +157,12 @@ export default {
       for (let i = 0; i < 8; i++) {
         this.state.allOddCycleClasses[classNames[i]] = {
           newProfessor: [],
+          Monday: ["","","","","","",""],
+          Tuesday: ["","","","","","",""],
+          Wednesday: ["","","","","","",""],
+          Thursday: ["","","","","","",""],
+          Friday: ["","","","","","",""],
+          Saturday: ["","","","","","",""],
           roomNumber: "",
           getProfessors: function(index) {
             return this.newProfessor[index];
@@ -214,6 +220,12 @@ export default {
       for (let i = 0; i < 8; i++) {
         this.state.allEvenCycleClasses[classNames[i]] = {
           newProfessor: [],
+          Monday: ["","","","","","",""],
+          Tuesday: ["","","","","","",""],
+          Wednesday: ["","","","","","",""],
+          Thursday: ["","","","","","",""],
+          Friday: ["","","","","","",""],
+          Saturday: ["","","","","","",""],
           roomNumber: "",
           getProfessors: function(index) {
             return this.newProfessor[index];
@@ -269,4 +281,87 @@ export default {
       }
     }
   },
+  async getProfessorObject(context,name)
+  {
+    console.log(context);
+    for(let i = 0;i<this.state.professorList.length;i++)
+    {
+      if(name == this.state.professorList[i].detail.Name)
+        return this.state.professorList[i];
+    }
+  },
+  async getLabHour(context,labHour){
+    console.log(context);
+    if(labHour == "9:00 AM")
+      return 0;
+    else if(labHour == "11:05 AM")
+      return 2;
+    else if(labHour == "1:45 PM")
+      return 4;
+    return 5;
+  },
+  async assignLabs(context) {
+    console.log(context);
+    if (this.state.cycle == "Odd") {
+      let classNames = [
+        "sec3A",
+        "sec3B",
+        "sec3C",
+        "sec5A",
+        "sec5B",
+        "sec5C",
+        "sec7A",
+        "sec7B",
+      ];
+      for(let i = 0;i<8;i++)
+      {
+        let currentClass = this.state.allOddCycleClasses[classNames[i]];
+        for(let i = 0;i<currentClass.subjects.length;i++)
+        {
+          let sub = currentClass.subjects[i];
+          if(sub.detail.Credits.Lab > 0)
+          { 
+            let x = await context.dispatch("getLabHour",sub.detail.LabSchedule.Time);
+            currentClass[sub.detail.LabSchedule.Day][x] = sub.detail.Name; 
+            currentClass[sub.detail.LabSchedule.Day][x + 1] = sub.detail.Name;
+            for(let j = 0;j<currentClass.newProfessor[i];j++)
+            { 
+              let professor = await context.dispatch("getProfessorObject",sub.detail.Professors[j]);
+              professor.detail[sub.detail.LabSchedule.Day][x] = sub.detail.Name + " " + classNames[i].substring(3);
+              professor.detail[sub.detail.LabSchedule.Day][x+1] = sub.detail.Name + " " + classNames[i].substring(3);
+            }
+          }
+        }
+      }
+    }
+    else{
+      let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
+      for(let i = 0;i<6;i++)
+      {
+        let currentClass = this.state.allEvenCycleClasses[classNames[i]];
+        for(let i = 0;i<currentClass.subjects.length;i++)
+        {
+          let sub = currentClass.subjects[i];
+          if(sub.detail.Credits.Lab > 0)
+          { 
+            let x = await context.dispatch("getLabHour",sub.detail.LabSchedule.Time);
+            currentClass[sub.detail.LabSchedule.Day][x] = sub.detail.Name; 
+            currentClass[sub.detail.LabSchedule.Day][x + 1] = sub.detail.Name;
+            for(let j = 0;j<currentClass.newProfessor[i];j++)
+            { 
+              let professor = await context.dispatch("getProfessorObject",sub.detail.Professors[j]);
+              professor.detail[sub.detail.LabSchedule.Day][x] = sub.detail.Name + " " + classNames[i].substring(3);
+              professor.detail[sub.detail.LabSchedule.Day][x+1] = sub.detail.Name + " " + classNames[i].substring(3);
+            }
+          }
+        }
+      }
+    } 
+  },
+  async automateTimetable(context) {
+    console.log(context);
+    await context.dispatch("assignLabs");
+
+
+  }
 };
