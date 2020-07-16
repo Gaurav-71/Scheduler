@@ -130,5 +130,11 @@ export default {
       }
     }
   }
+  @media print {
+    nav{
+    display: none;
+    margin: 0;
+    padding: 0;
+  }}
 }
 </style>

@@ -7,70 +7,52 @@
             class="pill"
             @click="changeSemester(3)"
             v-bind:class="{ active: $store.state.semester == 3 }"
-          >
-            Third
-          </div>
+          >Third</div>
           <div
             class="pill"
             @click="changeSemester(5)"
             v-bind:class="{ active: $store.state.semester == 5 }"
-          >
-            Fifth
-          </div>
+          >Fifth</div>
           <div
             class="pill"
             @click="changeSemester(7)"
             v-bind:class="{ active: $store.state.semester == 7 }"
-          >
-            Seventh
-          </div>
+          >Seventh</div>
         </div>
         <div class="pills" v-else>
           <div
             class="pill"
             @click="changeSemester(4)"
             v-bind:class="{ active: $store.state.semester == 4 }"
-          >
-            Fourth
-          </div>
+          >Fourth</div>
           <div
             class="pill"
             @click="changeSemester(6)"
             v-bind:class="{ active: $store.state.semester == 6 }"
-          >
-            Sixth
-          </div>
+          >Sixth</div>
           <div
             class="pill"
             @click="changeSemester(8)"
             v-bind:class="{ active: $store.state.semester == 8 }"
-          >
-            Eight
-          </div>
+          >Eight</div>
         </div>
         <div class="section-pills">
           <div
             class="pill"
             @click="changeSection('A')"
             v-bind:class="{ active: $store.state.section == 'A' }"
-          >
-            A
-          </div>
+          >A</div>
           <div
             class="pill"
             @click="changeSection('B')"
             v-bind:class="{ active: $store.state.section == 'B' }"
-          >
-            B
-          </div>
+          >B</div>
           <div
             v-if="$store.state.semester < 7"
             class="pill"
             @click="changeSection('C')"
             v-bind:class="{ active: $store.state.section == 'C' }"
-          >
-            C
-          </div>
+          >C</div>
         </div>
       </div>
       <mappingTable
@@ -141,9 +123,7 @@
         <table>
           <tr>
             <th>
-              <h1 style="margin:0;font-weight:lighter;">
-                Mapping : Courses & Professors
-              </h1>
+              <h1 style="margin:0;font-weight:lighter;">Mapping : Courses & Professors</h1>
             </th>
           </tr>
           <tr>
@@ -168,10 +148,7 @@
         </table>
       </div>
     </div>
-    <div
-      v-if="$store.state.semester != null && $store.state.section != null"
-      class="actions"
-    >
+    <div v-if="$store.state.semester != null && $store.state.section != null" class="actions">
       <a class="btn transparent" href="#top">Jump to Top</a>
       <div class="btn" @click="route()">Create Timetable</div>
     </div>
@@ -191,7 +168,7 @@ import Error from "../../components/Modals/Error";
 export default {
   components: {
     mappingTable,
-    Error,
+    Error
   },
   data() {
     return {
@@ -201,7 +178,7 @@ export default {
           code: "420-69/missing-information",
           message: ""
         }
-      },
+      }
     };
   },
   methods: {
@@ -214,6 +191,11 @@ export default {
       this.$store.state.section = sec;
     },
     route() {
+      //put this stuff after validation
+      this.$router.push("/timetable/result");
+      this.$store.state.semester = 0;
+      this.$store.state.section = null;
+      /*
       if (this.$store.state.cycle == "Odd") {
         let classNames = [
           "sec3A",
@@ -305,11 +287,8 @@ export default {
               break;
           }
         }
-      }
-
-
-
-    },
+      }*/
+    }
   },
   created() {
     this.$store.state.sidebarCounter = 2;
@@ -324,11 +303,11 @@ export default {
     this.$store
       .dispatch("assignSectionDetails")
       .then(() => {})
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
-  },
-};    
+  }
+};
 </script>
 
 <style lang="scss" scoped>

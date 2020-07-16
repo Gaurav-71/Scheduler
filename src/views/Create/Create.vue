@@ -51,5 +51,9 @@ export default {
   margin-top: 6rem;
   margin-left: 5rem;
   min-height: calc(100vh - 6rem);
+  @media print {    
+    margin: 0;
+    padding: 0;
+  }
 }
 </style>

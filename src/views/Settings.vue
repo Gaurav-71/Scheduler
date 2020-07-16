@@ -11,7 +11,7 @@
     <div class="card-container">
       <div class="card">
         <div class="title">
-          <img src="../assets/Settings/account.svg" alt />
+          <img src="../assets/Settings/account.svg" alt="settings" />
           <h3>Account Details</h3>
         </div>
         <div class="body">
