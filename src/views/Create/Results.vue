@@ -91,7 +91,6 @@
             <div
               v-else
               class="pill"
-              @click="print()"
             >Download {{$store.state.semester}}{{$store.state.section}} as PDF</div>
           </div>
         </div>

@@ -3,6 +3,8 @@ export default {
   sidebarCounter: 1,
   semester: null,
   section: null,
+  department: '',
+  term: '',
   showProfessorModal: false,
   showCourseModal: false,
   cycle: null,

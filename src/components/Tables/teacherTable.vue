@@ -1,5 +1,9 @@
 <template>
   <div class="student-table">
+    <div class="print-header">
+      <img src="../../assets/Common/rit.png" alt="rit-logo" />
+      <h3>Department of {{$store.state.department}}</h3>
+    </div>
     <div class="details">
       <div>
         <b>Faculty Name :</b> Srinidhi H
@@ -111,6 +115,9 @@ export default {
 @import "../../scss/table";
 .student-table {
   margin-top: 2.5rem;
+  .print-header {
+    display: none;
+  }
   .line {
     width: 100%;
     height: 1px;
@@ -191,14 +198,37 @@ export default {
         color: black;
       }
     }
+    .print-header {
+      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      img {
+        width: 170px;
+      }
+      h3 {
+        margin: 0;
+        font-weight: lighter;
+        margin: 2rem 0;
+        color: black;
+      }
+    }
     table {
+      color: black;
+      tr {
+        th {
+          color: black;
+        }
+      }
       tr:nth-child(1) {
-        background: rgb(21, 127, 135);
+        background: white;
         th {
           color: black;
         }
       }
     }
+    page-break-after: always;
   }
 }
 </style>
