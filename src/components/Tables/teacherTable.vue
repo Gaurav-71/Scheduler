@@ -6,7 +6,7 @@
     </div>
     <div class="details">
       <div>
-        <b>Faculty Name :</b> Srinidhi H
+        <b>Faculty Name :</b>{{teacherObject.detail.Name}} 
       </div>
     </div>
     <table>
@@ -21,78 +21,78 @@
         <th>1:45 - 2:40</th>
         <th>2:40 - 3:30</th>
         <th>3:30 - 4:30</th>
-      </tr>
+      </tr>      
       <tr>
         <th>Monday</th>
+        <td>{{teacherObject.detail.Monday[0]}}</td>
+        <td>{{teacherObject.detail.Monday[1]}}</td>
         <td></td>
+        <td>{{teacherObject.detail.Monday[2]}}</td>
+        <td>{{teacherObject.detail.Monday[3]}}</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{teacherObject.detail.Monday[4]}}</td>
+        <td>{{teacherObject.detail.Monday[5]}}</td>
+        <td>{{teacherObject.detail.Monday[6]}}</td>
       </tr>
       <tr>
         <th>Tuesday</th>
+        <td>{{teacherObject.detail.Tuesday[0]}}</td>
+        <td>{{teacherObject.detail.Tuesday[1]}}</td>
         <td></td>
+        <td>{{teacherObject.detail.Tuesday[2]}}</td>
+        <td>{{teacherObject.detail.Tuesday[3]}}</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{teacherObject.detail.Tuesday[4]}}</td>
+        <td>{{teacherObject.detail.Tuesday[5]}}</td>
+        <td>{{teacherObject.detail.Tuesday[6]}}</td>
       </tr>
       <tr>
         <th>Wednesday</th>
+        <td>{{teacherObject.detail.Wednesday[0]}}</td>
+        <td>{{teacherObject.detail.Wednesday[1]}}</td>
         <td></td>
+        <td>{{teacherObject.detail.Wednesday[2]}}</td>
+        <td>{{teacherObject.detail.Wednesday[3]}}</td>
         <td></td>
-        <td>Break</td>
-        <td></td>
-        <td></td>
-        <td>Break</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{teacherObject.detail.Wednesday[4]}}</td>
+        <td>{{teacherObject.detail.Wednesday[5]}}</td>
+        <td>{{teacherObject.detail.Wednesday[6]}}</td>
       </tr>
       <tr>
         <th>Thursday</th>
+        <td>{{teacherObject.detail.Thursday[0]}}</td>
+        <td>{{teacherObject.detail.Thursday[1]}}</td>
         <td></td>
+        <td>{{teacherObject.detail.Thursday[2]}}</td>
+        <td>{{teacherObject.detail.Thursday[3]}}</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{teacherObject.detail.Thursday[4]}}</td>
+        <td>{{teacherObject.detail.Thursday[5]}}</td>
+        <td>{{teacherObject.detail.Thursday[6]}}</td>
       </tr>
       <tr>
         <th>Friday</th>
+        <td>{{teacherObject.detail.Friday[0]}}</td>
+        <td>{{teacherObject.detail.Friday[1]}}</td>
         <td></td>
+        <td>{{teacherObject.detail.Friday[2]}}</td>
+        <td>{{teacherObject.detail.Friday[3]}}</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{teacherObject.detail.Friday[4]}}</td>
+        <td>{{teacherObject.detail.Friday[5]}}</td>
+        <td>{{teacherObject.detail.Friday[6]}}</td>
       </tr>
       <tr>
         <th>Saturday</th>
+        <td>{{teacherObject.detail.Saturday[0]}}</td>
+        <td>{{teacherObject.detail.Saturday[1]}}</td>
         <td></td>
+        <td>{{teacherObject.detail.Saturday[2]}}</td>
+        <td>{{teacherObject.detail.Saturday[3]}}</td>
         <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{teacherObject.detail.Saturday[4]}}</td>
+        <td>{{teacherObject.detail.Saturday[5]}}</td>
+        <td>{{teacherObject.detail.Saturday[6]}}</td>
       </tr>
     </table>
     <br />
