@@ -358,10 +358,32 @@ export default {
       }
     } 
   },
+  async assignTutorials(context) {
+    if (this.state.cycle == "Odd") {
+      let classNames = [
+        "sec3A",
+        "sec3B",
+        "sec3C",
+        "sec5A",
+        "sec5B",
+        "sec5C",
+        "sec7A",
+        "sec7B",
+      ];
+      for(let i = 0;i<8;i++)
+      {
+        let currentClass = this.state.allOddCycleClasses[classNames[i]];
+      }
+    }
+    else
+    {
+      
+    }
+  },
   async automateTimetable(context) {
     console.log(context);
     await context.dispatch("assignLabs");
-
+    await context.dispatch("assignTutorials");
 
   }
 };
