@@ -214,6 +214,10 @@ export default {
       this.$store.state.section = sec;
     },
     route() {
+
+      let isReadyToAutomate = true;
+
+
       if (this.$store.state.cycle == "Odd") {
         let classNames = [
           "sec3A",
@@ -240,6 +244,7 @@ export default {
               ) { 
                 this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
                 this.error.isVisible = true;
+                isReadyToAutomate = false;
                 break;
               }
             }
@@ -252,14 +257,18 @@ export default {
               { 
                 this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
                 this.error.isVisible = true;
+                isReadyToAutomate = false;
                 break; 
               }
             }
             if (this.error.message.message != "") {
+              isReadyToAutomate = false;
               break;
+              
             }
           }
           if (this.error.message.message != "") {
+              isReadyToAutomate = false;
               break;
           }
         }
@@ -282,10 +291,12 @@ export default {
               ) { 
                 this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
                 this.error.isVisible = true;
+                isReadyToAutomate = false;
                 break;
               }
             }
             if (this.error.message.message != "") {
+              isReadyToAutomate = false;
               break;
             }
             for(let k = 0;k< sectionObject.newProfessor[j];k++)
@@ -294,20 +305,24 @@ export default {
               { 
                 this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
                 this.error.isVisible = true;
+                isReadyToAutomate = false;
                 break; 
               }
             }
             if (this.error.message.message != "") {
+              isReadyToAutomate = false;
               break;
             }
           }
           if (this.error.message.message != "") {
+              isReadyToAutomate = false;
               break;
           }
         }
       }
-
-
+      if( isReadyToAutomate){
+        this.$router.push("/finalResult");
+      }
 
     },
   },
