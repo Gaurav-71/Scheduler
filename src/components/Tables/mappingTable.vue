@@ -131,7 +131,7 @@
             <option value="9:00 AM"></option>
             <option value="11:05 AM"></option>
             <option value="1:45 PM"></option>
-            <option value="2:40 AM"></option>
+            <option value="2:40 PM"></option>
           </datalist>
         </td>
         <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">

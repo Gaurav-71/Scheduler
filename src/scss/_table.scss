@@ -75,4 +75,44 @@ table {
       color: white;
     }
   }
+  @media print {    
+    width: 100%;
+    border-radius: none;
+    overflow: visible ;
+    background: white;
+    color: black;
+    box-shadow: none;    
+    tr {
+      td,
+      th {
+        text-align: center;
+        padding: 0.8rem;
+        font-size: small;
+        font-weight: lighter;  
+        color: black;
+      }      
+      th {
+        font-size: large;
+        font-weight: bold;
+        color: black;
+        padding: 1.3rem;        
+      }
+    }
+    tr:nth-child(odd) {
+      background: white;    
+      color: black;  
+    }
+    tr:nth-child(1) {
+      background: white;   
+      color: black;         
+      th {
+        color: black;        
+      }
+    }
+    table, th, td {      
+      border: 1px solid black;
+      border-collapse : collapse;
+      color: black;
+    }
+  }
 }
