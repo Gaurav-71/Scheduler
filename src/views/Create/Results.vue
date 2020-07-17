@@ -230,12 +230,15 @@
           </div>
         </div>
       </div>
-      <div v-else >
+      <div v-else-if="type == 2" >
         <div v-for="(professor,index) in this.$store.state.professorList" :key="index">
           <teacherTable 
           :teacherObject=professor
           />
         </div> 
+      </div>
+      <div v-else>
+        FFFFFFFFFFFFFFFFFFFFF
       </div>
     </div>
     <div v-if="$store.state.semester == 0 || $store.state.section != null" class="actions">
@@ -256,7 +259,7 @@ export default {
   },
   data() {
     return {
-      type: 1
+      type: null
     };
   },
   methods: {

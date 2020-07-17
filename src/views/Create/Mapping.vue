@@ -197,7 +197,7 @@ export default {
 
       //put this stuff after validation
       this.$router.push("/timetable/result");
-      this.$store.state.semester = 0;
+      this.$store.state.semester = null;
       this.$store.state.section = null;
       /*
       if (this.$store.state.cycle == "Odd") {

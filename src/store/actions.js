@@ -157,6 +157,8 @@ export default {
       for (let i = 0; i < 8; i++) {
         this.state.allOddCycleClasses[classNames[i]] = {
           newProfessor: [],
+          Semester: classNames[i].charAt(3),
+          Section: classNames[i].charAt(4),
           Monday: ["", "", "", "", "", "", ""],
           Tuesday: ["", "", "", "", "", "", ""],
           Wednesday: ["", "", "", "", "", "", ""],
@@ -229,6 +231,8 @@ export default {
       for (let i = 0; i < 8; i++) {
         this.state.allEvenCycleClasses[classNames[i]] = {
           newProfessor: [],
+          Semester: classNames[i].charAt(3),
+          Section: classNames[i].charAt(4),
           Monday: ["", "", "", "", "", "", ""],
           Tuesday: ["", "", "", "", "", "", ""],
           Wednesday: ["", "", "", "", "", "", ""],
@@ -328,17 +332,17 @@ export default {
               sub.detail.LabSchedule.Time
             );
             console.log(x + " " + sub.detail.Name);
-            currentClass[sub.detail.LabSchedule.Day][x] = sub.detail.Name;
-            currentClass[sub.detail.LabSchedule.Day][x + 1] = sub.detail.Name;
+            currentClass[sub.detail.LabSchedule.Day][x] = sub.detail.Abbreviation+ " " + sub.detail.LabSchedule.LabNumber;
+            currentClass[sub.detail.LabSchedule.Day][x + 1] = sub.detail.Abbreviation+ " " + sub.detail.LabSchedule.LabNumber;
             for (let j = 0; j < currentClass.newProfessor[i]; j++) {
               let professor = await context.dispatch(
                 "getProfessorObject",
                 sub.detail.Professors[j]
               );
               professor.detail[sub.detail.LabSchedule.Day][x] =
-                sub.detail.Name + " " + classNames[k].substring(3);
+                sub.detail.Abbreviation + " " + classNames[k].substring(3)+ " " + sub.detail.LabSchedule.LabNumber;
               professor.detail[sub.detail.LabSchedule.Day][x + 1] =
-                sub.detail.Name + " " + classNames[k].substring(3);
+                sub.detail.Abbreviation + " " + classNames[k].substring(3)+ " " + sub.detail.LabSchedule.LabNumber;
             }
           }
         }
@@ -354,17 +358,17 @@ export default {
               "getLabHour",
               sub.detail.LabSchedule.Time
             );
-            currentClass[sub.detail.LabSchedule.Day][x] = sub.detail.Name;
-            currentClass[sub.detail.LabSchedule.Day][x + 1] = sub.detail.Name;
+            currentClass[sub.detail.LabSchedule.Day][x] = sub.detail.Abbreviation + " " + sub.detail.LabSchedule.LabNumber;
+            currentClass[sub.detail.LabSchedule.Day][x + 1] = sub.detail.Abbreviation + " " + sub.detail.LabSchedule.LabNumber;
             for (let j = 0; j < currentClass.newProfessor[i]; j++) {
               let professor = await context.dispatch(
                 "getProfessorObject",
                 sub.detail.Professors[j]
               );
               professor.detail[sub.detail.LabSchedule.Day][x] =
-                sub.detail.Name + " " + classNames[k].substring(3);
+                sub.detail.Abbreviation + " " + classNames[k].substring(3) + " " + sub.detail.LabSchedule.LabNumber;
               professor.detail[sub.detail.LabSchedule.Day][x + 1] =
-                sub.detail.Name + " " + classNames[k].substring(3);
+                sub.detail.Abbreviation + " " + classNames[k].substring(3) + " " + sub.detail.LabSchedule.LabNumber;
             }
           }
         }
@@ -417,17 +421,17 @@ export default {
                   allProfessorsFree && professor.detail[x.day][x.hour] == "";
               }
               if (currentClassFree && allProfessorsFree) {
-                currentClass[x.day][x.hour] = sub.detail.Name;
-                currentClass[x.day][x.hour + 1] = sub.detail.Name;
+                currentClass[x.day][x.hour] = sub.detail.Abbreviation;
+                currentClass[x.day][x.hour + 1] = sub.detail.Abbreviation;
                 for (let j = 0; j < currentClass.newProfessor[i]; j++) {
                   let professor = await context.dispatch(
                     "getProfessorObject",
                     sub.detail.Professors[j]
                   );
                   professor.detail[x.day][x.hour] =
-                    sub.detail.Name + " " + classNames[k].substring(3);
+                    sub.detail.Abbreviation + " " + classNames[k].substring(3);
                   professor.detail[x.day][x.hour + 1] =
-                    sub.detail.Name + " " + classNames[k].substring(3);
+                    sub.detail.Abbreviation + " " + classNames[k].substring(3);
                 }
                 console.log(x + " true");
                 break;
@@ -459,17 +463,17 @@ export default {
                   allProfessorsFree && professor.detail[x.day][x.hour] == "";
               }
               if (allProfessorsFree) {
-                currentClass[x.day][x.hour] = sub.detail.Name;
-                currentClass[x.day][x.hour + 1] = sub.detail.Name;
+                currentClass[x.day][x.hour] = sub.detail.Abbreviation;
+                currentClass[x.day][x.hour + 1] = sub.detail.Abbreviation;
                 for (let j = 0; j < currentClass.newProfessor[i]; j++) {
                   let professor = await context.dispatch(
                     "getProfessorObject",
                     sub.detail.Professors[j]
                   );
                   professor.detail[x.day][x.hour] =
-                    sub.detail.Name + " " + classNames[k].substring(3);
+                    sub.detail.Abbreviation + " " + classNames[k].substring(3);
                   professor.detail[x.day][x.hour + 1] =
-                    sub.detail.Name + " " + classNames[k].substring(3);
+                    sub.detail.Abbreviation + " " + classNames[k].substring(3);
                 }
                 break;
               } else {

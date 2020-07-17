@@ -6,13 +6,13 @@
     </div>
     <div class="details">
       <div>
-        <b>Semester :</b> IV
+        <b>Semester :</b> {{sectionObject.Semester}}
       </div>
       <div>
-        <b>Section :</b> A
+        <b>Section :</b> {{sectionObject.Section}}
       </div>
       <div>
-        <b>Room No. :</b> LHC-303
+        <b>Room No. :</b> {{sectionObject.roomNumber}}
       </div>
       <div>
         <b>Term :</b>
@@ -121,7 +121,7 @@
         <td>{{subject.detail.Code}}</td>
         <td>{{subject.detail.Name}}</td>
         <td>{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
-        <td>{{subject.detail.Type}}</td>
+        <td>{{subject.detail.Abbreviation}}</td>
         <td>{{subject.detail.Professors[0]}}</td>
       </tr>
       

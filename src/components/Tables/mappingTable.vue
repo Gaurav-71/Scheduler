@@ -154,7 +154,6 @@
           <input
             type="text"
             placeholder="Enter Lab Name"
-            list="allProfessors"
             v-model="sectionObject.subjects[index].detail.LabSchedule.LabNumber"
           />
         </td>

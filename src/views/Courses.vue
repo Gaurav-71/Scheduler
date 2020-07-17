@@ -67,7 +67,7 @@
               <h4>
                 {{ course.detail.Code }} | {{ course.detail.Credits.Theory }}:{{
                   course.detail.Credits.Tutorial
-                }}:{{ course.detail.Credits.Lab }} | {{ course.detail.Type }}
+                }}:{{ course.detail.Credits.Lab }} | {{ course.detail.Abbreviation }}
               </h4>
             </div>
           </div>
@@ -122,18 +122,13 @@
                   <option value="7"></option>
                   <option value="8"></option>
                 </datalist>
-                <label for="type">Type:</label>
+                <label for="type">Abbreviation:</label>
                 <input
-                  list="type"
-                  name="type"
-                  v-model="type"
+                  list="text"
+                  name="abbreviation"
+                  v-model="abbreviation"
                   style="width: 5rem"
                 />
-                <datalist id="type">
-                  <option value="Theory"></option>
-                  <option value="Lab"></option>
-                  <option value="Other"></option>
-                </datalist>
               </div>
               <div class="row">
                 <label for="lecture">Credits : L:</label>
@@ -194,7 +189,7 @@ export default {
       unsubscribe: null,
       name: "",
       code: "",
-      type: "",
+      abbreviation: "",
       semester: 0,
       theoryCredits: 0,
       tutorialCredits: 0,
@@ -236,7 +231,7 @@ export default {
       course.isEditing = true;
       this.name = course.detail.Name;
       this.code = course.detail.Code;
-      this.type = course.detail.Type;
+      this.abbreviation = course.detail.Abbreviation;
       this.semester = course.detail.Semester;
       this.theoryCredits = course.detail.Credits.Theory;
       this.tutorialCredits = course.detail.Credits.Tutorial;
@@ -253,14 +248,14 @@ export default {
           Tutorial: this.tutorialCredits,
           Lab: this.labCredits,
         },
-        Type: this.type,
+        Abbreviation: this.abbreviation,
       };
       this.$store
         .dispatch("updateCourseDetails", data)
         .then(() => {
           this.name = "";
           this.code = "";
-          this.type = "";
+          this.abbreviation = "";
           this.semester = 0;
           this.theoryCredits = 0;
           this.tutorialCredits = 0;
