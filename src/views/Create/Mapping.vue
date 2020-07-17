@@ -193,7 +193,7 @@ export default {
     route() {
 
       let isReadyToAutomate = true;
-
+      console.log(isReadyToAutomate);
 
       //put this stuff after validation
       this.$router.push("/timetable/result");
