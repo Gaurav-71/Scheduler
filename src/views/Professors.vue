@@ -1,5 +1,6 @@
 <template>
   <div class="professors">
+    <Heading :obj="headingObj" />
     <div class="container">
       <div class="search-bar">
         <input type="search" placeholder="Search Professors" v-model="search" />
@@ -15,8 +16,8 @@
       </div>
       <div class="results">
         <div v-for="(professor, index) in searchProfessors" :key="index">
-          <div v-if="!professor.isEditing" class="card">
-            <div class="card-container">
+          <div v-if="!professor.isEditing" class="card-container">
+            <div class="card">
               <img
                 src="../assets/Professors/male.svg"
                 alt="male"
@@ -52,8 +53,8 @@
               />
             </div>
           </div>
-          <div v-else class="card">
-            <div class="card-container">
+          <div v-else class="card-container">
+            <div class="card">
               <img src="../assets/Common/edit.svg" alt="edit-mode" />
               <div class="details-edit">
                 <input type="text" v-model="name" />
@@ -62,29 +63,11 @@
             </div>
             <div class="actions-edit">
               <form>
-                <input
-                  type="radio"
-                  id="male"
-                  name="gender"
-                  value="M"
-                  v-model="gender"
-                />
+                <input type="radio" id="male" name="gender" value="M" v-model="gender" />
                 <label for="male">Male</label>
-                <input
-                  type="radio"
-                  id="female"
-                  name="gender"
-                  value="F"
-                  v-model="gender"
-                />
+                <input type="radio" id="female" name="gender" value="F" v-model="gender" />
                 <label for="female">Female</label>
-                <input
-                  type="radio"
-                  id="other"
-                  name="gender"
-                  value="O"
-                  v-model="gender"
-                />
+                <input type="radio" id="other" name="gender" value="O" v-model="gender" />
                 <label for="other">Other</label>
               </form>
               <img
@@ -109,17 +92,26 @@
 
 <script>
 import AddProfessor from "../components/Modals/AddProfessor.vue";
+import Heading from "../components/Design/Heading";
+
 export default {
   components: {
     AddProfessor,
-  }, 
+    Heading
+  },
   data() {
     return {
+      headingObj: {
+        h1: "Professors",
+        h4:
+          "A list of all professors in the department. Add, Modify or Delete a professor at will",
+        src: "professors.svg"
+      },
       search: "",
       unsubscribe: null,
       name: "",
       designation: "",
-      gender: "",
+      gender: ""
     };
   },
   created() {
@@ -131,7 +123,7 @@ export default {
       this.$store
         .dispatch("removeProfessor", id)
         .then(() => {})
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
@@ -146,7 +138,7 @@ export default {
         id: professor.id,
         Name: this.name,
         Designation: this.designation,
-        Gender: this.gender,
+        Gender: this.gender
       };
       this.$store
         .dispatch("updateProfessorBio", data)
@@ -156,26 +148,26 @@ export default {
           this.gender = "";
           professor.isEditing = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
-    },
+    }
   },
   computed: {
     searchProfessors: function() {
-      return this.$store.getters.getProfessorList.filter((professor) => {
+      return this.$store.getters.getProfessorList.filter(professor => {
         let professorLowerCase = professor.detail.Name.toLowerCase();
         return professorLowerCase.match(this.search.toLowerCase());
       });
-    },
+    }
   },
   mounted() {
     this.$store
       .dispatch("loadProfessorList")
-      .then((resp) => {
+      .then(resp => {
         this.unsubscribe = resp;
       })
-      .catch((err) => {
+      .catch(err => {
         alert(err);
       });
   },
@@ -188,32 +180,40 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/searchBar";
-
 .professors {
   margin-top: 4.5rem;
   margin-left: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
   .results {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     overflow-y: scroll;
-    .card {
+    .card-container {
       width: 20rem;
+      height: 12rem;
+      overflow: hidden;
       margin: 0.8rem;
+      display: grid;
+      grid-template-rows: 75% 25%;
       background: white;
       border: 1px solid lightgray;
       border-radius: 1rem;
       cursor: default;
-      .card-container {
+      .card {
         display: flex;
+        justify-content: flex-start;
+        align-items: center;
         padding: 1.5rem;
-        padding-bottom: 1.1rem;
         img {
           width: 80px;
           height: 80px;
         }
         .details {
-          padding: 1.4rem 0 0 1rem;
+          padding: 0 1rem;
           h3,
           h5 {
             padding: 0;
@@ -233,7 +233,6 @@ export default {
       .actions-edit {
         display: flex;
         justify-content: flex-end;
-        // background: $primary-light;
         background-image: $gradient;
         padding: 0.6rem;
         border-bottom-left-radius: 0.9rem;
@@ -273,7 +272,7 @@ export default {
         }
       }
     }
-    .card:hover {
+    .card-container:hover {
       border: 1px solid gray;
     }
   }

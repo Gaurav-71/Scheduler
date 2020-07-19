@@ -1,9 +1,9 @@
 <template>
   <div class="student-table">
     <div class="print-header">
-      <img src="../../assets/Common/rit.png" alt="rit-logo" />
+      <img v-if="!$store.state.isDownloading" src="../../assets/Common/rit.png" alt="rit-logo" />
       <h3>Department of {{$store.state.department}}</h3>
-    </div>
+    </div> 
     <div class="details">
       <div>
         <b>Semester :</b> IV
@@ -19,112 +19,244 @@
         {{$store.state.term}}
       </div>
     </div>
-    <table>
+    <table
+      v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;' "
+    >
       <tr>
-        <th></th>
-        <th>9:00 - 9:55</th>
-        <th>9:55 - 10:50</th>
-        <th></th>
-        <th>11:05 - 12:00</th>
-        <th>12:00 - 12:45</th>
-        <th></th>
-        <th>1:45 - 2:40</th>
-        <th>2:40 - 3:30</th>
-        <th>3:30 - 4:30</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        ></th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >9:00 - 9:55</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >9:55 - 10:50</th>
+        <th class="break top"></th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >11:05 - 12:00</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >12:00 - 12:45</th>
+        <th class="break top"></th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >1:45 - 2:40</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >2:40 - 3:30</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >3:30 - 4:30</th>
       </tr>
       <tr>
-        <th>Monday</th>
-        <td>{{sectionObject.Monday[0]}}</td>
-        <td>{{sectionObject.Monday[1]}}</td>
-        <td></td>
-        <td>{{sectionObject.Monday[2]}}</td>
-        <td>{{sectionObject.Monday[3]}}</td>
-        <td></td>
-        <td>{{sectionObject.Monday[4]}}</td>
-        <td>{{sectionObject.Monday[5]}}</td>
-        <td>{{sectionObject.Monday[6]}}</td>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Monday</th>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Monday[0]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Monday[1]}}</td>
+        <td class="break"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Monday[2]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Monday[3]}}</td>
+        <td class="break"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Monday[4]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Monday[5]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Monday[6]}}</td>
       </tr>
       <tr>
-        <th>Tuesday</th>
-        <td>{{sectionObject.Tuesday[0]}}</td>
-        <td>{{sectionObject.Tuesday[1]}}</td>
-        <td></td>
-        <td>{{sectionObject.Tuesday[2]}}</td>
-        <td>{{sectionObject.Tuesday[3]}}</td>
-        <td></td>
-        <td>{{sectionObject.Tuesday[4]}}</td>
-        <td>{{sectionObject.Tuesday[5]}}</td>
-        <td>{{sectionObject.Tuesday[6]}}</td>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Tuesday</th>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Tuesday[0]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Tuesday[1]}}</td>
+        <td class="break"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Tuesday[2]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Tuesday[3]}}</td>
+        <td class="break"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Tuesday[4]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Tuesday[5]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Tuesday[6]}}</td>
       </tr>
       <tr>
-        <th>Wednesday</th>
-        <td>{{sectionObject.Wednesday[0]}}</td>
-        <td>{{sectionObject.Wednesday[1]}}</td>
-        <td></td>
-        <td>{{sectionObject.Wednesday[2]}}</td>
-        <td>{{sectionObject.Wednesday[3]}}</td>
-        <td></td>
-        <td>{{sectionObject.Wednesday[4]}}</td>
-        <td>{{sectionObject.Wednesday[5]}}</td>
-        <td>{{sectionObject.Wednesday[6]}}</td>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Wednesday</th>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Wednesday[0]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Wednesday[1]}}</td>
+        <td class="break">Break</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Wednesday[2]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Wednesday[3]}}</td>
+        <td class="break">Break</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Wednesday[4]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Wednesday[5]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Wednesday[6]}}</td>
       </tr>
       <tr>
-        <th>Thursday</th>
-        <td>{{sectionObject.Thursday[0]}}</td>
-        <td>{{sectionObject.Thursday[1]}}</td>
-        <td></td>
-        <td>{{sectionObject.Thursday[2]}}</td>
-        <td>{{sectionObject.Thursday[3]}}</td>
-        <td></td>
-        <td>{{sectionObject.Thursday[4]}}</td>
-        <td>{{sectionObject.Thursday[5]}}</td>
-        <td>{{sectionObject.Thursday[6]}}</td>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Thursday</th>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Thursday[0]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Thursday[1]}}</td>
+        <td class="break"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Thursday[2]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Thursday[3]}}</td>
+        <td class="break"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Thursday[4]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Thursday[5]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Thursday[6]}}</td>
       </tr>
       <tr>
-        <th>Friday</th>
-        <td>{{sectionObject.Friday[0]}}</td>
-        <td>{{sectionObject.Friday[1]}}</td>
-        <td></td>
-        <td>{{sectionObject.Friday[2]}}</td>
-        <td>{{sectionObject.Friday[3]}}</td>
-        <td></td>
-        <td>{{sectionObject.Friday[4]}}</td>
-        <td>{{sectionObject.Friday[5]}}</td>
-        <td>{{sectionObject.Friday[6]}}</td>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Friday</th>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Friday[0]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Friday[1]}}</td>
+        <td class="break"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Friday[2]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Friday[3]}}</td>
+        <td class="break"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Friday[4]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Friday[5]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Friday[6]}}</td>
       </tr>
       <tr>
-        <th>Saturday</th>
-        <td>{{sectionObject.Saturday[0]}}</td>
-        <td>{{sectionObject.Saturday[1]}}</td>
-        <td></td>
-        <td>{{sectionObject.Saturday[2]}}</td>
-        <td>{{sectionObject.Saturday[3]}}</td>
-        <td></td>
-        <td>{{sectionObject.Saturday[4]}}</td>
-        <td>{{sectionObject.Saturday[5]}}</td>
-        <td>{{sectionObject.Saturday[6]}}</td>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Saturday</th>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Saturday[0]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Saturday[1]}}</td>
+        <td class="break bottom"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Saturday[2]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Saturday[3]}}</td>
+        <td class="break bottom"></td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Saturday[4]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Saturday[5]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.Saturday[6]}}</td>
       </tr>
     </table>
     <br />
     <br />
-    <table>
-    </table>
+    <table></table>
     <table>
       <tr>
-        <th>Subject Code</th>
-        <th>Subject Name</th>
-        <th>Credits</th>
-        <th>Abbreviation</th>
-        <th>Staff</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Subject Code</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Subject Name</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Credits</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Abbreviation</th>
+        <th
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Staff</th>
       </tr>
       <tr v-for="(subject,index) in sectionObject.subjects" :key="index">
-        <td>{{subject.detail.Code}}</td>
-        <td>{{subject.detail.Name}}</td>
-        <td>{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
-        <td>{{subject.detail.Type}}</td>
-        <td>{{subject.detail.Professors[0]}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Code}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Name}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Type}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Professors[0]}}</td>
       </tr>
-      
     </table>
     <div class="line" v-if="!hideline"></div>
   </div>
@@ -137,6 +269,13 @@ export default {
       type: Object
     },
     hideline: Boolean
+  },
+  data() {
+    return {
+      styleObject: {
+        border: "1px solid black"
+      }
+    };
   }
 };
 </script>
@@ -154,6 +293,10 @@ export default {
     height: 1px;
     background: gray;
     margin: 3rem 0;
+  }
+  .printborders {
+    border: 1px solid black;
+    border-collapse: collapse;
   }
   .details {
     margin-bottom: 1rem;
@@ -251,6 +394,9 @@ export default {
       tr {
         th {
           color: black;
+        }
+        .break {
+          border: none;
         }
       }
       tr:nth-child(1) {

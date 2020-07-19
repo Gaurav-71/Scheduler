@@ -1,8 +1,8 @@
 <template>
   <div class="mapping-table">
     <div class="heading">
-      <h1>Teacher Mapping</h1>
-      <h4>Map the subjects of the respective semester to the respective professors and lets you add custom timings for labs and tutorials</h4>
+      <h1>Professor Mapping</h1>
+      <h4>Map the subjects of the respective semester to the respective professors</h4>
     </div>
     <table>
       <tr>
@@ -19,7 +19,10 @@
           courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
         </td>
-        <td v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0" class="data-input">
+        <td
+          v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0"
+          class="data-input"
+        >
           <div class="custom-input">
             <input
               type="text"
@@ -89,7 +92,12 @@
         </td>
         <td v-else class="data-input">
           <div class="custom-input">
-            <input type="text" placeholder="Select Professor" list="allProfessors" v-model="sectionObject.subjects[index].detail.Professors[0]"/>
+            <input
+              type="text"
+              placeholder="Select Professor"
+              list="allProfessors"
+              v-model="sectionObject.subjects[index].detail.Professors[0]"
+            />
             <datalist id="allProfessors"></datalist>
             <div class="block"></div>
           </div>
@@ -102,7 +110,12 @@
         <h1>Classroom</h1>
         <h4>Enter the classroom name where you want to accomodate students of class {{$store.state.semester}}{{$store.state.section}}</h4>
       </div>
-      <input type="text" placeholder="Enter classroom" class="classroom" v-model="sectionObject.roomNumber"/>
+      <input
+        type="text"
+        placeholder="Enter classroom"
+        class="classroom"
+        v-model="sectionObject.roomNumber"
+      />
     </div>
     <br />
     <div class="heading">
@@ -197,7 +210,7 @@ export default {
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
     let list = document.getElementById("allProfessors");
-    
+
     professorNames.forEach(function(item) {
       var option = document.createElement("option");
       option.value = item;
@@ -217,6 +230,34 @@ export default {
       margin: 0.5rem;
       padding: 0;
       font-weight: lighter;
+    }
+    h1{
+      color: $primary;
+    }
+    h4{
+      color: black;
+    }
+  }
+  table{
+    @include ipad-portrait {
+      tr {        
+        td,
+        th {
+          text-align: left;
+          padding: 0.5rem;
+          font-size: small;
+          font-weight: lighter;
+        }
+        th {
+          text-align: center;
+          font-size: medium;
+          font-weight: lighter;          
+          padding: 1rem;
+        }
+        .course-name{
+          padding-left: 1rem;
+        }
+      }      
     }
   }
   .classroom {

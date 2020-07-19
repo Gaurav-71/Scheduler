@@ -11,6 +11,7 @@ export default {
   isLoggedIn: false,
   isLoggingIn: true,
   postSubscription: null,
+  isDownloading: false,
   user: JSON.parse(localStorage.getItem("loggedUser")),
   currentUser: localStorage.getItem("currentUser"),
   createRouteTracker: localStorage.getItem("createRouteTracker"),

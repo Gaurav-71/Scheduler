@@ -49,7 +49,6 @@ export default {
 @import "../../scss/mediaQuery";
 
 .type {
-  margin-top: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;

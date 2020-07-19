@@ -2,10 +2,10 @@
 @import "../scss/mediaQuery";
 
 .container {
-  height: calc(100vh - 8.5rem);
-  margin: 4rem;
+  width: 90%;
+  height: calc(100vh - 4.5rem);
   display: grid;
-  grid-template-rows: 20% 80%;
+  grid-template-rows: 15% 85%;
   .search-bar {
     display: flex;
     justify-content: space-between;

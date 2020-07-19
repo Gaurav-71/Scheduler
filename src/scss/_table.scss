@@ -75,44 +75,55 @@ table {
       color: white;
     }
   }
-  @media print {    
+  @media print {
     width: 100%;
     border-radius: none;
-    overflow: visible ;
+    overflow: visible;
     background: white;
     color: black;
-    box-shadow: none;    
+    box-shadow: none;
     tr {
       td,
       th {
         text-align: center;
         padding: 0.8rem;
         font-size: small;
-        font-weight: lighter;  
+        font-weight: lighter;
         color: black;
-      }      
+      }
       th {
         font-size: large;
         font-weight: bold;
         color: black;
-        padding: 1.3rem;        
+        padding: 1.3rem;
       }
     }
     tr:nth-child(odd) {
-      background: white;    
-      color: black;  
+      background: white;
+      color: black;
     }
     tr:nth-child(1) {
-      background: white;   
-      color: black;         
+      background: white;
+      color: black;
       th {
-        color: black;        
+        color: black;
       }
     }
-    table, th, td {      
-      border: 1px solid black;
-      border-collapse : collapse;
+    table,
+    th,
+    td {
+      border: 1px solid black !important;
+      border-collapse: collapse;
       color: black;
+    }
+    .break {
+      border: none !important;
+    }
+    .top {
+      border-top: 1px solid black !important;
+    }
+    .bottom {
+      border-bottom: 1px solid black !important;
     }
   }
 }

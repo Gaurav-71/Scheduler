@@ -1,13 +1,6 @@
 <template>
   <div class="settings">
-    <div class="heading-container">
-      <img src="../assets/Settings/settings.svg" alt />
-      <div class="heading">
-        <h1>Settings</h1>
-        <h4>Modify account details and manage your data & privacy</h4>
-      </div>
-    </div>
-    <div class="line"></div>
+    <Heading :obj="headingObj" />
     <div class="card-container">
       <div class="card">
         <div class="title">
@@ -75,7 +68,9 @@
           <h3>User Privacy</h3>
         </div>
         <div class="body">
-          <p style="line-height: 1.15;">Privacy is built in from the beginning. Our products and features include innovative privacy technologies and techniques designed to minimise how much of your data we — or anyone else — can access. And powerful security features help prevent anyone except you from being able to access your information.</p>
+          <p
+            style="line-height: 1.15;"
+          >Privacy is built in from the beginning. Our products and features include innovative privacy technologies and techniques designed to minimise how much of your data we — or anyone else — can access. And powerful security features help prevent anyone except you from being able to access your information.</p>
           <div class="line" style="margin: 1rem 0;"></div>
           <div class="btn-container">
             <div class="btn" @click="route">Delete Account</div>
@@ -87,9 +82,19 @@
 </template>
 
 <script>
+import Heading from "../components/Design/Heading";
+
 export default {
+  components: {
+    Heading
+  },
   data() {
     return {
+      headingObj: {
+        h1: "Settings",
+        h4: "Modify account details and manage your data & privacy",
+        src: "settings.svg"
+      },
       name: "Aravind Ramesh Shreyas ",
       email: "halalcut@shreyas.com",
       isEditingName: false
@@ -110,41 +115,23 @@ export default {
 <style lang="scss" scoped>
 @import "../scss/colors";
 .settings {
-  margin-top: 5rem;
+  margin-top: 4.5rem;
   margin-left: 5rem;
-  min-height: calc(100vh - 5rem);
-  padding: 0 1rem;
-  .heading-container {
-    height: 100%;
-    width: 100%;
-    padding: 0.7rem 0 1rem 1rem;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    img {
-      width: 60px;
-      margin-right: 0.5rem;
-    }
-    .heading {
-      h1,
-      h4 {
-        margin: 0.5rem;
-        padding: 0;
-        font-weight: lighter;
-      }
-    }
-  }
-  .line {
-    width: 100%;
-    height: 1px;
-    background: gray;
-    //background-image: $gradient;
-    margin: 0 0 1rem 0;
-  }
+  min-height: calc(100vh - 4.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
   .card-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    .line {
+      width: 100%;
+      height: 1px;
+      background: gray;
+      margin: 0 0 1rem 0;
+    }
     .card {
       width: 23rem;
       height: 23rem;

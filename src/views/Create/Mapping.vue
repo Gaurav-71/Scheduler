@@ -123,7 +123,7 @@
         <table>
           <tr>
             <th>
-              <h1 style="margin:0;font-weight:lighter;">Mapping : Courses & Professors</h1>
+              <h1 style="margin:0;font-weight:lighter;">Mapping : Professors & Labs</h1>
             </th>
           </tr>
           <tr>
@@ -193,7 +193,7 @@ export default {
     route() {
       //put this stuff after validation
       this.$router.push("/timetable/result");
-      this.$store.state.semester = 0;
+      this.$store.state.semester = null;
       this.$store.state.section = null;
       /*
       if (this.$store.state.cycle == "Odd") {

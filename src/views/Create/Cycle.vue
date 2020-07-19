@@ -18,7 +18,12 @@
         <label for="even">Even Cycle (4/6/8)</label>
       </form>
       <form class="dept-term">
-        <input type="text" class="dept" placeholder="Enter Department" v-model="$store.state.department" />
+        <input
+          type="text"
+          class="dept"
+          placeholder="Enter Department"
+          v-model="$store.state.department"
+        />
         <input type="text" class="term" placeholder="Enter Term" v-model="$store.state.term" />
       </form>
     </div>
@@ -50,7 +55,6 @@ export default {
 @import "../../scss/mediaQuery";
 
 .cycle {
-  margin-top: 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
