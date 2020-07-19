@@ -448,7 +448,7 @@ export default {
     } 
     else {
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
-      for (let k = 0; k < 1; k++) {
+      for (let k = 0; k < 3; k++) {
         let currentClass = this.state.allEvenCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
