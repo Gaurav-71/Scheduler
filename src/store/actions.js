@@ -538,7 +538,7 @@ export default {
         for(let i = 0;i<subjectStack.length;i++)
         {
           let subNumber = subjectStack[i];
-          console.log(subNumber);
+          console.log(i);
           for(let hour=0;hour<7;hour++)
           {   let toBreak = false;
               for(let day= 0;day<5;day++)
@@ -546,7 +546,7 @@ export default {
                 let professor = await context.dispatch("getProfessorObject",currentClass.subjects[subNumber].detail.Professors[0]);
                 console.log(x);
                 console.log(professor);
-                if(professor.detail[x][hour] == "" && currentClass.subjects[subNumber].detail.isDayDone[day] == false)
+                if(professor.detail[x][hour] == "" && currentClass.subjects[subNumber].detail.isDayDone[day] == false && currentClass[x][hour]=="")
                 {
                   currentClass.subjects[subNumber].detail.isDayDone[day] = true;
                   currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
