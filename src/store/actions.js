@@ -141,7 +141,7 @@ export default {
     }
   },
   async assignSectionDetails(context) {
-    console.log(context);
+    console.log("assignSectionDetails' context- "+ context);
     if (this.state.cycle == "Odd") {
       let semester = [3, 3, 3, 5, 5, 5, 7, 7];
       let classNames = [
@@ -296,21 +296,21 @@ export default {
     }
   },
   async getProfessorObject(context, name) {
-    console.log(context);
+    console.log("getProfessorObject's context- "+ context);
     for (let i = 0; i < this.state.professorList.length; i++) {
       if (name == this.state.professorList[i].detail.Name)
         return this.state.professorList[i];
     }
   },
   async getLabHour(context, labHour) {
-    console.log(context);
+    console.log("getLabHour's context- "+ context);
     if (labHour == "9:00 AM") return 0;
     else if (labHour == "11:05 AM") return 2;
     else if (labHour == "1:45 PM") return 4;
     else if (labHour == "2:40 PM") return 5;
   },
   async assignLabs(context) {
-    console.log(context);
+    console.log("assignLabs' context- "+ context);
     if (this.state.cycle == "Odd") {
       let classNames = [
         "sec3A",
@@ -376,7 +376,8 @@ export default {
       }
     }
   },
-  async getRandomDayHour() {
+  async getRandomDayHour(context) {
+    console.log("getRandomDayHour's context- "+ context);
     let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
     let day = Days[Math.floor(Math.random() * Days.length)];
     let Hours = [0, 2, 4, 5];
@@ -384,6 +385,7 @@ export default {
     return { day: day, hour: hour };
   },
   async assignTutorials(context) {
+    console.log("assignTutorials' context - "+context);
     if (this.state.cycle == "Odd") {
       let classNames = [
         "sec3A",
@@ -435,10 +437,8 @@ export default {
                   professor.detail[x.day][x.hour + 1] =
                     sub.detail.Abbreviation + " " + classNames[k].substring(3) + " Tutorial";
                 }
-                console.log(x + " true");
                 break;
               } else {
-                console.log(x + " false");
                 x = await context.dispatch("getRandomDayHour");
               }
             }
@@ -448,7 +448,7 @@ export default {
     } 
     else {
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
-      for (let k = 0; k < 1; k++) {
+      for (let k = 0; k < 3; k++) {
         let currentClass = this.state.allEvenCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -501,14 +501,14 @@ export default {
     }
   },
   async shuffleArray(context,array) {
-    console.log(context);
+    console.log("shuffleArray's context- "+ context);
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
   },
   async getDay(context,day){
-    console.log(context);
+    console.log("getDay's context- "+ context);
     let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
     return Days[day];
   },
@@ -533,6 +533,8 @@ export default {
             subjectStack.push(i);
         }
         await context.dispatch("shuffleArray",subjectStack);
+        
+        //Approach 3
         for(let i = 0;i<subjectStack.length;i++)
         {
           let subNumber = subjectStack[i];
@@ -557,6 +559,8 @@ export default {
                 break;
           }
         }
+
+        //Approach 2
         /*for(let day= 0;day<5;day++)
         {   
           let x = await context.dispatch("getDay",day);
@@ -590,6 +594,7 @@ export default {
             }
           }
         }*/
+            //Approach 1
             /*
             for(let day = 0;day < 5;day++)
             {
@@ -628,7 +633,7 @@ export default {
     }
   },
   async automateTimetable(context) {
-    console.log(context);
+    console.log("automateTimeTable's context- "+ context);
     await context.dispatch("assignLabs");
     await context.dispatch("assignTutorials");
     await context.dispatch("assignClasses");
