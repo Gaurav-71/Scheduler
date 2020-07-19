@@ -533,26 +533,63 @@ export default {
             subjectStack.push(i);
         }
         await context.dispatch("shuffleArray",subjectStack);
-        while(subjectStack.length>0)
-        {   
-            for(let hour=0;hour<7;hour++)
-            {   
+        for(let i = 0;i<subjectStack.length;i++)
+        {
+          let subNumber = subjectStack[i];
+          console.log(subNumber);
+          for(let hour=0;hour<7;hour++)
+          {   let toBreak = false;
               for(let day= 0;day<5;day++)
               { let x = await context.dispatch("getDay",day);
-                if(currentClass[x][hour] == "")
+                let professor = await context.dispatch("getProfessorObject",currentClass.subjects[subNumber].detail.Professors[0]);
+                console.log(x);
+                console.log(professor);
+                if(professor.detail[x][hour] == "" && currentClass.subjects[subNumber].detail.isDayDone[day] == false)
                 {
-                  let subNumber = subjectStack[subjectStack.length-1];
-                  let professor = await context.dispatch("getProfessorObject",currentClass.subjects[subNumber].detail.Professors[0]);
-                  if(professor.detail[x][hour] == "" && currentClass.subjects[subNumber].detail.isDayDone[day] == false)
+                  currentClass.subjects[subNumber].detail.isDayDone[day] = true;
+                  currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
+                  professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                  toBreak = true;
+                  break;
+                }
+              }
+              if(toBreak)
+                break;
+          }
+        }
+        /*for(let day= 0;day<5;day++)
+        {   
+          let x = await context.dispatch("getDay",day);
+          for(let hour=0;hour<7;hour++)
+          { 
+            if(currentClass[x][hour] == "")
+            { 
+              let subNumber = subjectStack[subjectStack.length-1];
+              let professor = await context.dispatch("getProfessorObject",currentClass.subjects[subNumber].detail.Professors[0]);
+              if(professor.detail[x][hour] == "" && currentClass.subjects[subNumber].detail.isDayDone[day] == false)
+              {
+                currentClass.subjects[subNumber].detail.isDayDone[day] = true;
+                currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
+                professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                subjectStack.pop();
+              }
+              else
+              { 
+                for(;;)
+                { let index = Math.floor(Math.random()*(subjectStack.length-2));
+                  let newSubNumber = subjectStack[index];
+                  if(professor.detail[x][hour] == "" && currentClass.subjects[newSubNumber].detail.isDayDone[day] == false)
                   {
-                    currentClass.subjects[subNumber].detail.isDayDone[day] = true;
-                    currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
-                    professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
-                    subjectStack.pop();
+                    currentClass.subjects[newSubNumber].detail.isDayDone[day] = true;
+                    currentClass[x][hour] = currentClass.subjects[newSubNumber].detail.Abbreviation;
+                    professor.detail[x][hour] = currentClass.subjects[newSubNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                    subjectStack.splice(index,1);
                   }
                 }
               }
             }
+          }
+        }*/
             /*
             for(let day = 0;day < 5;day++)
             {
@@ -577,7 +614,6 @@ export default {
                 }
               }
             }*/
-        }
     
       }
     } 
