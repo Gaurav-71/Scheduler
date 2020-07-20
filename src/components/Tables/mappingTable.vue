@@ -1,5 +1,9 @@
 <template>
   <div class="mapping-table">
+    <transition name="fade" appear>
+      <AddProfessor v-if="$store.state.showProfessorModal" />
+      <AddCourse v-if="$store.state.showCourseModal" />
+    </transition>
     <div class="heading">
       <h1>Professor Mapping</h1>
       <h4>Map the subjects of the respective semester to the respective professors</h4>
@@ -8,14 +12,23 @@
       <tr>
         <th>Course</th>
         <th>Course Code</th>
-        <th>Course Credits</th>
+        <th>Credits</th>
         <th>Professor</th>
       </tr>
       <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
-        <td class="course-name">{{ courses.detail.Name }}</td>
+        <td class="course-name">
+          <label
+            class="switch"
+            title="If this subject has more than one main teacher toggle this switch on"
+          >
+            <input type="checkbox" id="checkbox" v-model="isChecked" />
+            <span class="slider round"></span>
+          </label>
+          {{ courses.detail.Name }}
+        </td>
         <td>{{ courses.detail.Code }}</td>
         <td>
-          {{ courses.detail.Abbreviation }} | {{ courses.detail.Credits.Theory }}:{{
+          {{ courses.detail.Credits.Theory }}:{{
           courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
         </td>
@@ -90,6 +103,74 @@
             <div v-else class="block"></div>
           </div>
         </td>
+        <td v-else-if="isChecked" class="data-input">
+          <div class="custom-input">
+            <input
+              type="text"
+              placeholder="Select Main Professor 1"
+              list="allProfessors"
+              v-model="sectionObject.subjects[index].detail.Professors[0]"
+            />
+            <datalist id="allProfessors"></datalist>
+            <img
+              src="../../assets/Common/add.svg"
+              alt="add professor"
+              title="Add a professor"
+              @click="addProfessor(index)"
+            />
+          </div>
+          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 2">
+            <input
+              type="text"
+              placeholder="Select Main Professor 2"
+              list="allProfessors"
+              v-model="sectionObject.subjects[index].detail.Professors[1]"
+            />
+            <datalist id="allProfessors"></datalist>
+            <img
+              src="../../assets/Common/delete.svg"
+              alt="delete professor"
+              title="Remove Professor"
+              v-if="sectionObject.getProfessors(index) == 2"
+              @click="removeProfessor(index)"
+            />
+            <div v-else class="block"></div>
+          </div>
+          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 3">
+            <input
+              type="text"
+              placeholder="Main Professor 3"
+              list="allProfessors"
+              v-model="sectionObject.subjects[index].detail.Professors[2]"
+            />
+            <datalist id="allProfessors"></datalist>
+            <img
+              src="../../assets/Common/delete.svg"
+              alt="delete professor"
+              title="Remove Professor"
+              v-if="sectionObject.getProfessors(index) == 3"
+              @click="removeProfessor(index)"
+            />
+            <div v-else class="block"></div>
+          </div>
+          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 4">
+            <input
+              type="text"
+              placeholder="Select Main Professor 4"
+              list="allProfessors"
+              v-model="sectionObject.subjects[index].detail.Professors[3]"
+            />
+            <datalist id="allProfessors"></datalist>
+            <img
+              src="../../assets/Common/delete.svg"
+              alt="delete professor"
+              title="Remove Professor"
+              v-if="sectionObject.getProfessors(index) == 4"
+              @click="removeProfessor(index)"
+            />
+            <div v-else class="block"></div>
+          </div>
+        </td>
         <td v-else class="data-input">
           <div class="custom-input">
             <input
@@ -104,6 +185,13 @@
         </td>
       </tr>
     </table>
+    <p>
+      Can't find a Professor or Course ? Click here to add new
+      <span
+        @click="$store.state.showProfessorModal = true"
+      >Professor</span> or
+      <span @click="$store.state.showCourseModal = true">Course</span>
+    </p>
     <br />
     <div class="classroom-container">
       <div class="heading">
@@ -119,8 +207,8 @@
     </div>
     <br />
     <div class="heading">
-      <h1>Lab & Tutorials</h1>
-      <h4>Add custom timings for labs and tutorials</h4>
+      <h1>Labs</h1>
+      <h4>Add custom timings for labs</h4>
     </div>
     <table>
       <tr>
@@ -173,18 +261,188 @@
       </tr>
     </table>
     <br />
+    <div class="heading">
+      <h1>Math Professors</h1>
+      <h4>Enter the math professors for students of class {{$store.state.semester}}{{$store.state.section}}</h4>
+    </div>
+    <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-prof">
+      <input type="text" placeholder="Enter Main Professor name" class="classroom" />
+      <input type="text" placeholder="Enter Professor name" class="classroom" />
+      <input type="text" placeholder="Enter Professor name" class="classroom" />
+    </div>
+    <br />
+    <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="heading">
+      <h1>Math Classes</h1>
+      <h4>Enter the classes provided by the math department</h4>
+    </div>
+    <table v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-dept">
+      <tr>
+        <th>Day</th>
+        <th>Time</th>
+        <th>Type</th>
+      </tr>
+      <tr>
+        <td>Monday</td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Time" list="math-time" />
+          <datalist id="math-time">
+            <option value="9:00 AM"></option>
+            <option value="9:55 AM"></option>
+            <option value="11:05 AM"></option>
+            <option value="12:00 PM"></option>
+            <option value="12:55 PM"></option>
+            <option value="1:45 PM"></option>
+            <option value="2:40 PM"></option>
+            <option value="3:30 PM"></option>
+          </datalist>
+        </td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Class Type" list="type" />
+          <datalist id="type">
+            <option value="Theory"></option>
+            <option value="Tutorial"></option>
+          </datalist>
+        </td>
+      </tr>
+      <tr>
+        <td>Tuesday</td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Time" list="math-time" />
+          <datalist id="math-time">
+            <option value="9:00 AM"></option>
+            <option value="9:55 AM"></option>
+            <option value="11:05 AM"></option>
+            <option value="12:00 PM"></option>
+            <option value="12:55 PM"></option>
+            <option value="1:45 PM"></option>
+            <option value="2:40 PM"></option>
+            <option value="3:30 PM"></option>
+          </datalist>
+        </td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Class Type" list="type" />
+          <datalist id="type">
+            <option value="Theory"></option>
+            <option value="Tutorial"></option>
+          </datalist>
+        </td>
+      </tr>
+      <tr>
+        <td>Wednesday</td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Time" list="math-time" />
+          <datalist id="math-time">
+            <option value="9:00 AM"></option>
+            <option value="9:55 AM"></option>
+            <option value="11:05 AM"></option>
+            <option value="12:00 PM"></option>
+            <option value="12:55 PM"></option>
+            <option value="1:45 PM"></option>
+            <option value="2:40 PM"></option>
+            <option value="3:30 PM"></option>
+          </datalist>
+        </td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Class Type" list="type" />
+          <datalist id="type">
+            <option value="Theory"></option>
+            <option value="Tutorial"></option>
+          </datalist>
+        </td>
+      </tr>
+      <tr>
+        <td>Thursday</td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Time" list="math-time" />
+          <datalist id="math-time">
+            <option value="9:00 AM"></option>
+            <option value="9:55 AM"></option>
+            <option value="11:05 AM"></option>
+            <option value="12:00 PM"></option>
+            <option value="12:55 PM"></option>
+            <option value="1:45 PM"></option>
+            <option value="2:40 PM"></option>
+            <option value="3:30 PM"></option>
+          </datalist>
+        </td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Class Type" list="type" />
+          <datalist id="type">
+            <option value="Theory"></option>
+            <option value="Tutorial"></option>
+          </datalist>
+        </td>
+      </tr>
+      <tr>
+        <td>Friday</td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Time" list="math-time" />
+          <datalist id="math-time">
+            <option value="9:00 AM"></option>
+            <option value="9:55 AM"></option>
+            <option value="11:05 AM"></option>
+            <option value="12:00 PM"></option>
+            <option value="12:55 PM"></option>
+            <option value="1:45 PM"></option>
+            <option value="2:40 PM"></option>
+            <option value="3:30 PM"></option>
+          </datalist>
+        </td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Class Type" list="type" />
+          <datalist id="type">
+            <option value="Theory"></option>
+            <option value="Tutorial"></option>
+          </datalist>
+        </td>
+      </tr>
+      <tr>
+        <td>Saturday</td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Time" list="math-time" />
+          <datalist id="math-time">
+            <option value="9:00 AM"></option>
+            <option value="9:55 AM"></option>
+            <option value="11:05 AM"></option>
+            <option value="12:00 PM"></option>
+            <option value="12:55 PM"></option>
+            <option value="1:45 PM"></option>
+            <option value="2:40 PM"></option>
+            <option value="3:30 PM"></option>
+          </datalist>
+        </td>
+        <td class="custom-input">
+          <input type="text" placeholder="Select Class Type" list="type" />
+          <datalist id="type">
+            <option value="Theory"></option>
+            <option value="Tutorial"></option>
+          </datalist>
+        </td>
+      </tr>
+    </table>
+    <br />
+    <br />
   </div>
 </template>
 
 <script>
+import AddProfessor from "../Modals/AddProfessor";
+import AddCourse from "../Modals/AddCourse";
+
 export default {
   props: {
     sectionObject: {
       type: Object
     }
   },
+  components: {
+    AddProfessor,
+    AddCourse
+  },
   data() {
-    return {};
+    return {
+      isChecked: false
+    };
   },
   methods: {
     addProfessor(index) {
@@ -230,16 +488,94 @@ export default {
       padding: 0;
       font-weight: lighter;
     }
-    h1{
+    h1 {
       color: $primary;
     }
-    h4{
+    h4 {
       color: black;
     }
   }
-  table{
+  p {
+    text-align: left;
+    margin: 2rem 0 0rem 0.5rem;
+    span {
+      color: $primary-light;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    span:hover {
+      color: $primary-dark;
+    }
+  }
+  table {
+    tr {
+      .course-name {
+        text-align: left;
+        padding-left: 1.7rem;
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 35px;
+          height: 18px;
+          margin: 0 0.5rem;
+        }
+
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 10px;
+          width: 10px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+        }
+
+        input:checked + .slider {
+          background-color: $primary;
+        }
+
+        input:focus + .slider {
+          box-shadow: 0 0 1px $primary;
+        }
+
+        input:checked + .slider:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(18px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+          border-radius: 34px;
+        }
+
+        .slider.round:before {
+          border-radius: 50%;
+        }
+      }
+    }
     @include ipad-portrait {
-      tr {        
+      tr {
         td,
         th {
           text-align: left;
@@ -250,13 +586,18 @@ export default {
         th {
           text-align: center;
           font-size: medium;
-          font-weight: lighter;          
+          font-weight: lighter;
           padding: 1rem;
         }
-        .course-name{
+        .course-name {
           padding-left: 1rem;
         }
-      }      
+      }
+    }
+  }
+  .math-dept {
+    input {
+      width: 75%;
     }
   }
   .classroom {
@@ -269,6 +610,11 @@ export default {
     text-align: left;
     text-indent: 10px;
     margin: 0 0.5rem;
+  }
+  .math-prof {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
   ::-webkit-input-placeholder {
     color: darkslategrey;
