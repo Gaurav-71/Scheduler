@@ -322,7 +322,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 8; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -409,7 +409,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 8; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -542,7 +542,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 8; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         console.log(currentClass);
         let subjectStack = [];
