@@ -6,13 +6,13 @@
     </div> 
     <div class="details">
       <div>
-        <b>Semester :</b> IV
+        <b>Semester :</b> {{sectionObject.Semester}}
       </div>
       <div>
-        <b>Section :</b> A
+        <b>Section :</b> {{sectionObject.Section}}
       </div>
       <div>
-        <b>Room No. :</b> LHC-303
+        <b>Room No. :</b> {{sectionObject.roomNumber}}
       </div>
       <div>
         <b>Term :</b>
@@ -252,7 +252,7 @@
         >{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
         <td
           v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
-        >{{subject.detail.Type}}</td>
+        >{{subject.detail.Abbreviation}}</td>
         <td
           v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
         >{{subject.detail.Professors[0]}}</td>

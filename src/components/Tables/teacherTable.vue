@@ -6,8 +6,7 @@
     </div>
     <div class="details">
       <div>
-        <b>Faculty Name :</b>
-        {{teacherObject.detail.Name}}
+        <b>Faculty Name :</b>{{" "+teacherObject.detail.Name}} 
       </div>
     </div>
     <table

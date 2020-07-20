@@ -270,10 +270,13 @@
           </div>
         </div>
       </div>
-      <div v-else id="all-prof">
+      <div v-else-if="type == 2" id="all-prof">
         <div v-for="(professor,index) in this.$store.state.professorList" :key="index">
           <teacherTable :teacherObject="professor" />
         </div>
+      </div>
+      <div v-else>
+        FFFFFFFFFFFFFFFFFFFFF
       </div>
     </div>
     <div
@@ -313,7 +316,7 @@ export default {
         h4: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
         src: "results.svg"
       },
-      type: 1,
+      type: null,
       printID: 0,
       filename: "All"
     };

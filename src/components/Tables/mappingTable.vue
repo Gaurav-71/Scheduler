@@ -15,7 +15,7 @@
         <td class="course-name">{{ courses.detail.Name }}</td>
         <td>{{ courses.detail.Code }}</td>
         <td>
-          {{ courses.detail.Type }} | {{ courses.detail.Credits.Theory }}:{{
+          {{ courses.detail.Abbreviation }} | {{ courses.detail.Credits.Theory }}:{{
           courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
         </td>
@@ -167,7 +167,6 @@
           <input
             type="text"
             placeholder="Enter Lab Name"
-            list="allProfessors"
             v-model="sectionObject.subjects[index].detail.LabSchedule.LabNumber"
           />
         </td>

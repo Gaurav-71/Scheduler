@@ -39,7 +39,7 @@
               </div>
             </div>
             <div class="actions">
-              <img src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details" />
+              <img src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details"  @click="edit(professor)"/>
               <img src="../assets/Common/delete.svg" @click="removeProfessor(professor.id)" alt="delete" title="Delete Professor" />
             </div>
           </div>
@@ -82,7 +82,6 @@
 
 <script>
 import AddProfessor from "../components/Modals/AddProfessor.vue";
-import { mapGetters } from "vuex";
 import Heading from "../components/Design/Heading";
 
 export default {
@@ -161,15 +160,6 @@ export default {
       .catch((err) => {
         console.log(err);
       })
-  },
-  methods: {
-    removeProfessor(id){
-      this.$store.dispatch("removeProfessor", id)
-      .then(()=>{})
-      .catch(err => {
-        console.log(err);
-      });
-    }
   }
 };
 </script>
