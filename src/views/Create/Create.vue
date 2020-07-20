@@ -14,9 +14,9 @@ export default {
   },
   data() {
     return {
-      unsubscribeProfessor : null,
-      unsubscribeCourse : null
-    }
+      unsubscribeProfessor: null,
+      unsubscribeCourse: null
+    };
   },
   created() {
     this.$store.state.sidebarCounter = 2;
@@ -26,19 +26,20 @@ export default {
     );
   },
   mounted() {
-    this.$store.dispatch("loadProfessorList")
-      .then((response) => {
+    this.$store
+      .dispatch("loadProfessorList")
+      .then(response => {
         this.unsubscribeProfessor = response;
       })
-      .catch((err) => {
+      .catch(err => {
         alert(err);
       });
     this.$store
       .dispatch("loadCourseList")
-      .then((response) => {
+      .then(response => {
         this.unsubscribeCourse = response;
       })
-      .catch((err) => {
+      .catch(err => {
         alert(err);
       });
   }
@@ -48,8 +49,11 @@ export default {
 <style lang="scss" scoped>
 @import "../../scss/mediaQuery";
 .create {
-  margin-top: 6rem;
-  margin-left: 5rem;
-  min-height: calc(100vh - 6rem);
+  margin: 4.5rem 0 3rem 5rem;
+  min-height: calc(100vh - 4.5rem);
+  @media print {
+    margin: 0;
+    padding: 0;
+  }
 }
 </style>

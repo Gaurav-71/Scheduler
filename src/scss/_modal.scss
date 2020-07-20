@@ -2,7 +2,7 @@
 @import "../scss/mediaQuery";
 
 .modal-container {
-  position: absolute;
+  position: fixed;
   top: 4.5rem;
   left: 5rem;
   right: 0;
@@ -61,6 +61,7 @@
       border-radius: 20px;
       border: 1px solid $primary-light;
       background-color: $primary-light;
+      background-image: $gradient;
       color: #ffffff;
       font-size: 12px;
       font-weight: bold;
@@ -69,7 +70,7 @@
       text-transform: uppercase;
       transition: transform 80ms ease-in;
       cursor: pointer;
-      @media (max-width: 991px) {
+      @include ipad-portrait {
         margin-right: 1rem;
       }
       form {
@@ -88,11 +89,14 @@
       outline: none;
     }
     .form-data {
-      @media (max-width: 991px) {
-        height: 50vh;
+      @include ipad-portrait {
+        height: 38vh;
         overflow-x: hidden;
         overflow-y: auto;
       }
+    }
+    @include ipad-portrait {
+      width: 70vw;
     }
   }
   .cancel {

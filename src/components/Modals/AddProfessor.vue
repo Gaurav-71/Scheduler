@@ -112,7 +112,7 @@ export default {
       }
       input {
         width: 95%;
-        @media (max-width: 991px) {
+        @include ipad-portrait {
           width: 88%;
         }
         background-image: url("../../assets/Professors/Modal/name.svg");
@@ -137,11 +137,12 @@ export default {
           display: flex;
           justify-content: flex-start;
           align-items: center;
-          @media (max-width: 991px) {
+          @include ipad-portrait {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            flex-direction: column;
+            margin-right: 0;
+            margin-left: 0;
           }
           .custom-label {
             display: flex;
@@ -153,7 +154,7 @@ export default {
               width: 40px;
               height: 40px;
               margin: 0.3rem;
-              @media (max-width: 991px) {
+              @include ipad-portrait {
                 width: 35px;
               }
               cursor: default;
@@ -163,6 +164,11 @@ export default {
             }
           }
         }
+      }
+      @include ipad-portrait {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
     }
   }

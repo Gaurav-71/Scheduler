@@ -7,29 +7,41 @@
         <div class="row">
           <div class="field">
             <label for="name">Course name</label>
-            <input type="text" name="name" placeholder="Enter name" class="name" v-model="name"/>
+            <input type="text" name="name" placeholder="Enter name" class="name" v-model="name" />
           </div>
           <div class="field">
             <label for="code">Course code</label>
-            <input type="text" name="code" placeholder="Enter code" class="code" v-model="code"/>
+            <input type="text" name="code" placeholder="Enter code" class="code" v-model="code" />
           </div>
         </div>
         <div class="row">
           <div class="field">
             <label for="semester">Semester</label>
-            <input list="semesters" name="semester" placeholder="Enter semester" class="sem" v-model="semester"/>
+            <input
+              list="semesters"
+              name="semester"
+              placeholder="Enter semester"
+              class="sem"
+              v-model="semester"
+            />
             <datalist id="semesters">
-              <option value=3></option>
-              <option value=4></option>
-              <option value=5></option>
-              <option value=6></option>
-              <option value=7></option>
-              <option value=8></option>
+              <option value="3"></option>
+              <option value="4"></option>
+              <option value="5"></option>
+              <option value="6"></option>
+              <option value="7"></option>
+              <option value="8"></option>
             </datalist>
           </div>
           <div class="field">
             <label for="type">Course type</label>
-            <input list="type" name="type" placeholder="Enter course type" class="type" v-model="type"/>
+            <input
+              list="type"
+              name="type"
+              placeholder="Enter course type"
+              class="type"
+              v-model="type"
+            />
             <datalist id="type">
               <option value="Theory"></option>
               <option value="Lab"></option>
@@ -102,7 +114,7 @@ export default {
       name: "",
       code: "",
       type: "",
-      semester: 0,
+      semester: null,
       theoryCredits: 0,
       tutorialCredits: 0,
       labCredits: 0
@@ -150,13 +162,11 @@ export default {
     margin: 1rem;
     .row {
       width: 100%;
-      // height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       .field {
         width: 100%;
-        //height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: left;
@@ -188,7 +198,6 @@ export default {
     }
     .row1 {
       width: 100%;
-      //height: 100%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -198,7 +207,6 @@ export default {
       .field1 {
         label {
           width: 100%;
-          //height: 100%;
           font-weight: bold;
           color: $primary-dark;
         }
@@ -228,7 +236,12 @@ export default {
         }
       }
       .btn {
-        margin-right: 2.5rem;
+        margin-right: 2.8rem;
+      }
+      @include ipad-portrait {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
     }
   }

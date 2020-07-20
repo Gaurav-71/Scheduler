@@ -1,8 +1,8 @@
 <template>
   <div class="mapping-table">
     <div class="heading">
-      <h1>Teacher Mapping</h1>
-      <h4>Map the subjects of the respective semester to the respective professors and lets you add custom timings for labs and tutorials</h4>
+      <h1>Professor Mapping</h1>
+      <h4>Map the subjects of the respective semester to the respective professors</h4>
     </div>
     <table>
       <tr>
@@ -20,9 +20,7 @@
           }}:{{ courses.detail.Credits.Lab }}
         </td>
         <td
-          v-if="
-          courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0
-        "
+          v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0"
           class="data-input"
         >
           <div class="custom-input">
@@ -30,7 +28,7 @@
               type="text"
               placeholder="Select Main Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[0]"
+              v-model="sectionObject.subjects[index].detail.Professors[0]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -45,7 +43,7 @@
               type="text"
               placeholder="Select Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[1]"
+              v-model="sectionObject.subjects[index].detail.Professors[1]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -62,7 +60,7 @@
               type="text"
               placeholder="Select Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[2]"
+              v-model="sectionObject.subjects[index].detail.Professors[2]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -79,7 +77,7 @@
               type="text"
               placeholder="Select Professor"
               list="allProfessors"
-              v-model="courses.detail.Professors[3]"
+              v-model="sectionObject.subjects[index].detail.Professors[3]"
             />
             <datalist id="allProfessors"></datalist>
             <img
@@ -94,7 +92,12 @@
         </td>
         <td v-else class="data-input">
           <div class="custom-input">
-            <input type="text" placeholder="Select Professor" list="allProfessors" />
+            <input
+              type="text"
+              placeholder="Select Professor"
+              list="allProfessors"
+              v-model="sectionObject.subjects[index].detail.Professors[0]"
+            />
             <datalist id="allProfessors"></datalist>
             <div class="block"></div>
           </div>
@@ -107,7 +110,12 @@
         <h1>Classroom</h1>
         <h4>Enter the classroom name where you want to accomodate students of class {{$store.state.semester}}{{$store.state.section}}</h4>
       </div>
-      <input type="text" placeholder="Enter classroom" class="classroom" />
+      <input
+        type="text"
+        placeholder="Enter classroom"
+        class="classroom"
+        v-model="sectionObject.roomNumber"
+      />
     </div>
     <br />
     <div class="heading">
@@ -130,13 +138,13 @@
             type="text"
             placeholder="Select Time"
             list="time"
-            v-on:change="makeTrue((index)*3)"
+            v-model="sectionObject.subjects[index].detail.LabSchedule.Time"
           />
           <datalist id="time">
             <option value="9:00 AM"></option>
             <option value="11:05 AM"></option>
             <option value="1:45 PM"></option>
-            <option value="2:40 AM"></option>
+            <option value="2:40 PM"></option>
           </datalist>
         </td>
         <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
@@ -144,7 +152,7 @@
             type="text"
             placeholder="Select Day"
             list="day"
-            v-on:change="makeTrue((index)*3 + 1)"
+            v-model="sectionObject.subjects[index].detail.LabSchedule.Day"
           />
           <datalist id="day">
             <option value="Monday"></option>
@@ -160,7 +168,7 @@
             type="text"
             placeholder="Enter Lab Name"
             list="allProfessors"
-            v-on:change="makeTrue((index)*3 + 2)"
+            v-model="sectionObject.subjects[index].detail.LabSchedule.LabNumber"
           />
         </td>
       </tr>
@@ -174,8 +182,7 @@ export default {
   props: {
     sectionObject: {
       type: Object
-    },
-    position: Number
+    }
   },
   data() {
     return {};
@@ -203,39 +210,12 @@ export default {
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
     let list = document.getElementById("allProfessors");
-    console.log(professorNames);
+
     professorNames.forEach(function(item) {
       var option = document.createElement("option");
       option.value = item;
       list.appendChild(option);
     });
-  },
-  beforeDestroy() {
-    console.log("Dheeraj sucksss");
-    console.log(this.sectionObject);
-    let trueValue = true;
-    for (let i = 0; i < this.sectionObject.subjects.length; i++) {
-      let x = this.sectionObject.newProfessor[i];
-      let indexOfFirstEmptyStrings = this.sectionObject.subjects[
-        i
-      ].detail.Professors.indexOf("");
-
-      if (indexOfFirstEmptyStrings < x && indexOfFirstEmptyStrings != -1) {
-        trueValue = false;
-        break;
-      }
-    }
-    if (this.$store.state.cycle == "Odd") {
-      this.$emit("changeOddMapping", {
-        index: this.position,
-        trueValue: trueValue
-      });
-    } else {
-      this.$emit("changeEvenMapping", {
-        index: this.position,
-        trueValue: trueValue
-      });
-    }
   }
 };
 </script>
@@ -250,6 +230,34 @@ export default {
       margin: 0.5rem;
       padding: 0;
       font-weight: lighter;
+    }
+    h1{
+      color: $primary;
+    }
+    h4{
+      color: black;
+    }
+  }
+  table{
+    @include ipad-portrait {
+      tr {        
+        td,
+        th {
+          text-align: left;
+          padding: 0.5rem;
+          font-size: small;
+          font-weight: lighter;
+        }
+        th {
+          text-align: center;
+          font-size: medium;
+          font-weight: lighter;          
+          padding: 1rem;
+        }
+        .course-name{
+          padding-left: 1rem;
+        }
+      }      
     }
   }
   .classroom {
@@ -271,21 +279,6 @@ export default {
   }
   .classroom-container {
     margin-top: 0.7rem;
-    /*height: 100%;    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;        
-    padding: 0 1rem;
-    box-shadow: 0 0px 20px rgba(0, 0, 0, 0.25);
-    background-image: $gradient;
-    border-radius: 0.8rem;
-    h1 {
-      font-weight: bold;
-      color: white;
-    }
-    h4 {
-      color: black;
-    }*/
   }
 }
 </style>

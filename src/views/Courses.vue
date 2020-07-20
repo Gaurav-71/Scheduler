@@ -1,8 +1,9 @@
 <template>
-  <div class="professors">
+  <div class="courses">
+    <Heading :obj="headingObj" />
     <div class="container">
       <div class="search-bar">
-        <input type="search" placeholder="Search Courses" v-model="search"/>
+        <input type="search" placeholder="Search Courses" v-model="search" />
         <img
           src="../assets/Courses/add.svg"
           alt="add"
@@ -66,7 +67,7 @@
               <h3>{{ course.detail.Name }}</h3>
               <h4>
                 {{ course.detail.Code }} | {{ course.detail.Credits.Theory }}:{{
-                  course.detail.Credits.Tutorial
+                course.detail.Credits.Tutorial
                 }}:{{ course.detail.Credits.Lab }} | {{ course.detail.Type }}
               </h4>
             </div>
@@ -92,28 +93,13 @@
             <div class="details-edit">
               <div class="row">
                 <label for="name">Name :</label>
-                <input
-                  type="text"
-                  name="name"
-                  v-model="name"
-                  style="width: 7rem"
-                />
+                <input type="text" name="name" v-model="name" style="width: 7rem" />
                 <label for="code">Code :</label>
-                <input
-                  type="text"
-                  name="code"
-                  v-model="code"
-                  style="width:2rem;"
-                />
+                <input type="text" name="code" v-model="code" style="width:2rem;" />
               </div>
               <div class="row">
                 <label for="semester">Semester :</label>
-                <input
-                  list="semesters"
-                  name="semester"
-                  style="width: 3rem;"
-                  v-model="semester"
-                />
+                <input list="semesters" name="semester" style="width: 3rem;" v-model="semester" />
                 <datalist id="semesters">
                   <option value="3"></option>
                   <option value="4"></option>
@@ -123,12 +109,7 @@
                   <option value="8"></option>
                 </datalist>
                 <label for="type">Type:</label>
-                <input
-                  list="type"
-                  name="type"
-                  v-model="type"
-                  style="width: 5rem"
-                />
+                <input list="type" name="type" v-model="type" style="width: 5rem" />
                 <datalist id="type">
                   <option value="Theory"></option>
                   <option value="Lab"></option>
@@ -183,13 +164,21 @@
 
 <script>
 import AddCourse from "../components/Modals/AddCourse.vue";
+import Heading from "../components/Design/Heading";
 
 export default {
   components: {
     AddCourse,
+    Heading
   },
   data() {
     return {
+      headingObj: {
+        h1: "Courses",
+        h4:
+          "A list of all courses taught by the department. Add, Modify or Delete a course at will",
+        src: "books.svg"
+      },
       search: "",
       unsubscribe: null,
       name: "",
@@ -198,7 +187,7 @@ export default {
       semester: 0,
       theoryCredits: 0,
       tutorialCredits: 0,
-      labCredits: 0,
+      labCredits: 0
     };
   },
   created() {
@@ -207,19 +196,19 @@ export default {
   },
   computed: {
     searchCourses: function() {
-      return this.$store.getters.getCourseList.filter((course) => {
+      return this.$store.getters.getCourseList.filter(course => {
         let courseLowerCase = course.detail.Name.toLowerCase();
         return courseLowerCase.match(this.search.toLowerCase());
       });
-    },
+    }
   },
   mounted() {
     this.$store
       .dispatch("loadCourseList")
-      .then((resp) => {
+      .then(resp => {
         this.unsubscribe = resp;
       })
-      .catch((err) => {
+      .catch(err => {
         alert(err);
       });
   },
@@ -228,7 +217,7 @@ export default {
       this.$store
         .dispatch("removeCourse", id)
         .then(() => {})
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
@@ -251,9 +240,9 @@ export default {
         Credits: {
           Theory: this.theoryCredits,
           Tutorial: this.tutorialCredits,
-          Lab: this.labCredits,
+          Lab: this.labCredits
         },
-        Type: this.type,
+        Type: this.type
       };
       this.$store
         .dispatch("updateCourseDetails", data)
@@ -267,10 +256,10 @@ export default {
           this.labCredits = 0;
           course.isEditing = false;
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
-    },
+    }
   },
   beforeDestroy() {
     this.unsubscribe();
@@ -282,9 +271,13 @@ export default {
 <style lang="scss" scoped>
 @import "../scss/searchBar";
 
-.professors {
+.courses {
   margin-top: 4.5rem;
   margin-left: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
   .search-bar {
     input {
       background-image: url("../assets/Courses/search.svg");
@@ -351,6 +344,7 @@ export default {
         }
         h4 {
           margin-left: 0.7rem;
+          color: black;
         }
       }
       .actions-edit {

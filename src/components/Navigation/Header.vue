@@ -75,6 +75,12 @@ header {
       margin-left: 0.7rem;
       text-shadow: 1px 0.5px 1px black;
     }
+  }  
+  @media print {
+    display: none;
+    margin: 0;
+    padding: 0;
   }
 }
+
 </style>
