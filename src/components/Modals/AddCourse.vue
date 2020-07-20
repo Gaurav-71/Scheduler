@@ -34,19 +34,13 @@
             </datalist>
           </div>
           <div class="field">
-            <label for="type">Course type</label>
-            <input
-              list="type"
+            <label for="type">Course Abbreviation</label>
+            <input              
               name="type"
-              placeholder="Enter course type"
+              placeholder="Enter abbreviation"
               class="type"
               v-model="type"
-            />
-            <datalist id="type">
-              <option value="Theory"></option>
-              <option value="Lab"></option>
-              <option value="Other"></option>
-            </datalist>
+            />            
           </div>
         </div>
         <div class="row1">

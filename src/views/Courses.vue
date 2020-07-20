@@ -99,7 +99,7 @@
               </div>
               <div class="row">
                 <label for="semester">Semester :</label>
-                <input list="semesters" name="semester" style="width: 3rem;" v-model="semester" />
+                <input list="semesters" name="semester" style="width: 1.5rem;" v-model="semester" />
                 <datalist id="semesters">
                   <option value="3"></option>
                   <option value="4"></option>
@@ -289,7 +289,7 @@ export default {
     flex-wrap: wrap;
     overflow-y: scroll;
     .card {
-      width: 20rem;
+      width: 22.5rem;
       height: 12rem;
       margin: 0.6rem;
       background: white;
