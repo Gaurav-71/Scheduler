@@ -276,7 +276,25 @@
         </div>
       </div>
       <div v-else>
-        FFFFFFFFFFFFFFFFFFFFF
+        <table>
+          <tr>
+            <th>
+              <h1 style="margin:0;font-weight:lighter;">Class Timetables</h1>
+            </th>
+          </tr>
+          <tr>
+            <td class="instructions">
+              <ul>
+                <li>A list of automatically generated timetables for students and professors</li>
+                <li>Download timetables as either a PDF or a Word Document and share with ease</li>
+                <li>
+                  Please select the type of timetable you want to view from the status bar
+                  above to proceed
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
     <div
@@ -286,7 +304,7 @@
     >
       <div class="btn transparent" @click="printDoc(printID,filename)">Download as Word</div>
       <div class="btn" @click="route()">Save & Exit</div>
-      <div class="btn transparent" @click="printPDF()">Download as PDF</div>
+      <div class="btn transparent" @click="printPDF()">Download as PDF</div>      
     </div>
     <div
       v-if="$store.state.semester == 0 || $store.state.section != null"
@@ -294,7 +312,9 @@
       style="margin-top: 1rem;"
     >
       <a class="btn transparent" href="#page-top">Jump to Top</a>
+      <div class="btn transparent">Generate Again</div>
     </div>
+    <div class="btn generate">Generate Again</div>
   </div>
 </template>
 
@@ -313,7 +333,8 @@ export default {
     return {
       headingObj: {
         h1: "Class Timetables",
-        h4: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+        h4:
+          "A list of automatically generated timetables for students & professors",
         src: "results.svg"
       },
       type: null,
@@ -433,6 +454,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../scss/create-cards";
 @import "../../scss/pills";
+@import "../../scss/table";
 
 .result {
   margin-top: 5rem;
@@ -451,6 +473,16 @@ export default {
       margin-top: 2.5rem;
       @include ipad-portrait {
         margin: 0;
+      }
+    }
+    .instructions {
+      padding: 1rem 1.5rem;
+      text-align: left;
+      font-size: 1.2rem;
+      ul {
+        li {
+          margin: 1rem 0;
+        }
       }
     }
   }
@@ -473,6 +505,18 @@ export default {
       border-color: rgba($primary, 0.1);
       color: black;
     }
+    .transparent:hover {
+      background: rgba(21, 127, 135, 0.2);
+    }
+  }
+  .generate {
+    display: block;
+    position: absolute;
+    top: 5.3rem;
+    right: 2.7rem;
+    @include ipad-portrait{
+      display: none;
+    }
   }
   @media print {
     margin: 0;
@@ -491,6 +535,9 @@ export default {
       }
     }
     .actions {
+      display: none;
+    }
+    .generate{
       display: none;
     }
   }
