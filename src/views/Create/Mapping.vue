@@ -309,6 +309,7 @@ export default {
     },
   },
   created() {
+    this.$store.state.isMapping = true;
     this.$store.state.sidebarCounter = 2;
     this.$store.state.progressCounter = 3;
     localStorage.setItem("currentRoute", this.$route.path);

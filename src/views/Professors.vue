@@ -1,18 +1,21 @@
 <template>
   <div class="professors">
+    <transition name="fade" appear>
+      <Alert :obj="warning" :remove="warningRemoveObj" />
+    </transition>
+    <transition name="fade" appear>
+      <AddProfessor v-if="$store.state.showProfessorModal" />
+    </transition>
     <Heading :obj="headingObj" />
     <div class="container">
       <div class="search-bar">
-        <input type="search" placeholder="Search Professors" />
+        <input type="search" placeholder="Search Professors" v-model="search" />
         <img
           src="../assets/Professors/add.svg"
           alt="add"
           title="Add New Professor"
           @click="$store.state.showProfessorModal = true"
         />
-        <transition name="fade" appear>
-          <AddProfessor v-if="$store.state.showProfessorModal" />
-        </transition>
       </div>
       <div class="results">
         <div v-for="(professor, index) in searchProfessors" :key="index">
@@ -39,8 +42,18 @@
               </div>
             </div>
             <div class="actions">
-              <img src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details"  @click="edit(professor)"/>
-              <img src="../assets/Common/delete.svg" @click="removeProfessor(professor.id)" alt="delete" title="Delete Professor" />
+              <img
+                src="../assets/Common/edit.svg"
+                alt="edit"
+                title="Edit Professor Details"
+                @click="edit(professor)"
+              />
+              <img
+                src="../assets/Common/delete.svg"
+                @click="removeProfessor(professor)"
+                alt="delete"
+                title="Delete Professor"
+              />
             </div>
           </div>
           <div v-else class="card-container">
@@ -83,11 +96,13 @@
 <script>
 import AddProfessor from "../components/Modals/AddProfessor.vue";
 import Heading from "../components/Design/Heading";
+import Alert from "../components/Modals/Alert";
 
 export default {
   components: {
     AddProfessor,
-    Heading
+    Heading,
+    Alert
   },
   data() {
     return {
@@ -97,6 +112,13 @@ export default {
           "A list of all professors in the department. Add, Modify or Delete a professor at will",
         src: "professors.svg"
       },
+      warning: {
+        isVisible: false,
+        message: "Are you sure you want to delete this professor permanently ?",
+        button: "Delete Professor",
+        number: 2
+      },
+      warningRemoveObj: null,
       search: "",
       unsubscribe: null,
       name: "",
@@ -110,12 +132,8 @@ export default {
   },
   methods: {
     removeProfessor(id) {
-      this.$store
-        .dispatch("removeProfessor", id)
-        .then(() => {})
-        .catch(err => {
-          console.log(err);
-        });
+      this.warningRemoveObj = id;
+      this.warning.isVisible = true;
     },
     edit(professor) {
       professor.isEditing = true;
@@ -154,12 +172,12 @@ export default {
   mounted() {
     this.$store
       .dispatch("loadProfessorList")
-      .then((repsonse) => {
+      .then(repsonse => {
         this.unsubscribe = repsonse;
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
-      })
+      });
   }
 };
 </script>
