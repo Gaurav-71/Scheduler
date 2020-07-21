@@ -176,6 +176,27 @@ export default {
             return this.newProfessor[index] - 1;
           },
         };
+        if(semester[i] == 3){
+          this.state.allOddCycleClasses[classNames[i]]["mathClass"] = {
+            TutorialClass : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass1 : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass2 : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass3 : {
+              Time : "",
+              Day : ""
+            },
+            Professors : ["", "", ""]
+          }
+        }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
           if (subject.detail.Semester == semester[i]) {
@@ -188,34 +209,15 @@ export default {
               };
             }
             sub.detail["isDayDone"] = [false,false,false,false,false,false];
+            sub.detail["isToggleChecked"] = false;
+            sub.detail[
+              "Professors"
+            ] = ["", "", "", ""];
             subjects.push(sub);
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
           }
         });
         this.state.allOddCycleClasses[classNames[i]]["subjects"] = subjects;
-        for (
-          let j = 0;
-          j < this.state.allOddCycleClasses[classNames[i]].subjects.length;
-          j++
-        ) {
-          let currentSubject = this.state.allOddCycleClasses[classNames[i]]
-            .subjects[j];
-          if (currentSubject.detail.Credits.Tutorial > 0) {
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = ["", "", ""];
-          } else if (currentSubject.detail.Credits.Lab > 0) {
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = ["", "", "", ""];
-          } else {
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = [""];
-          }
-        }
       }
     } else {
       let semester = [4, 4, 4, 6, 6, 6, 8, 8];
@@ -251,7 +253,27 @@ export default {
             return this.newProfessor[index] - 1;
           },
         };
-
+        if(semester[i] == 4){
+          this.state.allEvenCycleClasses[classNames[i]]["mathClass"] = {
+            TutorialClass : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass1 : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass2 : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass3 : {
+              Time : "",
+              Day : ""
+            },
+            Professors : ["", "", ""]
+          }
+        }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
           if (subject.detail.Semester == semester[i]) {
@@ -264,34 +286,15 @@ export default {
               };
             }
             sub.detail["isDayDone"] = [false,false,false,false,false,false];
+            sub.detail["isToggleChecked"] = false;
+            sub.detail[
+              "Professors"
+            ] = ["", "", "", ""];
             subjects.push(sub);
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
           }
         });
         this.state.allEvenCycleClasses[classNames[i]]["subjects"] = subjects;
-        for (
-          let j = 0;
-          j < this.state.allEvenCycleClasses[classNames[i]].subjects.length;
-          j++
-        ) {
-          let currentSubject = this.state.allEvenCycleClasses[classNames[i]]
-            .subjects[j];
-          if (currentSubject.detail.Credits.Tutorial > 0) {
-            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = ["", "", ""];
-          } else if (currentSubject.detail.Credits.Lab > 0) {
-            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = ["", "", "", ""];
-          } else {
-            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = [""];
-          }
-        }
       }
     }
   },
