@@ -312,6 +312,77 @@ export default {
     else if (labHour == "1:45 PM") return 4;
     else if (labHour == "2:40 PM") return 5;
   },
+  async getMathHour(context, labHour) {
+    console.log("getMathHour's context- "+ context);
+    if (labHour == "9:00 AM") return 0;
+    else if (labHour == "9:55 AM") return 1;
+    else if (labHour == "11:05 AM") return 2;
+    else if (labHour == "12:00 PM") return 3;
+    else if (labHour == "1:45 PM") return 4;
+    else if (labHour == "2:40 PM") return 5;
+    else if (labHour == "3:35 PM") return 6;
+  },
+  async assignMathsClasses (context) {
+    console.log("assignMathsClasses' context- "+ context);
+    if (this.state.cycle == "Odd") {
+      let classNames = [
+        "sec3A",
+        "sec3B",
+        "sec3C"
+      ];
+      for (let k = 0; k < 3; k++) {
+        let currentClass = this.state.allOddCycleClasses[classNames[k]];      
+        let mathClassNames = [
+          "RegularClass1",
+          "RegularClass2",
+          "RegularClass3"
+        ];   
+        console.log(currentClass.mathClass);
+        let x = await context.dispatch(
+          "getMathHour",
+          currentClass.mathClass.TutorialClass.Time
+        );
+        currentClass[currentClass.mathClass.TutorialClass.Day][x] = "Maths Tutorial";
+        currentClass[currentClass.mathClass.TutorialClass.Day][x+1] = "Maths Tutorial";
+        for(let y =0; y<3; y++){
+          x = await context.dispatch(
+            "getMathHour",
+            currentClass.mathClass[mathClassNames[y]].Time
+          );
+          console.log(x);
+          currentClass[currentClass.mathClass[mathClassNames[y]].Day][x] = "Maths";
+        }       
+        
+      }
+        
+    } else {
+      let classNames = ["sec4A", "sec4B", "sec4C"];
+      for (let k = 0; k < 3; k++) {
+        let currentClass = this.state.allEvenCycleClasses[classNames[k]];      
+        let mathClassNames = [
+          "RegularClass1",
+          "RegularClass2",
+          "RegularClass3"
+        ];   
+        console.log(currentClass.mathClass);
+        let x = await context.dispatch(
+          "getMathHour",
+          currentClass.mathClass.TutorialClass.Time
+        );
+        currentClass[currentClass.mathClass.TutorialClass.Day][x] = "Maths Tutorial";
+        currentClass[currentClass.mathClass.TutorialClass.Day][x+1] = "Maths Tutorial";
+        for(let y =0; y<3; y++){
+          x = await context.dispatch(
+            "getMathHour",
+            currentClass.mathClass[mathClassNames[y]].Time
+          );
+          console.log(x);
+          currentClass[currentClass.mathClass[mathClassNames[y]].Day][x] = "Maths";
+        }       
+        
+      }
+    }
+  },
   async assignLabs(context) {
     console.log("assignLabs' context- "+ context);
     if (this.state.cycle == "Odd") {
@@ -653,6 +724,7 @@ export default {
   },
   async automateTimetable(context) {
     console.log("automateTimeTable's context- "+ context);
+    await context.dispatch("assignMathsClasses");
     await context.dispatch("assignLabs");
     await context.dispatch("assignTutorials");
     await context.dispatch("assignClasses");

@@ -22,7 +22,7 @@
             class="switch"
             title="If this subject has more than one main teacher toggle this switch on"
           >
-            <input type="checkbox" id="checkbox" v-model="courses.detail.isToggleChecked" />
+            <input type="checkbox" id="checkbox" v-model="courses.detail.isToggleChecked"/>
             <span class="slider round"></span>
           </label>
           {{ courses.detail.Name }}
@@ -104,9 +104,10 @@
             <div v-else class="block"></div>
           </div>
         </td>
-        <td v-else-if="courses.detail.isToggleChecked" class="data-input">
+        <td v-else class="data-input">
           <div class="custom-input">
             <input
+              
               type="text"
               placeholder="Select Main Professor 1"
               list="allProfessors"
@@ -123,7 +124,7 @@
           <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 2">
             <input
               type="text"
-              placeholder="Select Main Professor 2"
+              placeholder= "Select Professor"
               list="allProfessors"
               v-model="courses.detail.Professors[1]"
             />
@@ -140,7 +141,7 @@
           <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 3">
             <input
               type="text"
-              placeholder="Main Professor 3"
+              placeholder="Select Professor"
               list="allProfessors"
               v-model="courses.detail.Professors[2]"
             />
@@ -170,18 +171,6 @@
               @click="removeProfessor(index)"
             />
             <div v-else class="block"></div>
-          </div>
-        </td>
-        <td v-else class="data-input">
-          <div class="custom-input">
-            <input
-              type="text"
-              placeholder="Select Professor"
-              list="allProfessors"
-              v-model="courses.detail.Professors[0]"
-            />
-            <datalist id="allProfessors"></datalist>
-            <div class="block"></div>
           </div>
         </td>
       </tr>
@@ -286,8 +275,8 @@
       <tr>
         <td>Tutorial Class (2 hours)</td>
         <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" v-model="sectionObject.mathClass.TutorialClass.Time" />
-          <datalist id="math-time">
+          <input type="text" placeholder="Select Time" list="math-time-tutorial" v-model="sectionObject.mathClass.TutorialClass.Time" />
+          <datalist id="math-time-tutorial">
             <option value="9:00 AM"></option>
             <option value="11:05 AM"></option>
             <option value="1:45 PM"></option>
@@ -309,8 +298,8 @@
       <tr>
         <td>Regular class 1 (1 hour)</td>
         <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" v-model="sectionObject.mathClass.RegularClass1.Time"/>
-          <datalist id="math-time">
+          <input type="text" placeholder="Select Time" list="math-time-regular1" v-model="sectionObject.mathClass.RegularClass1.Time"/>
+          <datalist id="math-time-regular1">
             <option value="9:00 AM"></option>
             <option value="9:55 AM"></option>
             <option value="11:05 AM"></option>
@@ -335,8 +324,8 @@
       <tr>
         <td>Regular class 2 (1 hour)</td>
         <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" v-model="sectionObject.mathClass.RegularClass2.Time"/>
-          <datalist id="math-time">
+          <input type="text" placeholder="Select Time" list="math-time-regular2" v-model="sectionObject.mathClass.RegularClass2.Time"/>
+          <datalist id="math-time-regular2">
             <option value="9:00 AM"></option>
             <option value="9:55 AM"></option>
             <option value="11:05 AM"></option>
@@ -361,15 +350,15 @@
       <tr>
         <td>Regular class 3 (1 hour)</td>
         <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" v-model="sectionObject.mathClass.RegularClass3.Time"/>
-          <datalist id="math-time">
+          <input type="text" placeholder="Select Time" list="math-time-regular3" v-model="sectionObject.mathClass.RegularClass3.Time"/>
+          <datalist id="math-time-regular3">
             <option value="9:00 AM"></option>
             <option value="9:55 AM"></option>
             <option value="11:05 AM"></option>
             <option value="12:00 PM"></option>
             <option value="1:45 PM"></option>
             <option value="2:40 PM"></option>
-            <option value="3:30 PM"></option>
+            <option value="3:35 PM"></option>
           </datalist>
         </td>
         <td class="custom-input">

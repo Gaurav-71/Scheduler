@@ -257,6 +257,23 @@
           v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
         >{{subject.detail.Professors[0]}}</td>
       </tr>
+      <tr v-if="sectionObject.Semester == 3 || sectionObject.Semester == 4">
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{"CS"+sectionObject.Semester+"1"}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{"Engineering Mathematics -"+ sectionObject.Semester}}</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >3:1:0</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >Maths</td>
+        <td
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{sectionObject.mathClass.Professors[0]}}</td>
+      </tr>
     </table>
     <div class="line" v-if="!hideline"></div>
   </div>
