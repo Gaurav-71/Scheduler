@@ -4,6 +4,9 @@
       <Alert :obj="warning" :remove="warningRemoveObj" />
     </transition>
     <transition name="fade" appear>
+      <Error :obj="error" />
+    </transition>
+    <transition name="fade" appear>
       <AddCourse v-if="$store.state.showCourseModal" />
     </transition>
     <Heading :obj="headingObj" />
@@ -155,6 +158,10 @@
             </div>
           </div>
         </div>
+        <div v-if="searchCourses.length == 0" class="error">
+          <img src="../assets/Common/error.svg" alt="error" />
+          <h2>Sorry, we could'nt find any course named {{search}}</h2>
+        </div>
       </div>
     </div>
   </div>
@@ -164,12 +171,14 @@
 import AddCourse from "../components/Modals/AddCourse.vue";
 import Heading from "../components/Design/Heading";
 import Alert from "../components/Modals/Alert";
+import Error from "../components/Modals/Error";
 
 export default {
   components: {
     AddCourse,
     Heading,
-    Alert
+    Alert,
+    Error
   },
   data() {
     return {
@@ -184,6 +193,13 @@ export default {
         message: "Are you sure you want to delete this course permanently ?",
         button: "Delete Course",
         number: 3
+      },
+      error: {
+        isVisible: false,
+        message: {
+          code: "Missing-information",
+          message: "Please fill all data fields"
+        }
       },
       warningRemoveObj: null,
       search: "",
@@ -235,33 +251,43 @@ export default {
       this.labCredits = course.detail.Credits.Lab;
     },
     saveDetails(course) {
-      let data = {
-        id: course.id,
-        Name: this.name,
-        Code: this.code,
-        Semester: this.semester,
-        Credits: {
-          Theory: this.theoryCredits,
-          Tutorial: this.tutorialCredits,
-          Lab: this.labCredits
-        },
-        Abbreviation: this.abbreviation
-      };
-      this.$store
-        .dispatch("updateCourseDetails", data)
-        .then(() => {
-          this.name = "";
-          this.code = "";
-          this.abbreviation = "";
-          this.semester = 0;
-          this.theoryCredits = 0;
-          this.tutorialCredits = 0;
-          this.labCredits = 0;
-          course.isEditing = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.error.isVisible = false;
+      if (
+        this.name.trim() == "" ||
+        this.code.trim() == "" ||
+        this.semester == 0 ||
+        this.abbreviation.trim() == ""
+      ) {
+        this.error.isVisible = true;
+      } else {
+        let data = {
+          id: course.id,
+          Name: this.name,
+          Code: this.code,
+          Semester: this.semester,
+          Credits: {
+            Theory: this.theoryCredits,
+            Tutorial: this.tutorialCredits,
+            Lab: this.labCredits
+          },
+          Abbreviation: this.abbreviation
+        };
+        this.$store
+          .dispatch("updateCourseDetails", data)
+          .then(() => {
+            this.name = "";
+            this.code = "";
+            this.abbreviation = "";
+            this.semester = 0;
+            this.theoryCredits = 0;
+            this.tutorialCredits = 0;
+            this.labCredits = 0;
+            course.isEditing = false;
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     }
   },
   beforeDestroy() {
@@ -392,6 +418,19 @@ export default {
     }
     .card:hover {
       border: 1px solid gray;
+    }
+    .error {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        width: 150px;
+        height: 150px;
+      }
+      h2 {
+        font-weight: lighter;
+      }
     }
   }
 }

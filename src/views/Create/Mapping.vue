@@ -156,7 +156,7 @@
       <b>Note</b> : Please ensure all data fields are filled properly
     </p>
     <transition name="fade" appear>
-      <Error :obj="error" />
+      <Error :obj="error" :emptyStr="true" />
     </transition>
   </div>
 </template>

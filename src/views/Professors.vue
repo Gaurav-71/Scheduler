@@ -4,6 +4,9 @@
       <Alert :obj="warning" :remove="warningRemoveObj" />
     </transition>
     <transition name="fade" appear>
+      <Error :obj="error" />
+    </transition>
+    <transition name="fade" appear>
       <AddProfessor v-if="$store.state.showProfessorModal" />
     </transition>
     <Heading :obj="headingObj" />
@@ -88,6 +91,10 @@
             </div>
           </div>
         </div>
+        <div v-if="searchProfessors.length == 0" class="error">
+          <img src="../assets/Common/error.svg" alt="error" />
+          <h2>Sorry, we could'nt find any professor named {{search}}</h2>
+        </div>
       </div>
     </div>
   </div>
@@ -97,12 +104,14 @@
 import AddProfessor from "../components/Modals/AddProfessor.vue";
 import Heading from "../components/Design/Heading";
 import Alert from "../components/Modals/Alert";
+import Error from "../components/Modals/Error";
 
 export default {
   components: {
     AddProfessor,
     Heading,
-    Alert
+    Alert,
+    Error
   },
   data() {
     return {
@@ -117,6 +126,13 @@ export default {
         message: "Are you sure you want to delete this professor permanently ?",
         button: "Delete Professor",
         number: 2
+      },
+      error: {
+        isVisible: false,
+        message: {
+          code: "Missing-information",
+          message: "Please fill all data fields"
+        }
       },
       warningRemoveObj: null,
       search: "",
@@ -142,23 +158,31 @@ export default {
       this.gender = professor.detail.Gender;
     },
     saveDetails(professor) {
-      let data = {
-        id: professor.id,
-        Name: this.name,
-        Designation: this.designation,
-        Gender: this.gender
-      };
-      this.$store
-        .dispatch("updateProfessorBio", data)
-        .then(() => {
-          this.name = "";
-          this.designation = "";
-          this.gender = "";
-          professor.isEditing = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      if (
+        this.name.trim() == "" ||
+        this.designation.trim() == "" ||
+        this.gender.trim() == ""
+      ) {
+        this.error.isVisible = true;
+      } else {
+        let data = {
+          id: professor.id,
+          Name: this.name,
+          Designation: this.designation,
+          Gender: this.gender
+        };
+        this.$store
+          .dispatch("updateProfessorBio", data)
+          .then(() => {
+            this.name = "";
+            this.designation = "";
+            this.gender = "";
+            professor.isEditing = false;
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     }
   },
   computed: {
@@ -278,6 +302,19 @@ export default {
     }
     .card-container:hover {
       border: 1px solid gray;
+    }
+    .error {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        width: 150px;
+        height: 150px;
+      }
+      h2 {
+        font-weight: lighter;
+      }
     }
   }
 }

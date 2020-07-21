@@ -1,33 +1,31 @@
 <template>
   <div v-if="obj.isVisible" class="modal-container">
     <div class="modal">
-      <img src="../../assets/Login/Modal/error.svg" alt="add" class="error" />
+      <img src="../../assets/Common/error.svg" alt="add" class="error" />
       <div class="message">
         <h2>{{obj.message.code}}</h2>
         <h3>{{obj.message.message}}</h3>
       </div>
     </div>
-    <img
-      src="../../assets/Common/delete.svg"
-      alt="cancel"
-      @click="handleError"
-      class="cancel"
-    />
+    <img src="../../assets/Common/delete.svg" alt="cancel" @click="handleError" class="cancel" />
   </div>
 </template>
 
 <script>
 export default {
-  props: {    
+  props: {
     obj: {
       isVisible: Boolean,
       message: Object
-    }
+    },
+    emptyStr: Boolean
   },
-  methods:{
-    handleError(){
-      this.obj.isVisible=false;
-      this.obj.message.message = "";
+  methods: {
+    handleError() {
+      this.obj.isVisible = false;
+      if (this.emptyStr) {
+        this.obj.message.message = "";
+      }
     }
   }
 };
