@@ -9,8 +9,11 @@ export default {
         payload.email,
         payload.password
       );
-      this.state.currentUser = payload.email;
-      localStorage.setItem("currentUser", payload.email);
+      this.state.currentUser= { 
+        email: payload.email,
+        name: payload.name
+      };
+      localStorage.setItem("currentUser", this.state.currentUser);
       commit("signin", response.user);
     } catch (err) {
       this.state.isLoggingIn = true;
@@ -33,8 +36,12 @@ export default {
       payload.email,
       payload.password
     );
-    this.state.currentUser = payload.email;
-    localStorage.setItem("currentUser", payload.email);
+    this.state.currentUser= { 
+      email: payload.email,
+      name: payload.name
+    };
+
+    localStorage.setItem("currentUser", this.state.currentUser);
     commit("signup", response.user);
   },
   async loadProfessorList(context) {

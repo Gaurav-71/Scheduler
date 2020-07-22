@@ -14,7 +14,7 @@
               <h3>User Name</h3>
             </div>
             <div v-if="isEditingName" class="flex">
-              <input type="text" v-model="name" placeholder="Enter Name" />
+              <input type="text" v-model="currentUser.name" placeholder="Enter Name" />
               <img
                 @click="isEditingName=false"
                 src="../assets/Common/save.svg"
@@ -31,7 +31,7 @@
               />
             </div>
             <div class="flex" v-else>
-              <div class="box">{{name}}</div>
+              <div class="box">{{currentUser.name}}</div>
               <img
                 src="../assets/Common/edit.svg"
                 alt="edit"
@@ -47,7 +47,7 @@
               <img src="../assets/Settings/gmail.svg" alt="email" />
               <h3>Email</h3>
             </div>
-            <div style="margin: 0.3rem 0;">{{email}}</div>
+            <div style="margin: 0.3rem 0;">{{currentUser.email}}</div>
           </div>
           <div class="line"></div>
           <div class="btn-container">
@@ -83,7 +83,6 @@
 
 <script>
 import Heading from "../components/Design/Heading";
-
 export default {
   components: {
     Heading
@@ -95,12 +94,12 @@ export default {
         h4: "Modify account details and manage your data & privacy",
         src: "settings.svg"
       },
-      name: "Aravind Ramesh Shreyas ",
-      email: "halalcut@shreyas.com",
+      name: this.$store.state.currentUser.name,
+      email: this.$store.state.currentUser.email,
       isEditingName: false
     };
   },
-  methods: {
+  methods: {  
     route() {
       this.$router.push("/reset");
     }

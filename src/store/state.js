@@ -6,39 +6,17 @@ export default {
   semester: null,
 
   section: null,
-<<<<<<< HEAD
-
-  department: '',
-
-  term: '',
-
-  showProfessorModal: false,
-
-  showCourseModal: false,
-
-  cycle: null,
-
-=======
   cycle: null,
   department: "",
   term: "",  
   showProfessorModal: false,
   showCourseModal: false,  
->>>>>>> pooh
   isLoggedIn: false,
 
   isLoggingIn: true,
-<<<<<<< HEAD
-
-  postSubscription: null,
-
-  isDownloading: false,
-
-=======
   isMapping: false,  
   isDownloading: false,  
   postSubscription: null,
->>>>>>> pooh
   user: JSON.parse(localStorage.getItem("loggedUser")),
 
   currentUser: localStorage.getItem("currentUser"),
@@ -48,10 +26,6 @@ export default {
   professorList: [],
 
   courseList: [],
-<<<<<<< HEAD
-
-=======
->>>>>>> pooh
   allOddCycleClasses: {
     sec3A: {},
     sec3B: {},

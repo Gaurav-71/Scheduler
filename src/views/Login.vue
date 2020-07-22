@@ -7,7 +7,7 @@
           <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
           <h1 style="margin: 1rem;">Create Account</h1>
           <div v-if="$store.state.isLoggingIn" class="form-fields">
-            <input type="text" placeholder="Name" class="name" />
+            <input v-model="name" type="text" placeholder="Name" class="name" />
             <input v-model="email" type="email" placeholder="Email" class="email" />
             <input v-model="password" type="password" placeholder="Password" class="password" />
             <input
@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       shiftView: false,
+      name: "",
       email: "",
       password: "",
       confirmpassword: "",
@@ -102,7 +103,7 @@ export default {
         });
     },
     signUp() {
-      let data = { email: this.email, password: this.password };
+      let data = { name: this.name, email: this.email, password: this.password };
       if (this.password !== this.confirmpassword) {
         let customErr = {
           message: "Passwords do not match, please retry",
