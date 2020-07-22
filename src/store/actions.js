@@ -330,7 +330,7 @@ export default {
         "sec3B",
         "sec3C"
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];      
         let mathClassNames = [
           "RegularClass1",
@@ -357,7 +357,7 @@ export default {
         
     } else {
       let classNames = ["sec4A", "sec4B", "sec4C"];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allEvenCycleClasses[classNames[k]];      
         let mathClassNames = [
           "RegularClass1",
@@ -396,7 +396,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -431,7 +431,7 @@ export default {
       }
     } else {
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
-      for (let k = 0; k < 6; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allEvenCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -483,7 +483,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -616,7 +616,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         console.log(currentClass);
         let subjectStack = [];
@@ -637,12 +637,23 @@ export default {
           {   let toBreak = false;
               for(let day= 0;day<5;day++)
               { let x = await context.dispatch("getDay",day);
-                if((professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]==""))
+                if((professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]=="") && (currentClass.subjects[subNumber].detail.isToggleChecked == false))
                 { currentClass.subjects[subNumber].detail.isDayDone[day] = true;
                   currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
                   professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
                   toBreak = true;
                   break;
+                }
+                else if ((currentClass.subjects[subNumber].detail.isToggleChecked) && (professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]=="")){
+                  let secondProfessor = await context.dispatch("getProfessorObject",currentClass.subjects[subNumber].detail.Professors[1]);
+                  if(secondProfessor.detail[x][hour] == ""){
+                    currentClass.subjects[subNumber].detail.isDayDone[day] = true;
+                    currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
+                    professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                    secondProfessor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                    toBreak = true;
+                    break; 
+                  }
                 }
               }
               if(toBreak)
@@ -671,7 +682,8 @@ export default {
     else {
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
       for (let k = 0; k < 1; k++) {
-        let currentClass = this.state.allEvenCycleClasses[classNames[k]];
+        let currentClass = this.state.allOddCycleClasses[classNames[k]];
+        console.log(currentClass);
         let subjectStack = [];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -690,12 +702,23 @@ export default {
           {   let toBreak = false;
               for(let day= 0;day<5;day++)
               { let x = await context.dispatch("getDay",day);
-                if((professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]==""))
+                if((professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]=="") && (currentClass.subjects[subNumber].detail.isToggleChecked == false))
                 { currentClass.subjects[subNumber].detail.isDayDone[day] = true;
                   currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
                   professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
                   toBreak = true;
                   break;
+                }
+                else if ((currentClass.subjects[subNumber].detail.isToggleChecked) && (professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]=="")){
+                  let secondProfessor = await context.dispatch("getProfessorObject",currentClass.subjects[subNumber].detail.Professors[1]);
+                  if(secondProfessor.detail[x][hour] == ""){
+                    currentClass.subjects[subNumber].detail.isDayDone[day] = true;
+                    currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
+                    professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                    secondProfessor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                    toBreak = true;
+                    break; 
+                  }
                 }
               }
               if(toBreak)
