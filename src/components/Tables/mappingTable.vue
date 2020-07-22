@@ -6,9 +6,11 @@
     </transition>
     <div class="heading">
       <h1>Professor Mapping</h1>
-      <h4>Map the subjects of the respective semester to the respective professors</h4>
+      <h4>
+        Map the subjects of the respective semester to the respective professors
+      </h4>
     </div>
-    
+
     <table>
       <tr>
         <th>Course</th>
@@ -22,7 +24,11 @@
             class="switch"
             title="If this subject has more than one main teacher toggle this switch on"
           >
-            <input type="checkbox" id="checkbox" v-model="courses.detail.isToggleChecked"/>
+            <input
+              type="checkbox"
+              id="checkbox"
+              v-model="courses.detail.isToggleChecked"
+            />
             <span class="slider round"></span>
           </label>
           {{ courses.detail.Name }}
@@ -30,11 +36,14 @@
         <td>{{ courses.detail.Code }}</td>
         <td>
           {{ courses.detail.Credits.Theory }}:{{
-          courses.detail.Credits.Tutorial
+            courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
         </td>
         <td
-          v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0"
+          v-if="
+            courses.detail.Credits.Tutorial > 0 ||
+              courses.detail.Credits.Lab > 0
+          "
           class="data-input"
         >
           <div class="custom-input">
@@ -52,7 +61,10 @@
               @click="addProfessor(index)"
             />
           </div>
-          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 2">
+          <div
+            class="custom-input"
+            v-if="sectionObject.getProfessors(index) >= 2"
+          >
             <input
               type="text"
               placeholder="Select Professor"
@@ -69,7 +81,10 @@
             />
             <div v-else class="block"></div>
           </div>
-          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 3">
+          <div
+            class="custom-input"
+            v-if="sectionObject.getProfessors(index) >= 3"
+          >
             <input
               type="text"
               placeholder="Select Professor"
@@ -86,7 +101,10 @@
             />
             <div v-else class="block"></div>
           </div>
-          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 4">
+          <div
+            class="custom-input"
+            v-if="sectionObject.getProfessors(index) >= 4"
+          >
             <input
               type="text"
               placeholder="Select Professor"
@@ -107,7 +125,6 @@
         <td v-else class="data-input">
           <div class="custom-input">
             <input
-              
               type="text"
               placeholder="Select Main Professor 1"
               list="allProfessors"
@@ -121,10 +138,13 @@
               @click="addProfessor(index)"
             />
           </div>
-          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 2">
+          <div
+            class="custom-input"
+            v-if="sectionObject.getProfessors(index) >= 2"
+          >
             <input
               type="text"
-              placeholder= "Select Professor"
+              placeholder="Select Professor"
               list="allProfessors"
               v-model="courses.detail.Professors[1]"
             />
@@ -138,7 +158,10 @@
             />
             <div v-else class="block"></div>
           </div>
-          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 3">
+          <div
+            class="custom-input"
+            v-if="sectionObject.getProfessors(index) >= 3"
+          >
             <input
               type="text"
               placeholder="Select Professor"
@@ -155,7 +178,10 @@
             />
             <div v-else class="block"></div>
           </div>
-          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 4">
+          <div
+            class="custom-input"
+            v-if="sectionObject.getProfessors(index) >= 4"
+          >
             <input
               type="text"
               placeholder="Select Main Professor 4"
@@ -175,19 +201,20 @@
         </td>
       </tr>
     </table>
-    
+
     <p>
       Can't find a Professor or Course ? Click here to add new
-      <span
-        @click="$store.state.showProfessorModal = true"
-      >Professor</span> or
+      <span @click="$store.state.showProfessorModal = true">Professor</span> or
       <span @click="$store.state.showCourseModal = true">Course</span>
     </p>
     <br />
     <div class="classroom-container">
       <div class="heading">
         <h1>Classroom</h1>
-        <h4>Enter the classroom name where you want to accomodate students of class {{$store.state.semester}}{{$store.state.section}}</h4>
+        <h4>
+          Enter the classroom name where you want to accomodate students of
+          class {{ $store.state.semester }}{{ $store.state.section }}
+        </h4>
       </div>
       <input
         type="text"
@@ -197,187 +224,6 @@
       />
     </div>
     <br />
-<<<<<<< HEAD
-    <div class="heading">
-      <h1>Labs</h1>
-      <h4>Add custom timings for labs</h4>
-    </div>
-    <table>
-      <tr>
-        <th>Course</th>
-        <th>Course Code</th>
-        <th>Time</th>
-        <th>Day</th>
-        <th>Lab Name</th>
-      </tr>
-      <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
-        <td v-if="courses.detail.Credits.Lab > 0" class="course-name">{{ courses.detail.Name }}</td>
-        <td v-if="courses.detail.Credits.Lab > 0">{{ courses.detail.Code }}</td>
-        <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
-          <input
-            type="text"
-            placeholder="Select Time"
-            list="time"
-            v-model="sectionObject.subjects[index].detail.LabSchedule.Time"
-          />
-          <datalist id="time">
-            <option value="9:00 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
-          <input
-            type="text"
-            placeholder="Select Day"
-            list="day"
-            v-model="sectionObject.subjects[index].detail.LabSchedule.Day"
-          />
-          <datalist id="day">
-            <option value="Monday"></option>
-            <option value="Tuesday"></option>
-            <option value="Wednesday"></option>
-            <option value="Thursday"></option>
-            <option value="Friday"></option>
-            <option value="Saturday"></option>
-          </datalist>
-        </td>
-        <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
-          <input
-            type="text"
-            placeholder="Enter Lab Name"
-            v-model="sectionObject.subjects[index].detail.LabSchedule.LabNumber"
-          />
-        </td>
-      </tr>
-    </table>
-    <br />
-    <div class="heading"   v-if="$store.state.semester == 3 || $store.state.semester == 4">
-      <h1>Math Professors</h1>
-      <h4>Enter the math professors for students of class {{$store.state.semester}}{{$store.state.section}}</h4>
-    </div>
-    <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-prof">
-      <input type="text" placeholder="Enter Main Professor name" class="classroom" v-model="sectionObject.mathClass.Professors[0]"/>
-      <input type="text" placeholder="Enter Professor name" class="classroom" v-model="sectionObject.mathClass.Professors[1]"/>
-      <input type="text" placeholder="Enter Professor name" class="classroom" v-model="sectionObject.mathClass.Professors[2]"/>
-    </div>
-    <br />
-    <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="heading">
-      <h1>Math Classes</h1>
-      <h4>Enter the classes provided by the math department</h4>
-    </div>
-    <table v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-dept">
-      <tr>
-        <th>Class</th>
-        <th>Time</th>
-        <th>Day</th>
-      </tr>
-      <tr>
-        <td>Tutorial Class (2 hours)</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time-tutorial" v-model="sectionObject.mathClass.TutorialClass.Time" />
-          <datalist id="math-time-tutorial">
-            <option value="9:00 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Day" list="day" v-model="sectionObject.mathClass.TutorialClass.Day"/>
-          <datalist id="day">
-            <option value="Monday"></option>
-            <option value="Tuesday"></option>
-            <option value="Wednesday"></option>
-            <option value="Thursday"></option>
-            <option value="Friday"></option>
-            <option value="Saturday"></option>
-          </datalist>
-        </td>
-      </tr>
-      <tr>
-        <td>Regular class 1 (1 hour)</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time-regular1" v-model="sectionObject.mathClass.RegularClass1.Time"/>
-          <datalist id="math-time-regular1">
-            <option value="9:00 AM"></option>
-            <option value="9:55 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="12:00 PM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-            <option value="3:35 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Day" list="day" v-model="sectionObject.mathClass.RegularClass1.Day"/>
-          <datalist id="day">
-            <option value="Monday"></option>
-            <option value="Tuesday"></option>
-            <option value="Wednesday"></option>
-            <option value="Thursday"></option>
-            <option value="Friday"></option>
-            <option value="Saturday"></option>
-          </datalist>
-        </td>
-      </tr>
-      <tr>
-        <td>Regular class 2 (1 hour)</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time-regular2" v-model="sectionObject.mathClass.RegularClass2.Time"/>
-          <datalist id="math-time-regular2">
-            <option value="9:00 AM"></option>
-            <option value="9:55 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="12:00 PM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-            <option value="3:35 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Day" list="day" v-model="sectionObject.mathClass.RegularClass2.Day"/>
-          <datalist id="day">
-            <option value="Monday"></option>
-            <option value="Tuesday"></option>
-            <option value="Wednesday"></option>
-            <option value="Thursday"></option>
-            <option value="Friday"></option>
-            <option value="Saturday"></option>
-          </datalist>
-        </td>
-      </tr>
-      <tr>
-        <td>Regular class 3 (1 hour)</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time-regular3" v-model="sectionObject.mathClass.RegularClass3.Time"/>
-          <datalist id="math-time-regular3">
-            <option value="9:00 AM"></option>
-            <option value="9:55 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="12:00 PM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-            <option value="3:35 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Day" list="day" v-model="sectionObject.mathClass.RegularClass3.Day"/>
-          <datalist id="day">
-            <option value="Monday"></option>
-            <option value="Tuesday"></option>
-            <option value="Wednesday"></option>
-            <option value="Thursday"></option>
-            <option value="Friday"></option>
-            <option value="Saturday"></option>
-          </datalist>
-        </td>
-      </tr>
-    </table>
-    <br />
-    <br />
-=======
     <div v-if="$store.state.createType == 1">
       <div class="heading">
         <h1>Labs</h1>
@@ -392,8 +238,12 @@
           <th>Lab Name</th>
         </tr>
         <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
-          <td v-if="courses.detail.Credits.Lab > 0" class="course-name">{{ courses.detail.Name }}</td>
-          <td v-if="courses.detail.Credits.Lab > 0">{{ courses.detail.Code }}</td>
+          <td v-if="courses.detail.Credits.Lab > 0" class="course-name">
+            {{ courses.detail.Name }}
+          </td>
+          <td v-if="courses.detail.Credits.Lab > 0">
+            {{ courses.detail.Code }}
+          </td>
           <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
             <input
               type="text"
@@ -428,175 +278,210 @@
             <input
               type="text"
               placeholder="Enter Lab Name"
-              v-model="sectionObject.subjects[index].detail.LabSchedule.LabNumber"
+              v-model="
+                sectionObject.subjects[index].detail.LabSchedule.LabNumber
+              "
             />
           </td>
         </tr>
       </table>
+
       <br />
-      <div class="heading">
+      <div
+        class="heading"
+        v-if="$store.state.semester == 3 || $store.state.semester == 4"
+      >
         <h1>Math Professors</h1>
-        <h4>Enter the math professors for students of class {{$store.state.semester}}{{$store.state.section}}</h4>
+        <h4>
+          Enter the math professors for students of class
+          {{ $store.state.semester }}{{ $store.state.section }}
+        </h4>
       </div>
-      <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-prof">
-        <input type="text" placeholder="Enter Main Professor name" class="classroom" />
-        <input type="text" placeholder="Enter Professor name" class="classroom" />
-        <input type="text" placeholder="Enter Professor name" class="classroom" />
+      <div
+        v-if="$store.state.semester == 3 || $store.state.semester == 4"
+        class="math-prof"
+      >
+        <input
+          type="text"
+          placeholder="Enter Main Professor name"
+          class="classroom"
+          v-model="sectionObject.mathClass.Professors[0]"
+        />
+        <input
+          type="text"
+          placeholder="Enter Professor name"
+          class="classroom"
+          v-model="sectionObject.mathClass.Professors[1]"
+        />
+        <input
+          type="text"
+          placeholder="Enter Professor name"
+          class="classroom"
+          v-model="sectionObject.mathClass.Professors[2]"
+        />
       </div>
       <br />
-      <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="heading">
+      <div
+        v-if="$store.state.semester == 3 || $store.state.semester == 4"
+        class="heading"
+      >
         <h1>Math Classes</h1>
         <h4>Enter the classes provided by the math department</h4>
       </div>
-      <table v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-dept">
+      <table
+        v-if="$store.state.semester == 3 || $store.state.semester == 4"
+        class="math-dept"
+      >
         <tr>
-          <th>Day</th>
+          <th>Class</th>
           <th>Time</th>
-          <th>Type</th>
+          <th>Day</th>
         </tr>
         <tr>
-          <td>Monday</td>
+          <td>Tutorial Class (2 hours)</td>
           <td class="custom-input">
-            <input type="text" placeholder="Select Time" list="math-time" />
-            <datalist id="math-time">
+            <input
+              type="text"
+              placeholder="Select Time"
+              list="math-time-tutorial"
+              v-model="sectionObject.mathClass.TutorialClass.Time"
+            />
+            <datalist id="math-time-tutorial">
               <option value="9:00 AM"></option>
-              <option value="9:55 AM"></option>
               <option value="11:05 AM"></option>
-              <option value="12:00 PM"></option>
-              <option value="12:55 PM"></option>
               <option value="1:45 PM"></option>
               <option value="2:40 PM"></option>
-              <option value="3:30 PM"></option>
             </datalist>
           </td>
           <td class="custom-input">
-            <input type="text" placeholder="Select Class Type" list="type" />
-            <datalist id="type">
-              <option value="Theory"></option>
-              <option value="Tutorial"></option>
-            </datalist>
-          </td>
-        </tr>
-        <tr>
-          <td>Tuesday</td>
-          <td class="custom-input">
-            <input type="text" placeholder="Select Time" list="math-time" />
-            <datalist id="math-time">
-              <option value="9:00 AM"></option>
-              <option value="9:55 AM"></option>
-              <option value="11:05 AM"></option>
-              <option value="12:00 PM"></option>
-              <option value="12:55 PM"></option>
-              <option value="1:45 PM"></option>
-              <option value="2:40 PM"></option>
-              <option value="3:30 PM"></option>
-            </datalist>
-          </td>
-          <td class="custom-input">
-            <input type="text" placeholder="Select Class Type" list="type" />
-            <datalist id="type">
-              <option value="Theory"></option>
-              <option value="Tutorial"></option>
+            <input
+              type="text"
+              placeholder="Select Day"
+              list="day"
+              v-model="sectionObject.mathClass.TutorialClass.Day"
+            />
+            <datalist id="day">
+              <option value="Monday"></option>
+              <option value="Tuesday"></option>
+              <option value="Wednesday"></option>
+              <option value="Thursday"></option>
+              <option value="Friday"></option>
+              <option value="Saturday"></option>
             </datalist>
           </td>
         </tr>
         <tr>
-          <td>Wednesday</td>
+          <td>Regular class 1 (1 hour)</td>
           <td class="custom-input">
-            <input type="text" placeholder="Select Time" list="math-time" />
-            <datalist id="math-time">
+            <input
+              type="text"
+              placeholder="Select Time"
+              list="math-time-regular1"
+              v-model="sectionObject.mathClass.RegularClass1.Time"
+            />
+            <datalist id="math-time-regular1">
               <option value="9:00 AM"></option>
               <option value="9:55 AM"></option>
               <option value="11:05 AM"></option>
               <option value="12:00 PM"></option>
-              <option value="12:55 PM"></option>
               <option value="1:45 PM"></option>
               <option value="2:40 PM"></option>
-              <option value="3:30 PM"></option>
+              <option value="3:35 PM"></option>
             </datalist>
           </td>
           <td class="custom-input">
-            <input type="text" placeholder="Select Class Type" list="type" />
-            <datalist id="type">
-              <option value="Theory"></option>
-              <option value="Tutorial"></option>
+            <input
+              type="text"
+              placeholder="Select Day"
+              list="day"
+              v-model="sectionObject.mathClass.RegularClass1.Day"
+            />
+            <datalist id="day">
+              <option value="Monday"></option>
+              <option value="Tuesday"></option>
+              <option value="Wednesday"></option>
+              <option value="Thursday"></option>
+              <option value="Friday"></option>
+              <option value="Saturday"></option>
             </datalist>
           </td>
         </tr>
         <tr>
-          <td>Thursday</td>
+          <td>Regular class 2 (1 hour)</td>
           <td class="custom-input">
-            <input type="text" placeholder="Select Time" list="math-time" />
-            <datalist id="math-time">
+            <input
+              type="text"
+              placeholder="Select Time"
+              list="math-time-regular2"
+              v-model="sectionObject.mathClass.RegularClass2.Time"
+            />
+            <datalist id="math-time-regular2">
               <option value="9:00 AM"></option>
               <option value="9:55 AM"></option>
               <option value="11:05 AM"></option>
               <option value="12:00 PM"></option>
-              <option value="12:55 PM"></option>
               <option value="1:45 PM"></option>
               <option value="2:40 PM"></option>
-              <option value="3:30 PM"></option>
+              <option value="3:35 PM"></option>
             </datalist>
           </td>
           <td class="custom-input">
-            <input type="text" placeholder="Select Class Type" list="type" />
-            <datalist id="type">
-              <option value="Theory"></option>
-              <option value="Tutorial"></option>
+            <input
+              type="text"
+              placeholder="Select Day"
+              list="day"
+              v-model="sectionObject.mathClass.RegularClass2.Day"
+            />
+            <datalist id="day">
+              <option value="Monday"></option>
+              <option value="Tuesday"></option>
+              <option value="Wednesday"></option>
+              <option value="Thursday"></option>
+              <option value="Friday"></option>
+              <option value="Saturday"></option>
             </datalist>
           </td>
         </tr>
         <tr>
-          <td>Friday</td>
+          <td>Regular class 3 (1 hour)</td>
           <td class="custom-input">
-            <input type="text" placeholder="Select Time" list="math-time" />
-            <datalist id="math-time">
+            <input
+              type="text"
+              placeholder="Select Time"
+              list="math-time-regular3"
+              v-model="sectionObject.mathClass.RegularClass3.Time"
+            />
+            <datalist id="math-time-regular3">
               <option value="9:00 AM"></option>
               <option value="9:55 AM"></option>
               <option value="11:05 AM"></option>
               <option value="12:00 PM"></option>
-              <option value="12:55 PM"></option>
               <option value="1:45 PM"></option>
               <option value="2:40 PM"></option>
-              <option value="3:30 PM"></option>
+              <option value="3:35 PM"></option>
             </datalist>
           </td>
           <td class="custom-input">
-            <input type="text" placeholder="Select Class Type" list="type" />
-            <datalist id="type">
-              <option value="Theory"></option>
-              <option value="Tutorial"></option>
-            </datalist>
-          </td>
-        </tr>
-        <tr>
-          <td>Saturday</td>
-          <td class="custom-input">
-            <input type="text" placeholder="Select Time" list="math-time" />
-            <datalist id="math-time">
-              <option value="9:00 AM"></option>
-              <option value="9:55 AM"></option>
-              <option value="11:05 AM"></option>
-              <option value="12:00 PM"></option>
-              <option value="12:55 PM"></option>
-              <option value="1:45 PM"></option>
-              <option value="2:40 PM"></option>
-              <option value="3:30 PM"></option>
-            </datalist>
-          </td>
-          <td class="custom-input">
-            <input type="text" placeholder="Select Class Type" list="type" />
-            <datalist id="type">
-              <option value="Theory"></option>
-              <option value="Tutorial"></option>
+            <input
+              type="text"
+              placeholder="Select Day"
+              list="day"
+              v-model="sectionObject.mathClass.RegularClass3.Day"
+            />
+            <datalist id="day">
+              <option value="Monday"></option>
+              <option value="Tuesday"></option>
+              <option value="Wednesday"></option>
+              <option value="Thursday"></option>
+              <option value="Friday"></option>
+              <option value="Saturday"></option>
             </datalist>
           </td>
         </tr>
       </table>
-      <br />
-      <br />
     </div>
->>>>>>> pooh
+    <br />
+    <br />
   </div>
 </template>
 
@@ -607,12 +492,12 @@ import AddCourse from "../Modals/AddCourse";
 export default {
   props: {
     sectionObject: {
-      type: Object
-    }
+      type: Object,
+    },
   },
   components: {
     AddProfessor,
-    AddCourse
+    AddCourse,
   },
   data() {
     return {};
@@ -635,7 +520,7 @@ export default {
           this.sectionObject.decrementNewProfessors(index)
         );
       }
-    }
+    },
   },
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
@@ -646,7 +531,7 @@ export default {
       option.value = item;
       list.appendChild(option);
     });
-  }
+  },
 };
 </script>
 
