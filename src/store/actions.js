@@ -176,6 +176,27 @@ export default {
             return this.newProfessor[index] - 1;
           },
         };
+        if(semester[i] == 3){
+          this.state.allOddCycleClasses[classNames[i]]["mathClass"] = {
+            TutorialClass : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass1 : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass2 : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass3 : {
+              Time : "",
+              Day : ""
+            },
+            Professors : ["", "", ""]
+          }
+        }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
           if (subject.detail.Semester == semester[i]) {
@@ -188,34 +209,15 @@ export default {
               };
             }
             sub.detail["isDayDone"] = [false,false,false,false,false,false];
+            sub.detail["isToggleChecked"] = false;
+            sub.detail[
+              "Professors"
+            ] = ["", "", "", ""];
             subjects.push(sub);
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
           }
         });
         this.state.allOddCycleClasses[classNames[i]]["subjects"] = subjects;
-        for (
-          let j = 0;
-          j < this.state.allOddCycleClasses[classNames[i]].subjects.length;
-          j++
-        ) {
-          let currentSubject = this.state.allOddCycleClasses[classNames[i]]
-            .subjects[j];
-          if (currentSubject.detail.Credits.Tutorial > 0) {
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = ["", "", ""];
-          } else if (currentSubject.detail.Credits.Lab > 0) {
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = ["", "", "", ""];
-          } else {
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allOddCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = [""];
-          }
-        }
       }
     } else {
       let semester = [4, 4, 4, 6, 6, 6, 8, 8];
@@ -251,7 +253,27 @@ export default {
             return this.newProfessor[index] - 1;
           },
         };
-
+        if(semester[i] == 4){
+          this.state.allEvenCycleClasses[classNames[i]]["mathClass"] = {
+            TutorialClass : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass1 : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass2 : {
+              Time : "",
+              Day : ""
+            },
+            RegularClass3 : {
+              Time : "",
+              Day : ""
+            },
+            Professors : ["", "", ""]
+          }
+        }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
           if (subject.detail.Semester == semester[i]) {
@@ -264,34 +286,15 @@ export default {
               };
             }
             sub.detail["isDayDone"] = [false,false,false,false,false,false];
+            sub.detail["isToggleChecked"] = false;
+            sub.detail[
+              "Professors"
+            ] = ["", "", "", ""];
             subjects.push(sub);
+            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
           }
         });
         this.state.allEvenCycleClasses[classNames[i]]["subjects"] = subjects;
-        for (
-          let j = 0;
-          j < this.state.allEvenCycleClasses[classNames[i]].subjects.length;
-          j++
-        ) {
-          let currentSubject = this.state.allEvenCycleClasses[classNames[i]]
-            .subjects[j];
-          if (currentSubject.detail.Credits.Tutorial > 0) {
-            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = ["", "", ""];
-          } else if (currentSubject.detail.Credits.Lab > 0) {
-            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = ["", "", "", ""];
-          } else {
-            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
-            this.state.allEvenCycleClasses[classNames[i]].subjects[j].detail[
-              "Professors"
-            ] = [""];
-          }
-        }
       }
     }
   },
@@ -309,6 +312,77 @@ export default {
     else if (labHour == "1:45 PM") return 4;
     else if (labHour == "2:40 PM") return 5;
   },
+  async getMathHour(context, labHour) {
+    console.log("getMathHour's context- "+ context);
+    if (labHour == "9:00 AM") return 0;
+    else if (labHour == "9:55 AM") return 1;
+    else if (labHour == "11:05 AM") return 2;
+    else if (labHour == "12:00 PM") return 3;
+    else if (labHour == "1:45 PM") return 4;
+    else if (labHour == "2:40 PM") return 5;
+    else if (labHour == "3:35 PM") return 6;
+  },
+  async assignMathsClasses (context) {
+    console.log("assignMathsClasses' context- "+ context);
+    if (this.state.cycle == "Odd") {
+      let classNames = [
+        "sec3A",
+        "sec3B",
+        "sec3C"
+      ];
+      for (let k = 0; k < 1; k++) {
+        let currentClass = this.state.allOddCycleClasses[classNames[k]];      
+        let mathClassNames = [
+          "RegularClass1",
+          "RegularClass2",
+          "RegularClass3"
+        ];   
+        console.log(currentClass.mathClass);
+        let x = await context.dispatch(
+          "getMathHour",
+          currentClass.mathClass.TutorialClass.Time
+        );
+        currentClass[currentClass.mathClass.TutorialClass.Day][x] = "Maths Tutorial";
+        currentClass[currentClass.mathClass.TutorialClass.Day][x+1] = "Maths Tutorial";
+        for(let y =0; y<3; y++){
+          x = await context.dispatch(
+            "getMathHour",
+            currentClass.mathClass[mathClassNames[y]].Time
+          );
+          console.log(x);
+          currentClass[currentClass.mathClass[mathClassNames[y]].Day][x] = "Maths";
+        }       
+        
+      }
+        
+    } else {
+      let classNames = ["sec4A", "sec4B", "sec4C"];
+      for (let k = 0; k < 1; k++) {
+        let currentClass = this.state.allEvenCycleClasses[classNames[k]];      
+        let mathClassNames = [
+          "RegularClass1",
+          "RegularClass2",
+          "RegularClass3"
+        ];   
+        console.log(currentClass.mathClass);
+        let x = await context.dispatch(
+          "getMathHour",
+          currentClass.mathClass.TutorialClass.Time
+        );
+        currentClass[currentClass.mathClass.TutorialClass.Day][x] = "Maths Tutorial";
+        currentClass[currentClass.mathClass.TutorialClass.Day][x+1] = "Maths Tutorial";
+        for(let y =0; y<3; y++){
+          x = await context.dispatch(
+            "getMathHour",
+            currentClass.mathClass[mathClassNames[y]].Time
+          );
+          console.log(x);
+          currentClass[currentClass.mathClass[mathClassNames[y]].Day][x] = "Maths";
+        }       
+        
+      }
+    }
+  },
   async assignLabs(context) {
     console.log("assignLabs' context- "+ context);
     if (this.state.cycle == "Odd") {
@@ -322,7 +396,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -357,7 +431,7 @@ export default {
       }
     } else {
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
-      for (let k = 0; k < 6; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allEvenCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -409,7 +483,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -542,7 +616,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 1; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         console.log(currentClass);
         let subjectStack = [];
@@ -563,12 +637,23 @@ export default {
           {   let toBreak = false;
               for(let day= 0;day<5;day++)
               { let x = await context.dispatch("getDay",day);
-                if((professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]==""))
+                if((professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]=="") && (currentClass.subjects[subNumber].detail.isToggleChecked == false))
                 { currentClass.subjects[subNumber].detail.isDayDone[day] = true;
                   currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
                   professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
                   toBreak = true;
                   break;
+                }
+                else if ((currentClass.subjects[subNumber].detail.isToggleChecked) && (professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]=="")){
+                  let secondProfessor = await context.dispatch("getProfessorObject",currentClass.subjects[subNumber].detail.Professors[1]);
+                  if(secondProfessor.detail[x][hour] == ""){
+                    currentClass.subjects[subNumber].detail.isDayDone[day] = true;
+                    currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
+                    professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                    secondProfessor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                    toBreak = true;
+                    break; 
+                  }
                 }
               }
               if(toBreak)
@@ -597,7 +682,8 @@ export default {
     else {
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
       for (let k = 0; k < 1; k++) {
-        let currentClass = this.state.allEvenCycleClasses[classNames[k]];
+        let currentClass = this.state.allOddCycleClasses[classNames[k]];
+        console.log(currentClass);
         let subjectStack = [];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -616,12 +702,23 @@ export default {
           {   let toBreak = false;
               for(let day= 0;day<5;day++)
               { let x = await context.dispatch("getDay",day);
-                if((professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]==""))
+                if((professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]=="") && (currentClass.subjects[subNumber].detail.isToggleChecked == false))
                 { currentClass.subjects[subNumber].detail.isDayDone[day] = true;
                   currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
                   professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
                   toBreak = true;
                   break;
+                }
+                else if ((currentClass.subjects[subNumber].detail.isToggleChecked) && (professor.detail[x][hour] == "") && (currentClass.subjects[subNumber].detail.isDayDone[day] == false) && (currentClass[x][hour]=="")){
+                  let secondProfessor = await context.dispatch("getProfessorObject",currentClass.subjects[subNumber].detail.Professors[1]);
+                  if(secondProfessor.detail[x][hour] == ""){
+                    currentClass.subjects[subNumber].detail.isDayDone[day] = true;
+                    currentClass[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation;
+                    professor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                    secondProfessor.detail[x][hour] = currentClass.subjects[subNumber].detail.Abbreviation+ " " + currentClass.Semester + currentClass.Section;
+                    toBreak = true;
+                    break; 
+                  }
                 }
               }
               if(toBreak)
@@ -650,6 +747,7 @@ export default {
   },
   async automateTimetable(context) {
     console.log("automateTimeTable's context- "+ context);
+    await context.dispatch("assignMathsClasses");
     await context.dispatch("assignLabs");
     await context.dispatch("assignTutorials");
     await context.dispatch("assignClasses");

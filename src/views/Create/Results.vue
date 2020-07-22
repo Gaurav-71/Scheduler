@@ -312,7 +312,7 @@
       style="margin-top: 1rem;"
     >
       <a class="btn transparent" href="#page-top">Jump to Top</a>
-      <div class="btn transparent">Generate Again</div>
+      <div class="btn transparent hide">Generate Again</div>
     </div>
     <div class="btn generate">Generate Again</div>
   </div>
@@ -507,6 +507,12 @@ export default {
     }
     .transparent:hover {
       background: rgba(21, 127, 135, 0.2);
+    }
+    .hide{
+      display: none;
+      @include ipad-portrait{
+        display: block;
+      }
     }
   }
   .generate {
