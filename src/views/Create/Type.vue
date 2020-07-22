@@ -17,7 +17,10 @@
             <h3>Manual</h3>
           </div>
           <p>Create a new timetable for a particular semester manually using advanced drag and drop features.</p>
-          <button @click="route(2)">Create Manually</button>
+          <div class="create-manual">
+            <div class="one" @click="route(2)">Create One</div>
+            <div @click="route(3)">Create All</div>
+          </div>
         </div>
       </div>
     </div>
@@ -29,6 +32,11 @@ export default {
   methods: {
     route(page) {
       if (page == 1) {
+        this.$store.state.createType = 1;
+        this.$router.push("/timetable/create/cycle");
+      }      
+      else if(page == 3){
+        this.$store.state.createType = 2;
         this.$router.push("/timetable/create/cycle");
       }
     }
@@ -100,20 +108,47 @@ export default {
         p {
           font-weight: lighter;
         }
-        button {
+        button,
+        .create-manual {
           width: 100%;
-          padding: 0.89rem;
-          border: none;
-          background-image: $gradient;
+          padding: 0.89rem;               
           cursor: pointer;
           color: white;
           font-size: 0.9rem;
+        }
+        button{
+          background-image: $gradient;
+          border: none;     
         }
         button:active {
           transform: scale(1.01);
         }
         button:focus {
           outline: none;
+        }
+        .create-manual {
+          padding: 0;
+          display: grid;
+          grid-template-columns: 50% 50%;
+          background-image: $gradient;                 
+          div {
+            width: 100%;
+            padding: 0.89rem 0;            
+            background-image: $gradient;                 
+            border-left: 1px solid white;                          
+          }
+          .one {            
+            background-image: none;
+            background: $primary-light;      
+            color: white;                                     
+            border-left: none;
+          }
+          .one:hover{
+            background: $primary;
+          }
+          div:active{
+            transform: scale(0.95);            
+          }
         }
       }
     }

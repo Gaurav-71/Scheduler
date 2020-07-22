@@ -1,5 +1,14 @@
 <template>
   <div class="courses">
+    <transition name="fade" appear>
+      <Alert :obj="warning" :remove="warningRemoveObj" />
+    </transition>
+    <transition name="fade" appear>
+      <Error :obj="error" />
+    </transition>
+    <transition name="fade" appear>
+      <AddCourse v-if="$store.state.showCourseModal" />
+    </transition>
     <Heading :obj="headingObj" />
     <div class="container">
       <div class="search-bar">
@@ -10,9 +19,6 @@
           title="Add New Course"
           @click="$store.state.showCourseModal = true"
         />
-        <transition name="fade" appear>
-          <AddCourse v-if="$store.state.showCourseModal" />
-        </transition>
       </div>
       <div class="results">
         <div v-for="(course, index) in searchCourses" :key="index">
@@ -58,7 +64,7 @@
               </div>
               <img
                 src="../assets/Common/delete.svg"
-                @click="removeCourse(course.id)"
+                @click="removeCourse(course)"
                 alt="delete"
                 title="Delete Course"
               />
@@ -67,7 +73,7 @@
               <h3>{{ course.detail.Name }}</h3>
               <h4>
                 {{ course.detail.Code }} | {{ course.detail.Credits.Theory }}:{{
-                  course.detail.Credits.Tutorial
+                course.detail.Credits.Tutorial
                 }}:{{ course.detail.Credits.Lab }} | {{ course.detail.Abbreviation }}
               </h4>
             </div>
@@ -109,12 +115,7 @@
                   <option value="8"></option>
                 </datalist>
                 <label for="type">Abbreviation:</label>
-                <input
-                  list="text"
-                  name="abbreviation"
-                  v-model="abbreviation"
-                  style="width: 5rem"
-                />
+                <input list="text" name="abbreviation" v-model="abbreviation" style="width: 5rem" />
               </div>
               <div class="row">
                 <label for="lecture">Credits : L:</label>
@@ -157,6 +158,10 @@
             </div>
           </div>
         </div>
+        <div v-if="searchCourses.length == 0" class="error">
+          <img src="../assets/Common/error.svg" alt="error" />
+          <h2>Sorry, we could'nt find any course named {{search}}</h2>
+        </div>
       </div>
     </div>
   </div>
@@ -165,11 +170,15 @@
 <script>
 import AddCourse from "../components/Modals/AddCourse.vue";
 import Heading from "../components/Design/Heading";
+import Alert from "../components/Modals/Alert";
+import Error from "../components/Modals/Error";
 
 export default {
   components: {
     AddCourse,
-    Heading
+    Heading,
+    Alert,
+    Error
   },
   data() {
     return {
@@ -179,6 +188,20 @@ export default {
           "A list of all courses taught by the department. Add, Modify or Delete a course at will",
         src: "books.svg"
       },
+      warning: {
+        isVisible: false,
+        message: "Are you sure you want to delete this course permanently ?",
+        button: "Delete Course",
+        number: 3
+      },
+      error: {
+        isVisible: false,
+        message: {
+          code: "Missing-information",
+          message: "Please fill all data fields"
+        }
+      },
+      warningRemoveObj: null,
       search: "",
       unsubscribe: null,
       name: "",
@@ -214,12 +237,8 @@ export default {
   },
   methods: {
     removeCourse(id) {
-      this.$store
-        .dispatch("removeCourse", id)
-        .then(() => {})
-        .catch(err => {
-          console.log(err);
-        });
+      this.warningRemoveObj = id;
+      this.warning.isVisible = true;
     },
     edit(course) {
       course.isEditing = true;
@@ -232,33 +251,43 @@ export default {
       this.labCredits = course.detail.Credits.Lab;
     },
     saveDetails(course) {
-      let data = {
-        id: course.id,
-        Name: this.name,
-        Code: this.code,
-        Semester: this.semester,
-        Credits: {
-          Theory: this.theoryCredits,
-          Tutorial: this.tutorialCredits,
-          Lab: this.labCredits
-        },
-        Abbreviation: this.abbreviation,
-      };
-      this.$store
-        .dispatch("updateCourseDetails", data)
-        .then(() => {
-          this.name = "";
-          this.code = "";
-          this.abbreviation = "";
-          this.semester = 0;
-          this.theoryCredits = 0;
-          this.tutorialCredits = 0;
-          this.labCredits = 0;
-          course.isEditing = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      this.error.isVisible = false;
+      if (
+        this.name.trim() == "" ||
+        this.code.trim() == "" ||
+        this.semester == 0 ||
+        this.abbreviation.trim() == ""
+      ) {
+        this.error.isVisible = true;
+      } else {
+        let data = {
+          id: course.id,
+          Name: this.name,
+          Code: this.code,
+          Semester: this.semester,
+          Credits: {
+            Theory: this.theoryCredits,
+            Tutorial: this.tutorialCredits,
+            Lab: this.labCredits
+          },
+          Abbreviation: this.abbreviation
+        };
+        this.$store
+          .dispatch("updateCourseDetails", data)
+          .then(() => {
+            this.name = "";
+            this.code = "";
+            this.abbreviation = "";
+            this.semester = 0;
+            this.theoryCredits = 0;
+            this.tutorialCredits = 0;
+            this.labCredits = 0;
+            course.isEditing = false;
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     }
   },
   beforeDestroy() {
@@ -389,6 +418,19 @@ export default {
     }
     .card:hover {
       border: 1px solid gray;
+    }
+    .error {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        width: 150px;
+        height: 150px;
+      }
+      h2 {
+        font-weight: lighter;
+      }
     }
   }
 }

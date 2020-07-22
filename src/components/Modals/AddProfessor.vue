@@ -1,5 +1,8 @@
 <template>
   <div class="modal-container">
+    <transition name="fade" appear>
+      <Error :obj="error" />
+    </transition>
     <div class="modal">
       <img src="../../assets/Professors/add.svg" alt="add" />
       <div class="line"></div>
@@ -60,37 +63,53 @@
 </template>
 
 <script>
+import Error from "./Error";
+
 export default {
+  components: {
+    Error
+  },
   data() {
     return {
       name: "",
       gender: "",
-      designation: ""
+      designation: "",
+      error: {
+        isVisible: false,
+        message: {
+          code: "Missing-information",
+          message: "Please fill all data fields"
+        }
+      }
     };
   },
   methods: {
     addProfessor() {
-      this.$store.state.showProfessorModal = false;
-      let data = {
-        Name: this.name,
-        Gender: this.gender,
-        Designation: this.designation,
-        Monday: ["", "", "", "", "", "", ""],
-        Tuesday: ["", "", "", "", "", "", ""],
-        Wednesday: ["", "", "", "", "", "", ""],
-        Thursday: ["", "", "", "", "", "", ""],
-        Friday: ["", "", "", "", "", "", ""],
-        Saturday: ["", "", "", "", "", "", ""]
-      };
-      this.$store
-        .dispatch("addProfessor", data)
-        .then(() => {})
-        .catch(err => {
-          console.log(err);
-        });
-      this.name = "";
-      this.gender = "";
-      this.designation = "";
+      if (this.name.trim() == "" || this.gender.trim() == "" || this.designation.trim() == "") {
+        this.error.isVisible = true;
+      } else {
+        this.$store.state.showProfessorModal = false;
+        let data = {
+          Name: this.name,
+          Gender: this.gender,
+          Designation: this.designation,
+          Monday: ["", "", "", "", "", "", ""],
+          Tuesday: ["", "", "", "", "", "", ""],
+          Wednesday: ["", "", "", "", "", "", ""],
+          Thursday: ["", "", "", "", "", "", ""],
+          Friday: ["", "", "", "", "", "", ""],
+          Saturday: ["", "", "", "", "", "", ""]
+        };
+        this.$store
+          .dispatch("addProfessor", data)
+          .then(() => {})
+          .catch(err => {
+            console.log(err);
+          });
+        this.name = "";
+        this.gender = "";
+        this.designation = "";
+      }
     }
   }
 };

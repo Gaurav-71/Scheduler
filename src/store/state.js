@@ -7,16 +7,18 @@ export default {
 
   section: null,
 
-  department: '',
+  cycle: null,
 
-  term: '',
+  createType: null,
+
+  department: "",
+
+  term: "",  
 
   showProfessorModal: false,
 
-  showCourseModal: false,
-
-  cycle: null,
-
+  showCourseModal: false,  
+  
   isLoggedIn: false,
 
   isLoggingIn: true,
