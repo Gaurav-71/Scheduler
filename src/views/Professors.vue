@@ -3,12 +3,12 @@
     <Heading :obj="headingObj" />
     <div class="container">
       <div class="search-bar">
-        <input type="search" placeholder="Search Professors" />
+        <input type="search" placeholder="Search Professors" v-model="search"/>
         <img
           src="../assets/Professors/add.svg"
           alt="add"
           title="Add New Professor"
-          @click="$store.state.showProfessorModal = true"
+          @click="$store.state.showProfessorModal = true"          
         />
         <transition name="fade" appear>
           <AddProfessor v-if="$store.state.showProfessorModal" />
