@@ -18,7 +18,7 @@ export default {
       unsubscribeCourse: null
     };
   },
-  created() {
+  created() {    
     this.$store.state.sidebarCounter = 2;
     localStorage.setItem("currentRoute", this.$route.path);
     this.$store.state.createRouteTracker = localStorage.getItem(

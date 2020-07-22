@@ -1,18 +1,24 @@
 <template>
   <div class="professors">
+    <transition name="fade" appear>
+      <Alert :obj="warning" :remove="warningRemoveObj" />
+    </transition>
+    <transition name="fade" appear>
+      <Error :obj="error" />
+    </transition>
+    <transition name="fade" appear>
+      <AddProfessor v-if="$store.state.showProfessorModal" />
+    </transition>
     <Heading :obj="headingObj" />
     <div class="container">
       <div class="search-bar">
-        <input type="search" placeholder="Search Professors" v-model="search"/>
+        <input type="search" placeholder="Search Professors" v-model="search" />
         <img
           src="../assets/Professors/add.svg"
           alt="add"
           title="Add New Professor"
           @click="$store.state.showProfessorModal = true"          
         />
-        <transition name="fade" appear>
-          <AddProfessor v-if="$store.state.showProfessorModal" />
-        </transition>
       </div>
       <div class="results">
         <div v-for="(professor, index) in searchProfessors" :key="index">
@@ -39,8 +45,18 @@
               </div>
             </div>
             <div class="actions">
-              <img src="../assets/Common/edit.svg" alt="edit" title="Edit Professor Details"  @click="edit(professor)"/>
-              <img src="../assets/Common/delete.svg" @click="removeProfessor(professor.id)" alt="delete" title="Delete Professor" />
+              <img
+                src="../assets/Common/edit.svg"
+                alt="edit"
+                title="Edit Professor Details"
+                @click="edit(professor)"
+              />
+              <img
+                src="../assets/Common/delete.svg"
+                @click="removeProfessor(professor)"
+                alt="delete"
+                title="Delete Professor"
+              />
             </div>
           </div>
           <div v-else class="card-container">
@@ -75,6 +91,10 @@
             </div>
           </div>
         </div>
+        <div v-if="searchProfessors.length == 0" class="error">
+          <img src="../assets/Common/error.svg" alt="error" />
+          <h2>Sorry, we could'nt find any professor named {{search}}</h2>
+        </div>
       </div>
     </div>
   </div>
@@ -83,11 +103,15 @@
 <script>
 import AddProfessor from "../components/Modals/AddProfessor.vue";
 import Heading from "../components/Design/Heading";
+import Alert from "../components/Modals/Alert";
+import Error from "../components/Modals/Error";
 
 export default {
   components: {
     AddProfessor,
-    Heading
+    Heading,
+    Alert,
+    Error
   },
   data() {
     return {
@@ -97,6 +121,20 @@ export default {
           "A list of all professors in the department. Add, Modify or Delete a professor at will",
         src: "professors.svg"
       },
+      warning: {
+        isVisible: false,
+        message: "Are you sure you want to delete this professor permanently ?",
+        button: "Delete Professor",
+        number: 2
+      },
+      error: {
+        isVisible: false,
+        message: {
+          code: "Missing-information",
+          message: "Please fill all data fields"
+        }
+      },
+      warningRemoveObj: null,
       search: "",
       unsubscribe: null,
       name: "",
@@ -110,12 +148,8 @@ export default {
   },
   methods: {
     removeProfessor(id) {
-      this.$store
-        .dispatch("removeProfessor", id)
-        .then(() => {})
-        .catch(err => {
-          console.log(err);
-        });
+      this.warningRemoveObj = id;
+      this.warning.isVisible = true;
     },
     edit(professor) {
       professor.isEditing = true;
@@ -124,23 +158,31 @@ export default {
       this.gender = professor.detail.Gender;
     },
     saveDetails(professor) {
-      let data = {
-        id: professor.id,
-        Name: this.name,
-        Designation: this.designation,
-        Gender: this.gender
-      };
-      this.$store
-        .dispatch("updateProfessorBio", data)
-        .then(() => {
-          this.name = "";
-          this.designation = "";
-          this.gender = "";
-          professor.isEditing = false;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      if (
+        this.name.trim() == "" ||
+        this.designation.trim() == "" ||
+        this.gender.trim() == ""
+      ) {
+        this.error.isVisible = true;
+      } else {
+        let data = {
+          id: professor.id,
+          Name: this.name,
+          Designation: this.designation,
+          Gender: this.gender
+        };
+        this.$store
+          .dispatch("updateProfessorBio", data)
+          .then(() => {
+            this.name = "";
+            this.designation = "";
+            this.gender = "";
+            professor.isEditing = false;
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
     }
   },
   computed: {
@@ -154,12 +196,12 @@ export default {
   mounted() {
     this.$store
       .dispatch("loadProfessorList")
-      .then((repsonse) => {
+      .then(repsonse => {
         this.unsubscribe = repsonse;
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
-      })
+      });
   }
 };
 </script>
@@ -260,6 +302,19 @@ export default {
     }
     .card-container:hover {
       border: 1px solid gray;
+    }
+    .error {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      img {
+        width: 150px;
+        height: 150px;
+      }
+      h2 {
+        font-weight: lighter;
+      }
     }
   }
 }

@@ -304,7 +304,7 @@
     >
       <div class="btn transparent" @click="printDoc(printID,filename)">Download as Word</div>
       <div class="btn" @click="route()">Save & Exit</div>
-      <div class="btn transparent" @click="printPDF()">Download as PDF</div>      
+      <div class="btn transparent" @click="printPDF()">Download as PDF</div>
     </div>
     <div
       v-if="$store.state.semester == 0 || $store.state.section != null"
@@ -414,6 +414,11 @@ export default {
       this.$store.state.createRouteTracker = localStorage.getItem(
         "createRouteTracker"
       );
+      this.$store.state.semester = null;
+      this.$store.state.section = null;
+      this.$store.state.cycle = null;
+      this.$store.state.term = "";
+      this.$store.state.department = "";
       this.$router.push("/timetable");
     },
     changeSemester(sem) {
@@ -437,8 +442,13 @@ export default {
     }
   },
   created() {
+    this.$store.state.isMapping = false;
     this.$store.state.sidebarCounter = 2;
     localStorage.setItem("currentRoute", this.$route.path);
+    localStorage.setItem("createRouteTracker", this.$route.path);
+    this.$store.state.createRouteTracker = localStorage.getItem(
+      "createRouteTracker"
+    );
   },
   mounted() {
     this.$store
@@ -508,9 +518,9 @@ export default {
     .transparent:hover {
       background: rgba(21, 127, 135, 0.2);
     }
-    .hide{
+    .hide {
       display: none;
-      @include ipad-portrait{
+      @include ipad-portrait {
         display: block;
       }
     }
@@ -520,7 +530,7 @@ export default {
     position: absolute;
     top: 5.3rem;
     right: 2.7rem;
-    @include ipad-portrait{
+    @include ipad-portrait {
       display: none;
     }
   }
@@ -543,7 +553,7 @@ export default {
     .actions {
       display: none;
     }
-    .generate{
+    .generate {
       display: none;
     }
   }

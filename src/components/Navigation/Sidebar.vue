@@ -1,49 +1,52 @@
 <template>
   <div class="sidebar">
     <Header />
+    <transition name="fade" appear>
+      <Alert :obj="warning" :path="warningPath"/>
+    </transition>
     <nav>
       <ul>
-        <li v-bind:class="{'active':$store.state.sidebarCounter == '1'}">
-          <router-link to="/timetable" class="router-link">
+        <li @click="route(1)" v-bind:class="{'active':$store.state.sidebarCounter == '1'}">
+          <div class="router-link">
             <img src="../../assets/Sidebar/home.svg" alt="home" />
             <span>Home</span>
-          </router-link>
+          </div>
         </li>
-        <li v-bind:class="{'active':$store.state.sidebarCounter == '2'}">
-          <router-link :to="$store.state.createRouteTracker" class="router-link">
+        <li @click="route(2)" v-bind:class="{'active':$store.state.sidebarCounter == '2'}">
+          <div class="router-link">
             <img src="../../assets/Sidebar/create.svg" alt="create" />
             <span>Create</span>
-          </router-link>
+          </div>
         </li>
-        <li v-bind:class="{'active':$store.state.sidebarCounter == '3'}">
-          <router-link to="#" class="router-link">
+        <li @click="route(3)" v-bind:class="{'active':$store.state.sidebarCounter == '3'}">
+          <div class="router-link">
             <img src="../../assets/Sidebar/view.svg" alt="view" />
             <span>View</span>
-          </router-link>
+          </div>
         </li>
-        <li v-bind:class="{'active':$store.state.sidebarCounter == '4'}">
-          <router-link to="/timetable/professors" class="router-link">
+        <li @click="route(4)" v-bind:class="{'active':$store.state.sidebarCounter == '4'}">
+          <div class="router-link">
             <img src="../../assets/Sidebar/professor.svg" alt="professor" />
             <span>Professors</span>
-          </router-link>
+          </div>
         </li>
-        <li v-bind:class="{'active':$store.state.sidebarCounter == '5'}">
-          <router-link to="/timetable/courses" class="router-link">
+        <li @click="route(5)" v-bind:class="{'active':$store.state.sidebarCounter == '5'}">
+          <div class="router-link">
             <img src="../../assets/Sidebar/courses.svg" alt="courses" />
             <span>Courses</span>
-          </router-link>
+          </div>
         </li>
-        <li v-bind:class="{'active':$store.state.sidebarCounter == '6'}">
-          <router-link to="/settings" class="router-link">
+        <li @click="route(6)" v-bind:class="{'active':$store.state.sidebarCounter == '6'}">
+          <div class="router-link">
             <img src="../../assets/Sidebar/settings.svg" alt="settings" />
             <span>Settings</span>
-          </router-link>
+          </div>
         </li>
-        <li>
-          <router-link to="/choice" class="router-link">
+        <li @click="route(7)">
+          <div class="router-link">
             <img src="../../assets/Sidebar/exit.svg" alt="exit" />
             <span>Exit Time Table</span>
-          </router-link>
+          </div>
         </li>
       </ul>
     </nav>
@@ -52,11 +55,50 @@
 </template>
 
 <script>
-import Header from "../Navigation/Header.vue";
+import Header from "../Navigation/Header";
+import Alert from "../Modals/Alert";
 
 export default {
   components: {
-    Header
+    Header,
+    Alert
+  },
+  data() {
+    return {
+      warning: {
+        isVisible: false,
+        message:
+          "Changes you made will not be saved if you exit Create process",
+        button: "Leave",
+        number: 1        
+      },
+      warningPath: null
+    };
+  },
+  methods: {
+    route(path) {
+      this.warningPath = path;
+      if (!this.$store.state.isMapping) {
+        if (path == 1) {
+          this.$router.push("/timetable");
+        } else if (path == 2) {
+          this.$router.push(this.$store.state.createRouteTracker);
+        } else if (path == 3) {
+          //this.$router.push("");
+          alert("Page not created yet !");
+        } else if (path == 4) {
+          this.$router.push("/timetable/professors");
+        } else if (path == 5) {
+          this.$router.push("/timetable/courses");
+        } else if (path == 6) {
+          this.$router.push("/settings");
+        } else if (path == 7) {
+          this.$router.push("/choice");
+        }
+      } else {
+        this.warning.isVisible = true;        
+      }
+    }
   }
 };
 </script>
@@ -115,7 +157,7 @@ export default {
     width: 12rem;
     box-shadow: 1px 0px 20px black;
     ul {
-      a {
+      .router-link {
         justify-content: left;
         padding-left: 17.5px;
         transition: 300ms;
@@ -131,10 +173,11 @@ export default {
     }
   }
   @media print {
-    nav{
-    display: none;
-    margin: 0;
-    padding: 0;
-  }}
+    nav {
+      display: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
 }
 </style>
