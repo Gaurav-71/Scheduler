@@ -20,11 +20,13 @@ export default {
   isLoggedIn: false,
 
   isLoggingIn: true,
+  
+  isMapping: false,  
+
+  isDownloading: false, 
 
   postSubscription: null,
-
-  isDownloading: false,
-
+  
   user: JSON.parse(localStorage.getItem("loggedUser")),
 
   currentUser: localStorage.getItem("currentUser"),
@@ -34,7 +36,7 @@ export default {
   professorList: [],
 
   courseList: [],
-
+  
   allOddCycleClasses: {
     sec3A: {},
     sec3B: {},
@@ -43,7 +45,7 @@ export default {
     sec5A: {},
     sec5B: {},
     sec5C: {},
-    
+
     sec7A: {},
     sec7B: {},
   },
