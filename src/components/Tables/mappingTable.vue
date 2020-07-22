@@ -33,10 +33,7 @@
           courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
         </td>
-        <td
-          v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0"
-          class="data-input"
-        >
+        <td v-if="courses.detail.Credits.Tutorial > 0 || courses.detail.Credits.Lab > 0" class="data-input">
           <div class="custom-input">
             <input
               type="text"
