@@ -206,222 +206,224 @@
       />
     </div>
     <br />
-    <div class="heading">
-      <h1>Labs</h1>
-      <h4>Add custom timings for labs</h4>
+    <div v-if="$store.state.createType == 1">
+      <div class="heading">
+        <h1>Labs</h1>
+        <h4>Add custom timings for labs</h4>
+      </div>
+      <table>
+        <tr>
+          <th>Course</th>
+          <th>Course Code</th>
+          <th>Time</th>
+          <th>Day</th>
+          <th>Lab Name</th>
+        </tr>
+        <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
+          <td v-if="courses.detail.Credits.Lab > 0" class="course-name">{{ courses.detail.Name }}</td>
+          <td v-if="courses.detail.Credits.Lab > 0">{{ courses.detail.Code }}</td>
+          <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
+            <input
+              type="text"
+              placeholder="Select Time"
+              list="time"
+              v-model="sectionObject.subjects[index].detail.LabSchedule.Time"
+            />
+            <datalist id="time">
+              <option value="9:00 AM"></option>
+              <option value="11:05 AM"></option>
+              <option value="1:45 PM"></option>
+              <option value="2:40 PM"></option>
+            </datalist>
+          </td>
+          <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
+            <input
+              type="text"
+              placeholder="Select Day"
+              list="day"
+              v-model="sectionObject.subjects[index].detail.LabSchedule.Day"
+            />
+            <datalist id="day">
+              <option value="Monday"></option>
+              <option value="Tuesday"></option>
+              <option value="Wednesday"></option>
+              <option value="Thursday"></option>
+              <option value="Friday"></option>
+              <option value="Saturday"></option>
+            </datalist>
+          </td>
+          <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
+            <input
+              type="text"
+              placeholder="Enter Lab Name"
+              v-model="sectionObject.subjects[index].detail.LabSchedule.LabNumber"
+            />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <div class="heading">
+        <h1>Math Professors</h1>
+        <h4>Enter the math professors for students of class {{$store.state.semester}}{{$store.state.section}}</h4>
+      </div>
+      <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-prof">
+        <input type="text" placeholder="Enter Main Professor name" class="classroom" />
+        <input type="text" placeholder="Enter Professor name" class="classroom" />
+        <input type="text" placeholder="Enter Professor name" class="classroom" />
+      </div>
+      <br />
+      <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="heading">
+        <h1>Math Classes</h1>
+        <h4>Enter the classes provided by the math department</h4>
+      </div>
+      <table v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-dept">
+        <tr>
+          <th>Day</th>
+          <th>Time</th>
+          <th>Type</th>
+        </tr>
+        <tr>
+          <td>Monday</td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Time" list="math-time" />
+            <datalist id="math-time">
+              <option value="9:00 AM"></option>
+              <option value="9:55 AM"></option>
+              <option value="11:05 AM"></option>
+              <option value="12:00 PM"></option>
+              <option value="12:55 PM"></option>
+              <option value="1:45 PM"></option>
+              <option value="2:40 PM"></option>
+              <option value="3:30 PM"></option>
+            </datalist>
+          </td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Class Type" list="type" />
+            <datalist id="type">
+              <option value="Theory"></option>
+              <option value="Tutorial"></option>
+            </datalist>
+          </td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Time" list="math-time" />
+            <datalist id="math-time">
+              <option value="9:00 AM"></option>
+              <option value="9:55 AM"></option>
+              <option value="11:05 AM"></option>
+              <option value="12:00 PM"></option>
+              <option value="12:55 PM"></option>
+              <option value="1:45 PM"></option>
+              <option value="2:40 PM"></option>
+              <option value="3:30 PM"></option>
+            </datalist>
+          </td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Class Type" list="type" />
+            <datalist id="type">
+              <option value="Theory"></option>
+              <option value="Tutorial"></option>
+            </datalist>
+          </td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Time" list="math-time" />
+            <datalist id="math-time">
+              <option value="9:00 AM"></option>
+              <option value="9:55 AM"></option>
+              <option value="11:05 AM"></option>
+              <option value="12:00 PM"></option>
+              <option value="12:55 PM"></option>
+              <option value="1:45 PM"></option>
+              <option value="2:40 PM"></option>
+              <option value="3:30 PM"></option>
+            </datalist>
+          </td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Class Type" list="type" />
+            <datalist id="type">
+              <option value="Theory"></option>
+              <option value="Tutorial"></option>
+            </datalist>
+          </td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Time" list="math-time" />
+            <datalist id="math-time">
+              <option value="9:00 AM"></option>
+              <option value="9:55 AM"></option>
+              <option value="11:05 AM"></option>
+              <option value="12:00 PM"></option>
+              <option value="12:55 PM"></option>
+              <option value="1:45 PM"></option>
+              <option value="2:40 PM"></option>
+              <option value="3:30 PM"></option>
+            </datalist>
+          </td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Class Type" list="type" />
+            <datalist id="type">
+              <option value="Theory"></option>
+              <option value="Tutorial"></option>
+            </datalist>
+          </td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Time" list="math-time" />
+            <datalist id="math-time">
+              <option value="9:00 AM"></option>
+              <option value="9:55 AM"></option>
+              <option value="11:05 AM"></option>
+              <option value="12:00 PM"></option>
+              <option value="12:55 PM"></option>
+              <option value="1:45 PM"></option>
+              <option value="2:40 PM"></option>
+              <option value="3:30 PM"></option>
+            </datalist>
+          </td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Class Type" list="type" />
+            <datalist id="type">
+              <option value="Theory"></option>
+              <option value="Tutorial"></option>
+            </datalist>
+          </td>
+        </tr>
+        <tr>
+          <td>Saturday</td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Time" list="math-time" />
+            <datalist id="math-time">
+              <option value="9:00 AM"></option>
+              <option value="9:55 AM"></option>
+              <option value="11:05 AM"></option>
+              <option value="12:00 PM"></option>
+              <option value="12:55 PM"></option>
+              <option value="1:45 PM"></option>
+              <option value="2:40 PM"></option>
+              <option value="3:30 PM"></option>
+            </datalist>
+          </td>
+          <td class="custom-input">
+            <input type="text" placeholder="Select Class Type" list="type" />
+            <datalist id="type">
+              <option value="Theory"></option>
+              <option value="Tutorial"></option>
+            </datalist>
+          </td>
+        </tr>
+      </table>
+      <br />
+      <br />
     </div>
-    <table>
-      <tr>
-        <th>Course</th>
-        <th>Course Code</th>
-        <th>Time</th>
-        <th>Day</th>
-        <th>Lab Name</th>
-      </tr>
-      <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
-        <td v-if="courses.detail.Credits.Lab > 0" class="course-name">{{ courses.detail.Name }}</td>
-        <td v-if="courses.detail.Credits.Lab > 0">{{ courses.detail.Code }}</td>
-        <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
-          <input
-            type="text"
-            placeholder="Select Time"
-            list="time"
-            v-model="sectionObject.subjects[index].detail.LabSchedule.Time"
-          />
-          <datalist id="time">
-            <option value="9:00 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
-          <input
-            type="text"
-            placeholder="Select Day"
-            list="day"
-            v-model="sectionObject.subjects[index].detail.LabSchedule.Day"
-          />
-          <datalist id="day">
-            <option value="Monday"></option>
-            <option value="Tuesday"></option>
-            <option value="Wednesday"></option>
-            <option value="Thursday"></option>
-            <option value="Friday"></option>
-            <option value="Saturday"></option>
-          </datalist>
-        </td>
-        <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
-          <input
-            type="text"
-            placeholder="Enter Lab Name"
-            v-model="sectionObject.subjects[index].detail.LabSchedule.LabNumber"
-          />
-        </td>
-      </tr>
-    </table>
-    <br />
-    <div class="heading">
-      <h1>Math Professors</h1>
-      <h4>Enter the math professors for students of class {{$store.state.semester}}{{$store.state.section}}</h4>
-    </div>
-    <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-prof">
-      <input type="text" placeholder="Enter Main Professor name" class="classroom" />
-      <input type="text" placeholder="Enter Professor name" class="classroom" />
-      <input type="text" placeholder="Enter Professor name" class="classroom" />
-    </div>
-    <br />
-    <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="heading">
-      <h1>Math Classes</h1>
-      <h4>Enter the classes provided by the math department</h4>
-    </div>
-    <table v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-dept">
-      <tr>
-        <th>Day</th>
-        <th>Time</th>
-        <th>Type</th>
-      </tr>
-      <tr>
-        <td>Monday</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" />
-          <datalist id="math-time">
-            <option value="9:00 AM"></option>
-            <option value="9:55 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="12:00 PM"></option>
-            <option value="12:55 PM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-            <option value="3:30 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Class Type" list="type" />
-          <datalist id="type">
-            <option value="Theory"></option>
-            <option value="Tutorial"></option>
-          </datalist>
-        </td>
-      </tr>
-      <tr>
-        <td>Tuesday</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" />
-          <datalist id="math-time">
-            <option value="9:00 AM"></option>
-            <option value="9:55 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="12:00 PM"></option>
-            <option value="12:55 PM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-            <option value="3:30 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Class Type" list="type" />
-          <datalist id="type">
-            <option value="Theory"></option>
-            <option value="Tutorial"></option>
-          </datalist>
-        </td>
-      </tr>
-      <tr>
-        <td>Wednesday</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" />
-          <datalist id="math-time">
-            <option value="9:00 AM"></option>
-            <option value="9:55 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="12:00 PM"></option>
-            <option value="12:55 PM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-            <option value="3:30 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Class Type" list="type" />
-          <datalist id="type">
-            <option value="Theory"></option>
-            <option value="Tutorial"></option>
-          </datalist>
-        </td>
-      </tr>
-      <tr>
-        <td>Thursday</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" />
-          <datalist id="math-time">
-            <option value="9:00 AM"></option>
-            <option value="9:55 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="12:00 PM"></option>
-            <option value="12:55 PM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-            <option value="3:30 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Class Type" list="type" />
-          <datalist id="type">
-            <option value="Theory"></option>
-            <option value="Tutorial"></option>
-          </datalist>
-        </td>
-      </tr>
-      <tr>
-        <td>Friday</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" />
-          <datalist id="math-time">
-            <option value="9:00 AM"></option>
-            <option value="9:55 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="12:00 PM"></option>
-            <option value="12:55 PM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-            <option value="3:30 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Class Type" list="type" />
-          <datalist id="type">
-            <option value="Theory"></option>
-            <option value="Tutorial"></option>
-          </datalist>
-        </td>
-      </tr>
-      <tr>
-        <td>Saturday</td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Time" list="math-time" />
-          <datalist id="math-time">
-            <option value="9:00 AM"></option>
-            <option value="9:55 AM"></option>
-            <option value="11:05 AM"></option>
-            <option value="12:00 PM"></option>
-            <option value="12:55 PM"></option>
-            <option value="1:45 PM"></option>
-            <option value="2:40 PM"></option>
-            <option value="3:30 PM"></option>
-          </datalist>
-        </td>
-        <td class="custom-input">
-          <input type="text" placeholder="Select Class Type" list="type" />
-          <datalist id="type">
-            <option value="Theory"></option>
-            <option value="Tutorial"></option>
-          </datalist>
-        </td>
-      </tr>
-    </table>
-    <br />
-    <br />
   </div>
 </template>
 

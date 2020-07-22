@@ -4,6 +4,7 @@ export default {
   semester: null,
   section: null,
   cycle: null,
+  createType: null,
   department: "",
   term: "",  
   showProfessorModal: false,

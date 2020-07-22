@@ -220,8 +220,7 @@
       </tr>
     </table>
     <br />
-    <br />
-    <table></table>
+    <br />    
     <table>
       <tr>
         <th

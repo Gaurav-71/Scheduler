@@ -191,12 +191,16 @@ export default {
       this.$store.state.section = sec;
     },
     route() {
-
       let isReadyToAutomate = true;
       console.log(isReadyToAutomate);
 
       //put this stuff after validation
-      this.$router.push("/timetable/result");
+      if (this.$store.state.createType == 1) {
+        this.$router.push("/timetable/result");
+      } else {
+        //this.$router.push("/timetable/manual");
+        alert("drag & drop");
+      }
       this.$store.state.semester = null;
       this.$store.state.section = null;
       /*
@@ -305,8 +309,7 @@ export default {
       if( isReadyToAutomate){
         this.$router.push("/finalResult");
       }*/
-
-    },
+    }
   },
   created() {
     this.$store.state.isMapping = true;
