@@ -437,8 +437,13 @@ export default {
     }
   },
   created() {
+    this.$store.state.isMapping = false;
     this.$store.state.sidebarCounter = 2;
     localStorage.setItem("currentRoute", this.$route.path);
+    localStorage.setItem("createRouteTracker", this.$route.path);
+    this.$store.state.createRouteTracker = localStorage.getItem(
+      "createRouteTracker"
+    );
   },
   mounted() {
     this.$store

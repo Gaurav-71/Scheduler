@@ -1,5 +1,8 @@
 <template>
   <div class="modal-container">
+    <transition name="fade" appear>
+      <Error :obj="error" />
+    </transition>
     <div class="modal">
       <img src="../../assets/Courses/add.svg" alt="add" class="add-course" />
       <div class="line"></div>
@@ -35,12 +38,7 @@
           </div>
           <div class="field">
             <label for="type">Course Abbreviation</label>
-            <input              
-              name="type"
-              placeholder="Enter abbreviation"
-              class="type"
-              v-model="type"
-            />            
+            <input name="type" placeholder="Enter abbreviation" class="type" v-model="type" />
           </div>
         </div>
         <div class="row1">
@@ -102,7 +100,12 @@
 </template>
 
 <script>
+import Error from "./Error";
+
 export default {
+  components: {
+    Error
+  },
   data() {
     return {
       name: "",
@@ -111,36 +114,52 @@ export default {
       semester: null,
       theoryCredits: 0,
       tutorialCredits: 0,
-      labCredits: 0
+      labCredits: 0,
+      error: {
+        isVisible: false,
+        message: {
+          code: "Missing-information",
+          message: "Please fill all data fields"
+        }
+      }
     };
   },
   methods: {
     addCourse() {
-      this.$store.state.showCourseModal = false;
-      let data = {
-        Name: this.name,
-        Code: this.code,
-        Semester: this.semester,
-        Credits: {
-          Theory: this.theoryCredits,
-          Tutorial: this.tutorialCredits,
-          Lab: this.labCredits
-        },
-        Type: this.type
-      };
-      this.$store
-        .dispatch("addCourse", data)
-        .then(() => {})
-        .catch(err => {
-          console.log(err);
-        });
-      this.name = "";
-      this.code = "";
-      this.type = "";
-      this.semester = 0;
-      this.theoryCredits = 0;
-      this.tutorialCredits = 0;
-      this.labCredits = 0;
+      if (
+        this.name.trim() == "" ||
+        this.code.trim() == "" ||
+        this.type.trim() == "" ||
+        this.semester == null
+      ) {
+        this.error.isVisible = true;
+      } else {
+        this.$store.state.showCourseModal = false;
+        let data = {
+          Name: this.name,
+          Code: this.code,
+          Semester: this.semester,
+          Credits: {
+            Theory: this.theoryCredits,
+            Tutorial: this.tutorialCredits,
+            Lab: this.labCredits
+          },
+          Type: this.type
+        };
+        this.$store
+          .dispatch("addCourse", data)
+          .then(() => {})
+          .catch(err => {
+            console.log(err);
+          });
+        this.name = "";
+        this.code = "";
+        this.type = "";
+        this.semester = 0;
+        this.theoryCredits = 0;
+        this.tutorialCredits = 0;
+        this.labCredits = 0;
+      }
     }
   }
 };

@@ -156,7 +156,7 @@
       <b>Note</b> : Please ensure all data fields are filled properly
     </p>
     <transition name="fade" appear>
-      <Error :obj="error" />
+      <Error :obj="error" :emptyStr="true" />
     </transition>
   </div>
 </template>
@@ -309,6 +309,7 @@ export default {
     },
   },
   created() {
+    this.$store.state.isMapping = true;
     this.$store.state.sidebarCounter = 2;
     this.$store.state.progressCounter = 3;
     localStorage.setItem("currentRoute", this.$route.path);
