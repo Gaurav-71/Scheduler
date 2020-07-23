@@ -215,6 +215,7 @@ export default {
               false,
               false,
             ];
+            sub.detail["id"] = "checkbox" + this.Semester + this.Section;
             sub.detail["isToggleChecked"] = false;
             sub.detail["Professors"] = ["", "", "", ""];
             subjects.push(sub);

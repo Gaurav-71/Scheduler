@@ -20,13 +20,10 @@
       </tr>
       <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
         <td class="course-name">
-          <label
-            class="switch"
-            title="If this subject has more than one main teacher toggle this switch on"
-          >
+          <label class="switch" title="If this subject has more than one main teacher toggle this switch on">
             <input
               type="checkbox"
-              id="checkbox"
+              v-bind:id="createID(index)" 
               v-model="courses.detail.isToggleChecked"
             />
             <span class="slider round"></span>
@@ -417,7 +414,9 @@ export default {
     AddCourse,
   },
   data() {
-    return {};
+    return {
+      toggle : []
+    };
   },
   methods: {
     addProfessor(index) {
@@ -438,6 +437,8 @@ export default {
         );
       }
     },
+    createID(index) {return "checkbox" + this.sectionObject.Semester + this.sectionObject.Section + index;
+    }
   },
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
@@ -448,6 +449,8 @@ export default {
       option.value = item;
       list.appendChild(option);
     });
+
+    
   },
 };
 </script>

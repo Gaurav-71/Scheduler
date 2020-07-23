@@ -451,6 +451,7 @@ export default {
     );
   },
   mounted() {
+    console.log(this.$store.state.allOddCycleClasses);
     this.$store
       .dispatch("automateTimetable")
       .then()
