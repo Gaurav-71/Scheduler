@@ -54,6 +54,13 @@
             v-bind:class="{ active: $store.state.section == 'C' }"
           >C</div>
         </div>
+        <div class="elective-pills">
+          <div
+            class="pill"
+            @click="changeSemester(0)"
+            v-bind:class="{ active: $store.state.semester == 0 }"
+          >Electives</div>
+        </div>
       </div>
       <mappingTable
         v-if="$store.state.semester == 3 && $store.state.section == 'A'"
@@ -119,6 +126,7 @@
         v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec8b"
       />
+      <electiveTable v-else-if="$store.state.semester == 0 && $store.state.section == null "/>
       <div v-else>
         <table>
           <tr>
@@ -156,18 +164,20 @@
       <b>Note</b> : Please ensure all data fields are filled properly
     </p>
     <transition name="fade" appear>
-      <Error :obj="error" :emptyStr="true" />
+      <Error :obj="error" :emptyStr="true" /> 
     </transition>
   </div>
 </template>
 
 <script>
 import mappingTable from "../../components/Tables/mappingTable";
+import electiveTable from "../../components/Tables/electiveTable";
 import Error from "../../components/Modals/Error";
 
 export default {
   components: {
     mappingTable,
+    electiveTable,
     Error
   },
   data() {
@@ -184,10 +194,21 @@ export default {
   methods: {
     changeSemester(sem) {
       this.$store.state.semester = sem;
-      if (sem >= 7 && this.$store.state.section == "C")
+      if (sem >= 7 && this.$store.state.section == "C") {
         this.$store.state.section = "B";
+      } else if (sem == 0) {
+        this.$store.state.section = null;
+      }
     },
     changeSection(sec) {
+      if(this.$store.state.semester == 0){
+        if(this.$store.state.cycle == 'Odd'){          
+          this.$store.state.semester = 3;
+        }
+        else{
+          this.$store.state.semester = 4;
+        }
+      }
       this.$store.state.section = sec;
     },
     route() {
