@@ -300,7 +300,7 @@ export default {
             sub.detail["isToggleChecked"] = false;
             sub.detail["Professors"] = ["", "", "", ""];
             subjects.push(sub);
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
           }
         });
         this.state.allEvenCycleClasses[classNames[i]]["subjects"] = subjects;

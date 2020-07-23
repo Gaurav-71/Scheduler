@@ -126,7 +126,7 @@
           <div class="custom-input">
             <input
               type="text"
-              placeholder="Select Main Professor 1"
+              placeholder="Select Professor"
               list="allProfessors"
               v-model="courses.detail.Professors[0]"
             />
@@ -184,7 +184,7 @@
           >
             <input
               type="text"
-              placeholder="Select Main Professor 4"
+              placeholder="Select Professor"
               list="allProfessors"
               v-model="courses.detail.Professors[3]"
             />
@@ -525,7 +525,7 @@ export default {
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
     let list = document.getElementById("allProfessors");
-
+    console.log(this.sectionObject);
     professorNames.forEach(function(item) {
       var option = document.createElement("option");
       option.value = item;
