@@ -103,11 +103,24 @@ export default {
         });
     },
     signUp() {
-      let data = { name: this.name, email: this.email, password: this.password };
+      let data = {
+        name: this.name,
+        email: this.email,
+        password: this.password
+      };
       if (this.password !== this.confirmpassword) {
         let customErr = {
           message: "Passwords do not match, please retry",
           code: "auth/password-mismatch"
+        };
+        this.error.message = customErr;
+        this.error.isVisible = true;
+        this.password = "";
+        this.confirmpassword = "";
+      } else if (this.name.trim() == "") {
+        let customErr = {
+          message: "User name is empty, please retry",
+          code: "auth/null-name"
         };
         this.error.message = customErr;
         this.error.isVisible = true;

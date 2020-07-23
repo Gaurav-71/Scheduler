@@ -18,9 +18,7 @@ export default {
   isDownloading: false,  
   postSubscription: null,
   user: JSON.parse(localStorage.getItem("loggedUser")),
-
-  currentUser: localStorage.getItem("currentUser"),
-
+  
   createRouteTracker: localStorage.getItem("createRouteTracker"),
 
   professorList: [],
