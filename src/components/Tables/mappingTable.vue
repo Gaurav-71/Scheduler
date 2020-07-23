@@ -20,13 +20,10 @@
       </tr>
       <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
         <td class="course-name">
-          <label
-            class="switch"
-            title="If this subject has more than one main teacher toggle this switch on"
-          >
+          <label class="switch" title="If this subject has more than one main teacher toggle this switch on">
             <input
               type="checkbox"
-              id="checkbox"
+              v-bind:id="createID(index)" 
               v-model="courses.detail.isToggleChecked"
             />
             <span class="slider round"></span>
@@ -39,90 +36,7 @@
             courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
         </td>
-        <td
-          v-if="
-            courses.detail.Credits.Tutorial > 0 ||
-              courses.detail.Credits.Lab > 0
-          "
-          class="data-input"
-        >
-          <div class="custom-input">
-            <input
-              type="text"
-              placeholder="Select Main Professor"
-              list="allProfessors"
-              v-model="courses.detail.Professors[0]"
-            />
-            <datalist id="allProfessors"></datalist>
-            <img
-              src="../../assets/Common/add.svg"
-              alt="add professor"
-              title="Add a professor"
-              @click="addProfessor(index)"
-            />
-          </div>
-          <div
-            class="custom-input"
-            v-if="sectionObject.getProfessors(index) >= 2"
-          >
-            <input
-              type="text"
-              placeholder="Select Professor"
-              list="allProfessors"
-              v-model="courses.detail.Professors[1]"
-            />
-            <datalist id="allProfessors"></datalist>
-            <img
-              src="../../assets/Common/delete.svg"
-              alt="delete professor"
-              title="Remove Professor"
-              v-if="sectionObject.getProfessors(index) == 2"
-              @click="removeProfessor(index)"
-            />
-            <div v-else class="block"></div>
-          </div>
-          <div
-            class="custom-input"
-            v-if="sectionObject.getProfessors(index) >= 3"
-          >
-            <input
-              type="text"
-              placeholder="Select Professor"
-              list="allProfessors"
-              v-model="courses.detail.Professors[2]"
-            />
-            <datalist id="allProfessors"></datalist>
-            <img
-              src="../../assets/Common/delete.svg"
-              alt="delete professor"
-              title="Remove Professor"
-              v-if="sectionObject.getProfessors(index) == 3"
-              @click="removeProfessor(index)"
-            />
-            <div v-else class="block"></div>
-          </div>
-          <div
-            class="custom-input"
-            v-if="sectionObject.getProfessors(index) >= 4"
-          >
-            <input
-              type="text"
-              placeholder="Select Professor"
-              list="allProfessors"
-              v-model="courses.detail.Professors[3]"
-            />
-            <datalist id="allProfessors"></datalist>
-            <img
-              src="../../assets/Common/delete.svg"
-              alt="delete professor"
-              title="Remove Professor"
-              v-if="sectionObject.getProfessors(index) == 4"
-              @click="removeProfessor(index)"
-            />
-            <div v-else class="block"></div>
-          </div>
-        </td>
-        <td v-else class="data-input">
+        <td class="data-input">
           <div class="custom-input">
             <input
               type="text"
@@ -184,7 +98,7 @@
           >
             <input
               type="text"
-              placeholder="Select Professor"
+              placeholder="Select 4"
               list="allProfessors"
               v-model="courses.detail.Professors[3]"
             />
@@ -500,7 +414,9 @@ export default {
     AddCourse,
   },
   data() {
-    return {};
+    return {
+      toggle : []
+    };
   },
   methods: {
     addProfessor(index) {
@@ -521,6 +437,8 @@ export default {
         );
       }
     },
+    createID(index) {return "checkbox" + this.sectionObject.Semester + this.sectionObject.Section + index;
+    }
   },
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
@@ -531,6 +449,8 @@ export default {
       option.value = item;
       list.appendChild(option);
     });
+
+    
   },
 };
 </script>
@@ -566,6 +486,17 @@ export default {
     }
   }
   table {
+    tr:nth-child(odd) {
+    background: rgba($color: $primary-dark, $alpha: 0.2);
+    }
+    tr:nth-child(1) {
+      background: $gradient;
+      border-top-left-radius: 0.8rem;
+      border-top-right-radius: 0.8rem;
+      th {
+        color: white;
+      }
+    }
     tr {
       .course-name {
         text-align: left;

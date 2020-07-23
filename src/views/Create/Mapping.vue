@@ -229,8 +229,7 @@ export default {
                 sub.detail.LabSchedule.LabNumber == ""
               ) { 
                 this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
-                this.error.isVisible = true;
-                isReadyToAutomate = false;
+                this.error.isVisible = true;            isReadyToAutomate = false;
                 break;
               }
             }
