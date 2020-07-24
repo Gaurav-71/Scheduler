@@ -10,7 +10,6 @@
         Map the subjects of the respective semester to the respective professors
       </h4>
     </div>
-
     <table>
       <tr>
         <th>Course</th>
