@@ -481,7 +481,7 @@ export default {
             }
             else
             {
-              x = context.dispatch("getRandomDayRegularHour");
+              x = await context.dispatch("getRandomDayRegularHour");
             }
           }
         }
@@ -492,15 +492,15 @@ export default {
         {
           let x = await context.dispatch("getRandomDayRegularHour");
           for(;;)
-          { let allProfessorsFree = true
-            for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
+          { console.log(x);
+            let allProfessorsFree = true
+            for(let j = 0;j<this.state.oddCycleElectives.sem7.newProfessor[k];j++)
             {
               let professor = await context.dispatch(
                 "getProfessorObject",
                 subject.detail.Professors[j]
               );
-              allProfessorsFree =
-                allProfessorsFree && professor.detail[x.day][x.hour] == "";
+              allProfessorsFree = allProfessorsFree && professor.detail[x.day][x.hour] == "";
             }
             if(allProfessorsFree && this.state.allOddCycleClasses["sec7A"][x.day][x.hour] == "" && this.state.allOddCycleClasses["sec7B"][x.day][x.hour] == "")
             {
@@ -518,7 +518,7 @@ export default {
             }
             else
             {
-              x = context.dispatch("getRandomDayRegularHour");
+              x = await context.dispatch("getRandomDayRegularHour");
             }
           }
         }
@@ -559,7 +559,7 @@ export default {
             }
             else
             {
-              x = context.dispatch("getRandomDayRegularHour");
+              x = await context.dispatch("getRandomDayRegularHour");
             }
           }
         }
@@ -1072,8 +1072,8 @@ export default {
   },
   async automateTimetable(context) {
     console.log("automateTimeTable's context- " + context);
-    await context.dispatch("assignMathsClasses");
-    await context.dispatch("assignLabs");
+    //await context.dispatch("assignMathsClasses");
+    //await context.dispatch("assignLabs");
     await context.dispatch("assignElectives");
     await context.dispatch("assignTutorials");
     await context.dispatch("assignClasses");
