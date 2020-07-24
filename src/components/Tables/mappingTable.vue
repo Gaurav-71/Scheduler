@@ -441,7 +441,7 @@ export default {
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
     let list = document.getElementById("allProfessors");
-
+    console.log(this.sectionObject);
     professorNames.forEach(function(item) {
       var option = document.createElement("option");
       option.value = item;
