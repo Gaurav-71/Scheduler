@@ -18,6 +18,17 @@ export default {
   },
   loadCourseList: (state,items) => {     
     state.courseList = items;    
-  }
-  
+  },
+  toggleState: (state,payload) => {
+    console.log(payload);
+    let section = "sec" + payload.semester + payload.section;
+    if(state.cycle == "Odd")
+    {
+      state.allOddCycleClasses[section].subjects[payload.index].detail.isToggleChecked = payload.truthValue;
+    }
+    else
+    {
+      state.allEvenCycleClasses[section].subjects[payload.index].detail.isToggleChecked = payload.truthValue;
+    }
+  },
 };

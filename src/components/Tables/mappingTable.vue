@@ -16,18 +16,12 @@
         <th>Course</th>
         <th>Course Code</th>
         <th>Credits</th>
+        <th>No. of Theory Teachers</th>
         <th>Professor</th>
       </tr>
       <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
         <td class="course-name">
-          <label class="switch" title="If this subject has more than one main teacher toggle this switch on">
-            <input
-              type="checkbox"
-              v-bind:id="createID(index)" 
-              v-model="courses.detail.isToggleChecked"
-            />
-            <span class="slider round"></span>
-          </label>
+            
           {{ courses.detail.Name }}
         </td>
         <td>{{ courses.detail.Code }}</td>
@@ -35,6 +29,16 @@
           {{ courses.detail.Credits.Theory }}:{{
             courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
+        </td>  
+        <td class="course-name">
+          <input
+              style = "width: 3rem;"
+              type="number"
+              min = "1"
+              max = "2"
+              v-bind:id="createID(index)"
+              v-model="courses.detail.noOfTheoryTeachers"
+            />
         </td>
         <td class="data-input">
           <div class="custom-input">
@@ -413,11 +417,6 @@ export default {
     AddProfessor,
     AddCourse,
   },
-  data() {
-    return {
-      toggle : []
-    };
-  },
   methods: {
     addProfessor(index) {
       if (this.sectionObject.getProfessors(index) < 4) {
@@ -438,7 +437,7 @@ export default {
       }
     },
     createID(index) {return "checkbox" + this.sectionObject.Semester + this.sectionObject.Section + index;
-    }
+    },
   },
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
@@ -449,8 +448,6 @@ export default {
       option.value = item;
       list.appendChild(option);
     });
-
-    
   },
 };
 </script>

@@ -215,8 +215,7 @@ export default {
               false,
               false,
             ];
-            sub.detail["id"] = "checkbox" + this.Semester + this.Section;
-            sub.detail["isToggleChecked"] = false;
+            sub.detail["noOfTheoryTeachers"] = 1;
             sub.detail["Professors"] = ["", "", "", ""];
             subjects.push(sub);
             this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
@@ -298,7 +297,7 @@ export default {
               false,
               false,
             ];
-            sub.detail["isToggleChecked"] = false;
+            sub.detail["noOfTheoryTeachers"] = 1;
             sub.detail["Professors"] = ["", "", "", ""];
             subjects.push(sub);
             this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
