@@ -198,33 +198,45 @@ export default {
         }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
-          if (subject.detail.Semester == semester[i]) {
+          if(subject.detail.Code.startsWith("CSE"))
+          {
             let sub = JSON.parse(JSON.stringify(subject));
-            if (sub.detail.Credits.Lab > 0) {
-              sub.detail["LabSchedule"] = {
-                Day: "",
-                Time: "",
-                LabNumber: "",
-              };
-            }
-            sub.detail["isDayDone"] = [
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ];
-            sub.detail["id"] = "checkbox" + this.Semester + this.Section;
-            sub.detail["isToggleChecked"] = null;
-            sub.detail["Professors"] = ["", "", "", ""];
-            subjects.push(sub);
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            sub.detail["Professors"]=["","","",""];
+            if( subject.detail.Semester != 6 && i==0){
+              this.state.oddCycleElectives["sem"+subject.detail.Semester].newProfessor.push(1);
+              this.state.oddCycleElectives["sem"+subject.detail.Semester].subjects.push(sub);
+            }          
+          }
+          else
+          {
+            if (subject.detail.Semester == semester[i]) {
+              let sub = JSON.parse(JSON.stringify(subject));
+              if (sub.detail.Credits.Lab > 0) {
+                sub.detail["LabSchedule"] = {
+                  Day: "",
+                  Time: "",
+                  LabNumber: "",
+                };
+              }
+              sub.detail["isDayDone"] = [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+              ];
+              sub.detail["noOfTheoryTeachers"] = 1;
+              sub.detail["Professors"] = ["", "", "", ""];
+              subjects.push(sub);
+              this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            }  
           }
         });
         this.state.allOddCycleClasses[classNames[i]]["subjects"] = subjects;
       }
-    } else {
+    } 
+    else {
       let semester = [4, 4, 4, 6, 6, 6, 8, 8];
       let classNames = [
         "sec4A",
@@ -281,28 +293,39 @@ export default {
         }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
-          if (subject.detail.Semester == semester[i]) {
+          if(subject.detail.Code.startsWith("CSE"))
+          {
             let sub = JSON.parse(JSON.stringify(subject));
-            if (sub.detail.Credits.Lab > 0) {
-              sub.detail["LabSchedule"] = {
-                Day: "",
-                Time: "",
-                LabNumber: "",
-              };
-            }
-            sub.detail["isDayDone"] = [
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-            ];
-            sub.detail["isToggleChecked"] = null;
-            sub.detail["Professors"] = ["", "", "", ""];
-            subjects.push(sub);
-            this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
+            sub.detail["Professors"]=["","","",""];
+            if( subject.detail.Semester == 6  && i==0){
+              this.state.evenCycleElectives["sem"+subject.detail.Semester].newProfessor.push(1);
+              this.state.evenCycleElectives["sem"+subject.detail.Semester].subjects.push(sub);
+            }          
           }
+          else{
+            if (subject.detail.Semester == semester[i]) {
+              let sub = JSON.parse(JSON.stringify(subject));
+              if (sub.detail.Credits.Lab > 0) {
+                sub.detail["LabSchedule"] = {
+                  Day: "",
+                  Time: "",
+                  LabNumber: "",
+                };
+              }
+              sub.detail["isDayDone"] = [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+              ];
+              sub.detail["noOfTheoryTeachers"] = 1;
+              sub.detail["Professors"] = ["", "", "", ""];
+              subjects.push(sub);
+              this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
+            }
+          } 
         });
         this.state.allEvenCycleClasses[classNames[i]]["subjects"] = subjects;
       }
