@@ -64,4 +64,43 @@ export default {
     sec8A: {},
     sec8B: {},
   },
+
+  oddCycleElectives: {
+    5 : {newProfessor: [],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects:[]},
+    7 : {newProfessor: [],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects:[]} 
+  },
+
+  evenCycleElectives: {
+    6: {newProfessor: [],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects:[]}
+  }
 };

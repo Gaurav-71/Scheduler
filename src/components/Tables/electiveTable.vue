@@ -3,18 +3,34 @@
     <div class="heading">
       <h1>Electives Mapping</h1>
       <h4>Map the electives of the respective semester to the respective professors</h4>
-    </div>
-
+    </div> 
     <table>
       <tr>
+        <th>Semester</th>
         <th>Course</th>
         <th>Course Code</th>
         <th>Credits</th>
         <th>Professor</th>
       </tr>
+      <tr v-for="(courses,index) in $store.state.oddCycleElectives" :key ="index">
+        <td>
+          {{courses.detail.Semester}}
+        </td>
+        <td>
+          {{courses.detail.Name}}
+        </td>
+        <td>
+          {{courses.detail.Code}}
+        </td>
+        <td>
+          {{courses.detail.Credits.Theory}}:{{courses.detail.Credits.Tutorial}}:{{courses.detail.Credits.Lab}}
+        </td>
+
+      </tr>
     </table>
   </div>
 </template>
+
 
 <style lang="scss" scoped>
 @import "../../scss/table";
