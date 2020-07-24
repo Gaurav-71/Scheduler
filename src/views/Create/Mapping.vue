@@ -196,7 +196,8 @@ export default {
       this.$store.state.semester = sem;
       if (sem >= 7 && this.$store.state.section == "C") {
         this.$store.state.section = "B";
-      } else if (sem == 0) {
+      } 
+      else if (sem == 0) {
         this.$store.state.section = null;
       }
     },

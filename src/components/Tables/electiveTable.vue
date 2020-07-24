@@ -4,7 +4,7 @@
       <h1>Electives Mapping</h1>
       <h4>Map the electives of the respective semester to the respective professors</h4>
     </div> 
-    <table v-if="$store.state.cycle = 'Odd'">
+    <table v-if="$store.state.cycle == 'Odd'">
       <tr>
         <th>Semester</th>
         <th>Course</th>

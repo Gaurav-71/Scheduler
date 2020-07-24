@@ -77,7 +77,8 @@ export default {
       decrementNewProfessors: function(index) {
         return this.newProfessor[index] - 1;
       },
-      subjects:[]},
+      subjects:[],
+    },
     sem7 : {
       newProfessor: [],
       getProfessors: function(index) {
@@ -89,7 +90,8 @@ export default {
       decrementNewProfessors: function(index) {
         return this.newProfessor[index] - 1;
       },
-      subjects:[]} 
+      subjects:[],
+    } 
   },
 
   evenCycleElectives: {
@@ -104,6 +106,7 @@ export default {
       decrementNewProfessors: function(index) {
         return this.newProfessor[index] - 1;
       },
-      subjects:[]}
+      subjects:[]
+    }
   }
 };

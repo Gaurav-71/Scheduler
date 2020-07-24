@@ -436,6 +436,136 @@ export default {
       }
     }
   },
+  async getRandomDayRegularHour(context){
+    console.log("getRandomDayRegularHour's context- " + context)
+    let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    let index = Math.floor(Math.random() * Days.length);
+    let day = Days[index];
+    let Hours = [0, 1, 2, 3, 4, 5, 6];
+    let hour = Hours[Math.floor(Math.random() * Hours.length)];
+    return {day: day, hour :hour }
+  },
+  async assignElectives(context) {
+    if(this.state.cycle == "Odd")
+    { 
+      for(let k = 0;k<this.state.oddCycleElectives.sem5.subjects.length;k++)
+      { let subject = this.state.oddCycleElectives.sem5.subjects[k];
+        for(let i = 0;i<subject.detail.Credits.Theory;i++)
+        {
+          let x = await context.dispatch("getRandomDayRegularHour");
+          for(;;)
+          { let allProfessorsFree = true
+            for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
+            {
+              let professor = await context.dispatch(
+                "getProfessorObject",
+                subject.detail.Professors[j]
+              );
+              allProfessorsFree =
+                allProfessorsFree && professor.detail[x.day][x.hour] == "";
+            }
+            if(allProfessorsFree && this.state.allOddCycleClasses["sec5A"][x.day][x.hour] == "" && this.state.allOddCycleClasses["sec5B"][x.day][x.hour] == "" && this.state.allOddCycleClasses["sec5C"][x.day][x.hour] == "")
+            {
+              this.state.allOddCycleClasses["sec5A"][x.day][x.hour] = subject.detail.Code;
+              this.state.allOddCycleClasses["sec5B"][x.day][x.hour] = subject.detail.Code;
+              this.state.allOddCycleClasses["sec5C"][x.day][x.hour] = subject.detail.Code;
+              for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
+              {
+                let professor = await context.dispatch(
+                  "getProfessorObject",
+                  subject.detail.Professors[j]
+                );
+                professor.detail[x.day][x.hour] = subject.detail.Code + subject.detail.Semester;
+              }
+              break;
+            }
+            else
+            {
+              x = context.dispatch("getRandomDayRegularHour");
+            }
+          }
+        }
+      }
+      for(let k = 0;k<this.state.oddCycleElectives.sem7.subjects.length;k++)
+      { let subject = this.state.oddCycleElectives.sem7.subjects[k];
+        for(let i = 0;i<subject.detail.Credits.Theory;i++)
+        {
+          let x = await context.dispatch("getRandomDayRegularHour");
+          for(;;)
+          { let allProfessorsFree = true
+            for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
+            {
+              let professor = await context.dispatch(
+                "getProfessorObject",
+                subject.detail.Professors[j]
+              );
+              allProfessorsFree =
+                allProfessorsFree && professor.detail[x.day][x.hour] == "";
+            }
+            if(allProfessorsFree && this.state.allOddCycleClasses["sec7A"][x.day][x.hour] == "" && this.state.allOddCycleClasses["sec7B"][x.day][x.hour] == "")
+            {
+              this.state.allOddCycleClasses["sec7A"][x.day][x.hour] = subject.detail.Code;
+              this.state.allOddCycleClasses["sec7B"][x.day][x.hour] = subject.detail.Code;
+              for(let j = 0;j<this.state.oddCycleElectives.sem7.newProfessor[k];j++)
+              {
+                let professor = await context.dispatch(
+                  "getProfessorObject",
+                  subject.detail.Professors[j]
+                );
+                professor.detail[x.day][x.hour] = subject.detail.Code + subject.detail.Semester;
+              }
+              break;
+            }
+            else
+            {
+              x = context.dispatch("getRandomDayRegularHour");
+            }
+          }
+        }
+      }
+    }
+    else
+    {
+      for(let k = 0;k<this.state.evenCycleElectives.sem6.subjects.length;k++)
+      { let subject = this.state.evenCycleElectives.sem6.subjects[k];
+        for(let i = 0;i<subject.detail.Credits.Theory;i++)
+        {
+          let x = await context.dispatch("getRandomDayRegularHour");
+          for(;;)
+          { let allProfessorsFree = true
+            for(let j = 0;j<this.state.evenCycleElectives.sem6.newProfessor[k];j++)
+            {
+              let professor = await context.dispatch(
+                "getProfessorObject",
+                subject.detail.Professors[j]
+              );
+              allProfessorsFree =
+                allProfessorsFree && professor.detail[x.day][x.hour] == "";
+            }
+            if(allProfessorsFree && this.state.allEvenCycleClasses["sec6A"][x.day][x.hour] == "" && this.state.allEvenCycleClasses["sec6B"][x.day][x.hour] == "" && this.state.allEvenCycleClasses["sec6C"][x.day][x.hour] == "")
+            {
+              this.state.allEvenCycleClasses["sec6A"][x.day][x.hour] = subject.detail.Code;
+              this.state.allEvenCycleClasses["sec6B"][x.day][x.hour] = subject.detail.Code;
+              this.state.allEvenCycleClasses["sec6C"][x.day][x.hour] = subject.detail.Code;
+              for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
+              {
+                let professor = await context.dispatch(
+                  "getProfessorObject",
+                  subject.detail.Professors[j]
+                );
+                professor.detail[x.day][x.hour] = subject.detail.Code + subject.detail.Semester;
+              }
+              break;
+            }
+            else
+            {
+              x = context.dispatch("getRandomDayRegularHour");
+            }
+          }
+        }
+      }
+    }
+  },
   async assignLabs(context) {
     console.log("assignLabs' context- " + context);
     if (this.state.cycle == "Odd") {
@@ -944,6 +1074,7 @@ export default {
     console.log("automateTimeTable's context- " + context);
     await context.dispatch("assignMathsClasses");
     await context.dispatch("assignLabs");
+    await context.dispatch("assignElectives");
     await context.dispatch("assignTutorials");
     await context.dispatch("assignClasses");
   },
