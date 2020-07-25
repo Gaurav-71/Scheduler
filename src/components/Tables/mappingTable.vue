@@ -26,12 +26,12 @@
           >
             <input
               type="checkbox"
-              id="checkbox"
+              :id="createID(index)"
               v-model="courses.detail.isToggleChecked"
             />
             <span class="slider round"></span>
           </label>
-          {{ courses.detail.Name }}
+          {{ courses.detail.isToggleChecked }}
         </td>
         <td>{{ courses.detail.Code }}</td>
         <td>
