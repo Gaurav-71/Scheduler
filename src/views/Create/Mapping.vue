@@ -215,17 +215,17 @@ export default {
     route() {
       let isReadyToAutomate = true;
       console.log(isReadyToAutomate);
-
+      /*
       //put this stuff after validation
       if (this.$store.state.createType == 1) {
         this.$router.push("/timetable/result");
       } else {
         //this.$router.push("/timetable/manual");
         alert("drag & drop");
-      }
+      }*/
       this.$store.state.semester = null;
       this.$store.state.section = null;
-      /*
+      
       if (this.$store.state.cycle == "Odd") {
         let classNames = [
           "sec3A",
@@ -328,8 +328,8 @@ export default {
         }
       }
       if( isReadyToAutomate){
-        this.$router.push("/finalResult");
-      }*/
+        this.$router.push("/timetable/result");
+      }
     }
   },
   created() {

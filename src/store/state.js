@@ -112,6 +112,15 @@ export default {
 
   presetValues: {
     sec3A: {
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
       newProfessor: [3, 1, 1, 1, 3, 2, 1],
       Semester: 3,
       Section: "A",
@@ -249,6 +258,15 @@ export default {
       ],
     },
     sec3B: {
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
       newProfessor: [3, 1, 1, 1, 3, 2, 1],
       Semester: 3,
       Section: "B",
@@ -390,6 +408,15 @@ export default {
       ],
     },
     sec3C: {
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
       newProfessor: [3, 1, 1, 1, 4, 2, 1],
       Semester: 3,
       Section: "C",
@@ -531,6 +558,15 @@ export default {
       ],
     },
     sec5A: {
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
       newProfessor: [4, 4, 1, 3, 1, 1, 1, 1],
       Semester: 5,
       Section: "A",
@@ -687,6 +723,15 @@ export default {
       ],
     },
     sec5B: {
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
       newProfessor: [3, 3, 1, 3, 1, 2, 1, 1],
       Semester: 5,
       Section: "B",
@@ -844,6 +889,15 @@ export default {
       ],
     },
     sec5C: {
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
       newProfessor: [3, 3, 1, 3, 1, 1, 1, 1],
       Semester: 5,
       Section: "C",
@@ -996,6 +1050,15 @@ export default {
       ],
     },
     sec7A: {
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
       newProfessor: [1, 1, 4, 1, 4],
       Semester: 7,
       Section: "A",
@@ -1100,6 +1163,15 @@ export default {
       ],
     },
     sec7B: {
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
       newProfessor: [1, 1, 3, 1, 3],
       Semester: 7,
       Section: "B",
@@ -1194,6 +1266,93 @@ export default {
               "Meeradevi A. K.",
               "",
             ],
+          },
+          isEditing: false,
+        },
+      ],
+    },
+  },
+
+  presetElectives: {
+    sem5: {
+      newProfessor: [],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects: [
+        {
+          id: "semester 5 elective",
+          detail: {
+            Code: "CSE01",
+            Credits: { Theory: 3, Tutorial: 0, Lab: 0 },
+            Abbreviation: "DM/AI",
+            Name: "Data Mining/Artificial Intelligence",
+            Semester: 5,
+            isDayDone: [false, false, false, false, false, false],
+            noOfTheoryTeachers: 1,
+            Professors: ["Sowmya B. J.", "Dr. Annapurna P. Patil", "Dr. S. Rajarajeswari", ""],
+          },
+          isEditing: false,
+        },
+      ],
+    },
+    sem7: {
+      newProfessor: [],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects: [
+        {
+          id: "semester 7 elective group a",
+          detail: {
+            Code: "CSE21",
+            Credits: { Theory: 3, Tutorial: 0, Lab: 0 },
+            Abbreviation: "CC",
+            Name: "Cloud Computing G-A",
+            Semester: 7,
+            isDayDone: [false, false, false, false, false, false],
+            noOfTheoryTeachers: 1,
+            Professors: ["Dr. Divakar Harekal", "Ganeshayya Shidaganti", ""],
+          },
+          isEditing: false,
+        },
+        {
+          id: "semester 7 elective group b",
+          detail: {
+            Code: "CSE22",
+            Credits: { Theory: 3, Tutorial: 0, Lab: 0 },
+            Abbreviation: "DL/DS",
+            Name: "Deep Learning/Distributed Systems",
+            Semester: 7,
+            isDayDone: [false, false, false, false, false, false],
+            noOfTheoryTeachers: 1,
+            Professors: ["Srinidhi Hiriyannaiah", "Mrs. Sini Anna Alex", "", ""],
+          },
+          isEditing: false,
+        },
+        {
+          id: "semester 5 elective",
+          detail: {
+            Code: "CSE23",
+            Credits: { Theory: 3, Tutorial: 0, Lab: 0 },
+            Abbreviation: "PMEE",
+            Name: "PMEE Group C",
+            Semester: 5,
+            isDayDone: [false, false, false, false, false, false],
+            noOfTheoryTeachers: 1,
+            Professors: ["Veena G.S.", "Dr. T.N.R.Kumar", "", ""],
           },
           isEditing: false,
         },
