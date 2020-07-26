@@ -103,7 +103,7 @@
         </td>
 
       </tr>
-      <tr v-for="(courses,index) in $store.state.oddCycleElectives.sem7.subjects" :key ="courses.detail.Semester+index">
+      <tr v-for="(courses,index) in $store.state.oddCycleElectives.sem7.subjects" :key ="courses.id+index*2+100">
         <td>
           {{courses.detail.Semester}}
         </td>
