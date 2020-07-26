@@ -388,7 +388,7 @@ export default {
     let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
     let index = Math.floor(Math.random() * Days.length);
     let day = Days[index];
-    let Hours = [0, 2, 4, 5];
+    let Hours = [0, 2, 4];
     let hour = Hours[Math.floor(Math.random() * Hours.length)];
     return { day: day, hour: hour, dayNumber: index };
   },
@@ -457,7 +457,7 @@ export default {
     let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
     let index = Math.floor(Math.random() * Days.length);
     let day = Days[index];
-    let Hours = [0, 1, 2, 3, 4, 5, 6];
+    let Hours = [0, 1, 2, 3, 4];
     let hour = Hours[Math.floor(Math.random() * Hours.length)];
     return {day: day, hour :hour,dayNumber : index }
   },
