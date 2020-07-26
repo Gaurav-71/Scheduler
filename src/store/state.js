@@ -1,6 +1,6 @@
 export default {
   progressCounter: 1,
-  
+
   sidebarCounter: 1,
 
   semester: null,
@@ -13,24 +13,24 @@ export default {
 
   department: "",
 
-  term: "",  
+  term: "",
 
   isLoading : false,
 
   showProfessorModal: false,
 
-  showCourseModal: false,  
-  
+  showCourseModal: false,
+
   isLoggedIn: false,
 
   isLoggingIn: true,
-  
-  isMapping: false,  
 
-  isDownloading: false, 
+  isMapping: false,
+
+  isDownloading: false,
 
   postSubscription: null,
-  
+
   user: JSON.parse(localStorage.getItem("loggedUser")),
 
   currentUser: localStorage.getItem("currentUser"),
@@ -79,9 +79,9 @@ export default {
       decrementNewProfessors: function(index) {
         return this.newProfessor[index] - 1;
       },
-      subjects:[],
+      subjects: [],
     },
-    sem7 : {
+    sem7: {
       newProfessor: [],
       getProfessors: function(index) {
         return this.newProfessor[index];
@@ -92,8 +92,8 @@ export default {
       decrementNewProfessors: function(index) {
         return this.newProfessor[index] - 1;
       },
-      subjects:[],
-    } 
+      subjects: [],
+    },
   },
 */
   evenCycleElectives: {
