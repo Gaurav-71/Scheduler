@@ -459,7 +459,7 @@ export default {
     let day = Days[index];
     let Hours = [0, 1, 2, 3, 4, 5, 6];
     let hour = Hours[Math.floor(Math.random() * Hours.length)];
-    return {day: day, hour :hour }
+    return {day: day, hour :hour,dayNumber : index }
   },
   async assignElectives(context) {
     if(this.state.cycle == "Odd")
@@ -471,8 +471,6 @@ export default {
           let x = await context.dispatch("getRandomDayRegularHour");
           for(;;)
           { let allProfessorsFree = true;
-            let dayDone = subject.detail.isDayDone[x.dayNumber];
-            console.log(dayDone);
             for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
             {
               let professor = await context.dispatch(
@@ -482,7 +480,7 @@ export default {
               allProfessorsFree =
                 allProfessorsFree && professor.detail[x.day][x.hour] == "";
             }
-            if( (allProfessorsFree) && (this.state.allOddCycleClasses["sec5A"][x.day][x.hour] == "") && (this.state.allOddCycleClasses["sec5B"][x.day][x.hour] == "") && (this.state.allOddCycleClasses["sec5C"][x.day][x.hour] == ""))
+            if(subject.detail.isDayDone[x.dayNumber] == false && (allProfessorsFree) && (this.state.allOddCycleClasses["sec5A"][x.day][x.hour] == "") && (this.state.allOddCycleClasses["sec5B"][x.day][x.hour] == "") && (this.state.allOddCycleClasses["sec5C"][x.day][x.hour] == ""))
             { subject.detail.isDayDone[x.dayNumber] =  true;
               this.state.allOddCycleClasses["sec5A"][x.day][x.hour] = subject.detail.Code;
               this.state.allOddCycleClasses["sec5B"][x.day][x.hour] = subject.detail.Code;
@@ -520,7 +518,7 @@ export default {
               );
               allProfessorsFree = allProfessorsFree && professor.detail[x.day][x.hour] == "";
             }
-            if((allProfessorsFree) && (this.state.allOddCycleClasses["sec7A"][x.day][x.hour] == "") && (this.state.allOddCycleClasses["sec7B"][x.day][x.hour] == ""))
+            if(subject.detail.isDayDone[x.dayNumber] == false && (allProfessorsFree) && (this.state.allOddCycleClasses["sec7A"][x.day][x.hour] == "") && (this.state.allOddCycleClasses["sec7B"][x.day][x.hour] == ""))
             { 
               subject.detail.isDayDone[x.dayNumber] =  true;
               this.state.allOddCycleClasses["sec7A"][x.day][x.hour] = subject.detail.Code;
