@@ -300,8 +300,7 @@
     <div
       v-if="$store.state.semester == 0 || $store.state.section != null"
       class="actions"
-      style="margin-top: 2.5rem;"
-    >
+      style="margin-top: 2.5rem;">
       <div class="btn transparent" @click="printDoc(printID,filename)">Download as Word</div>
       <div class="btn" @click="route()">Save & Exit</div>
       <div class="btn transparent" @click="printPDF()">Download as PDF</div>
@@ -309,8 +308,7 @@
     <div
       v-if="$store.state.semester == 0 || $store.state.section != null"
       class="actions"
-      style="margin-top: 1rem;"
-    >
+      style="margin-top: 1rem;">
       <a class="btn transparent" href="#page-top">Jump to Top</a>
       <div class="btn transparent hide">Generate Again</div>
     </div>
@@ -322,7 +320,6 @@
 import studentTable from "../../components/Tables/studentTable";
 import teacherTable from "../../components/Tables/teacherTable";
 import Heading from "../../components/Design/Heading";
-
 export default {
   components: {
     studentTable,
@@ -450,15 +447,6 @@ export default {
       "createRouteTracker"
     );
   },
-  mounted() {
-    console.log(this.$store.state.allOddCycleClasses);
-    this.$store
-      .dispatch("automateTimetable")
-      .then()
-      .catch(err => {
-        console.log(err);
-      });
-  }
 };
 </script>
 

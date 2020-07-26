@@ -15,6 +15,8 @@ export default {
 
   term: "",
 
+  isLoading : false,
+
   showProfessorModal: false,
 
   showCourseModal: false,
@@ -38,8 +40,8 @@ export default {
   professorList: [],
 
   courseList: [],
-
-  allOddCycleClasses: {
+  
+/*  allOddCycleClasses: {
     sec3A: {},
     sec3B: {},
     sec3C: {},
@@ -51,7 +53,7 @@ export default {
     sec7A: {},
     sec7B: {},
   },
-
+*/
   allEvenCycleClasses: {
     sec4A: {},
     sec4B: {},
@@ -65,8 +67,8 @@ export default {
     sec8B: {},
   },
 
-  oddCycleElectives: {
-    sem5: {
+ /* oddCycleElectives: {
+    sem5 : {
       newProfessor: [],
       getProfessors: function(index) {
         return this.newProfessor[index];
@@ -93,7 +95,7 @@ export default {
       subjects: [],
     },
   },
-
+*/
   evenCycleElectives: {
     sem6: {
       newProfessor: [],
@@ -106,11 +108,12 @@ export default {
       decrementNewProfessors: function(index) {
         return this.newProfessor[index] - 1;
       },
-      subjects: [],
-    },
+      subjects:[]
+    }
   },
 
-  presetValues: {
+
+  allOddCycleClasses: {
     sec3A: {
       getProfessors: function(index) {
         return this.newProfessor[index];
@@ -1273,9 +1276,9 @@ export default {
     },
   },
 
-  presetElectives: {
+  oddCycleElectives: {
     sem5: {
-      newProfessor: [],
+      newProfessor: [3],
       getProfessors: function(index) {
         return this.newProfessor[index];
       },
@@ -1296,14 +1299,14 @@ export default {
             Semester: 5,
             isDayDone: [false, false, false, false, false, false],
             noOfTheoryTeachers: 1,
-            Professors: ["Sowmya B. J.", "Dr. Annapurna P. Patil", "Dr. S. Rajarajeswari", ""],
+            Professors: ["Dr. Monica R. Mundada", "Dr. Annapurna P. Patil", "Dr. S. Rajarajeswari", ""],
           },
           isEditing: false,
         },
       ],
     },
     sem7: {
-      newProfessor: [],
+      newProfessor: [2,2,2],
       getProfessors: function(index) {
         return this.newProfessor[index];
       },
@@ -1343,7 +1346,7 @@ export default {
           isEditing: false,
         },
         {
-          id: "semester 5 elective",
+          id: "semester 7 elective group c",
           detail: {
             Code: "CSE23",
             Credits: { Theory: 3, Tutorial: 0, Lab: 0 },

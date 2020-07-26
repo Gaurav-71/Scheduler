@@ -31,4 +31,7 @@ export default {
       state.allEvenCycleClasses[section].subjects[payload.index].detail.isToggleChecked = payload.truthValue;
     }
   },
+  changeLoading: (state) => {
+    state.isLoading = !(state.isLoading);
+  }
 };
