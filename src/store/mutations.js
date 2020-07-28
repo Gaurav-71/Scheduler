@@ -35,9 +35,6 @@ export default {
   loadCourseList: (state, items) => {
     state.courseList = items;
   },
-  loadCourseList: (state,items) => {     
-    state.courseList = items;    
-  },
   toggleState: (state,payload) => {
     console.log(payload);
     let section = "sec" + payload.semester + payload.section;
