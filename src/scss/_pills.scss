@@ -9,6 +9,7 @@
   @include ipad-portrait {
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     height: 2.8rem;
     margin-bottom: 1.8rem;
   }
@@ -55,7 +56,7 @@
       background: rgb(21, 127, 135);
     }
   }
-  .section-pills {
+  .section-pills, .elective-pills {
     margin: 0 1rem;
     border-radius: 0.8rem;
     background: rgba($color: $primary-dark, $alpha: 0.2);
@@ -94,6 +95,13 @@
     }
     .active:hover {
       background: rgb(21, 127, 135);
+    }
+  }
+  .elective-pills{
+    margin: 0;
+    width: 12%;
+    .pill{
+      width: 5rem;
     }
   }
   .type-pills {

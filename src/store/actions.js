@@ -107,7 +107,6 @@ export default {
       console.log(err);
     }
   },
-
   async loadCourseList(context) {
     let response = db.collection("Courses").onSnapshot((snapshot) => {
       let items = [];
@@ -218,15 +217,9 @@ export default {
         }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
-          if (subject.detail.Semester == semester[i]) {
+          if(subject.detail.Code.startsWith("CSE"))
+          {
             let sub = JSON.parse(JSON.stringify(subject));
-            if (sub.detail.Credits.Lab > 0) {
-              sub.detail["LabSchedule"] = {
-                Day: "",
-                Time: "",
-                LabNumber: "",
-              };
-            }
             sub.detail["isDayDone"] = [
               false,
               false,
@@ -235,15 +228,42 @@ export default {
               false,
               false,
             ];
-            sub.detail["isToggleChecked"] = false;
-            sub.detail["Professors"] = ["", "", "", ""];
-            subjects.push(sub);
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            sub.detail["Professors"]=["","","",""];
+            if( subject.detail.Semester != 6 && i==0){
+              this.state.oddCycleElectives["sem"+subject.detail.Semester].newProfessor.push(1);
+              this.state.oddCycleElectives["sem"+subject.detail.Semester].subjects.push(sub);
+            }          
+          }
+          else
+          {
+            if (subject.detail.Semester == semester[i]) {
+              let sub = JSON.parse(JSON.stringify(subject));
+              if (sub.detail.Credits.Lab > 0) {
+                sub.detail["LabSchedule"] = {
+                  Day: "",
+                  Time: "",
+                  LabNumber: "",
+                };
+              }
+              sub.detail["isDayDone"] = [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+              ];
+              sub.detail["noOfTheoryTeachers"] = 1;
+              sub.detail["Professors"] = ["", "", "", ""];
+              subjects.push(sub);
+              this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            }  
           }
         });
         this.state.allOddCycleClasses[classNames[i]]["subjects"] = subjects;
       }
-    } else {
+    } 
+    else {
       let semester = [4, 4, 4, 6, 6, 6, 8, 8];
       let classNames = [
         "sec4A",
@@ -300,15 +320,9 @@ export default {
         }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
-          if (subject.detail.Semester == semester[i]) {
+          if(subject.detail.Code.startsWith("CSE"))
+          {
             let sub = JSON.parse(JSON.stringify(subject));
-            if (sub.detail.Credits.Lab > 0) {
-              sub.detail["LabSchedule"] = {
-                Day: "",
-                Time: "",
-                LabNumber: "",
-              };
-            }
             sub.detail["isDayDone"] = [
               false,
               false,
@@ -317,11 +331,36 @@ export default {
               false,
               false,
             ];
-            sub.detail["isToggleChecked"] = false;
-            sub.detail["Professors"] = ["", "", "", ""];
-            subjects.push(sub);
-            this.state.allOddCycleClasses[classNames[i]].newProfessor.push(1);
+            sub.detail["Professors"]=["","","",""];
+            if( subject.detail.Semester == 6  && i==0){
+              this.state.evenCycleElectives["sem"+subject.detail.Semester].newProfessor.push(1);
+              this.state.evenCycleElectives["sem"+subject.detail.Semester].subjects.push(sub);
+            }          
           }
+          else{
+            if (subject.detail.Semester == semester[i]) {
+              let sub = JSON.parse(JSON.stringify(subject));
+              if (sub.detail.Credits.Lab > 0) {
+                sub.detail["LabSchedule"] = {
+                  Day: "",
+                  Time: "",
+                  LabNumber: "",
+                };
+              }
+              sub.detail["isDayDone"] = [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+              ];
+              sub.detail["noOfTheoryTeachers"] = 1;
+              sub.detail["Professors"] = ["", "", "", ""];
+              subjects.push(sub);
+              this.state.allEvenCycleClasses[classNames[i]].newProfessor.push(1);
+            }
+          } 
         });
         this.state.allEvenCycleClasses[classNames[i]]["subjects"] = subjects;
       }
@@ -350,6 +389,27 @@ export default {
     else if (labHour == "1:45 PM") return 4;
     else if (labHour == "2:40 PM") return 5;
     else if (labHour == "3:35 PM") return 6;
+  },
+  async shuffleArray(context, array) {
+    console.log("shuffleArray's context- " + context);
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  },
+  async getDay(context, day) {
+    console.log("getDay's context- " + context);
+    let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    return Days[day];
+  },
+  async getRandomDayHour(context) {
+    console.log("getRandomDayHour's context- " + context);
+    let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    let index = Math.floor(Math.random() * Days.length);
+    let day = Days[index];
+    let Hours = [0, 2, 4];
+    let hour = Hours[Math.floor(Math.random() * Hours.length)];
+    return { day: day, hour: hour, dayNumber: index };
   },
   async assignMathsClasses(context) {
     console.log("assignMathsClasses' context- " + context);
@@ -411,6 +471,140 @@ export default {
       }
     }
   },
+  async getRandomDayRegularHour(context){
+    console.log("getRandomDayRegularHour's context- " + context)
+    let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    let index = Math.floor(Math.random() * Days.length);
+    let day = Days[index];
+    let Hours = [0, 1, 2, 3, 4];
+    let hour = Hours[Math.floor(Math.random() * Hours.length)];
+    return {day: day, hour :hour,dayNumber : index }
+  },
+  async assignElectives(context) {
+    if(this.state.cycle == "Odd")
+    { 
+      for(let k = 0;k<this.state.oddCycleElectives.sem5.subjects.length;k++)
+      { let subject = this.state.oddCycleElectives.sem5.subjects[k];
+        for(let i = 0;i<subject.detail.Credits.Theory;i++)
+        {
+          let x = await context.dispatch("getRandomDayRegularHour");
+          for(;;)
+          { let allProfessorsFree = true;
+            for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
+            {
+              let professor = await context.dispatch(
+                "getProfessorObject",
+                subject.detail.Professors[j]
+              );
+              allProfessorsFree =
+                allProfessorsFree && professor.detail[x.day][x.hour] == "";
+            }
+            if(subject.detail.isDayDone[x.dayNumber] == false && (allProfessorsFree) && (this.state.allOddCycleClasses["sec5A"][x.day][x.hour] == "") && (this.state.allOddCycleClasses["sec5B"][x.day][x.hour] == "") && (this.state.allOddCycleClasses["sec5C"][x.day][x.hour] == ""))
+            { subject.detail.isDayDone[x.dayNumber] =  true;
+              this.state.allOddCycleClasses["sec5A"][x.day][x.hour] = subject.detail.Code;
+              this.state.allOddCycleClasses["sec5B"][x.day][x.hour] = subject.detail.Code;
+              this.state.allOddCycleClasses["sec5C"][x.day][x.hour] = subject.detail.Code;
+              for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
+              {
+                let professor = await context.dispatch(
+                  "getProfessorObject",
+                  subject.detail.Professors[j]
+                );
+                professor.detail[x.day][x.hour] = subject.detail.Code + subject.detail.Semester;
+              }
+              break;
+            }
+            else
+            {
+              x = await context.dispatch("getRandomDayRegularHour");
+            }
+          }
+        }
+      }
+      for(let k = 0;k<this.state.oddCycleElectives.sem7.subjects.length;k++)
+      { let subject = this.state.oddCycleElectives.sem7.subjects[k];
+        for(let i = 0;i<subject.detail.Credits.Theory;i++)
+        {
+          let x = await context.dispatch("getRandomDayRegularHour");
+          for(;;)
+          { console.log(x);
+            let allProfessorsFree = true;
+            for(let j = 0;j<this.state.oddCycleElectives.sem7.newProfessor[k];j++)
+            {
+              let professor = await context.dispatch(
+                "getProfessorObject",
+                subject.detail.Professors[j]
+              );
+              allProfessorsFree = allProfessorsFree && professor.detail[x.day][x.hour] == "";
+            }
+            if(subject.detail.isDayDone[x.dayNumber] == false && (allProfessorsFree) && (this.state.allOddCycleClasses["sec7A"][x.day][x.hour] == "") && (this.state.allOddCycleClasses["sec7B"][x.day][x.hour] == ""))
+            { 
+              subject.detail.isDayDone[x.dayNumber] =  true;
+              this.state.allOddCycleClasses["sec7A"][x.day][x.hour] = subject.detail.Code;
+              this.state.allOddCycleClasses["sec7B"][x.day][x.hour] = subject.detail.Code;
+              for(let j = 0;j<this.state.oddCycleElectives.sem7.newProfessor[k];j++)
+              {
+                let professor = await context.dispatch(
+                  "getProfessorObject",
+                  subject.detail.Professors[j]
+                );
+                professor.detail[x.day][x.hour] = subject.detail.Code + subject.detail.Semester;
+              }
+              break;
+            }
+            else
+            {
+              x = await context.dispatch("getRandomDayRegularHour");
+            }
+          }
+        }
+      }
+    }
+    else
+    {
+      for(let k = 0;k<this.state.evenCycleElectives.sem6.subjects.length;k++)
+      { let subject = this.state.evenCycleElectives.sem6.subjects[k];
+        for(let i = 0;i<subject.detail.Credits.Theory;i++)
+        {
+          let x = await context.dispatch("getRandomDayRegularHour");
+          for(;;)
+          { let allProfessorsFree = true;
+            let dayDone = subject.detail.isDayDone[x.dayNumber];
+            for(let j = 0;j<this.state.evenCycleElectives.sem6.newProfessor[k];j++)
+            {
+              let professor = await context.dispatch(
+                "getProfessorObject",
+                subject.detail.Professors[j]
+              );
+              allProfessorsFree =
+                allProfessorsFree && professor.detail[x.day][x.hour] == "";
+            }
+            if(dayDone == false && allProfessorsFree && this.state.allEvenCycleClasses["sec6A"][x.day][x.hour] == "" && this.state.allEvenCycleClasses["sec6B"][x.day][x.hour] == "" && this.state.allEvenCycleClasses["sec6C"][x.day][x.hour] == "")
+            {
+              
+              subject.detail.isDayDone[x.dayNumber] =  true;
+              this.state.allEvenCycleClasses["sec6A"][x.day][x.hour] = subject.detail.Code;
+              this.state.allEvenCycleClasses["sec6B"][x.day][x.hour] = subject.detail.Code;
+              this.state.allEvenCycleClasses["sec6C"][x.day][x.hour] = subject.detail.Code;
+              for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
+              {
+                let professor = await context.dispatch(
+                  "getProfessorObject",
+                  subject.detail.Professors[j]
+                );
+                professor.detail[x.day][x.hour] = subject.detail.Code + subject.detail.Semester;
+              }
+              break;
+            }
+            else
+            {
+              x = await context.dispatch("getRandomDayRegularHour");
+            }
+          }
+        }
+      }
+    }
+  },
   async assignLabs(context) {
     console.log("assignLabs' context- " + context);
     if (this.state.cycle == "Odd") {
@@ -424,7 +618,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 8; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -508,15 +702,6 @@ export default {
       }
     }
   },
-  async getRandomDayHour(context) {
-    console.log("getRandomDayHour's context- " + context);
-    let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-    let index = Math.floor(Math.random() * Days.length);
-    let day = Days[index];
-    let Hours = [0, 2, 4, 5];
-    let hour = Hours[Math.floor(Math.random() * Hours.length)];
-    return { day: day, hour: hour, dayNumber: index };
-  },
   async assignTutorials(context) {
     console.log("assignTutorials' context - " + context);
     if (this.state.cycle == "Odd") {
@@ -530,143 +715,97 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for(let k = 0;k<8;k++)
+      {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
-        for (let i = 0; i < currentClass.subjects.length; i++) {
-          let sub = currentClass.subjects[i];
-          if (sub.detail.Credits.Tutorial > 0) {
-            let allProfessorsFree = true;
+        for(let i = 0;i<currentClass.subjects.length;i++)
+        {
+          let currentSubject = currentClass.subjects[i];
+          if(currentSubject.detail.Credits.Tutorial>0)
+          {
             let x = await context.dispatch("getRandomDayHour");
-            for (;;) {
-              let currentClassFree = currentClass[x.day][x.hour] == "";
-              if (x.hour != 0) {
-                currentClassFree =
-                  currentClassFree && currentClass[x.day][x.hour - 1] == "";
-                if (x.hour != 5) {
-                  currentClassFree =
-                    currentClassFree && currentClass[x.day][x.hour + 2] == "";
+            let isDone = false;
+            for(;;)
+            { let allProfessorsFree = true;
+              let currentClassFree = (currentClass[x.day][x.hour] == "") && (currentClass[x.day][x.hour + 1] == "") && (currentSubject.detail.isDayDone[x.dayNumber]== false);
+              if(currentClassFree)
+              {
+                for(let j = 0;j<currentClass.newProfessor[i];j++)
+                { let professor = await context.dispatch("getProfessorObject",currentSubject.detail.Professors[j]);
+                  allProfessorsFree = allProfessorsFree && professor.detail[x.day][x.hour] == "" && professor.detail[x.day][x.hour+1] == "";
                 }
-              } else {
-                currentClassFree =
-                  currentClassFree && currentClass[x.day][x.hour + 2] == "";
               }
-              for (let j = 0; j < currentClass.newProfessor[i]; j++) {
-                let professor = await context.dispatch(
-                  "getProfessorObject",
-                  sub.detail.Professors[j]
-                );
-                allProfessorsFree =
-                  allProfessorsFree && professor.detail[x.day][x.hour] == "";
+              if(allProfessorsFree && currentClassFree)
+              { currentSubject.detail.isDayDone[x.dayNumber] = true;
+                currentClass[x.day][x.hour] =  currentSubject.detail.Abbreviation + " Tutorial";
+                currentClass[x.day][x.hour + 1] = currentSubject.detail.Abbreviation + " Tutorial";
+                for(let j = 0;j<currentClass.newProfessor[i];j++)
+                { let professor = await context.dispatch("getProfessorObject",currentSubject.detail.Professors[j]);
+                  professor.detail[x.day][x.hour] = currentSubject.detail.Abbreviation + " Tutorial" + " " + currentClass.Semester + currentClass.Section; 
+                   professor.detail[x.day][x.hour+1] = currentSubject.detail.Abbreviation + " Tutorial" + " " + currentClass.Semester + currentClass.Section;
+                }
+                isDone = true;
               }
-              if (currentClassFree && allProfessorsFree) {
-                sub.detail.isDayDone[x.dayNumber] = true;
-                currentClass[x.day][x.hour] =
-                  sub.detail.Abbreviation + " Tutorial";
-                currentClass[x.day][x.hour + 1] =
-                  sub.detail.Abbreviation + " Tutorial";
-                if (x == 4) {
-                  currentClass[sub.detail.LabSchedule.Day][x + 2] = "    ";
-                }
-                for (let j = 0; j < currentClass.newProfessor[i]; j++) {
-                  let professor = await context.dispatch(
-                    "getProfessorObject",
-                    sub.detail.Professors[j]
-                  );
-                  professor.detail[x.day][x.hour] =
-                    sub.detail.Abbreviation +
-                    " " +
-                    classNames[k].substring(3) +
-                    " Tutorial";
-                  professor.detail[x.day][x.hour + 1] =
-                    sub.detail.Abbreviation +
-                    " " +
-                    classNames[k].substring(3) +
-                    " Tutorial";
-                }
+              if(isDone)
+              {
                 break;
-              } else {
-                x = await context.dispatch("getRandomDayHour");
+              }
+              else
+              {
+                x = await context.dispatch("getRandomDayHour"); 
               }
             }
           }
         }
       }
-    } else {
+    }
+    else
+    {
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
-      for (let k = 0; k < 1; k++) {
+      for(let k = 0;k<6;k++)
+      {
         let currentClass = this.state.allEvenCycleClasses[classNames[k]];
-        for (let i = 0; i < currentClass.subjects.length; i++) {
-          let sub = currentClass.subjects[i];
-          if (sub.detail.Credits.Tutorial > 0) {
-            let allProfessorsFree = true;
+        for(let i = 0;i<currentClass.subjects.length;i++)
+        {
+          let currentSubject = currentClass.subjects[i];
+          if(currentSubject.detail.Credits.Tutorial>0)
+          {
             let x = await context.dispatch("getRandomDayHour");
-            for (;;) {
-              let currentClassFree = currentClass[x.day][x.hour] == "";
-              if (x.hour != 0) {
-                currentClassFree =
-                  currentClassFree && currentClass[x.day][x.hour - 1] == "";
-                if (x.hour != 5) {
-                  currentClassFree =
-                    currentClassFree && currentClass[x.day][x.hour + 2] == "";
+            let isDone = false;
+            for(;;)
+            { let allProfessorsFree = true;
+              let currentClassFree = currentClass[x.day][x.hour] == "" && currentClass[x.day][x.hour + 1] == "" (currentSubject.detail.isDayDone[x.dayNumber]== false);
+              if(currentClassFree)
+              {
+                for(let j = 0;j<currentClass.newProfessor[i];j++)
+                { let professor = await context.dispatch("getProfessorObject",currentSubject.detail.Professors[j]);
+                  allProfessorsFree = allProfessorsFree && professor.detail[x.day][x.hour] == "" && professor.detail[x.day][x.hour+1] == "";
                 }
-              } else {
-                currentClassFree =
-                  currentClassFree && currentClass[x.day][x.hour + 2] == "";
               }
-              for (let j = 0; j < currentClass.newProfessor[i]; j++) {
-                let professor = await context.dispatch(
-                  "getProfessorObject",
-                  sub.detail.Professors[j]
-                );
-                allProfessorsFree =
-                  allProfessorsFree && professor.detail[x.day][x.hour] == "";
+              if(allProfessorsFree && currentClassFree)
+              { currentSubject.detail.isDayDone[x.dayNumber] = true;
+                currentClass[x.day][x.hour] = currentSubject.detail.Abbreviation + " Tutorial";
+                currentClass[x.day][x.hour + 1] = currentSubject.detail.Abbreviation + " Tutorial";
+                for(let j = 0;j<currentClass.newProfessor[i];j++)
+                { let professor = await context.dispatch("getProfessorObject",currentSubject.detail.Professors[j]);
+                  professor.detail[x.day][x.hour] = currentSubject.detail.Abbreviation + " Tutorial" + " " + currentClass.Semester + currentClass.Section; 
+                   professor.detail[x.day][x.hour+1] = currentSubject.detail.Abbreviation + " Tutorial" + " " + currentClass.Semester + currentClass.Section;
+                }
+                isDone = true;
               }
-              if (currentClassFree && allProfessorsFree) {
-                sub.detail.isDayDone[x.dayNumber] = true;
-                currentClass[x.day][x.hour] =
-                  sub.detail.Abbreviation + " Tutorial";
-                currentClass[x.day][x.hour + 1] =
-                  sub.detail.Abbreviation + " Tutorial";
-                if (x == 4) {
-                  currentClass[sub.detail.LabSchedule.Day][x + 2] = "    ";
-                }
-                for (let j = 0; j < currentClass.newProfessor[i]; j++) {
-                  let professor = await context.dispatch(
-                    "getProfessorObject",
-                    sub.detail.Professors[j]
-                  );
-                  professor.detail[x.day][x.hour] =
-                    sub.detail.Abbreviation +
-                    " " +
-                    classNames[k].substring(3) +
-                    " Tutorial";
-                  professor.detail[x.day][x.hour + 1] =
-                    sub.detail.Abbreviation +
-                    " " +
-                    classNames[k].substring(3) +
-                    " Tutorial";
-                }
+              if(isDone)
+              {
                 break;
-              } else {
-                x = await context.dispatch("getRandomDayHour");
+              }
+              else
+              {
+                x = await context.dispatch("getRandomDayHour"); 
               }
             }
           }
         }
       }
-    }
-  },
-  async shuffleArray(context, array) {
-    console.log("shuffleArray's context- " + context);
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  },
-  async getDay(context, day) {
-    console.log("getDay's context- " + context);
-    let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-    return Days[day];
+    }  
   },
   async assignClasses(context) {
     if (this.state.cycle == "Odd") {
@@ -680,7 +819,7 @@ export default {
         "sec7A",
         "sec7B",
       ];
-      for (let k = 0; k < 3; k++) {
+      for (let k = 0; k < 8; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];
         console.log(currentClass);
         let subjectStack = [];
@@ -690,7 +829,6 @@ export default {
             subjectStack.push(i);
         }
         await context.dispatch("shuffleArray", subjectStack);
-
         //Approach 3
         for (let i = 0; i < subjectStack.length; i++) {
           let subNumber = subjectStack[i];
@@ -707,7 +845,8 @@ export default {
                 professor.detail[x][hour] == "" &&
                 currentClass.subjects[subNumber].detail.isDayDone[day] ==
                   false &&
-                currentClass[x][hour] == ""
+                currentClass[x][hour] == "" &&
+                currentClass.subjects[subNumber].detail.noOfTheoryTeachers == 1
               ) {
                 currentClass.subjects[subNumber].detail.isDayDone[day] = true;
                 currentClass[x][hour] =
@@ -719,6 +858,34 @@ export default {
                   currentClass.Section;
                 toBreak = true;
                 break;
+              } else if (
+                currentClass.subjects[subNumber].detail.noOfTheoryTeachers == 2 &&
+                professor.detail[x][hour] == "" &&
+                currentClass.subjects[subNumber].detail.isDayDone[day] ==
+                  false &&
+                currentClass[x][hour] == ""
+              ) {
+                let secondProfessor = await context.dispatch(
+                  "getProfessorObject",
+                  currentClass.subjects[subNumber].detail.Professors[1]
+                );
+                if (secondProfessor.detail[x][hour] == "") {
+                  currentClass.subjects[subNumber].detail.isDayDone[day] = true;
+                  currentClass[x][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation;
+                  professor.detail[x][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation +
+                    " " +
+                    currentClass.Semester +
+                    currentClass.Section;
+                  secondProfessor.detail[x][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation +
+                    " " +
+                    currentClass.Semester +
+                    currentClass.Section;
+                  toBreak = true;
+                  break;
+                }
               }
             }
             if (toBreak) {
@@ -731,7 +898,8 @@ export default {
               if (
                 professor.detail["Saturday"][hour] == "" &&
                 currentClass.subjects[subNumber].detail.isDayDone[5] == false &&
-                currentClass["Saturday"][hour] == ""
+                currentClass["Saturday"][hour] == "" &&
+                currentClass.subjects[subNumber].detail.isnoOfTheoryTeachers == 1
               ) {
                 currentClass.subjects[subNumber].detail.isDayDone[5] = true;
                 currentClass["Saturday"][hour] =
@@ -743,6 +911,34 @@ export default {
                   currentClass.Section;
                 isAllotted = true;
                 break;
+              } else if (
+                currentClass.subjects[subNumber].detail.noOfTheoryTeachers == 2 &&
+                professor.detail["Saturday"][hour] == "" &&
+                currentClass.subjects[subNumber].detail.isDayDone[5] == false &&
+                currentClass["Saturday"][hour] == ""
+              ) {
+                let secondProfessor = await context.dispatch(
+                  "getProfessorObject",
+                  currentClass.subjects[subNumber].detail.Professors[1]
+                );
+                if (secondProfessor.detail["Saturday"][hour] == "") {
+                  currentClass.subjects[subNumber].detail.isDayDone[
+                    "Saturday"
+                  ] = true;
+                  currentClass["Saturday"][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation;
+                  professor.detail["Saturday"][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation +
+                    " " +
+                    currentClass.Semester +
+                    currentClass.Section;
+                  secondProfessor.detail["Saturday"][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation +
+                    " " +
+                    currentClass.Semester +
+                    currentClass.Section;
+                  break;
+                }
               }
             }
           }
@@ -750,8 +946,9 @@ export default {
       }
     } else {
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
-      for (let k = 0; k < 1; k++) {
-        let currentClass = this.state.allEvenCycleClasses[classNames[k]];
+      for (let k = 0; k < 6; k++) {
+        let currentClass = this.state.allOddCycleClasses[classNames[k]];
+        console.log(currentClass);
         let subjectStack = [];
         for (let i = 0; i < currentClass.subjects.length; i++) {
           let sub = currentClass.subjects[i];
@@ -759,7 +956,6 @@ export default {
             subjectStack.push(i);
         }
         await context.dispatch("shuffleArray", subjectStack);
-
         //Approach 3
         for (let i = 0; i < subjectStack.length; i++) {
           let subNumber = subjectStack[i];
@@ -776,7 +972,8 @@ export default {
                 professor.detail[x][hour] == "" &&
                 currentClass.subjects[subNumber].detail.isDayDone[day] ==
                   false &&
-                currentClass[x][hour] == ""
+                currentClass[x][hour] == "" &&
+                currentClass.subjects[subNumber].detail.isToggleChecked == false
               ) {
                 currentClass.subjects[subNumber].detail.isDayDone[day] = true;
                 currentClass[x][hour] =
@@ -788,6 +985,34 @@ export default {
                   currentClass.Section;
                 toBreak = true;
                 break;
+              } else if (
+                currentClass.subjects[subNumber].detail.isToggleChecked &&
+                professor.detail[x][hour] == "" &&
+                currentClass.subjects[subNumber].detail.isDayDone[day] ==
+                  false &&
+                currentClass[x][hour] == ""
+              ) {
+                let secondProfessor = await context.dispatch(
+                  "getProfessorObject",
+                  currentClass.subjects[subNumber].detail.Professors[1]
+                );
+                if (secondProfessor.detail[x][hour] == "") {
+                  currentClass.subjects[subNumber].detail.isDayDone[day] = true;
+                  currentClass[x][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation;
+                  professor.detail[x][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation +
+                    " " +
+                    currentClass.Semester +
+                    currentClass.Section;
+                  secondProfessor.detail[x][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation +
+                    " " +
+                    currentClass.Semester +
+                    currentClass.Section;
+                  toBreak = true;
+                  break;
+                }
               }
             }
             if (toBreak) {
@@ -800,7 +1025,8 @@ export default {
               if (
                 professor.detail["Saturday"][hour] == "" &&
                 currentClass.subjects[subNumber].detail.isDayDone[5] == false &&
-                currentClass["Saturday"][hour] == ""
+                currentClass["Saturday"][hour] == "" &&
+                currentClass.subjects[subNumber].detail.isToggleChecked == false
               ) {
                 currentClass.subjects[subNumber].detail.isDayDone[5] = true;
                 currentClass["Saturday"][hour] =
@@ -812,6 +1038,34 @@ export default {
                   currentClass.Section;
                 isAllotted = true;
                 break;
+              } else if (
+                currentClass.subjects[subNumber].detail.isToggleChecked &&
+                professor.detail["Saturday"][hour] == "" &&
+                currentClass.subjects[subNumber].detail.isDayDone[5] == false &&
+                currentClass["Saturday"][hour] == ""
+              ) {
+                let secondProfessor = await context.dispatch(
+                  "getProfessorObject",
+                  currentClass.subjects[subNumber].detail.Professors[1]
+                );
+                if (secondProfessor.detail["Saturday"][hour] == "") {
+                  currentClass.subjects[subNumber].detail.isDayDone[
+                    "Saturday"
+                  ] = true;
+                  currentClass["Saturday"][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation;
+                  professor.detail["Saturday"][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation +
+                    " " +
+                    currentClass.Semester +
+                    currentClass.Section;
+                  secondProfessor.detail["Saturday"][hour] =
+                    currentClass.subjects[subNumber].detail.Abbreviation +
+                    " " +
+                    currentClass.Semester +
+                    currentClass.Section;
+                  break;
+                }
               }
             }
           }
@@ -820,10 +1074,146 @@ export default {
     }
   },
   async automateTimetable(context) {
-    console.log("automateTimeTable's context- " + context);
-    await context.dispatch("assignMathsClasses");
-    await context.dispatch("assignLabs");
-    await context.dispatch("assignTutorials");
-    await context.dispatch("assignClasses");
+    context.commit("changeLoading");
+    try{
+      console.log("automateTimeTable's context- " + context);
+      await context.dispatch("assignMathsClasses");
+      await context.dispatch("assignLabs");
+      await context.dispatch("assignElectives");
+      await context.dispatch("assignTutorials");
+      await context.dispatch("assignClasses");
+      context.commit("changeLoading");
+    }
+    catch(exc){
+      console.log(exc);
+      context.commit("changeLoading");  
+    }
   },
 };
+
+
+/*for (let k = 0; k < 6; k++) {
+        let currentClass = this.state.allOddCycleClasses[classNames[k]];
+        for (let i = 0; i < currentClass.subjects.length; i++) {
+          let sub = currentClass.subjects[i];
+          if (sub.detail.Credits.Tutorial > 0) {
+            let allProfessorsFree = true;
+            let x = await context.dispatch("getRandomDayHour");
+            for (;;) {
+              let currentClassFree = currentClass[x.day][x.hour] == "";
+              if (x.hour != 0) {
+                currentClassFree =
+                  currentClassFree && currentClass[x.day][x.hour - 1] == "";
+                if (x.hour != 5) {
+                  currentClassFree =
+                    currentClassFree && currentClass[x.day][x.hour + 2] == "";
+                }
+              } else {
+                currentClassFree =
+                  currentClassFree && currentClass[x.day][x.hour + 2] == "";
+              }
+              for (let j = 0; j < currentClass.newProfessor[i]; j++) {
+                let professor = await context.dispatch(
+                  "getProfessorObject",
+                  sub.detail.Professors[j]
+                );
+                allProfessorsFree =
+                  allProfessorsFree && professor.detail[x.day][x.hour] == "";
+              }
+              if (currentClassFree && allProfessorsFree) {
+                sub.detail.isDayDone[x.dayNumber] = true;
+                currentClass[x.day][x.hour] =
+                  sub.detail.Abbreviation + " Tutorial";
+                currentClass[x.day][x.hour + 1] =
+                  sub.detail.Abbreviation + " Tutorial";
+                if (x == 4) {
+                  currentClass[sub.detail.LabSchedule.Day][x + 2] = "    ";
+                }
+                for (let j = 0; j < currentClass.newProfessor[i]; j++) {
+                  let professor = await context.dispatch(
+                    "getProfessorObject",
+                    sub.detail.Professors[j]
+                  );
+                  professor.detail[x.day][x.hour] =
+                    sub.detail.Abbreviation +
+                    " " +
+                    classNames[k].substring(3) +
+                    " Tutorial";
+                  professor.detail[x.day][x.hour + 1] =
+                    sub.detail.Abbreviation +
+                    " " +
+                    classNames[k].substring(3) +
+                    " Tutorial";
+                }
+                break;
+              } else {
+                x = await context.dispatch("getRandomDayHour");
+              }
+            }
+          }
+        }
+      }
+    } else {
+      let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
+      for (let k = 0; k < 6; k++) {
+        let currentClass = this.state.allEvenCycleClasses[classNames[k]];
+        for (let i = 0; i < currentClass.subjects.length; i++) {
+          let sub = currentClass.subjects[i];
+          if (sub.detail.Credits.Tutorial > 0) {
+            let allProfessorsFree = true;
+            let x = await context.dispatch("getRandomDayHour");
+            for (;;) {
+              let currentClassFree = currentClass[x.day][x.hour] == "";
+              if (x.hour != 0) {
+                currentClassFree =
+                  currentClassFree && currentClass[x.day][x.hour - 1] == "";
+                if (x.hour != 5) {
+                  currentClassFree =
+                    currentClassFree && currentClass[x.day][x.hour + 2] == "";
+                }
+              } else {
+                currentClassFree =
+                  currentClassFree && currentClass[x.day][x.hour + 2] == "";
+              }
+              for (let j = 0; j < currentClass.newProfessor[i]; j++) {
+                let professor = await context.dispatch(
+                  "getProfessorObject",
+                  sub.detail.Professors[j]
+                );
+                allProfessorsFree =
+                  allProfessorsFree && professor.detail[x.day][x.hour] == "";
+              }
+              if (currentClassFree && allProfessorsFree) {
+                sub.detail.isDayDone[x.dayNumber] = true;
+                currentClass[x.day][x.hour] =
+                  sub.detail.Abbreviation + " Tutorial";
+                currentClass[x.day][x.hour + 1] =
+                  sub.detail.Abbreviation + " Tutorial";
+                if (x == 4) {
+                  currentClass[sub.detail.LabSchedule.Day][x + 2] = "    ";
+                }
+                for (let j = 0; j < currentClass.newProfessor[i]; j++) {
+                  let professor = await context.dispatch(
+                    "getProfessorObject",
+                    sub.detail.Professors[j]
+                  );
+                  professor.detail[x.day][x.hour] =
+                    sub.detail.Abbreviation +
+                    " " +
+                    classNames[k].substring(3) +
+                    " Tutorial";
+                  professor.detail[x.day][x.hour + 1] =
+                    sub.detail.Abbreviation +
+                    " " +
+                    classNames[k].substring(3) +
+                    " Tutorial";
+                }
+                break;
+              } else {
+                x = await context.dispatch("getRandomDayHour");
+              }
+            }
+          }
+        }
+      }
+    }*/

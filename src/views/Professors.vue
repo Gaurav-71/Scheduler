@@ -17,7 +17,7 @@
           src="../assets/Professors/add.svg"
           alt="add"
           title="Add New Professor"
-          @click="$store.state.showProfessorModal = true"
+          @click="$store.state.showProfessorModal = true"          
         />
       </div>
       <div class="results">

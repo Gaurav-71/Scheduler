@@ -1,5 +1,7 @@
 <template>
-  <div class="mapping" id="top">
+
+  <Loading :message="'Generating Timetable'" v-if="$store.state.isLoading == true" />
+  <div class="mapping" id="top" v-else>
     <div class="container">
       <div class="pills-container">
         <div class="pills" v-if="$store.state.cycle == 'Odd'">
@@ -53,6 +55,13 @@
             @click="changeSection('C')"
             v-bind:class="{ active: $store.state.section == 'C' }"
           >C</div>
+        </div>
+        <div class="elective-pills">
+          <div
+            class="pill"
+            @click="changeSemester(0)"
+            v-bind:class="{ active: $store.state.semester == 0 }"
+          >Electives</div>
         </div>
       </div>
       <mappingTable
@@ -119,6 +128,7 @@
         v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
         :sectionObject="$store.state.allEvenCycleClasses.sec8b"
       />
+      <electiveTable v-else-if="$store.state.semester == 0 && $store.state.section == null "/>
       <div v-else>
         <table>
           <tr>
@@ -156,19 +166,23 @@
       <b>Note</b> : Please ensure all data fields are filled properly
     </p>
     <transition name="fade" appear>
-      <Error :obj="error" :emptyStr="true" />
+      <Error :obj="error" :emptyStr="true" /> 
     </transition>
   </div>
 </template>
 
 <script>
 import mappingTable from "../../components/Tables/mappingTable";
+import electiveTable from "../../components/Tables/electiveTable";
 import Error from "../../components/Modals/Error";
+import Loading from "../../components/Loading/Circle";
 
 export default {
   components: {
     mappingTable,
-    Error
+    electiveTable,
+    Error,
+    Loading
   },
   data() {
     return {
@@ -184,22 +198,44 @@ export default {
   methods: {
     changeSemester(sem) {
       this.$store.state.semester = sem;
-      if (sem >= 7 && this.$store.state.section == "C")
+      if (sem >= 7 && this.$store.state.section == "C") {
         this.$store.state.section = "B";
+      } 
+      else if (sem == 0) {
+        this.$store.state.section = null;
+      }
     },
     changeSection(sec) {
+      if(this.$store.state.semester == 0){
+        if(this.$store.state.cycle == 'Odd'){          
+          this.$store.state.semester = 3;
+        }
+        else{
+          this.$store.state.semester = 4;
+        }
+      }
       this.$store.state.section = sec;
     },
     route() {
-
       let isReadyToAutomate = true;
       console.log(isReadyToAutomate);
-
       //put this stuff after validation
-      this.$router.push("/timetable/result");
+      if (this.$store.state.createType == 1) {
+        this.$store
+        .dispatch("automateTimetable")
+        .then(()=> {
+          this.$router.push("/timetable/result");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      } else {
+        //this.$router.push("/timetable/manual");
+        alert("drag & drop");
+      }
+      /*
       this.$store.state.semester = null;
       this.$store.state.section = null;
-      /*
       if (this.$store.state.cycle == "Odd") {
         let classNames = [
           "sec3A",
@@ -225,8 +261,7 @@ export default {
                 sub.detail.LabSchedule.LabNumber == ""
               ) { 
                 this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
-                this.error.isVisible = true;
-                isReadyToAutomate = false;
+                this.error.isVisible = true;            isReadyToAutomate = false;
                 break;
               }
             }
@@ -303,10 +338,17 @@ export default {
         }
       }
       if( isReadyToAutomate){
-        this.$router.push("/finalResult");
+      
+      this.$store
+      .dispatch("automateTimetable")
+      .then(()=> {
+        this.$router.push("/timetable/result");
+      })
+      .catch(err => {
+        console.log(err);
+      });
       }*/
-
-    },
+    }
   },
   created() {
     this.$store.state.isMapping = true;
@@ -319,12 +361,6 @@ export default {
     );
   },
   mounted() {
-    this.$store
-      .dispatch("assignSectionDetails")
-      .then(() => {})
-      .catch(err => {
-        console.log(err);
-      });
   }
 };
 </script>

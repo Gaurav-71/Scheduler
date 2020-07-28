@@ -300,17 +300,15 @@
     <div
       v-if="$store.state.semester == 0 || $store.state.section != null"
       class="actions"
-      style="margin-top: 2.5rem;"
-    >
+      style="margin-top: 2.5rem;">
       <div class="btn transparent" @click="printDoc(printID,filename)">Download as Word</div>
       <div class="btn" @click="route()">Save & Exit</div>
-      <div class="btn transparent" @click="printPDF()">Download as PDF</div>      
+      <div class="btn transparent" @click="printPDF()">Download as PDF</div>
     </div>
     <div
       v-if="$store.state.semester == 0 || $store.state.section != null"
       class="actions"
-      style="margin-top: 1rem;"
-    >
+      style="margin-top: 1rem;">
       <a class="btn transparent" href="#page-top">Jump to Top</a>
       <div class="btn transparent hide">Generate Again</div>
     </div>
@@ -322,7 +320,6 @@
 import studentTable from "../../components/Tables/studentTable";
 import teacherTable from "../../components/Tables/teacherTable";
 import Heading from "../../components/Design/Heading";
-
 export default {
   components: {
     studentTable,
@@ -414,6 +411,11 @@ export default {
       this.$store.state.createRouteTracker = localStorage.getItem(
         "createRouteTracker"
       );
+      this.$store.state.semester = null;
+      this.$store.state.section = null;
+      this.$store.state.cycle = null;
+      this.$store.state.term = "";
+      this.$store.state.department = "";
       this.$router.push("/timetable");
     },
     changeSemester(sem) {
@@ -445,14 +447,6 @@ export default {
       "createRouteTracker"
     );
   },
-  mounted() {
-    this.$store
-      .dispatch("automateTimetable")
-      .then()
-      .catch(err => {
-        console.log(err);
-      });
-  }
 };
 </script>
 
@@ -513,9 +507,9 @@ export default {
     .transparent:hover {
       background: rgba(21, 127, 135, 0.2);
     }
-    .hide{
+    .hide {
       display: none;
-      @include ipad-portrait{
+      @include ipad-portrait {
         display: block;
       }
     }
@@ -525,7 +519,7 @@ export default {
     position: absolute;
     top: 5.3rem;
     right: 2.7rem;
-    @include ipad-portrait{
+    @include ipad-portrait {
       display: none;
     }
   }
@@ -548,7 +542,7 @@ export default {
     .actions {
       display: none;
     }
-    .generate{
+    .generate {
       display: none;
     }
   }
