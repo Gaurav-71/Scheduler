@@ -6,44 +6,39 @@
     </transition>
     <div class="heading">
       <h1>Professor Mapping</h1>
-      <h4>
-        Map the subjects of the respective semester to the respective professors
-      </h4>
+      <h4>Map the subjects of the respective semester to the respective professors</h4>
     </div>
-
     <table>
       <tr>
         <th>Course</th>
         <th>Course Code</th>
         <th>Credits</th>
+        <th>No. of Theory Teachers</th>
         <th>Professor</th>
       </tr>
       <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
-        <td class="course-name">
-          <label
-            class="switch"
-            title="If this subject has more than one main teacher toggle this switch on"
-          >
-            <input
-              type="checkbox"
-              :id="createID(index)"
-              v-model="courses.detail.isToggleChecked"
-            />
-            <span class="slider round"></span>
-          </label>
-          {{ courses.detail.isToggleChecked }}
-        </td>
+        <td class="course-name">{{ courses.detail.Name }}</td>
         <td>{{ courses.detail.Code }}</td>
         <td>
           {{ courses.detail.Credits.Theory }}:{{
-            courses.detail.Credits.Tutorial
+          courses.detail.Credits.Tutorial
           }}:{{ courses.detail.Credits.Lab }}
+        </td>
+        <td class="course-name">
+          <input
+            style="width: 3rem;"
+            type="number"
+            min="1"
+            max="2"
+            v-bind:id="createID(index)"
+            v-model="courses.detail.noOfTheoryTeachers"
+          />
         </td>
         <td class="data-input">
           <div class="custom-input">
             <input
               type="text"
-              placeholder="Select Professor"
+              placeholder="Select Main Professor"
               list="allProfessors"
               v-model="courses.detail.Professors[0]"
             />
@@ -55,10 +50,7 @@
               @click="addProfessor(index)"
             />
           </div>
-          <div
-            class="custom-input"
-            v-if="sectionObject.getProfessors(index) >= 2"
-          >
+          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 2">
             <input
               type="text"
               placeholder="Select Professor"
@@ -75,10 +67,7 @@
             />
             <div v-else class="block"></div>
           </div>
-          <div
-            class="custom-input"
-            v-if="sectionObject.getProfessors(index) >= 3"
-          >
+          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 3">
             <input
               type="text"
               placeholder="Select Professor"
@@ -95,13 +84,10 @@
             />
             <div v-else class="block"></div>
           </div>
-          <div
-            class="custom-input"
-            v-if="sectionObject.getProfessors(index) >= 4"
-          >
+          <div class="custom-input" v-if="sectionObject.getProfessors(index) >= 4">
             <input
               type="text"
-              placeholder="Select Main Professor 4"
+              placeholder="Select Professor"
               list="allProfessors"
               v-model="courses.detail.Professors[3]"
             />
@@ -121,7 +107,9 @@
 
     <p>
       Can't find a Professor or Course ? Click here to add new
-      <span @click="$store.state.showProfessorModal = true">Professor</span> or
+      <span
+        @click="$store.state.showProfessorModal = true"
+      >Professor</span> or
       <span @click="$store.state.showCourseModal = true">Course</span>
     </p>
     <br />
@@ -155,12 +143,8 @@
           <th>Lab Name</th>
         </tr>
         <tr v-for="(courses, index) in sectionObject.subjects" :key="index">
-          <td v-if="courses.detail.Credits.Lab > 0" class="course-name">
-            {{ courses.detail.Name }}
-          </td>
-          <td v-if="courses.detail.Credits.Lab > 0">
-            {{ courses.detail.Code }}
-          </td>
+          <td v-if="courses.detail.Credits.Lab > 0" class="course-name">{{ courses.detail.Name }}</td>
+          <td v-if="courses.detail.Credits.Lab > 0">{{ courses.detail.Code }}</td>
           <td class="custom-input" v-if="courses.detail.Credits.Lab > 0">
             <input
               type="text"
@@ -204,20 +188,14 @@
       </table>
 
       <br />
-      <div
-        class="heading"
-        v-if="$store.state.semester == 3 || $store.state.semester == 4"
-      >
+      <div class="heading" v-if="$store.state.semester == 3 || $store.state.semester == 4">
         <h1>Math Professors</h1>
         <h4>
           Enter the math professors for students of class
           {{ $store.state.semester }}{{ $store.state.section }}
         </h4>
       </div>
-      <div
-        v-if="$store.state.semester == 3 || $store.state.semester == 4"
-        class="math-prof"
-      >
+      <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-prof">
         <input
           type="text"
           placeholder="Enter Main Professor name"
@@ -238,17 +216,11 @@
         />
       </div>
       <br />
-      <div
-        v-if="$store.state.semester == 3 || $store.state.semester == 4"
-        class="heading"
-      >
+      <div v-if="$store.state.semester == 3 || $store.state.semester == 4" class="heading">
         <h1>Math Classes</h1>
         <h4>Enter the classes provided by the math department</h4>
       </div>
-      <table
-        v-if="$store.state.semester == 3 || $store.state.semester == 4"
-        class="math-dept"
-      >
+      <table v-if="$store.state.semester == 3 || $store.state.semester == 4" class="math-dept">
         <tr>
           <th>Class</th>
           <th>Time</th>
@@ -409,15 +381,12 @@ import AddCourse from "../Modals/AddCourse";
 export default {
   props: {
     sectionObject: {
-      type: Object,
-    },
+      type: Object
+    }
   },
   components: {
     AddProfessor,
-    AddCourse,
-  },
-  data() {
-    return {};
+    AddCourse
   },
   methods: {
     addProfessor(index) {
@@ -438,17 +407,24 @@ export default {
         );
       }
     },
+    createID(index) {
+      return (
+        "checkbox" +
+        this.sectionObject.Semester +
+        this.sectionObject.Section +
+        index
+      );
+    }
   },
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
     let list = document.getElementById("allProfessors");
-
     professorNames.forEach(function(item) {
       var option = document.createElement("option");
       option.value = item;
       list.appendChild(option);
     });
-  },
+  }
 };
 </script>
 
@@ -483,6 +459,17 @@ export default {
     }
   }
   table {
+    tr:nth-child(odd) {
+      background: rgba($color: $primary-dark, $alpha: 0.2);
+    }
+    tr:nth-child(1) {
+      background: $gradient;
+      border-top-left-radius: 0.8rem;
+      border-top-right-radius: 0.8rem;
+      th {
+        color: white;
+      }
+    }
     tr {
       .course-name {
         text-align: left;

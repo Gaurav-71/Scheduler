@@ -1,5 +1,7 @@
 <template>
-  <div class="mapping" id="top">
+
+  <Loading :message="'Generating Timetable'" v-if="$store.state.isLoading == true" />
+  <div class="mapping" id="top" v-else>
     <div class="container">
       <div class="pills-container">
         <div class="pills" v-if="$store.state.cycle == 'Odd'">
@@ -173,12 +175,14 @@
 import mappingTable from "../../components/Tables/mappingTable";
 import electiveTable from "../../components/Tables/electiveTable";
 import Error from "../../components/Modals/Error";
+import Loading from "../../components/Loading/Circle";
 
 export default {
   components: {
     mappingTable,
     electiveTable,
-    Error
+    Error,
+    Loading
   },
   data() {
     return {
@@ -196,7 +200,8 @@ export default {
       this.$store.state.semester = sem;
       if (sem >= 7 && this.$store.state.section == "C") {
         this.$store.state.section = "B";
-      } else if (sem == 0) {
+      } 
+      else if (sem == 0) {
         this.$store.state.section = null;
       }
     },
@@ -214,17 +219,23 @@ export default {
     route() {
       let isReadyToAutomate = true;
       console.log(isReadyToAutomate);
-
       //put this stuff after validation
       if (this.$store.state.createType == 1) {
-        this.$router.push("/timetable/result");
+        this.$store
+        .dispatch("automateTimetable")
+        .then(()=> {
+          this.$router.push("/timetable/result");
+        })
+        .catch(err => {
+          console.log(err);
+        });
       } else {
         //this.$router.push("/timetable/manual");
         alert("drag & drop");
       }
+      /*
       this.$store.state.semester = null;
       this.$store.state.section = null;
-      /*
       if (this.$store.state.cycle == "Odd") {
         let classNames = [
           "sec3A",
@@ -250,8 +261,7 @@ export default {
                 sub.detail.LabSchedule.LabNumber == ""
               ) { 
                 this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
-                this.error.isVisible = true;
-                isReadyToAutomate = false;
+                this.error.isVisible = true;            isReadyToAutomate = false;
                 break;
               }
             }
@@ -328,7 +338,15 @@ export default {
         }
       }
       if( isReadyToAutomate){
-        this.$router.push("/finalResult");
+      
+      this.$store
+      .dispatch("automateTimetable")
+      .then(()=> {
+        this.$router.push("/timetable/result");
+      })
+      .catch(err => {
+        console.log(err);
+      });
       }*/
     }
   },
@@ -343,12 +361,6 @@ export default {
     );
   },
   mounted() {
-    this.$store
-      .dispatch("assignSectionDetails")
-      .then(() => {})
-      .catch(err => {
-        console.log(err);
-      });
   }
 };
 </script>

@@ -319,7 +319,7 @@ export default {
     overflow-y: scroll;
     .card {
       width: 22.5rem;
-      height: 12rem;
+      height: 14rem;
       margin: 0.6rem;
       background: white;
       border: 1px solid lightgray;
