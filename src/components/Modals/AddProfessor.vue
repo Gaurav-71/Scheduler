@@ -3,56 +3,58 @@
     <transition name="fade" appear>
       <Error :obj="error" />
     </transition>
-    <div class="modal">
-      <img src="../../assets/Professors/add.svg" alt="add" />
-      <div class="line"></div>
-      <form class="form-data">
-        <div class="field1">
-          <label for="name">Professor name</label>
-          <br />
-          <input v-model="name" type="text" name="name" placeholder="Enter name" />
-        </div>
-        <div class="field2">
-          <label for="designation">Designation</label>
-          <br />
-          <input
-            v-model="designation"
-            list="designation"
-            name="designation"
-            placeholder="Enter designation"
-          />
-          <datalist id="designation">
-            <option value="Head Of Department"></option>
-            <option value="Professor"></option>
-            <option value="Associate Professor"></option>
-            <option value="Assistant Professor"></option>
-          </datalist>
-        </div>
-        <div class="field3">
-          <div class="col1">
-            <label>Gender</label>
-            <form>
-              <input type="radio" id="male" name="gender" value="M" v-model="gender" />
-              <div class="custom-label">
-                <img src="../../assets/Professors/Modal/male.svg" alt="male" />
-                <label for="male">Male</label>
-              </div>
-              <input type="radio" id="female" name="gender" value="F" v-model="gender" />
-              <div class="custom-label">
-                <img src="../../assets/Professors/Modal/female.svg" alt="male" />
-                <label for="female">Female</label>
-              </div>
-              <input type="radio" id="other" name="gender" value="O" v-model="gender" />
-              <div class="custom-label">
-                <img src="../../assets/Professors/other.svg" alt="male" />
-                <label for="other">Other</label>
-              </div>
-            </form>
+    <transition name="custom-classes-transition" enter-active-class="animated zoomInUp" appear>
+      <div class="modal">
+        <img src="../../assets/Professors/add.svg" alt="add" />
+        <div class="line"></div>
+        <form class="form-data">
+          <div class="field1">
+            <label for="name">Professor name</label>
+            <br />
+            <input v-model="name" type="text" name="name" placeholder="Enter name" />
           </div>
-          <div class="btn" @click="addProfessor">Save</div>
-        </div>
-      </form>
-    </div>
+          <div class="field2">
+            <label for="designation">Designation</label>
+            <br />
+            <input
+              v-model="designation"
+              list="designation"
+              name="designation"
+              placeholder="Enter designation"
+            />
+            <datalist id="designation">
+              <option value="Head Of Department"></option>
+              <option value="Professor"></option>
+              <option value="Associate Professor"></option>
+              <option value="Assistant Professor"></option>
+            </datalist>
+          </div>
+          <div class="field3">
+            <div class="col1">
+              <label>Gender</label>
+              <form>
+                <input type="radio" id="male" name="gender" value="M" v-model="gender" />
+                <div class="custom-label">
+                  <img src="../../assets/Professors/Modal/male.svg" alt="male" />
+                  <label for="male">Male</label>
+                </div>
+                <input type="radio" id="female" name="gender" value="F" v-model="gender" />
+                <div class="custom-label">
+                  <img src="../../assets/Professors/Modal/female.svg" alt="male" />
+                  <label for="female">Female</label>
+                </div>
+                <input type="radio" id="other" name="gender" value="O" v-model="gender" />
+                <div class="custom-label">
+                  <img src="../../assets/Professors/other.svg" alt="male" />
+                  <label for="other">Other</label>
+                </div>
+              </form>
+            </div>
+            <div class="btn" @click="addProfessor">Save</div>
+          </div>
+        </form>
+      </div>
+    </transition>
     <img
       src="../../assets/Common/delete.svg"
       alt="cancel"
@@ -85,7 +87,11 @@ export default {
   },
   methods: {
     addProfessor() {
-      if (this.name.trim() == "" || this.gender.trim() == "" || this.designation.trim() == "") {
+      if (
+        this.name.trim() == "" ||
+        this.gender.trim() == "" ||
+        this.designation.trim() == ""
+      ) {
         this.error.isVisible = true;
       } else {
         this.$store.state.showProfessorModal = false;

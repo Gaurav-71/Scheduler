@@ -1,7 +1,7 @@
 <template>
   <div class="professors">
     <transition name="fade" appear>
-      <Alert :obj="warning" :remove="warningRemoveObj" />
+      <Alert v-if="warning.isVisible" :obj="warning" :remove="warningRemoveObj" />
     </transition>
     <transition name="fade" appear>
       <Error :obj="error" />
@@ -10,93 +10,122 @@
       <AddProfessor v-if="$store.state.showProfessorModal" />
     </transition>
     <Heading :obj="headingObj" />
-    <div class="container">
-      <div class="search-bar">
-        <input type="search" placeholder="Search Professors" v-model="search" />
-        <img
-          src="../assets/Professors/add.svg"
-          alt="add"
-          title="Add New Professor"
-          @click="$store.state.showProfessorModal = true"          
-        />
-      </div>
-      <div class="results">
-        <div v-for="(professor, index) in searchProfessors" :key="index">
-          <div v-if="!professor.isEditing" class="card-container">
-            <div class="card">
-              <img
-                src="../assets/Professors/male.svg"
-                alt="male"
-                v-if="professor.detail.Gender == 'M'"
-              />
-              <img
-                src="../assets/Professors/female.svg"
-                alt="female"
-                v-else-if="professor.detail.Gender == 'F'"
-              />
-              <img
-                src="../assets/Professors/other.svg"
-                alt="male"
-                v-else-if="professor.detail.Gender == 'O'"
-              />
-              <div class="details">
-                <h3>{{ professor.detail.Name }}</h3>
-                <h5>{{ professor.detail.Designation }}</h5>
+    <transition v-if="!$store.state.isLoadingProfessors" name="fade" appear>
+      <div class="container">
+        <div class="search-bar">
+          <input type="search" placeholder="Search Professors" v-model="search"/>
+          <img
+            src="../assets/Professors/add.svg"
+            alt="add"
+            title="Add New Professor"
+            @click="$store.state.showProfessorModal = true"
+            class="shake"
+          />
+        </div>
+        <transition
+          name="custom-classes-transition"
+          enter-active-class="animated bounceInUp"
+          appear
+        >
+          <div class="results">
+            <div v-for="(professor, index) in searchProfessors" :key="index">
+              <transition
+                name="flip"
+                enter-active-class="animated flipInY"
+                leave-active-class="animated flipOutY"
+                v-on:afterLeave="afterLeave"
+              >
+                <div v-if="!professor.isEditing" class="card-container grow">
+                  <div class="card">
+                    <img
+                      src="../assets/Professors/male.svg"
+                      alt="male"
+                      v-if="professor.detail.Gender == 'M'"
+                    />
+                    <img
+                      src="../assets/Professors/female.svg"
+                      alt="female"
+                      v-else-if="professor.detail.Gender == 'F'"
+                    />
+                    <img
+                      src="../assets/Professors/other.svg"
+                      alt="male"
+                      v-else-if="professor.detail.Gender == 'O'"
+                    />
+                    <div class="details">
+                      <h3>{{ professor.detail.Name }}</h3>
+                      <h5>{{ professor.detail.Designation }}</h5>
+                    </div>
+                  </div>
+                  <div class="actions">
+                    <img
+                      src="../assets/Common/edit.svg"
+                      alt="edit"
+                      title="Edit Professor Details"
+                      @click="edit(professor)"
+                      class="grow-btn"
+                    />
+                    <img
+                      src="../assets/Common/delete.svg"
+                      @click="removeProfessor(professor)"
+                      alt="delete"
+                      title="Delete Professor"
+                      class="grow-btn"
+                    />
+                  </div>
+                </div>
+              </transition>
+              <div v-if="showEditing">
+                <div v-if="professor.isEditing" class="card-container grow">
+                  <div class="card">
+                    <img src="../assets/Common/edit.svg" alt="edit-mode" />
+                    <div class="details-edit">
+                      <input type="text" v-model="name" />
+                      <input type="text" v-model="designation" />
+                    </div>
+                  </div>
+                  <div class="actions-edit">
+                    <form>
+                      <input type="radio" id="male" name="gender" value="M" v-model="gender" />
+                      <label for="male">Male</label>
+                      <input type="radio" id="female" name="gender" value="F" v-model="gender" />
+                      <label for="female">Female</label>
+                      <input type="radio" id="other" name="gender" value="O" v-model="gender" />
+                      <label for="other">Other</label>
+                    </form>
+                    <img
+                      @click="saveDetails(professor)"
+                      src="../assets/Common/save.svg"
+                      alt="save"
+                      title="Save Edited Details"
+                      class="grow-btn"
+                    />
+                    <img
+                      @click="cancelEdit(professor)"
+                      src="../assets/Common/cancel.svg"
+                      alt="cancel"
+                      title="Cancel Editing"
+                      class="grow-btn"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="actions">
-              <img
-                src="../assets/Common/edit.svg"
-                alt="edit"
-                title="Edit Professor Details"
-                @click="edit(professor)"
-              />
-              <img
-                src="../assets/Common/delete.svg"
-                @click="removeProfessor(professor)"
-                alt="delete"
-                title="Delete Professor"
-              />
+            <div v-if="searchProfessors.length == 0" class="error">
+              <transition
+                name="custom-classes-transition"
+                enter-active-class="animated tada"
+                appear
+              >
+                <img src="../assets/Common/error.svg" alt="error" />
+              </transition>
+              <h2>Sorry, we could'nt find any professor named {{search}}</h2>
             </div>
           </div>
-          <div v-else class="card-container">
-            <div class="card">
-              <img src="../assets/Common/edit.svg" alt="edit-mode" />
-              <div class="details-edit">
-                <input type="text" v-model="name" />
-                <input type="text" v-model="designation" />
-              </div>
-            </div>
-            <div class="actions-edit">
-              <form>
-                <input type="radio" id="male" name="gender" value="M" v-model="gender" />
-                <label for="male">Male</label>
-                <input type="radio" id="female" name="gender" value="F" v-model="gender" />
-                <label for="female">Female</label>
-                <input type="radio" id="other" name="gender" value="O" v-model="gender" />
-                <label for="other">Other</label>
-              </form>
-              <img
-                @click="saveDetails(professor)"
-                src="../assets/Common/save.svg"
-                alt="save"
-                title="Save Edited Details"
-              />
-              <img
-                @click="professor.isEditing = false"
-                src="../assets/Common/cancel.svg"
-                alt="cancel"
-                title="Cancel Editing"
-              />
-            </div>
-          </div>
-        </div>
-        <div v-if="searchProfessors.length == 0" class="error">
-          <img src="../assets/Common/error.svg" alt="error" />
-          <h2>Sorry, we could'nt find any professor named {{search}}</h2>
-        </div>
+        </transition>
       </div>
-    </div>
+    </transition>
+    <Loading v-else :message="'Fetching Department Professors'" />
   </div>
 </template>
 
@@ -105,13 +134,15 @@ import AddProfessor from "../components/Modals/AddProfessor.vue";
 import Heading from "../components/Design/Heading";
 import Alert from "../components/Modals/Alert";
 import Error from "../components/Modals/Error";
+import Loading from "../components/Loading/Pulse";
 
 export default {
   components: {
     AddProfessor,
     Heading,
     Alert,
-    Error
+    Error,
+    Loading
   },
   data() {
     return {
@@ -139,7 +170,8 @@ export default {
       unsubscribe: null,
       name: "",
       designation: "",
-      gender: ""
+      gender: "",
+      showEditing: false
     };
   },
   created() {
@@ -178,11 +210,20 @@ export default {
             this.designation = "";
             this.gender = "";
             professor.isEditing = false;
+            this.showEditing = false;
           })
           .catch(err => {
             console.log(err);
           });
       }
+    },
+    cancelEdit(course) {
+      course.isEditing = false;
+      this.showEditing = false;
+    },
+    afterLeave(el, done) {
+      this.showEditing = !this.showEditing;
+      console.log(el, done);
     }
   },
   computed: {
@@ -194,6 +235,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.state.isLoadingProfessors = true;
     this.$store
       .dispatch("loadProfessorList")
       .then(repsonse => {
@@ -208,13 +250,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/searchBar";
+@import "../scss/custom-animations";
+
 .professors {
   margin-top: 4.5rem;
   margin-left: 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  overflow: hidden;  
   .results {
     display: flex;
     justify-content: center;
@@ -299,10 +343,7 @@ export default {
           padding: 0.5rem;
         }
       }
-    }
-    .card-container:hover {
-      border: 1px solid gray;
-    }
+    }    
     .error {
       margin-top: 3rem;
       display: flex;
@@ -317,5 +358,15 @@ export default {
       }
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -30,14 +30,14 @@ export default {
 @import "../../scss/colors";
 
 h4 {
-  color: $primary-dark;
-  font-weight: lighter;
+  color: grey;
+  font-weight: lighter;  
 }
 
 .sk-fading-circle {
-  margin: 100px auto;
-  width: 40px;
-  height: 40px;
+  margin: 80px auto;
+  width: 65px;
+  height: 65px;
   position: relative;
 }
 
@@ -55,8 +55,7 @@ h4 {
   margin: 0 auto;
   width: 15%;
   height: 15%;
-  background-color: $primary;
-  border-radius: 100%;
+  background-color: $primary; 
   -webkit-animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
   animation: sk-circleFadeDelay 1.2s infinite ease-in-out both;
 }

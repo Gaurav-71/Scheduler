@@ -3,7 +3,7 @@
     <div class="card">
       <h1>Manual or Automated ?</h1>
       <div class="child-container">
-        <div class="child-card">
+        <div class="child-card grow">
           <div class="title">
             <img src="../../assets/Create/Type/automation.svg" alt="automated" />
             <h3>Automated</h3>
@@ -11,7 +11,7 @@
           <p>Create a new timetable for all semesters automatically without any hassle.</p>
           <button @click="route(1)">Create Automatically</button>
         </div>
-        <div class="child-card">
+        <div class="child-card grow">
           <div class="title">
             <img src="../../assets/Create/Type/manual.svg" alt="manual" />
             <h3>Manual</h3>
@@ -34,8 +34,7 @@ export default {
       if (page == 1) {
         this.$store.state.createType = 1;
         this.$router.push("/timetable/create/cycle");
-      }      
-      else if(page == 3){
+      } else if (page == 3) {
         this.$store.state.createType = 2;
         this.$router.push("/timetable/create/cycle");
       }
@@ -55,11 +54,13 @@ export default {
 <style lang="scss" scoped>
 @import "../../scss/create-cards";
 @import "../../scss/mediaQuery";
+@import "../../scss/custom-animations";
 
 .type {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 3rem;
   .card {
     text-align: center;
     @include ipad-portrait {
@@ -111,17 +112,18 @@ export default {
         button,
         .create-manual {
           width: 100%;
-          padding: 0.89rem;               
+          padding: 0.89rem;
           cursor: pointer;
           color: white;
           font-size: 0.9rem;
+          transition: all 0.2s ease-in-out;
         }
-        button{
+        button {
           background-image: $gradient;
-          border: none;     
-        }
-        button:active {
-          transform: scale(1.01);
+          border: none;
+        }        
+        button:hover{
+          background-image: $gradient-inverted;
         }
         button:focus {
           outline: none;
@@ -130,25 +132,24 @@ export default {
           padding: 0;
           display: grid;
           grid-template-columns: 50% 50%;
-          background-image: $gradient;                 
+          background-image: $gradient;
           div {
             width: 100%;
-            padding: 0.89rem 0;            
-            background-image: $gradient;                 
-            border-left: 1px solid white;                          
+            padding: 0.89rem 0;
+            background-image: $gradient-inverted;
+            border-left: 1.35px solid white;
+            transition: all 0.2s ease-in-out;
           }
-          .one {            
-            background-image: none;
-            background: $primary-light;      
-            color: white;                                     
+          div:hover{
+            background-image: $gradient;
+          }
+          .one {        
+            background-image: $gradient;    
             border-left: none;
           }
-          .one:hover{
-            background: $primary;
-          }
-          div:active{
-            transform: scale(0.95);            
-          }
+          .one:hover {
+            background-image: $gradient-inverted;
+          }          
         }
       }
     }

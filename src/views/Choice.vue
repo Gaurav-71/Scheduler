@@ -1,25 +1,29 @@
 <template>
   <div class="choice">
     <Header />
-    <h1>What would you like to schedule today ?</h1>
-    <div class="container">
-      <div class="card">
-        <div class="image-1"></div>
-        <div class="description">
-          <h3>Timetable</h3>
-          <p>Create a new timetable for any semester automatically without any hassle.</p>
+    <transition name="custom-classes-transition" enter-active-class="animated bounceInUp" appear>
+      <div class="wrapper">
+        <h1>What would you like to schedule today ?</h1>
+        <div class="container">
+          <div class="card grow">
+            <div class="image-1"></div>
+            <div class="description">
+              <h3>Timetable</h3>
+              <p>Create a new timetable for any semester automatically without any hassle.</p>
+            </div>
+            <a @click="route(1)">Schedule Timetable</a>
+          </div>
+          <div class="card grow">
+            <div class="image-2"></div>
+            <div class="description">
+              <h3>Internals</h3>
+              <p>Create a new timetable for internals and send it via sms to all students without any hassle.</p>
+            </div>
+            <a @click="route(2)">Schedule Internals</a>
+          </div>
         </div>
-        <a @click="route(1)">Schedule Timetable</a>
       </div>
-      <div class="card">
-        <div class="image-2"></div>
-        <div class="description">
-          <h3>Internals</h3>
-          <p>Create a new timetable for internals and send it via sms to all students without any hassle.</p>
-        </div>
-        <a @click="route(2)">Schedule Internals</a>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -50,15 +54,16 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/colors";
+@import "../scss/custom-animations";
 
 .choice {
-  padding-top: 5.3rem;
+  margin-top: 6rem;
   h1 {
     text-align: center;
     color: $primary-light;
     font-size: 2.5rem;
     font-weight: 400;
-    margin: 1.2rem;
+    margin-top: 6.5rem;
     text-shadow: 1px 1px 1px black;
   }
   .container {
@@ -68,7 +73,7 @@ export default {
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    margin-top: 2rem;
+    margin-top: 3rem;
     .card {
       height: 24rem;
       width: 18rem;
@@ -122,6 +127,10 @@ export default {
         color: white;
         cursor: pointer;
         text-shadow: 1px 1px 1px black;
+        transition: all 0.2s ease-in-out;
+      }
+      a:hover {
+        background-image: $gradient-inverted;
       }
     }
   }

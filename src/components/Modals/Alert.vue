@@ -1,19 +1,28 @@
 <template>
   <div v-if="obj.isVisible" class="modal-container">
-    <div class="modal">
-      <div class="message-container">
-        <img src="../../assets/Common/warning.svg" alt="warning" class="error" />
-        <div class="message">
-          <h2>Warning</h2>
-          <h3>{{obj.message}}</h3>
+    <transition name="bounce" enter-active-class="animated bounceIn" :duration="500" appear>
+      <div v-if="obj.isVisible" class="modal">
+        <div class="message-container">
+          <transition
+            name="tada"
+            enter-active-class="animated tada"
+            leave-active-class="fade"
+            appear
+          >
+            <img src="../../assets/Common/warning.svg" alt="warning" class="error" />
+          </transition>
+          <div class="message">
+            <h2>Warning</h2>
+            <h3>{{obj.message}}</h3>
+          </div>
+        </div>
+        <div class="line"></div>
+        <div class="actions">
+          <button @click="cancel()" class="btn transparent">Cancel</button>
+          <button @click="action(obj.number)" class="btn" style="margin-left: 2rem;">{{obj.button}}</button>
         </div>
       </div>
-      <div class="line"></div>
-      <div class="actions">
-        <button @click="cancel()" class="btn transparent">Cancel</button>
-        <button @click="action(obj.number)" class="btn" style="margin-left: 2rem;">{{obj.button}}</button>
-      </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -84,6 +93,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../scss/modal";
+
 .modal-container {
   position: fixed;
   left: 0;

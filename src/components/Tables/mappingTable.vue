@@ -104,7 +104,6 @@
         </td>
       </tr>
     </table>
-
     <p>
       Can't find a Professor or Course ? Click here to add new
       <span

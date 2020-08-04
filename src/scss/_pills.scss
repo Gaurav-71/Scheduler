@@ -36,15 +36,15 @@
       padding: 0.65rem 1rem;
       margin: 0 0.5rem;
       border-radius: 0.5rem;
-      text-align: center;
+      text-align: center;      
       cursor: pointer;
       @include ipad-portrait {
         font-size: small;
       }
     }
     .pill:hover {
-      background: rgba(21, 127, 135, 0.2);
-      transition: all 0.3s ease;
+      background: rgba(21, 127, 135, 0.2);      
+      transition: all 0.3s ease;      
     }
     .active {
       background: rgb(21, 127, 135);
@@ -127,14 +127,15 @@
   .download-container {
     width: 100%;
     display: flex;
-    align-items: center;
-    cursor: pointer;
+    align-items: center;    
+    cursor: pointer;    
     @include ipad-portrait {
       display: none;
     }
     .download {
       width: 14rem;
       margin-left: auto;
+      transition: width 0.5s ease-in-out;
       .pill {
         height: 100%;
         width: 100%;

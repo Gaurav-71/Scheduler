@@ -1,62 +1,76 @@
 <template>
   <div class="login">
+    <transition name="fade" appear>
+      <Error :obj="error" />
+    </transition>
     <Header />
-    <div class="container" :class="{'right-panel-active':shiftView}">
-      <div class="form-container sign-up-container">
-        <form @submit.prevent="signUp" autocomplete="off">
-          <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
-          <h1 style="margin: 1rem;">Create Account</h1>
-          <div v-if="$store.state.isLoggingIn" class="form-fields">
-            <input v-model="name" type="text" placeholder="Name" class="name" />
-            <input v-model="email" type="email" placeholder="Email" class="email" />
-            <input v-model="password" type="password" placeholder="Password" class="password" />
-            <input
-              v-model="confirmpassword"
-              type="password"
-              placeholder="Confirm Password"
-              class="confirm-password"
-            />
-            <button type="button" @click="signUp">Sign Up</button>
-          </div>
-          <Loading :message="'Verifying and creating new account'" v-else />
-        </form>
-      </div>
-      <div class="form-container sign-in-container">
-        <form @submit.prevent="signIn" autocomplete="on">
-          <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
-          <h1 style="margin: 1rem;">Sign in</h1>
-          <div v-if="$store.state.isLoggingIn" class="form-fields">
-            <input v-model="email" type="email" placeholder="Email" class="email" autocomplete="on" />
-            <input
-              v-model="password"
-              type="password"
-              placeholder="Password"
-              class="password"
-              autocomplete="on"
-            />
-            <button type="button" @click="signIn">Sign In</button>
-            <router-link to="/reset" class="forgot-pass">Forgot your password?</router-link>
-          </div>
-          <Loading :message="'Verifying User Credentials'" v-else />
-        </form>
-      </div>
-      <div class="overlay-container">
-        <div class="overlay">
-          <div class="overlay-panel overlay-left">
-            <h1>Welcome Back!</h1>
-            <p>To keep connected with us please login with your credentials</p>
-            <button class="ghost" @click="shiftView=false">Sign In</button>
-          </div>
-          <div class="overlay-panel overlay-right">
-            <h1>Hello!</h1>
-            <p>Enter your details and start your journey with us</p>
-            <button class="ghost" @click="shiftView=true">Sign Up</button>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated bounceInUp"
+      leave-active-class="animated bounceOutUp"
+      mode="out-in"
+      appear
+    >
+      <div class="container" :class="{'right-panel-active':shiftView}">
+        <div class="form-container sign-up-container">
+          <form @submit.prevent="signUp" autocomplete="off">
+            <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
+            <h1 style="margin: 1rem;">Create Account</h1>
+            <div v-if="$store.state.isLoggingIn" class="form-fields">
+              <input v-model="name" type="text" placeholder="Name" class="name" />
+              <input v-model="email" type="email" placeholder="Email" class="email" />
+              <input v-model="password" type="password" placeholder="Password" class="password" />
+              <input
+                v-model="confirmpassword"
+                type="password"
+                placeholder="Confirm Password"
+                class="confirm-password"
+              />
+              <button type="button" @click="signUp" class="grow">Sign Up</button>
+            </div>
+            <Loading :message="'Verifying and creating new account'" v-else />
+          </form>
+        </div>
+        <div class="form-container sign-in-container">
+          <form @submit.prevent="signIn" autocomplete="on">
+            <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
+            <h1 style="margin: 1rem;">Sign in</h1>
+            <div v-if="$store.state.isLoggingIn" class="form-fields">
+              <input
+                v-model="email"
+                type="email"
+                placeholder="Email"
+                class="email"
+                autocomplete="on"
+              />
+              <input
+                v-model="password"
+                type="password"
+                placeholder="Password"
+                class="password"
+                autocomplete="on"
+              />
+              <button type="button" @click="signIn" class="grow">Sign In</button>
+              <router-link to="/reset" class="forgot-pass">Forgot your password?</router-link>
+            </div>
+            <Loading :message="'Verifying User Credentials'" v-else />
+          </form>
+        </div>
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-left">
+              <h1>Welcome Back!</h1>
+              <p>To keep connected with us please login with your credentials</p>
+              <button class="ghost grow" @click="shiftView=false">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+              <h1>Hello!</h1>
+              <p>Enter your details and start your journey with us</p>
+              <button class="ghost grow" @click="shiftView=true">Sign Up</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <transition name="fade" appear>
-      <Error :obj="error" />
     </transition>
   </div>
 </template>
@@ -155,6 +169,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/colors";
+@import "../scss/custom-animations";
 
 .login {
   margin-top: 2.2rem;

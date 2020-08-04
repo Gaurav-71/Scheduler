@@ -15,7 +15,7 @@ export default {
 
   term: "",
 
-  isLoading : false,
+  isAutomating : false,
 
   showProfessorModal: false,
 
@@ -28,6 +28,10 @@ export default {
   isMapping: false,
 
   isDownloading: false,
+
+  isLoadingCourses: false,
+
+  isLoadingProfessors: false,
 
   postSubscription: null,
 

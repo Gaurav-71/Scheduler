@@ -2,7 +2,7 @@
   <div class="sidebar">
     <Header />
     <transition name="fade" appear>
-      <Alert :obj="warning" :path="warningPath"/>
+      <Alert :obj="warning" :path="warningPath" />
     </transition>
     <nav>
       <ul>
@@ -70,7 +70,7 @@ export default {
         message:
           "Changes you made will not be saved if you exit Create process",
         button: "Leave",
-        number: 1        
+        number: 1
       },
       warningPath: null
     };
@@ -96,7 +96,7 @@ export default {
           this.$router.push("/choice");
         }
       } else {
-        this.warning.isVisible = true;        
+        this.warning.isVisible = true;
       }
     }
   }
@@ -113,7 +113,7 @@ export default {
     width: 5rem;
     height: 100vh;
     z-index: 1;
-    background-image: $gradient;
+    background-image: $gradient-inverted;
     ul {
       list-style-type: none;
       margin: 0;
@@ -136,6 +136,7 @@ export default {
           img {
             width: 45px;
             width: 45px;
+            transition: all 0.2s ease-in-out;
           }
           span {
             display: none;
@@ -157,19 +158,18 @@ export default {
     width: 12rem;
     box-shadow: 1px 0px 20px black;
     ul {
-      .router-link {
+      .router-link {        
         justify-content: left;
         padding-left: 17.5px;
         transition: 300ms;
-        span {
+        span {          
           display: block;
           margin-left: 1rem;
-          color: $sidebar-menu-text;
-          //color: white;
+          color: $sidebar-menu-text;          
           font-weight: 550;
           text-shadow: 1px 0.5px 1px black;
         }
-      }
+      }      
     }
   }
   @media print {

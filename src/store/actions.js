@@ -107,7 +107,7 @@ export default {
       console.log(err);
     }
   },
-  async loadCourseList(context) {
+  async loadCourseList(context) {    
     let response = db.collection("Courses").onSnapshot((snapshot) => {
       let items = [];
       snapshot.forEach((doc) => {
@@ -1073,20 +1073,17 @@ export default {
       }
     }
   },
-  async automateTimetable(context) {
-    context.commit("changeLoading");
-    try{
+  async automateTimetable(context) {    
+    try{      
       console.log("automateTimeTable's context- " + context);
       await context.dispatch("assignMathsClasses");
       await context.dispatch("assignLabs");
       await context.dispatch("assignElectives");
       await context.dispatch("assignTutorials");
-      await context.dispatch("assignClasses");
-      context.commit("changeLoading");
+      await context.dispatch("assignClasses");      
     }
     catch(exc){
-      console.log(exc);
-      context.commit("changeLoading");  
+      console.log(exc);      
     }
   },
 };

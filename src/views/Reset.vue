@@ -1,44 +1,57 @@
 <template>
   <div class="reset">
-    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css" />
-    <Header />
-    <transition
-      name="custom-classes-transition"
-      enter-active-class="animated tada"
-      leave-active-class="animated bounceOutRight"
-      v-on:afterLeave="afterLeave"
-    >
-      <div v-if="show" class="container" id="container">
-        <img src="../assets/Login/Forgot/forgot.svg" alt="forgot" />
-        <div v-if="!isLoading" class="content">
-          <h2>Reset Password</h2>
-          <h4>No worries, we got you! Just verify your Email</h4>
-          <input v-if="!$store.state.isLoggedIn" v-model="email" type="email" placeholder="Email" class="email" />
-          <input v-else type="email" v-model="loggedEmail" placeholder="Email" class="email" />
-          <button @click="resetPassword" class="btn">Reset</button>
-        </div>
-        <Loading :message="'Sending an email to reset your password'" v-else />
-      </div>
-    </transition>
-    <transition name="fade" appear>
-      <div v-if="isSuccessful" class="sent-container">
-        <div class="sent">
-          <img src="../assets/Login/Forgot/correct.svg" alt="succesful reset" />
-          <h4>Email is sent succesfully, check your email</h4>
-          <button v-if="$store.state.isLoggedIn" @click="route">Go to Settings</button>
-          <button v-else @click="route">Sign In</button>
-        </div>
-      </div>
-    </transition>
     <transition name="fade" appear>
       <Error :obj="error" />
+    </transition>
+    <Header />
+    <transition
+      name="custom-classes-transitions-1"
+      enter-active-class="animated bounceInLeft"
+      leave-active-class="animated fadeOutDown"      
+      appear
+    >
+      <div class="main">
+        <transition
+          name="custom-classes-transitions"
+          leave-active-class="animated bounceOutRight"
+          v-on:afterLeave="afterLeave"
+        >
+          <div v-if="showReset" class="container" id="container">
+            <img src="../assets/Login/Forgot/forgot.svg" alt="forgot" />
+            <div v-if="!isLoading" class="content">
+              <h2>Reset Password</h2>
+              <h4>No worries, we got you! Just verify your Email</h4>
+              <input
+                v-if="!$store.state.isLoggedIn"
+                v-model="email"
+                type="email"
+                placeholder="Email"
+                class="email"
+              />
+              <input v-else type="email" v-model="loggedEmail" placeholder="Email" class="email" />
+              <button @click="resetPassword()" class="btn grow">Reset</button>
+            </div>
+            <Loading :message="'Sending an email to reset your password'" v-else />
+          </div>
+        </transition>
+        <transition name="fade" appear>
+          <div v-if="isSuccessful" class="sent-container">
+            <div class="sent">
+              <img src="../assets/Login/Forgot/correct.svg" alt="succesful reset" />
+              <h4>Email is sent succesfully, check your email</h4>
+              <button v-if="$store.state.isLoggedIn" @click="route" class="grow">Go to Settings</button>
+              <button v-else @click="route" class="grow">Sign In</button>
+            </div>
+          </div>
+        </transition>
+      </div>
     </transition>
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
-import Header from "@/components/Navigation/Header.vue";
+import { auth } from "../main.js";
+import Header from "../components/Navigation/Header.vue";
 import Error from "../components/Modals/Error.vue";
 import Loading from "../components/Loading/Dots.vue";
 
@@ -49,11 +62,10 @@ export default {
     Loading
   },
   data() {
-    const auth = firebase.auth();
     return {
       email: "",
-      loggedEmail:auth.currentUser.email,
-      show: true,
+      loggedEmail: this.$store.state.user.email,
+      showReset: true,
       isLoading: false,
       loadingMessage: "Sending an email to reset your password",
       isSuccessful: false,
@@ -66,17 +78,17 @@ export default {
   methods: {
     resetPassword() {
       this.isLoading = true;
-      const auth = firebase.auth();
       let emailAddress = "";
-      if(!this.$store.state.isLoggedIn)
+      if (!this.$store.state.isLoggedIn) {
         emailAddress = this.email;
-      else
+      } else {
         emailAddress = auth.currentUser.email;
+      }
       auth
         .sendPasswordResetEmail(emailAddress)
         .then(() => {
           // Email sent.
-          this.show = false;
+          this.showReset = false;
           console.log(emailAddress);
         })
         .catch(err => {
@@ -96,55 +108,15 @@ export default {
     },
     afterLeave(el, done) {
       this.isSuccessful = true;
-      console.log(el);
-      done();
+      console.log(el, done);
     }
   }
 };
 </script>
-<!--
-     No worries,we got you.
-    Just verify your Email.    
-    Create a new password at the click of a button.
-<style scoped>
-
-.main {
-  text-align: center;
-  margin-top: 250px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.container {
-  margin-bottom: 100px;
-}
-.btn {
-  background: rgb(79, 196, 79);
-  border-radius: 0.8em;
-  width: 80px;
-  height: 25px;
-  color: darkgreen;
-  font-weight: bold;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.emailBox {
-  align-content: center;
-  justify-content: center;
-  display: flex;
-}
-.email {
-  height: 25px;
-  width: 250px;
-  border: 1px solid rgb(28, 116, 28);
-  border-radius: 0.8em;
-}
-.img {
-  height: 200px;
-  width: 150px;
-}
-</style>
--->
 
 <style lang="scss" scoped>
 @import "../scss/colors";
+@import "../scss/custom-animations";
 .reset {
   margin-top: 2.3rem;
   box-sizing: border-box;

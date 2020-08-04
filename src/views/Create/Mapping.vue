@@ -1,6 +1,5 @@
 <template>
-
-  <Loading :message="'Generating Timetable'" v-if="$store.state.isLoading == true" />
+  <Loading :message="'Generating Timetable'" v-if="$store.state.isAutomating" />
   <div class="mapping" id="top" v-else>
     <div class="container">
       <div class="pills-container">
@@ -64,109 +63,137 @@
           >Electives</div>
         </div>
       </div>
-      <mappingTable
-        v-if="$store.state.semester == 3 && $store.state.section == 'A'"
-        :sectionObject="$store.state.allOddCycleClasses.sec3A"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
-        :sectionObject="$store.state.allOddCycleClasses.sec3B"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
-        :sectionObject="$store.state.allOddCycleClasses.sec3C"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
-        :sectionObject="$store.state.allEvenCycleClasses.sec4A"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
-        :sectionObject="$store.state.allEvenCycleClasses.sec4B"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
-        :sectionObject="$store.state.allEvenCycleClasses.sec4C"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
-        :sectionObject="$store.state.allOddCycleClasses.sec5A"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
-        :sectionObject="$store.state.allOddCycleClasses.sec5B"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
-        :sectionObject="$store.state.allOddCycleClasses.sec5C"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
-        :sectionObject="$store.state.allEvenCycleClasses.sec6A"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
-        :sectionObject="$store.state.allEvenCycleClasses.sec6B"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
-        :sectionObject="$store.state.allEvenCycleClasses.sec6C"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
-        :sectionObject="$store.state.allOddCycleClasses.sec7A"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
-        :sectionObject="$store.state.allOddCycleClasses.sec7B"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
-        :sectionObject="$store.state.allEvenCycleClasses.sec8a"
-      />
-      <mappingTable
-        v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
-        :sectionObject="$store.state.allEvenCycleClasses.sec8b"
-      />
-      <electiveTable v-else-if="$store.state.semester == 0 && $store.state.section == null "/>
-      <div v-else>
-        <table>
-          <tr>
-            <th>
-              <h1 style="margin:0;font-weight:lighter;">Mapping : Professors & Labs</h1>
-            </th>
-          </tr>
-          <tr>
-            <td class="instructions">
-              <ul>
-                <li>
-                  This section lets you map the subjects of the respective
-                  semester to the respective professors and lets you add custom
-                  timings for labs and tutorials.
-                </li>
-                <li>
-                  Please select the semester and section from the status bar
-                  above to proceed.
-                </li>
-                <li>
-                  <b>Note :</b> Please fill all the details to move to the next
-                  step
-                </li>
-              </ul>
-            </td>
-          </tr>
-        </table>
-      </div>
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated fadeInUp"
+        leave-active-class="animated fadeOutDown"
+        mode="out-in"
+        :duration="{enter:850,leave: 100}"
+        appear
+      >
+        <mappingTable
+          v-if="$store.state.semester == 3 && $store.state.section == 'A'"
+          :sectionObject="$store.state.allOddCycleClasses.sec3A"
+          :key="'3A'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 3 && $store.state.section == 'B'"
+          :sectionObject="$store.state.allOddCycleClasses.sec3B"
+          :key="'3B'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 3 && $store.state.section == 'C'"
+          :sectionObject="$store.state.allOddCycleClasses.sec3C"
+          :key="'3C'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 4 && $store.state.section == 'A'"
+          :sectionObject="$store.state.allEvenCycleClasses.sec4A"
+          :key="'4A'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 4 && $store.state.section == 'B'"
+          :sectionObject="$store.state.allEvenCycleClasses.sec4B"
+          :key="'4B'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 4 && $store.state.section == 'C'"
+          :sectionObject="$store.state.allEvenCycleClasses.sec4C"
+          :key="'4C'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 5 && $store.state.section == 'A'"
+          :sectionObject="$store.state.allOddCycleClasses.sec5A"
+          :key="'5A'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 5 && $store.state.section == 'B'"
+          :sectionObject="$store.state.allOddCycleClasses.sec5B"
+          :key="'5B'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 5 && $store.state.section == 'C'"
+          :sectionObject="$store.state.allOddCycleClasses.sec5C"
+          :key="'5C'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 6 && $store.state.section == 'A'"
+          :sectionObject="$store.state.allEvenCycleClasses.sec6A"
+          :key="'6A'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 6 && $store.state.section == 'B'"
+          :sectionObject="$store.state.allEvenCycleClasses.sec6B"
+          :key="'6B'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 6 && $store.state.section == 'C'"
+          :sectionObject="$store.state.allEvenCycleClasses.sec6C"
+          :key="'6C'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 7 && $store.state.section == 'A'"
+          :sectionObject="$store.state.allOddCycleClasses.sec7A"
+          :key="'7A'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 7 && $store.state.section == 'B'"
+          :sectionObject="$store.state.allOddCycleClasses.sec7B"
+          :key="'7B'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 8 && $store.state.section == 'A'"
+          :sectionObject="$store.state.allEvenCycleClasses.sec8a"
+          :key="'8A'"
+        />
+        <mappingTable
+          v-else-if="$store.state.semester == 8 && $store.state.section == 'B'"
+          :sectionObject="$store.state.allEvenCycleClasses.sec8b"
+          :key="'8B'"
+        />
+        <electiveTable
+          v-else-if="$store.state.semester == 0 && $store.state.section == null "
+          :key="'elective'"
+        />
+        <div v-else>
+          <table>
+            <tr>
+              <th>
+                <h1 style="margin:0;font-weight:lighter;">Mapping : Professors & Labs</h1>
+              </th>
+            </tr>
+            <tr>
+              <td class="instructions">
+                <ul>
+                  <li>
+                    This section lets you map the subjects of the respective
+                    semester to the respective professors and lets you add custom
+                    timings for labs and tutorials.
+                  </li>
+                  <li>
+                    Please select the semester and section from the status bar
+                    above to proceed.
+                  </li>
+                  <li>
+                    <b>Note :</b> Please fill all the details to move to the next
+                    step
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </transition>
     </div>
     <div v-if="$store.state.semester != null && $store.state.section != null" class="actions">
-      <a class="btn transparent" href="#top">Jump to Top</a>
-      <div class="btn" @click="route()">Create Timetable</div>
+      <a class="btn transparent grow" href="#top">Jump to Top</a>
+      <div class="btn grow" @click="route()">Create Timetable</div>
     </div>
     <p v-if="$store.state.semester != null && $store.state.section != null">
       <b>Note</b> : Please ensure all data fields are filled properly
     </p>
     <transition name="fade" appear>
-      <Error :obj="error" :emptyStr="true" /> 
+      <Error :obj="error" :emptyStr="true" />
     </transition>
   </div>
 </template>
@@ -200,35 +227,42 @@ export default {
       this.$store.state.semester = sem;
       if (sem >= 7 && this.$store.state.section == "C") {
         this.$store.state.section = "B";
-      } 
-      else if (sem == 0) {
+      } else if (sem == 0) {
         this.$store.state.section = null;
+      } else if (sem != 0 && this.$store.state.section == null) {
+        this.$store.state.section = "A";
       }
     },
     changeSection(sec) {
-      if(this.$store.state.semester == 0){
-        if(this.$store.state.cycle == 'Odd'){          
+      if (this.$store.state.semester == 0) {
+        if (this.$store.state.cycle == "Odd") {
           this.$store.state.semester = 3;
-        }
-        else{
+        } else {
           this.$store.state.semester = 4;
         }
       }
       this.$store.state.section = sec;
     },
-    route() {
-      let isReadyToAutomate = true;
-      console.log(isReadyToAutomate);
-      //put this stuff after validation
-      if (this.$store.state.createType == 1) {
-        this.$store
+    readyToAutomate() {
+      this.$store.state.isAutomating = true;
+    },
+    automate() {
+      this.$store
         .dispatch("automateTimetable")
-        .then(()=> {
+        .then(() => {
           this.$router.push("/timetable/result");
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    route() {
+      let isReadyToAutomate = true;
+      this.$store.state.isAutomating = true;
+      console.log(isReadyToAutomate);
+      //put this stuff after validation
+      if (this.$store.state.createType == 1) {        
+        setTimeout(this.automate(),5000);
       } else {
         //this.$router.push("/timetable/manual");
         alert("drag & drop");
@@ -360,8 +394,7 @@ export default {
       "createRouteTracker"
     );
   },
-  mounted() {
-  }
+  mounted() {}
 };
 </script>
 
@@ -369,12 +402,14 @@ export default {
 @import "../../scss/create-cards";
 @import "../../scss/table";
 @import "../../scss/pills";
+@import "../../scss/custom-animations";
 
 .mapping {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow-x: hidden;
   .container {
     width: 85%;
     border-radius: 0.8rem;
@@ -400,12 +435,30 @@ export default {
       text-align: center;
       text-decoration: none;
     }
+    .btn:hover {
+      background-image: $gradient-inverted;
+    }
+    .btn:active {
+      transform: scale(0.95);
+    }
     .transparent {
       background-image: none;
       background: rgba($primary, 0.1);
       border-color: rgba($primary, 0.1);
       color: black;
     }
+    .transparent:hover {
+      background-image: none;
+      background: rgba(21, 127, 135, 0.2);
+    }
   }
+}
+
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
