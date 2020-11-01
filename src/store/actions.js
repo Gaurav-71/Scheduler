@@ -399,7 +399,7 @@ export default {
   },
   async getDay(context, day) {
     console.log("getDay's context- " + context);
-    let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"];
     return Days[day];
   },
   async getRandomDayHour(context) {
@@ -478,9 +478,11 @@ export default {
     let day = Days[index];
     let Hours = [0, 1, 2, 3, 4];
     let hour = Hours[Math.floor(Math.random() * Hours.length)];
+    console.log({day: day, hour :hour,dayNumber : index })
     return {day: day, hour :hour,dayNumber : index }
   },
   async assignElectives(context) {
+    console.log("assign electives's context")
     if(this.state.cycle == "Odd")
     { 
       for(let k = 0;k<this.state.oddCycleElectives.sem5.subjects.length;k++)
@@ -488,6 +490,7 @@ export default {
         for(let i = 0;i<subject.detail.Credits.Theory;i++)
         {
           let x = await context.dispatch("getRandomDayRegularHour");
+          console.log(x)
           for(;;)
           { let allProfessorsFree = true;
             for(let j = 0;j<this.state.oddCycleElectives.sem5.newProfessor[k];j++)
@@ -1089,6 +1092,59 @@ export default {
       context.commit("changeLoading");  
     }
   },
+  async emptyTimetable(context) {
+    console.log("emptyTimetable's context- " + context)
+    this.state.professorList.forEach(async professor => {
+      for(let i = 0;i < 6; i++){
+        let x = await context.dispatch("getDay", i)
+        professor.detail[x] = ["", "", "", "", "", "", ""]
+      }
+    })
+    if (this.state.cycle == "Odd") {
+      let classNames = [
+        "sec3A",
+        "sec3B",
+        "sec3C",
+        "sec5A",
+        "sec5B",
+        "sec5C",
+        "sec7A",
+        "sec7B",
+      ];
+      for (let k = 0; k < 8; k++) {
+        let currentClass = this.state.allOddCycleClasses[classNames[k]];
+        for(let i = 0;i < 6; i++){
+          let x = await context.dispatch("getDay", i)
+          currentClass[x] = ["", "", "", "", "", "", ""]
+        }
+        currentClass.subjects.forEach(subject => {
+          subject.detail["isDayDone"] = [false, false, false, false, false, false]
+        })
+      }
+    }
+    else{
+      let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
+      for (let k = 0; k < 6; k++) {
+        let currentClass = this.state.allEvenCycleClasses[classNames[k]];
+        for(let i = 0;i < 6; i++){
+          let x = await context.dispatch("getDay", i)
+          currentClass[x] = ["", "", "", "", "", "", ""]
+        }
+        currentClass.subjects.forEach(subject => {
+          subject.detail["isDayDone"] = [false, false, false, false, false, false]
+        })
+      }
+
+    }
+  },
+  async generateAgain(context) {
+    console.log("In generate" + context)
+    await context.dispatch("emptyTimetable")
+    console.log(this.state.professorList)
+    console.log("CLASSES")
+    console.log(this.state.allOddCycleClasses)
+    //await context.dispatch("automateTimetable")
+  }
 };
 
 

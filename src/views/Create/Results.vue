@@ -312,7 +312,7 @@
       <a class="btn transparent" href="#page-top">Jump to Top</a>
       <div class="btn transparent hide">Generate Again</div>
     </div>
-    <div class="btn generate">Generate Again</div>
+    <div class="btn generate" @click= "generateAgain">Generate Again</div>
   </div>
 </template>
 
@@ -436,6 +436,13 @@ export default {
     changeType(type) {
       this.type = type;
       this.createID(this.$store.state.semester, this.$store.state.section);
+    },
+    generateAgain() {
+      console.log("SMFH")
+      this.$store.dispatch("generateAgain")
+      .catch(err => {
+        console.log(err)
+      })
     }
   },
   created() {
