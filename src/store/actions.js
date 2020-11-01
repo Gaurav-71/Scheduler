@@ -1121,6 +1121,12 @@ export default {
           subject.detail["isDayDone"] = [false, false, false, false, false, false]
         })
       }
+      this.state.oddCycleElectives.sem5.subjects.forEach(subject => {
+        subject.detail.isDayDone = [false, false, false, false, false, false]
+      })
+      this.state.oddCycleElectives.sem7.subjects.forEach(subject => {
+        subject.detail.isDayDone = [false, false, false, false, false, false]
+      })
     }
     else{
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
@@ -1134,7 +1140,9 @@ export default {
           subject.detail["isDayDone"] = [false, false, false, false, false, false]
         })
       }
-
+      this.state.evenCycleElectives.sem6.subjects.forEach(subject => {
+        subject.detail.isDayDone = [false, false, false, false, false, false]
+      })
     }
   },
   async generateAgain(context) {
@@ -1143,7 +1151,7 @@ export default {
     console.log(this.state.professorList)
     console.log("CLASSES")
     console.log(this.state.allOddCycleClasses)
-    //await context.dispatch("automateTimetable")
+    await context.dispatch("automateTimetable")
   }
 };
 
