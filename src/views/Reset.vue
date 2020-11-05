@@ -13,7 +13,8 @@
         <div v-if="!isLoading" class="content">
           <h2>Reset Password</h2>
           <h4>No worries, we got you! Just verify your Email</h4>
-          <input v-model="email" type="email" placeholder="Email" class="email" />
+          <input v-if="!$store.state.isLoggedIn" v-model="email" type="email" placeholder="Email" class="email" />
+          <input v-else type="email" v-model="loggedEmail" placeholder="Email" class="email" />
           <button @click="resetPassword" class="btn">Reset</button>
         </div>
         <Loading :message="'Sending an email to reset your password'" v-else />
@@ -48,8 +49,10 @@ export default {
     Loading
   },
   data() {
+    const auth = firebase.auth();
     return {
       email: "",
+      loggedEmail:auth.currentUser.email,
       show: true,
       isLoading: false,
       loadingMessage: "Sending an email to reset your password",
@@ -64,7 +67,11 @@ export default {
     resetPassword() {
       this.isLoading = true;
       const auth = firebase.auth();
-      var emailAddress = this.email;
+      let emailAddress = "";
+      if(!this.$store.state.isLoggedIn)
+        emailAddress = this.email;
+      else
+        emailAddress = auth.currentUser.email;
       auth
         .sendPasswordResetEmail(emailAddress)
         .then(() => {
