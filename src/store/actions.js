@@ -529,6 +529,89 @@ export default {
       }
     }
   },
+  async assignOpenElectiveClasses(context) {
+    console.log("assignOpenElectiveClasses' context- " + context);
+    if (this.state.cycle == "Odd") {
+      let OEClassNames = ["RegularClass1", "RegularClass2", "RegularClass3"];
+      this.state.oddCycleOpenElectives.sem5.subjects.forEach(
+        async (openElective) => {
+          let classNames = ["sec5A", "sec5B", "sec5C"];
+          for (let y = 0; y < 3; y++) {
+            let hour = await context.dispatch(
+              "getMathHour",
+              openElective.detail.classTimings[OEClassNames[y]].Time
+            );
+            let day = openElective.detail.classTimings[OEClassNames[y]].Day;
+            for (let k = 0; k < 3; k++) {
+              let currentClass = this.state.allOddCycleClasses[classNames[k]];
+              currentClass[day][hour] = openElective.detail.Name;
+            }
+            let noOfProfs = openElective.detail.Professors.indexOf("");
+            for (let i = 0; i < noOfProfs; i++) {
+              let professor = await context.dispatch(
+                "getProfessorObject",
+                openElective.detail.Professors[i]
+              );
+              professor.detail[day][hour] =
+                openElective.detail.Abbreviation + openElective.detail.Semester;
+            }
+          }
+        }
+      );
+      this.state.oddCycleOpenElectives.sem7.subjects.forEach(
+        async (openElective) => {
+          let classNames = ["sec7A", "sec7B"];
+          for (let y = 0; y < 3; y++) {
+            let hour = await context.dispatch(
+              "getMathHour",
+              openElective.detail.classTimings[OEClassNames[y]].Time
+            );
+            let day = openElective.detail.classTimings[OEClassNames[y]].Day;
+            for (let k = 0; k < 2; k++) {
+              let currentClass = this.state.allOddCycleClasses[classNames[k]];
+              currentClass[day][hour] = openElective.detail.Name;
+            }
+            let noOfProfs = openElective.detail.Professors.indexOf("");
+            for (let i = 0; i < noOfProfs; i++) {
+              let professor = await context.dispatch(
+                "getProfessorObject",
+                openElective.detail.Professors[i]
+              );
+              professor.detail[day][hour] =
+                openElective.detail.Abbreviation + openElective.detail.Semester;
+            }
+          }
+        }
+      );
+    } else {
+      let OEClassNames = ["RegularClass1", "RegularClass2", "RegularClass3"];
+      this.state.evenCycleOpenElectives.sem6.subjects.forEach(
+        async (openElective) => {
+          let classNames = ["sec6A", "sec6B", "sec6C"];
+          for (let y = 0; y < 3; y++) {
+            let hour = await context.dispatch(
+              "getMathHour",
+              openElective.detail.classTimings[OEClassNames[y]].Time
+            );
+            let day = openElective.detail.classTimings[OEClassNames[y]].Day;
+            for (let k = 0; k < 3; k++) {
+              let currentClass = this.state.allEvenCycleClasses[classNames[k]];
+              currentClass[day][hour] = openElective.detail.Name;
+            }
+            let noOfProfs = openElective.detail.Professors.indexOf("");
+            for (let i = 0; i < noOfProfs; i++) {
+              let professor = await context.dispatch(
+                "getProfessorObject",
+                openElective.detail.Professors[i]
+              );
+              professor.detail[day][hour] =
+                openElective.detail.Abbreviation + openElective.detail.Semester;
+            }
+          }
+        }
+      );
+    }
+  },
   async getRandomDayRegularHour(context) {
     console.log("getRandomDayRegularHour's context- " + context);
     let Days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -573,11 +656,11 @@ export default {
             ) {
               subject.detail.isDayDone[x.dayNumber] = true;
               this.state.allOddCycleClasses["sec5A"][x.day][x.hour] =
-                subject.detail.Code;
+                subject.detail.Abbreviation;
               this.state.allOddCycleClasses["sec5B"][x.day][x.hour] =
-                subject.detail.Code;
+                subject.detail.Abbreviation;
               this.state.allOddCycleClasses["sec5C"][x.day][x.hour] =
-                subject.detail.Code;
+                subject.detail.Abbreviation;
               for (
                 let j = 0;
                 j < this.state.oddCycleElectives.sem5.newProfessor[k];
@@ -588,7 +671,7 @@ export default {
                   subject.detail.Professors[j]
                 );
                 professor.detail[x.day][x.hour] =
-                  subject.detail.Code + subject.detail.Semester;
+                  subject.detail.Abbreviation + subject.detail.Semester;
               }
               break;
             } else {
@@ -628,9 +711,9 @@ export default {
             ) {
               subject.detail.isDayDone[x.dayNumber] = true;
               this.state.allOddCycleClasses["sec7A"][x.day][x.hour] =
-                subject.detail.Code;
+                subject.detail.Abbreviation;
               this.state.allOddCycleClasses["sec7B"][x.day][x.hour] =
-                subject.detail.Code;
+                subject.detail.Abbreviation;
               for (
                 let j = 0;
                 j < this.state.oddCycleElectives.sem7.newProfessor[k];
@@ -641,7 +724,7 @@ export default {
                   subject.detail.Professors[j]
                 );
                 professor.detail[x.day][x.hour] =
-                  subject.detail.Code + subject.detail.Semester;
+                  subject.detail.Abbreviation + subject.detail.Semester;
               }
               break;
             } else {
@@ -698,7 +781,7 @@ export default {
                   subject.detail.Professors[j]
                 );
                 professor.detail[x.day][x.hour] =
-                  subject.detail.Code + subject.detail.Semester;
+                  subject.detail.Abbreviation + subject.detail.Semester;
               }
               break;
             } else {
@@ -1218,6 +1301,7 @@ export default {
     try {
       console.log("automateTimeTable's context- " + context);
       await context.dispatch("assignMathsClasses");
+      await context.dispatch("assignOpenElectiveClasses");
       await context.dispatch("assignLabs");
       await context.dispatch("assignElectives");
       await context.dispatch("assignTutorials");
