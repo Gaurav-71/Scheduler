@@ -225,7 +225,24 @@ export default {
         }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
-          if (subject.detail.Code.startsWith("CSE")) {
+          if (subject.detail.Code.startsWith("CSOE")) {
+            let sub = JSON.parse(JSON.stringify(subject));
+            sub.detail["Professors"] = ["", "", "", "", "", ""];
+            sub.detail["classTimings"] = {
+              RegularClass1: { Time: "", Day: "" },
+              RegularClass2: { Time: "", Day: "" },
+              RegularClass3: { Time: "", Day: "" },
+            };
+
+            if (subject.detail.Semester != 6 && i == 0) {
+              this.state.oddCycleOpenElectives[
+                "sem" + subject.detail.Semester
+              ].newProfessor.push(1);
+              this.state.oddCycleOpenElectives[
+                "sem" + subject.detail.Semester
+              ].subjects.push(sub);
+            }
+          } else if (subject.detail.Code.startsWith("CSE")) {
             let sub = JSON.parse(JSON.stringify(subject));
             sub.detail["isDayDone"] = [
               false,
@@ -328,7 +345,24 @@ export default {
         }
         let subjects = [];
         this.state.courseList.forEach((subject) => {
-          if (subject.detail.Code.startsWith("CSE")) {
+          if (subject.detail.Code.startsWith("CSOE")) {
+            let sub = JSON.parse(JSON.stringify(subject));
+            sub.detail["Professors"] = ["", "", "", "", "", ""];
+            sub.detail["classTimings"] = {
+              RegularClass1: { Time: "", Day: "" },
+              RegularClass2: { Time: "", Day: "" },
+              RegularClass3: { Time: "", Day: "" },
+            };
+
+            if (subject.detail.Semester == 6 && i == 0) {
+              this.state.oddCycleOpenElectives[
+                "sem" + subject.detail.Semester
+              ].newProfessor.push(1);
+              this.state.oddCycleOpenElectives[
+                "sem" + subject.detail.Semester
+              ].subjects.push(sub);
+            }
+          } else if (subject.detail.Code.startsWith("CSE")) {
             let sub = JSON.parse(JSON.stringify(subject));
             sub.detail["isDayDone"] = [
               false,
@@ -1230,6 +1264,12 @@ export default {
           ];
         });
       }
+      this.state.oddCycleElectives.sem5.subjects.forEach((subject) => {
+        subject.detail.isDayDone = [false, false, false, false, false, false];
+      });
+      this.state.oddCycleElectives.sem7.subjects.forEach((subject) => {
+        subject.detail.isDayDone = [false, false, false, false, false, false];
+      });
     } else {
       let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C"];
       for (let k = 0; k < 6; k++) {
@@ -1249,13 +1289,17 @@ export default {
           ];
         });
       }
+      this.state.evenCycleElectives.sem6.subjects.forEach((subject) => {
+        subject.detail.isDayDone = [false, false, false, false, false, false];
+      });
     }
   },
   async generateAgain(context) {
     console.log("generateAgain's context-" + context);
     await context.dispatch("emptyTimetable");
+    console.log(this.state.professorList);
     console.log(this.state.allOddCycleClasses);
-    //await context.dispatch("automateTimetable")
+    await context.dispatch("automateTimetable");
   },
 };
 

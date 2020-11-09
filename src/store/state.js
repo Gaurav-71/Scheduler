@@ -15,7 +15,7 @@ export default {
 
   term: "",
 
-  isLoading : false,
+  isLoading: false,
 
   showProfessorModal: false,
 
@@ -32,14 +32,14 @@ export default {
   postSubscription: null,
 
   user: JSON.parse(localStorage.getItem("loggedUser")),
-  
+
   createRouteTracker: localStorage.getItem("createRouteTracker"),
 
   professorList: [],
 
   courseList: [],
-  
-/*  allOddCycleClasses: {
+
+  /*  allOddCycleClasses: {
     sec3A: {},
     sec3B: {},
     sec3C: {},
@@ -65,7 +65,7 @@ export default {
     sec8B: {},
   },
 
- /* oddCycleElectives: {
+  /* oddCycleElectives: {
     sem5 : {
       newProfessor: [],
       getProfessors: function(index) {
@@ -93,7 +93,37 @@ export default {
       subjects: [],
     },
   },
-*/
+
+
+  oddCycleOpenElectives: {
+    sem5: {
+      newProfessor: [],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects: [],
+    },
+    sem7: {
+      newProfessor: [],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects: [],
+    },
+  },*/
+
   evenCycleElectives: {
     sem6: {
       newProfessor: [],
@@ -106,10 +136,27 @@ export default {
       decrementNewProfessors: function(index) {
         return this.newProfessor[index] - 1;
       },
-      subjects:[]
-    }
+      subjects: [],
+    },
   },
 
+  evenCycleOpenElectives: {
+    sem6: {
+      newProfessor: [],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects: [],
+    },
+  },
+
+  /*------------------------------------dummy data--------------------------------*/
 
   allOddCycleClasses: {
     sec3A: {
@@ -1297,14 +1344,19 @@ export default {
             Semester: 5,
             isDayDone: [false, false, false, false, false, false],
             noOfTheoryTeachers: 1,
-            Professors: ["Dr. Monica R. Mundada", "Dr. Annapurna P. Patil", "Dr. S. Rajarajeswari", ""],
+            Professors: [
+              "Dr. Monica R. Mundada",
+              "Dr. Annapurna P. Patil",
+              "Dr. S. Rajarajeswari",
+              "",
+            ],
           },
           isEditing: false,
         },
       ],
     },
     sem7: {
-      newProfessor: [2,2,2],
+      newProfessor: [2, 2, 2],
       getProfessors: function(index) {
         return this.newProfessor[index];
       },
@@ -1339,7 +1391,12 @@ export default {
             Semester: 7,
             isDayDone: [false, false, false, false, false, false],
             noOfTheoryTeachers: 1,
-            Professors: ["Srinidhi Hiriyannaiah", "Mrs. Sini Anna Alex", "", ""],
+            Professors: [
+              "Srinidhi Hiriyannaiah",
+              "Mrs. Sini Anna Alex",
+              "",
+              "",
+            ],
           },
           isEditing: false,
         },
@@ -1360,4 +1417,85 @@ export default {
       ],
     },
   },
+
+  oddCycleOpenElectives: {
+    sem5: {
+      newProfessor: [2],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects: [
+        {
+          id: "Open Elective sem 5",
+          detail: {
+            Code: "CSOE51",
+            Credits: { Theory: 3, Tutorial: 0, Lab: 0 },
+            Abbreviation: "OE5",
+            Name: "Open Elective sem 5",
+            Semester: 5,
+            Professors: [
+              "Hanumantha Raju R.",
+              "Pramod Sunagar",
+              "",
+              "",
+              "",
+              "",
+            ],
+            classTimings: {
+              RegularClass1: { Time: "9:00 AM", Day: "Saturday" },
+              RegularClass2: { Time: "9:55 AM", Day: "Saturday" },
+              RegularClass3: { Time: "11:05 AM", Day: "Saturday" },
+            },
+          },
+          isEditing: false,
+        },
+      ],
+    },
+    sem7: {
+      newProfessor: [2],
+      getProfessors: function(index) {
+        return this.newProfessor[index];
+      },
+      incrementNewProfessors: function(index) {
+        return this.newProfessor[index] + 1;
+      },
+      decrementNewProfessors: function(index) {
+        return this.newProfessor[index] - 1;
+      },
+      subjects: [
+        {
+          id: "Open Elective Sem 7",
+          detail: {
+            Code: "CSOE71",
+            Credits: { Theory: 3, Tutorial: 0, Lab: 0 },
+            Abbreviation: "OE7",
+            Name: "Open Elective Sem 7",
+            Semester: 7,
+            Professors: [
+              "Dr. Divakar Harekal",
+              "Ganeshayya Shidaganti",
+              "",
+              "",
+              "",
+              "",
+            ],
+            classTimings: {
+              RegularClass1: { Time: "9:00 AM", Day: "Saturday" },
+              RegularClass2: { Time: "9:55 AM", Day: "Saturday" },
+              RegularClass3: { Time: "11:05 AM", Day: "Saturday" },
+            },
+          },
+          isEditing: false,
+        },
+      ],
+    },
+  },
+
+  /*------------------------------------dummy data--------------------------------*/
 };
