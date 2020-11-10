@@ -273,6 +273,114 @@
           v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
         >{{sectionObject.mathClass.Professors[0]}}</td>
       </tr>
+
+
+      <tr v-for="(subject,index) in $store.state.oddCycleElectives.sem5.subjects" :key="index">
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Code}}</td>
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Name}}</td>
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Abbreviation}}</td>
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Professors[0]}}</td>
+      </tr>
+      <tr v-for="(subject,index) in $store.state.evenCycleElectives.sem6.subjects" :key="index">
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Code}}</td>
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Name}}</td>
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Abbreviation}}</td>
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Professors[0]}}</td>
+      </tr>
+      <tr v-for="(subject,index) in $store.state.oddCycleElectives.sem7.subjects" :key="index">
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Code}}</td>
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Name}}</td>
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Abbreviation}}</td>
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Professors[0]}}</td>
+      </tr>
+
+
+
+      <tr v-for="(subject,index) in $store.state.oddCycleOpenElectives.sem5.subjects" :key="index">
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Code}}</td>
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Name}}</td>
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Abbreviation}}</td>
+        <td v-if="sectionObject.Semester == 5 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Professors[0]}}</td>
+      </tr>
+      <tr v-for="(subject,index) in $store.state.evenCycleOpenElectives.sem6.subjects" :key="index">
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Code}}</td>
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Name}}</td>
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Abbreviation}}</td>
+        <td v-if="sectionObject.Semester == 6 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Professors[0]}}</td>
+      </tr>
+      <tr v-for="(subject,index) in $store.state.oddCycleOpenElectives.sem7.subjects" :key="index">
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Code}}</td>
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Name}}</td>
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Credits.Theory}}:{{subject.detail.Credits.Tutorial}}:{{subject.detail.Credits.Lab}}</td>
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Abbreviation}}</td>
+        <td v-if="sectionObject.Semester == 7 "
+          v-bind:style=" $store.state.isDownloading ? 'border: 1px solid black; border-collapse: collapse;' : 'border: none;'"
+        >{{subject.detail.Professors[0]}}</td>
+      </tr>
+      
     </table>
     <div class="line" v-if="!hideline"></div>
   </div>
