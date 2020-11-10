@@ -438,7 +438,7 @@ export default {
       this.createID(this.$store.state.semester, this.$store.state.section);
     },
     generateAgain() {
-      console.log("SMFH")
+      this.type = null
       this.$store.dispatch("generateAgain")
       .catch(err => {
         console.log(err)
