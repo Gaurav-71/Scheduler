@@ -218,22 +218,7 @@ export default {
     },
     route() {
       let isReadyToAutomate = true;
-      console.log(isReadyToAutomate);
-      //put this stuff after validation
-      if (this.$store.state.createType == 1) {
-        this.$store
-        .dispatch("automateTimetable")
-        .then(()=> {
-          this.$router.push("/timetable/result");
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      } else {
-        //this.$router.push("/timetable/manual");
-        alert("drag & drop");
-      }
-      /*
+      
       this.$store.state.semester = null;
       this.$store.state.section = null;
       if (this.$store.state.cycle == "Odd") {
@@ -247,6 +232,107 @@ export default {
           "sec7A",
           "sec7B",
         ];
+
+        for(let i =0; i< 3;i++)
+        {
+          let sectionObject = this.$store.state.allOddCycleClasses[classNames[i]];
+          if(sectionObject.mathClass.RegularClass1.Day=="" || sectionObject.mathClass.RegularClass1.Time=="" || sectionObject.mathClass.RegularClass2.Day=="" || sectionObject.mathClass.RegularClass2.Time=="" || sectionObject.mathClass.RegularClass3.Day=="" || sectionObject.mathClass.RegularClass3.Time=="" || sectionObject.mathClass.TutorialClass.Day=="" || sectionObject.mathClass.TutorialClass.Time=="" || sectionObject.mathClass.Professors[0] == "" || sectionObject.mathClass.Professors[1] == "" || sectionObject.mathClass.Professors[2] == "")
+          {
+                this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
+                this.error.isVisible = true;            isReadyToAutomate = false;
+                break;
+          }
+        }
+        for(let i = 0;i< this.$store.state.oddCycleElectives.sem5.subjects.length;i++)
+        {
+          let k = 0  
+          let subject = this.$store.state.oddCycleElectives.sem5.subjects[i]
+          let noP = this.$store.state.oddCycleElectives.sem5.newProfessor[i]
+          for(let j = 0; j< noP;j++)
+          {
+                if(subject.detail.Professors[j] == "")
+                {
+                  this.error.message.message = "Please fill all the fields for Electives ";
+                  this.error.isVisible = true;            isReadyToAutomate = false;
+                  k = 1
+                  break;
+                }
+          }
+          if(k == 1)
+            break;
+        }
+        for(let i = 0;i< this.$store.state.oddCycleElectives.sem7.subjects.length;i++)
+        {
+          let k = 0  
+          let subject = this.$store.state.oddCycleElectives.sem7.subjects[i]
+          let noP = this.$store.state.oddCycleElectives.sem7.newProfessor[i]
+          for(let j = 0; j< noP;j++)
+          {
+                if(subject.detail.Professors[j] == "")
+                {
+                  this.error.message.message = "Please fill all the fields for Electives ";
+                  this.error.isVisible = true;            isReadyToAutomate = false;
+                  k = 1
+                  break;
+                }
+          }
+          if(k == 1)
+            break;
+        }
+
+
+        for(let i = 0;i< this.$store.state.oddCycleOpenElectives.sem5.subjects.length;i++)
+        {
+          let k = 0  
+          let subject = this.$store.state.oddCycleOpenElectives.sem5.subjects[i]
+          let noP = this.$store.state.oddCycleOpenElectives.sem5.newProfessor[i]
+          if(subject.detail.classTimings.RegularClass1.Day == "" || subject.detail.classTimings.RegularClass1.Time == "" || subject.detail.classTimings.RegularClass2.Day == "" || subject.detail.classTimings.RegularClass2.Time == "" || subject.detail.classTimings.RegularClass3.Day == "" || subject.detail.classTimings.RegularClass3.Time == "")
+          {
+            this.error.message.message = "Please fill all the fields for Electives ";
+                  this.error.isVisible = true;            isReadyToAutomate = false;
+                  break;
+          }
+          for(let j = 0; j< noP;j++)
+          {
+                if(subject.detail.Professors[j] == "")
+                {
+                  this.error.message.message = "Please fill all the fields for Electives ";
+                  this.error.isVisible = true;            isReadyToAutomate = false;
+                  k = 1
+                  break;
+                }
+          }
+          if(k == 1)
+            break;
+        }
+
+        
+        for(let i = 0;i< this.$store.state.oddCycleOpenElectives.sem7.subjects.length;i++)
+        {
+          let k = 0  
+          let subject = this.$store.state.oddCycleOpenElectives.sem7.subjects[i]
+          let noP = this.$store.state.oddCycleOpenElectives.sem7.newProfessor[i]
+          if(subject.detail.classTimings.RegularClass1.Day == "" || subject.detail.classTimings.RegularClass1.Time == "" || subject.detail.classTimings.RegularClass2.Day == "" || subject.detail.classTimings.RegularClass2.Time == "" || subject.detail.classTimings.RegularClass3.Day == "" || subject.detail.classTimings.RegularClass3.Time == "")
+          {
+            this.error.message.message = "Please fill all the fields for Electives ";
+                  this.error.isVisible = true;            isReadyToAutomate = false;
+                  break;
+          }
+          for(let j = 0; j< noP;j++)
+          {
+                if(subject.detail.Professors[j] == "")
+                {
+                  this.error.message.message = "Please fill all the fields for Electives ";
+                  this.error.isVisible = true;            isReadyToAutomate = false;
+                  k = 1
+                  break;
+                }
+          }
+          if(k == 1)
+            break;
+        }
+
+
         for (let i = 0; i < 8; i++) {
           let sectionObject = this.$store.state.allOddCycleClasses[
             classNames[i]
@@ -347,7 +433,35 @@ export default {
       .catch(err => {
         console.log(err);
       });
-      }*/
+      }
+      else
+      {
+        console.log(isReadyToAutomate)
+      }
+
+      
+  /*    
+      
+      console.log(isReadyToAutomate);
+      //put this stuff after validation
+      if (this.$store.state.createType == 1) {
+        this.$store
+        .dispatch("automateTimetable")
+        .then(()=> {
+          this.$router.push("/timetable/result");
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      } else {
+        //this.$router.push("/timetable/manual");
+        alert("drag & drop");
+      }  
+
+
+*/
+
+
     }
   },
   created() {
