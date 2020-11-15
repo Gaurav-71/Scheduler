@@ -243,6 +243,8 @@ export default {
                 break;
           }
         }
+
+
         for(let i = 0;i< this.$store.state.oddCycleElectives.sem5.subjects.length;i++)
         {
           let k = 0  
@@ -379,7 +381,65 @@ export default {
       else 
       {
         let classNames = ["sec4A", "sec4B", "sec4C", "sec6A", "sec6B", "sec6C","sec8A", "sec8B"];
-        for (let i = 0; i < 8; i++) {
+
+        
+        for(let i =0; i< 3;i++)
+        {
+          let sectionObject = this.$store.state.allEvenCycleClasses[classNames[i]];
+          if(sectionObject.mathClass.RegularClass1.Day=="" || sectionObject.mathClass.RegularClass1.Time=="" || sectionObject.mathClass.RegularClass2.Day=="" || sectionObject.mathClass.RegularClass2.Time=="" || sectionObject.mathClass.RegularClass3.Day=="" || sectionObject.mathClass.RegularClass3.Time=="" || sectionObject.mathClass.TutorialClass.Day=="" || sectionObject.mathClass.TutorialClass.Time=="" || sectionObject.mathClass.Professors[0] == "" || sectionObject.mathClass.Professors[1] == "" || sectionObject.mathClass.Professors[2] == "")
+          {
+                this.error.message.message = "Please fill all the fields for Class " + classNames[i].substring(3);
+                this.error.isVisible = true;            isReadyToAutomate = false;
+                break;
+          }
+        }
+
+        
+        for(let i = 0;i< this.$store.state.evenCycleElectives.sem6.subjects.length;i++)
+        {
+          let k = 0  
+          let subject = this.$store.state.evenCycleElectives.sem6.subjects[i]
+          let noP = this.$store.state.evenCycleElectives.sem6.newProfessor[i]
+          for(let j = 0; j< noP;j++)
+          {
+                if(subject.detail.Professors[j] == "")
+                {
+                  this.error.message.message = "Please fill all the fields for Electives ";
+                  this.error.isVisible = true;            isReadyToAutomate = false;
+                  k = 1
+                  break;
+                }
+          }
+          if(k == 1)
+            break;
+        }
+
+        for(let i = 0;i< this.$store.state.evenCycleOpenElectives.sem6.subjects.length;i++)
+        {
+          let k = 0  
+          let subject = this.$store.state.evenCycleOpenElectives.sem6.subjects[i]
+          let noP = this.$store.state.evenCycleOpenElectives.sem6.newProfessor[i]
+          if(subject.detail.classTimings.RegularClass1.Day == "" || subject.detail.classTimings.RegularClass1.Time == "" || subject.detail.classTimings.RegularClass2.Day == "" || subject.detail.classTimings.RegularClass2.Time == "" || subject.detail.classTimings.RegularClass3.Day == "" || subject.detail.classTimings.RegularClass3.Time == "")
+          {
+            this.error.message.message = "Please fill all the fields for Electives ";
+                  this.error.isVisible = true;            isReadyToAutomate = false;
+                  break;
+          }
+          for(let j = 0; j< noP;j++)
+          {
+                if(subject.detail.Professors[j] == "")
+                {
+                  this.error.message.message = "Please fill all the fields for Electives ";
+                  this.error.isVisible = true;            isReadyToAutomate = false;
+                  k = 1
+                  break;
+                }
+          }
+          if(k == 1)
+            break;
+        }
+
+        for (let i = 0; i < 6; i++) {
           let sectionObject = this.$store.state.allEvenCycleClasses[
             classNames[i]
           ];
