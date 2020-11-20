@@ -1297,7 +1297,6 @@ export default {
     }
   },
   async automateTimetable(context) {
-    context.commit("changeLoading");
     try {
       console.log("automateTimeTable's context- " + context);
       await context.dispatch("assignMathsClasses");
@@ -1306,10 +1305,8 @@ export default {
       await context.dispatch("assignElectives");
       await context.dispatch("assignTutorials");
       await context.dispatch("assignClasses");
-      context.commit("changeLoading");
     } catch (exc) {
       console.log(exc);
-      context.commit("changeLoading");
     }
   },
   async emptyTimetable(context) {
@@ -1381,8 +1378,6 @@ export default {
   async generateAgain(context) {
     console.log("generateAgain's context-" + context);
     await context.dispatch("emptyTimetable");
-    console.log(this.state.professorList);
-    console.log(this.state.allOddCycleClasses);
     await context.dispatch("automateTimetable");
   },
 };

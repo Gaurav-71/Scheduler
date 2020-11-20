@@ -1,12 +1,23 @@
 <template>
   <div v-if="obj.isVisible" class="modal-container">
-    <div class="modal">
-      <img src="../../assets/Common/error.svg" alt="add" class="error" />
-      <div class="message">
-        <h2>{{obj.message.code}}</h2>
-        <h3>{{obj.message.message}}</h3>
+    <transition name="bounce" enter-active-class="animated bounceIn" :duration="500" appear>
+      <div v-if="obj.isVisible" class="modal">
+        <transition name="custom-classes-transition" enter-active-class="animated tada" appear>
+          <transition
+            name="tada"
+            enter-active-class="animated tada"
+            leave-active-class="fade"
+            appear
+          >
+            <img src="../../assets/Common/error.svg" alt="add" class="error" />
+          </transition>
+        </transition>
+        <div class="message">
+          <h2>{{obj.message.code}}</h2>
+          <h3>{{obj.message.message}}</h3>
+        </div>
       </div>
-    </div>
+    </transition>
     <img src="../../assets/Common/delete.svg" alt="cancel" @click="handleError" class="cancel" />
   </div>
 </template>

@@ -4,86 +4,96 @@
       <Error :obj="error" />
     </transition>
     <Heading :obj="headingObj" />
-    <div class="card-container">
-      <div class="card-wrapper">
-        <div class="card">
-          <div class="title">
-            <img src="../assets/Settings/account.svg" alt="settings" />
-            <h3>Account Details</h3>
-          </div>
-          <div class="body">
-            <div class="container">
-              <div class="flex">
-                <img src="../assets/Settings/name.svg" alt="name" />
-                <h3>User Name</h3>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated bounceInUp"
+      leave-active-class="animated fadeOutDown"
+      appear
+    >
+      <div class="card-container">
+        <div class="card-wrapper">
+          <div class="card">
+            <div class="title">
+              <img src="../assets/Settings/account.svg" alt="settings" />
+              <h3>Account Details</h3>
+            </div>
+            <div class="body">
+              <div class="container">
+                <div class="flex">
+                  <img src="../assets/Settings/name.svg" alt="name" />
+                  <h3>User Name</h3>
+                </div>
+                <div v-if="isEditingName" class="flex">
+                  <input type="text" v-model="name" placeholder="Enter Name" />
+                  <img
+                    @click="saveEdit()"
+                    src="../assets/Common/save.svg"
+                    alt="save"
+                    style="margin-left: auto;width: 30px;cursor: pointer;"
+                    title="Save changes"
+                    class="grow-btn"
+                  />
+                  <img
+                    src="../assets/Common/cancel.svg"
+                    alt="cancel"
+                    style="width: 30px;cursor: pointer;"
+                    title="Cancel edit"
+                    @click="cancelEdit()"
+                    class="grow-btn"
+                  />
+                </div>
+                <div class="flex" v-else>
+                  <div class="box">{{name}}</div>
+                  <img
+                    src="../assets/Common/edit.svg"
+                    alt="edit"
+                    title="Edit user name"
+                    style="margin-left: auto;width:39px;cursor:pointer;"
+                    @click="editName()"
+                    class="grow-btn"
+                  />
+                </div>
               </div>
-              <div v-if="isEditingName" class="flex">
-                <input type="text" v-model="name" placeholder="Enter Name" />
-                <img
-                  @click="saveEdit()"
-                  src="../assets/Common/save.svg"
-                  alt="save"
-                  style="margin-left: auto;width: 30px;cursor: pointer;"
-                  title="Save changes"
-                />
-                <img
-                  src="../assets/Common/cancel.svg"
-                  alt="cancel"
-                  style="width: 30px;cursor: pointer;"
-                  title="Cancel edit"
-                  @click="cancelEdit()"
-                />
-              </div>
-              <div class="flex" v-else>
-                <div class="box">{{name}}</div>
-                <img
-                  src="../assets/Common/edit.svg"
-                  alt="edit"
-                  title="Edit user name"
-                  style="margin-left: auto;width:39px;cursor:pointer;"
-                  @click="editName()"
-                />
+              <div class="container" style="margin-top: 1rem;">
+                <div class="flex">
+                  <img src="../assets/Settings/gmail.svg" alt="email" />
+                  <h3>Email</h3>
+                </div>
+                <div style="margin: 0.3rem 0;">{{email}}</div>
               </div>
             </div>
-            <div class="container" style="margin-top: 1rem;">
-              <div class="flex">
-                <img src="../assets/Settings/gmail.svg" alt="email" />
-                <h3>Email</h3>
-              </div>
-              <div style="margin: 0.3rem 0;">{{email}}</div>
+          </div>
+          <div class="btn-container">
+            <div class="btn grow" @click="route">Reset Password</div>
+          </div>
+        </div>
+        <div class="card-wrapper">
+          <div class="card">
+            <div class="title">
+              <img src="../assets/Settings/data.svg" alt />
+              <h3>Data Collected</h3>
+            </div>
+            <div class="body">lol</div>
+          </div>
+        </div>
+        <div class="card-wrapper">
+          <div class="card">
+            <div class="title">
+              <img src="../assets/Settings/privacy.svg" alt />
+              <h3>User Privacy</h3>
+            </div>
+            <div class="body">
+              <p
+                style="line-height: 1.3;"
+              >Privacy is built in from the beginning. Our products and features include innovative privacy technologies and techniques designed to minimise how much of your data we — or anyone else — can access. And powerful security features help prevent anyone except you from being able to access your information.</p>
             </div>
           </div>
-        </div>
-        <div class="btn-container">
-          <div class="btn" @click="route">Reset Password</div>
-        </div>
-      </div>
-      <div class="card-wrapper">
-        <div class="card">
-          <div class="title">
-            <img src="../assets/Settings/data.svg" alt />
-            <h3>Data Collected</h3>
-          </div>
-          <div class="body">lol</div>
-        </div>
-      </div>
-      <div class="card-wrapper">
-        <div class="card">
-          <div class="title">
-            <img src="../assets/Settings/privacy.svg" alt />
-            <h3>User Privacy</h3>
-          </div>
-          <div class="body">
-            <p
-              style="line-height: 1.3;"
-            >Privacy is built in from the beginning. Our products and features include innovative privacy technologies and techniques designed to minimise how much of your data we — or anyone else — can access. And powerful security features help prevent anyone except you from being able to access your information.</p>
+          <div class="btn-container">
+            <div class="btn del grow">Delete Account</div>
           </div>
         </div>
-        <div class="btn-container">
-          <div class="btn">Delete Account</div>
-        </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 
@@ -154,6 +164,8 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/colors";
+@import "../scss/custom-animations";
+
 .settings {
   margin-top: 4.5rem;
   margin-left: 5rem;
@@ -205,7 +217,7 @@ export default {
         }
         .body {
           padding: 1rem;
-          .container {            
+          .container {
             h3 {
               margin: 0;
               color: $primary;
@@ -235,6 +247,9 @@ export default {
                 height: 40px;
                 margin: 0 0.5rem 0 0;
               }
+              img:active {
+                transform: scale(0.95);
+              }
             }
           }
         }
@@ -261,11 +276,18 @@ export default {
           transition: transform 80ms ease-in;
           cursor: pointer;
         }
-        .btn:active {
-          transform: scale(0.95);
+        .btn:hover {
+          background-image: $gradient-inverted;
+        }
+        .del:hover {
+          background-image: $gradient-red;
+          border-color: rgba(185, 25, 25, 0.678);
         }
         .btn:focus {
           outline: none;
+        }
+        .btn:active {
+          transform: scale(0.95);
         }
       }
     }

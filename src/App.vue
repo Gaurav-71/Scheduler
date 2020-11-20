@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css" />
     <router-view />
   </div>
 </template>

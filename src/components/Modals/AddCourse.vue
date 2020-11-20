@@ -3,93 +3,95 @@
     <transition name="fade" appear>
       <Error :obj="error" />
     </transition>
-    <div class="modal">
-      <img src="../../assets/Courses/add.svg" alt="add" class="add-course" />
-      <div class="line"></div>
-      <form class="form-data">
-        <div class="row">
-          <div class="field">
-            <label for="name">Course name</label>
-            <input type="text" name="name" placeholder="Enter name" class="name" v-model="name" />
-          </div>
-          <div class="field">
-            <label for="code">Course code</label>
-            <input type="text" name="code" placeholder="Enter code" class="code" v-model="code" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="semester">Semester</label>
-            <input
-              list="semesters"
-              name="semester"
-              placeholder="Enter semester"
-              class="sem"
-              v-model="semester"
-            />
-            <datalist id="semesters">
-              <option value="3"></option>
-              <option value="4"></option>
-              <option value="5"></option>
-              <option value="6"></option>
-              <option value="7"></option>
-              <option value="8"></option>
-            </datalist>
-          </div>
-          <div class="field">
-            <label for="type">Course Abbreviation</label>
-            <input name="type" placeholder="Enter abbreviation" class="type" v-model="type" />
-          </div>
-        </div>
-        <div class="row1">
-          <div class="field1">
-            <label>Credits</label>
-            <div class="data">
-              <div class="data-field">
-                <input
-                  type="number"
-                  name="lecture"
-                  min="0"
-                  max="8"
-                  step="1"
-                  value="0"
-                  class="lecture"
-                  v-model="theoryCredits"
-                />
-                <label for="lecture">Lecture</label>
-              </div>
-              <div class="data-field">
-                <input
-                  type="number"
-                  name="tutorial"
-                  min="0"
-                  max="8"
-                  step="1"
-                  value="0"
-                  class="tutorial"
-                  v-model="tutorialCredits"
-                />
-                <label for="tutorial">Tutorial</label>
-              </div>
-              <div class="data-field">
-                <input
-                  type="number"
-                  name="practicals"
-                  min="0"
-                  max="8"
-                  step="1"
-                  value="0"
-                  class="lab"
-                  v-model="labCredits"
-                />
-                <label for="practicals">Practicals</label>
-              </div>
+    <transition name="custom-classes-transition" enter-active-class="animated zoomInUp" appear>
+      <div class="modal">
+        <img src="../../assets/Courses/add.svg" alt="add" class="add-course" />
+        <div class="line"></div>
+        <form class="form-data">
+          <div class="row">
+            <div class="field">
+              <label for="name">Course name</label>
+              <input type="text" name="name" placeholder="Enter name" class="name" v-model="name" />
+            </div>
+            <div class="field">
+              <label for="code">Course code</label>
+              <input type="text" name="code" placeholder="Enter code" class="code" v-model="code" />
             </div>
           </div>
-          <div class="btn" @click="addCourse">Save</div>
-        </div>
-      </form>
-    </div>
+          <div class="row">
+            <div class="field">
+              <label for="semester">Semester</label>
+              <input
+                list="semesters"
+                name="semester"
+                placeholder="Enter semester"
+                class="sem"
+                v-model="semester"
+              />
+              <datalist id="semesters">
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+                <option value="6"></option>
+                <option value="7"></option>
+                <option value="8"></option>
+              </datalist>
+            </div>
+            <div class="field">
+              <label for="type">Course Abbreviation</label>
+              <input name="type" placeholder="Enter abbreviation" class="type" v-model="type" />
+            </div>
+          </div>
+          <div class="row1">
+            <div class="field1">
+              <label>Credits</label>
+              <div class="data">
+                <div class="data-field">
+                  <input
+                    type="number"
+                    name="lecture"
+                    min="0"
+                    max="8"
+                    step="1"
+                    value="0"
+                    class="lecture"
+                    v-model="theoryCredits"
+                  />
+                  <label for="lecture">Lecture</label>
+                </div>
+                <div class="data-field">
+                  <input
+                    type="number"
+                    name="tutorial"
+                    min="0"
+                    max="8"
+                    step="1"
+                    value="0"
+                    class="tutorial"
+                    v-model="tutorialCredits"
+                  />
+                  <label for="tutorial">Tutorial</label>
+                </div>
+                <div class="data-field">
+                  <input
+                    type="number"
+                    name="practicals"
+                    min="0"
+                    max="8"
+                    step="1"
+                    value="0"
+                    class="lab"
+                    v-model="labCredits"
+                  />
+                  <label for="practicals">Practicals</label>
+                </div>
+              </div>
+            </div>
+            <div class="btn" @click="addCourse">Save</div>
+          </div>
+        </form>
+      </div>
+    </transition>
     <img
       src="../../assets/Common/delete.svg"
       alt="cancel"

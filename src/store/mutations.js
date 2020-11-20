@@ -31,9 +31,11 @@ export default {
   },
   loadProfessorList: (state, items) => {
     state.professorList = items;
+    state.isLoadingProfessors = false;
   },
   loadCourseList: (state, items) => {
     state.courseList = items;
+    state.isLoadingCourses = false;
   },
   toggleState: (state,payload) => {
     console.log(payload);
@@ -46,8 +48,5 @@ export default {
     {
       state.allEvenCycleClasses[section].subjects[payload.index].detail.isToggleChecked = payload.truthValue;
     }
-  },
-  changeLoading: (state) => {
-    state.isLoading = !(state.isLoading);
-  }
+  },  
 };

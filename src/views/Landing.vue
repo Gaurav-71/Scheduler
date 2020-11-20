@@ -4,7 +4,7 @@
     <h1>Schedule timetables and exams the modern way</h1>
     <h5>The scheduler is a smart web solution which helps in scheduling timetables and exams</h5>
     <h6>Made by Aravind Shreyas, Dheeraj Bhat, Divya, Gaurav v</h6>
-    <button @click="route">Login</button>
+    <button @click="route" class="grow">Login</button>
     <footer>
       <img src="../assets/Landing/college.png" alt="college" />
     </footer>
@@ -34,6 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../scss/colors";
+@import "../scss/custom-animations";
 
 .landing {
   text-align: center;

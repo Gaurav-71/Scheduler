@@ -27,7 +27,7 @@
         <input type="text" class="term" placeholder="Enter Term" v-model="$store.state.term" />
       </form>
     </div>
-    <div class="btn" @click="route()">Start Mapping</div>
+    <div class="btn grow" @click="route()">Start Mapping</div>
   </div>
 </template>
 
@@ -53,6 +53,7 @@ export default {
 <style lang="scss" scoped>
 @import "../../scss/create-cards";
 @import "../../scss/mediaQuery";
+@import "../../scss/custom-animations";
 
 .cycle {
   display: flex;
@@ -107,6 +108,12 @@ export default {
       line-height: 25px;
       color: $primary-dark;
     }
+  }
+  .btn:hover {
+    background-image: $gradient-inverted;
+  }
+  .btn:active {
+    transform: scale(0.95);
   }
 }
 </style>

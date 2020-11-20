@@ -29,6 +29,10 @@ export default {
 
   isDownloading: false,
 
+  isLoadingCourses: false,
+
+  isLoadingProfessors: false,
+
   postSubscription: null,
 
   user: JSON.parse(localStorage.getItem("loggedUser")),
