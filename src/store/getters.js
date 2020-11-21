@@ -21,4 +21,7 @@ export default {
     });
     return subjects;
   },
+  getCode : (store) => {
+    return store.code;
+  }
 }

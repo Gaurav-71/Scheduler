@@ -21,6 +21,9 @@ export default {
     state.isLoggedIn = true;
     localStorage.setItem("loggedUser", JSON.stringify(state.user));
   },
+  setCode: (state, code) =>{
+    state.code = code;
+  },
   updateDisplayName: (state,user) => {    
     state.user = {
       name: user.displayName,

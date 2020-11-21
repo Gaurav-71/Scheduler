@@ -41,6 +41,20 @@ export default {
       });
     commit("signup", response.user);
   },
+  async downloadSecurityCode({ commit }) {
+    let response = await db.collection("SecurityCode").onSnapshot(snapshot =>{
+    let code = [];
+    snapshot.forEach(doc =>{
+      let data = {
+        id: doc.id,
+        data: doc.data()
+      };
+      code.push(data);
+    });
+    commit('setCode', code[0]);
+    });
+    return response;
+  },
   async updateDisplayName({ commit }, payload) {
     let user = auth.currentUser;
     await user
@@ -55,6 +69,17 @@ export default {
       .catch(function(error) {
         console.log(error);
       });
+  },
+  async updateSecurityCode({commit},payload) {
+    try {
+      console.log(commit);
+      await db
+        .collection("SecurityCode")
+        .doc(payload.id)
+        .update({ code: payload.code });
+    } catch (err) {
+      alert(err);
+    }
   },
   async loadProfessorList(context) {
     let response = db.collection("Teachers").onSnapshot((snapshot) => {

@@ -1,4 +1,5 @@
 export default {
+
   progressCounter: 1,
 
   sidebarCounter: 1,
@@ -10,6 +11,8 @@ export default {
   cycle: null,
 
   createType: null,
+
+  code: null,
 
   department: "",
 

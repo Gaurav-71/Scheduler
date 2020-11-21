@@ -71,9 +71,46 @@
           <div class="card">
             <div class="title">
               <img src="../assets/Settings/data.svg" alt />
-              <h3>Data Collected</h3>
+              <h3>Security Code</h3>
             </div>
-            <div class="body">lol</div>
+                        <div class="body">
+              <div class="container">
+                <div class="flex">
+                  <img src="../assets/Settings/name.svg" alt="name" />
+                  <h3>Security Code</h3>
+                </div>
+                <div v-if="isEditingSecurityCode" class="flex">
+                  <input type="text" v-model="securityCode" placeholder="Enter Security Code" />
+                  <img
+                    @click="saveEditCode()"
+                    src="../assets/Common/save.svg"
+                    alt="save"
+                    style="margin-left: auto;width: 30px;cursor: pointer;"
+                    title="Save changes"
+                    class="grow-btn"
+                  />
+                  <img
+                    src="../assets/Common/cancel.svg"
+                    alt="cancel"
+                    style="width: 30px;cursor: pointer;"
+                    title="Cancel edit"
+                    @click="cancelEditCode()"
+                    class="grow-btn"
+                  />
+                </div>
+                <div class="flex" v-else>
+                  <div class="box">{{ securityCode }}</div>
+                  <img
+                    src="../assets/Common/edit.svg"
+                    alt="edit"
+                    title="Edit user name"
+                    style="margin-left: auto;width:39px;cursor:pointer;"
+                    @click="editCode()"
+                    class="grow-btn"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="card-wrapper">
@@ -122,7 +159,9 @@ export default {
       },
       name: this.$store.state.user.name,
       email: this.$store.state.user.email,
-      isEditingName: false
+      securityCode: this.$store.getters.getCode.data.code,
+      isEditingName: false,
+      isEditingSecurityCode: false
     };
   },
   methods: {
@@ -153,11 +192,47 @@ export default {
             console.log(err);
           });
       }
+    },
+    editCode() {
+      this.isEditingSecurityCode = true;
+    },
+    cancelEditCode() {
+      this.securityCode = this.$store.getters.getCode.data.code;
+      this.isEditingSecurityCode = false;
+    },
+    saveEditCode() {
+      if (this.securityCode.trim() == "") {
+        this.error.message.code = "Missing Information";
+        this.error.message.message = "Please fill the security code properly";
+        this.error.isVisible = true;
+      } else {
+        let payload ={
+          id: this.$store.getters.getCode.id,
+          code: this.securityCode
+        };
+        this.$store
+          .dispatch("updateSecurityCode", payload)
+          .then(() => {
+            this.isEditingSecurityCode = false;
+          })
+          .catch(err => {
+            //this.error.message = err;
+            //this.error.isVisible = true;
+            console.log(err);
+          });
+      }
     }
   },
   created() {
     this.$store.state.sidebarCounter = 6;
     localStorage.setItem("currentRoute", this.$route.path);
+  },
+  mounted() {
+        this.$store.dispatch("downloadSecurityCode").then(response =>{
+    console.log(response);
+      }).catch(error =>{
+        alert(error);
+      });
   }
 };
 </script>

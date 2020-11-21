@@ -26,6 +26,7 @@
                 placeholder="Confirm Password"
                 class="confirm-password"
               />
+              <input v-model="code" type="password" placeholder="Security Code" class="code" />
               <button type="button" @click="signUp" class="grow">Sign Up</button>
             </div>
             <Loading :message="'Verifying and creating new account'" v-else />
@@ -94,6 +95,7 @@ export default {
       email: "",
       password: "",
       confirmpassword: "",
+      code: "",
       error: {
         isVisible: false,
         message: ""
@@ -140,7 +142,17 @@ export default {
         this.error.isVisible = true;
         this.password = "";
         this.confirmpassword = "";
-      } else {
+      } 
+      else if(this.code != this.$store.getters.getCode.data.code){
+          let customErr = {
+          message: "Invalid security code, a valid code is required to register.",
+          code: "auth/invalid-security-code"
+        };
+        this.error.message = customErr;
+        this.error.isVisible = true;
+        this.code="";
+      }
+      else {
         this.$store
           .dispatch("signup", data)
           .then(() => {
@@ -159,6 +171,11 @@ export default {
   },
   mounted() {
     let user = JSON.parse(localStorage.getItem("loggedUser"));
+    this.$store.dispatch("downloadSecurityCode").then(response =>{
+    console.log(response);
+      }).catch(error =>{
+        alert(error);
+      });
     if (user) {
       this.$store.state.user = user;
       this.$router.push(localStorage.getItem("currentRoute"));
@@ -252,6 +269,9 @@ export default {
     }
     .password {
       background-image: url("../assets/Login/password.svg");
+    }
+    .code{
+      background-image: url("../assets/Login/secure.svg");
     }
     .confirm-password {
       background-image: url("../assets/Login/confirm.svg");
