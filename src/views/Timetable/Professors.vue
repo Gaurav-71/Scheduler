@@ -1,7 +1,11 @@
 <template>
   <div class="professors">
     <transition name="fade" appear>
-      <Alert v-if="warning.isVisible" :obj="warning" :remove="warningRemoveObj" />
+      <Alert
+        v-if="warning.isVisible"
+        :obj="warning"
+        :remove="warningRemoveObj"
+      />
     </transition>
     <transition name="fade" appear>
       <Error :obj="error" />
@@ -13,9 +17,14 @@
     <transition v-if="!$store.state.isLoadingProfessors" name="fade" appear>
       <div class="container">
         <div class="search-bar">
-          <input type="search" placeholder="Search Professors" v-model="search"/>
+          <input
+            type="search"
+            placeholder="Search Professors"
+            v-model="search"
+            class="sp"
+          />
           <img
-            src="../assets/Professors/add.svg"
+            src="../../assets/Professors/add.svg"
             alt="add"
             title="Add New Professor"
             @click="$store.state.showProfessorModal = true"
@@ -38,17 +47,17 @@
                 <div v-if="!professor.isEditing" class="card-container grow">
                   <div class="card">
                     <img
-                      src="../assets/Professors/male.svg"
+                      src="../../assets/Professors/male.svg"
                       alt="male"
                       v-if="professor.detail.Gender == 'M'"
                     />
                     <img
-                      src="../assets/Professors/female.svg"
+                      src="../../assets/Professors/female.svg"
                       alt="female"
                       v-else-if="professor.detail.Gender == 'F'"
                     />
                     <img
-                      src="../assets/Professors/other.svg"
+                      src="../../assets/Professors/other.svg"
                       alt="male"
                       v-else-if="professor.detail.Gender == 'O'"
                     />
@@ -59,14 +68,14 @@
                   </div>
                   <div class="actions">
                     <img
-                      src="../assets/Common/edit.svg"
+                      src="../../assets/Common/edit.svg"
                       alt="edit"
                       title="Edit Professor Details"
                       @click="edit(professor)"
                       class="grow-btn"
                     />
                     <img
-                      src="../assets/Common/delete.svg"
+                      src="../../assets/Common/delete.svg"
                       @click="removeProfessor(professor)"
                       alt="delete"
                       title="Delete Professor"
@@ -78,7 +87,7 @@
               <div v-if="showEditing">
                 <div v-if="professor.isEditing" class="card-container grow">
                   <div class="card">
-                    <img src="../assets/Common/edit.svg" alt="edit-mode" />
+                    <img src="../../assets/Common/edit.svg" alt="edit-mode" />
                     <div class="details-edit">
                       <input type="text" v-model="name" />
                       <input type="text" v-model="designation" />
@@ -86,23 +95,41 @@
                   </div>
                   <div class="actions-edit">
                     <form>
-                      <input type="radio" id="male" name="gender" value="M" v-model="gender" />
+                      <input
+                        type="radio"
+                        id="male"
+                        name="gender"
+                        value="M"
+                        v-model="gender"
+                      />
                       <label for="male">Male</label>
-                      <input type="radio" id="female" name="gender" value="F" v-model="gender" />
+                      <input
+                        type="radio"
+                        id="female"
+                        name="gender"
+                        value="F"
+                        v-model="gender"
+                      />
                       <label for="female">Female</label>
-                      <input type="radio" id="other" name="gender" value="O" v-model="gender" />
+                      <input
+                        type="radio"
+                        id="other"
+                        name="gender"
+                        value="O"
+                        v-model="gender"
+                      />
                       <label for="other">Other</label>
                     </form>
                     <img
                       @click="saveDetails(professor)"
-                      src="../assets/Common/save.svg"
+                      src="../../assets/Common/save.svg"
                       alt="save"
                       title="Save Edited Details"
                       class="grow-btn"
                     />
                     <img
                       @click="cancelEdit(professor)"
-                      src="../assets/Common/cancel.svg"
+                      src="../../assets/Common/cancel.svg"
                       alt="cancel"
                       title="Cancel Editing"
                       class="grow-btn"
@@ -117,9 +144,9 @@
                 enter-active-class="animated tada"
                 appear
               >
-                <img src="../assets/Common/error.svg" alt="error" />
+                <img src="../../assets/Common/error.svg" alt="error" />
               </transition>
-              <h2>Sorry, we could'nt find any professor named {{search}}</h2>
+              <h2>Sorry, we could'nt find any professor named {{ search }}</h2>
             </div>
           </div>
         </transition>
@@ -130,11 +157,11 @@
 </template>
 
 <script>
-import AddProfessor from "../components/Modals/AddProfessor.vue";
-import Heading from "../components/Design/Heading";
-import Alert from "../components/Modals/Alert";
-import Error from "../components/Modals/Error";
-import Loading from "../components/Loading/Pulse";
+import AddProfessor from "../../components/Modals/AddProfessor.vue";
+import Heading from "../../components/Design/Heading";
+import Alert from "../../components/Modals/Alert";
+import Error from "../../components/Modals/Error";
+import Loading from "../../components/Loading/Pulse";
 
 export default {
   components: {
@@ -142,7 +169,7 @@ export default {
     Heading,
     Alert,
     Error,
-    Loading
+    Loading,
   },
   data() {
     return {
@@ -150,20 +177,20 @@ export default {
         h1: "Professors",
         h4:
           "A list of all professors in the department. Add, Modify or Delete a professor at will",
-        src: "professors.svg"
+        src: "professors.svg",
       },
       warning: {
         isVisible: false,
         message: "Are you sure you want to delete this professor permanently ?",
         button: "Delete Professor",
-        number: 2
+        number: 2,
       },
       error: {
         isVisible: false,
         message: {
           code: "Missing-information",
-          message: "Please fill all data fields"
-        }
+          message: "Please fill all data fields",
+        },
       },
       warningRemoveObj: null,
       search: "",
@@ -171,11 +198,10 @@ export default {
       name: "",
       designation: "",
       gender: "",
-      showEditing: false
+      showEditing: false,
     };
   },
   created() {
-    this.$store.state.sidebarCounter = 4;
     localStorage.setItem("currentRoute", this.$route.path);
   },
   methods: {
@@ -201,7 +227,7 @@ export default {
           id: professor.id,
           Name: this.name,
           Designation: this.designation,
-          Gender: this.gender
+          Gender: this.gender,
         };
         this.$store
           .dispatch("updateProfessorBio", data)
@@ -212,7 +238,7 @@ export default {
             professor.isEditing = false;
             this.showEditing = false;
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       }
@@ -224,33 +250,33 @@ export default {
     afterLeave(el, done) {
       this.showEditing = !this.showEditing;
       console.log(el, done);
-    }
+    },
   },
   computed: {
-    searchProfessors: function() {
-      return this.$store.getters.getProfessorList.filter(professor => {
+    searchProfessors: function () {
+      return this.$store.getters.getProfessorList.filter((professor) => {
         let professorLowerCase = professor.detail.Name.toLowerCase();
         return professorLowerCase.match(this.search.toLowerCase());
       });
-    }
+    },
   },
   mounted() {
     this.$store.state.isLoadingProfessors = true;
     this.$store
       .dispatch("loadProfessorList")
-      .then(repsonse => {
+      .then((repsonse) => {
         this.unsubscribe = repsonse;
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/searchBar";
-@import "../scss/custom-animations";
+@import "../../scss/searchBar";
+@import "../../scss/custom-animations";
 
 .professors {
   margin-top: 4.5rem;
@@ -258,7 +284,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: hidden;  
+  overflow: hidden;
   .results {
     display: flex;
     justify-content: center;
@@ -343,7 +369,7 @@ export default {
           padding: 0.5rem;
         }
       }
-    }    
+    }
     .error {
       margin-top: 3rem;
       display: flex;
@@ -358,6 +384,10 @@ export default {
       }
     }
   }
+}
+
+.sp {
+  background-image: url("../../assets/Professors/s.svg");
 }
 
 .fade-enter-active,

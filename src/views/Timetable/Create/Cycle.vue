@@ -10,11 +10,17 @@
           name="cycle"
           value="Odd"
           v-model="$store.state.cycle"
-          style="margin-bottom: 1.1rem;"
+          style="margin-bottom: 1.1rem"
         />
         <label for="odd">Odd Cycle (3/5/7)</label>
         <br />
-        <input type="radio" id="even" name="cycle" value="Even" v-model="$store.state.cycle" />
+        <input
+          type="radio"
+          id="even"
+          name="cycle"
+          value="Even"
+          v-model="$store.state.cycle"
+        />
         <label for="even">Even Cycle (4/6/8)</label>
       </form>
       <form class="dept-term">
@@ -24,7 +30,12 @@
           placeholder="Enter Department"
           v-model="$store.state.department"
         />
-        <input type="text" class="term" placeholder="Enter Term" v-model="$store.state.term" />
+        <input
+          type="text"
+          class="term"
+          placeholder="Enter Term"
+          v-model="$store.state.term"
+        />
       </form>
     </div>
     <div class="btn grow" @click="route()">Start Mapping</div>
@@ -36,7 +47,7 @@ export default {
   methods: {
     route() {
       this.$router.push("/timetable/create/automated/mapping");
-    }
+    },
   },
   created() {
     this.$store.state.sidebarCounter = 2;
@@ -46,14 +57,14 @@ export default {
     this.$store.state.createRouteTracker = localStorage.getItem(
       "createRouteTracker"
     );
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../scss/create-cards";
-@import "../../scss/mediaQuery";
-@import "../../scss/custom-animations";
+@import "../../../scss/create-cards";
+@import "../../../scss/mediaQuery";
+@import "../../../scss/custom-animations";
 
 .cycle {
   display: flex;
@@ -97,10 +108,10 @@ export default {
         cursor: text;
       }
       .dept {
-        background-image: url("../../assets/Create/department 2.svg");
+        background-image: url("../../../assets/Create/department 2.svg");
       }
       .term {
-        background-image: url("../../assets/Create/term 2.svg");
+        background-image: url("../../../assets/Create/term 2.svg");
       }
     }
     p {

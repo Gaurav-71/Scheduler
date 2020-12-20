@@ -5,18 +5,27 @@
       <div class="child-container">
         <div class="child-card grow">
           <div class="title">
-            <img src="../../assets/Create/Type/automation.svg" alt="automated" />
+            <img
+              src="../../../assets/Create/Type/automation.svg"
+              alt="automated"
+            />
             <h3>Automated</h3>
           </div>
-          <p>Create a new timetable for all semesters automatically without any hassle.</p>
+          <p>
+            Create a new timetable for all semesters automatically without any
+            hassle.
+          </p>
           <button @click="route(1)">Create Automatically</button>
         </div>
         <div class="child-card grow">
           <div class="title">
-            <img src="../../assets/Create/Type/manual.svg" alt="manual" />
+            <img src="../../../assets/Create/Type/manual.svg" alt="manual" />
             <h3>Manual</h3>
           </div>
-          <p>Create a new timetable for a particular semester manually using advanced drag and drop features.</p>
+          <p>
+            Create a new timetable for a particular semester manually using
+            advanced drag and drop features.
+          </p>
           <div class="create-manual">
             <div class="one" @click="route(2)">Create One</div>
             <div @click="route(3)">Create All</div>
@@ -38,7 +47,7 @@ export default {
         this.$store.state.createType = 2;
         this.$router.push("/timetable/create/cycle");
       }
-    }
+    },
   },
   created() {
     this.$store.state.sidebarCounter = 2;
@@ -47,14 +56,14 @@ export default {
     this.$store.state.createRouteTracker = localStorage.getItem(
       "createRouteTracker"
     );
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../scss/create-cards";
-@import "../../scss/mediaQuery";
-@import "../../scss/custom-animations";
+@import "../../../scss/create-cards";
+@import "../../../scss/mediaQuery";
+@import "../../../scss/custom-animations";
 
 .type {
   display: flex;
@@ -121,8 +130,8 @@ export default {
         button {
           background-image: $gradient;
           border: none;
-        }        
-        button:hover{
+        }
+        button:hover {
           background-image: $gradient-inverted;
         }
         button:focus {
@@ -140,16 +149,16 @@ export default {
             border-left: 1.35px solid white;
             transition: all 0.2s ease-in-out;
           }
-          div:hover{
+          div:hover {
             background-image: $gradient;
           }
-          .one {        
-            background-image: $gradient;    
+          .one {
+            background-image: $gradient;
             border-left: none;
           }
           .one:hover {
             background-image: $gradient-inverted;
-          }          
+          }
         }
       }
     }

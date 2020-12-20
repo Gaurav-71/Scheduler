@@ -1,22 +1,31 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+// General routes
 import Login from "../views/Login.vue";
 import Choice from "../views/Choice.vue";
 import Landing from "../views/Landing.vue";
 import Settings from "../views/Settings.vue";
-
-import Create from "../views/Create/Create.vue";
-import Sidebar from "../components/Navigation/Sidebar.vue";
-import Professors from "../views/Professors.vue";
-import Courses from "../views/Courses.vue";
-import Home from "../views/Home.vue";
-
-import Type from "../views/Create/Type.vue";
-import Cycle from "../views/Create/Cycle.vue";
-import MappingAutomated from "../views/Create/Mapping.vue";
-import Result from "../views/Create/Results.vue";
 import Reset from "../views/Reset.vue";
+
+// Timetable Routes
+import Create from "../views/Timetable/Create/Create.vue";
+import Sidebar from "../components/Navigation/Sidebar.vue";
+import Professors from "../views/Timetable/Professors.vue";
+import Courses from "../views/Timetable/Courses.vue";
+import Home from "../views/Home.vue";
+// Timetable create routes
+import Type from "../views/Timetable/Create/Type.vue";
+import Cycle from "../views/Timetable/Create/Cycle.vue";
+import MappingAutomated from "../views/Timetable/Create/Mapping.vue";
+import Result from "../views/Timetable/Create/Results.vue";
+
+// Internals Routes
+import Students from "../views/Internals/Students.vue";
+import Saved from "../views/Internals/Saved.vue";
+// Internals create
+import CreateInt from "../views/Internals/Create.vue";
+
 import store from "../store/index.js";
 
 Vue.use(VueRouter);
@@ -115,6 +124,60 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/internals",
+    component: Sidebar,
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: "/",
+        component: Home,
+        name: "Home",
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/internals/create",
+        component: CreateInt,
+        children: [],
+      },
+      {
+        path: "/internals/students",
+        name: "Students",
+        component: Students,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/internals/saved-timetables",
+        name: "Saved",
+        component: Saved,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/internals/courses",
+        name: "Courses",
+        component: Courses,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
+        path: "/settings",
+        name: "Settings",
+        component: Settings,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({
@@ -127,7 +190,10 @@ const router = new VueRouter({
     ignore = from;
     ignore = savedPosition;
     ignore = null;
-    console.log("This is some stupid eslint problem, ignore this console log - from router scrollbehaviour function",ignore)
+    console.log(
+      "This is some stupid eslint problem, ignore this console log - from router scrollbehaviour function",
+      ignore
+    );
     return { x: 0, y: 0 };
   },
 });

@@ -29,37 +29,37 @@
                     @click="saveEdit()"
                     src="../assets/Common/save.svg"
                     alt="save"
-                    style="margin-left: auto;width: 30px;cursor: pointer;"
+                    style="margin-left: auto; width: 30px; cursor: pointer"
                     title="Save changes"
                     class="grow-btn"
                   />
                   <img
                     src="../assets/Common/cancel.svg"
                     alt="cancel"
-                    style="width: 30px;cursor: pointer;"
+                    style="width: 30px; cursor: pointer"
                     title="Cancel edit"
                     @click="cancelEdit()"
                     class="grow-btn"
                   />
                 </div>
                 <div class="flex" v-else>
-                  <div class="box">{{name}}</div>
+                  <div class="box">{{ name }}</div>
                   <img
                     src="../assets/Common/edit.svg"
                     alt="edit"
                     title="Edit user name"
-                    style="margin-left: auto;width:39px;cursor:pointer;"
+                    style="margin-left: auto; width: 39px; cursor: pointer"
                     @click="editName()"
                     class="grow-btn"
                   />
                 </div>
               </div>
-              <div class="container" style="margin-top: 1rem;">
+              <div class="container" style="margin-top: 1rem">
                 <div class="flex">
                   <img src="../assets/Settings/gmail.svg" alt="email" />
                   <h3>Email</h3>
                 </div>
-                <div style="margin: 0.3rem 0;">{{email}}</div>
+                <div style="margin: 0.3rem 0">{{ email }}</div>
               </div>
             </div>
           </div>
@@ -73,26 +73,30 @@
               <img src="../assets/Settings/data.svg" alt />
               <h3>Security Code</h3>
             </div>
-                        <div class="body">
+            <div class="body">
               <div class="container">
                 <div class="flex">
                   <img src="../assets/Settings/name.svg" alt="name" />
                   <h3>Security Code</h3>
                 </div>
                 <div v-if="isEditingSecurityCode" class="flex">
-                  <input type="text" v-model="securityCode" placeholder="Enter Security Code" />
+                  <input
+                    type="text"
+                    v-model="securityCode"
+                    placeholder="Enter Security Code"
+                  />
                   <img
                     @click="saveEditCode()"
                     src="../assets/Common/save.svg"
                     alt="save"
-                    style="margin-left: auto;width: 30px;cursor: pointer;"
+                    style="margin-left: auto; width: 30px; cursor: pointer"
                     title="Save changes"
                     class="grow-btn"
                   />
                   <img
                     src="../assets/Common/cancel.svg"
                     alt="cancel"
-                    style="width: 30px;cursor: pointer;"
+                    style="width: 30px; cursor: pointer"
                     title="Cancel edit"
                     @click="cancelEditCode()"
                     class="grow-btn"
@@ -104,7 +108,7 @@
                     src="../assets/Common/edit.svg"
                     alt="edit"
                     title="Edit user name"
-                    style="margin-left: auto;width:39px;cursor:pointer;"
+                    style="margin-left: auto; width: 39px; cursor: pointer"
                     @click="editCode()"
                     class="grow-btn"
                   />
@@ -120,9 +124,13 @@
               <h3>User Privacy</h3>
             </div>
             <div class="body">
-              <p
-                style="line-height: 1.3;"
-              >Privacy is built in from the beginning. Our products and features include innovative privacy technologies and techniques designed to minimise how much of your data we — or anyone else — can access. And powerful security features help prevent anyone except you from being able to access your information.</p>
+              <p style="line-height: 1.3">
+                Privacy is built in from the beginning. Our products and
+                features include innovative privacy technologies and techniques
+                designed to minimise how much of your data we — or anyone else —
+                can access. And powerful security features help prevent anyone
+                except you from being able to access your information.
+              </p>
             </div>
           </div>
           <div class="btn-container">
@@ -141,27 +149,27 @@ import Error from "../components/Modals/Error";
 export default {
   components: {
     Heading,
-    Error
+    Error,
   },
   data() {
     return {
       headingObj: {
         h1: "Settings",
         h4: "Modify account details and manage your data & privacy",
-        src: "settings.svg"
+        src: "settings.svg",
       },
       error: {
         isVisible: false,
         message: {
           code: "",
-          message: ""
-        }
+          message: "",
+        },
       },
       name: this.$store.state.user.name,
       email: this.$store.state.user.email,
       securityCode: this.$store.getters.getCode.data.code,
       isEditingName: false,
-      isEditingSecurityCode: false
+      isEditingSecurityCode: false,
     };
   },
   methods: {
@@ -186,7 +194,7 @@ export default {
           .then(() => {
             this.isEditingName = false;
           })
-          .catch(err => {
+          .catch((err) => {
             //this.error.message = err;
             //this.error.isVisible = true;
             console.log(err);
@@ -206,34 +214,36 @@ export default {
         this.error.message.message = "Please fill the security code properly";
         this.error.isVisible = true;
       } else {
-        let payload ={
+        let payload = {
           id: this.$store.getters.getCode.id,
-          code: this.securityCode
+          code: this.securityCode,
         };
         this.$store
           .dispatch("updateSecurityCode", payload)
           .then(() => {
             this.isEditingSecurityCode = false;
           })
-          .catch(err => {
+          .catch((err) => {
             //this.error.message = err;
             //this.error.isVisible = true;
             console.log(err);
           });
       }
-    }
+    },
   },
   created() {
-    this.$store.state.sidebarCounter = 6;
     localStorage.setItem("currentRoute", this.$route.path);
   },
   mounted() {
-        this.$store.dispatch("downloadSecurityCode").then(response =>{
-    console.log(response);
-      }).catch(error =>{
+    this.$store
+      .dispatch("downloadSecurityCode")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
         alert(error);
       });
-  }
+  },
 };
 </script>
 

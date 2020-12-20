@@ -1,7 +1,11 @@
 <template>
   <div class="choice">
     <Header />
-    <transition name="custom-classes-transition" enter-active-class="animated bounceInUp" appear>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated bounceInUp"
+      appear
+    >
       <div class="wrapper">
         <h1>What would you like to schedule today ?</h1>
         <div class="container">
@@ -9,7 +13,10 @@
             <div class="image-1"></div>
             <div class="description">
               <h3>Timetable</h3>
-              <p>Create a new timetable for any semester automatically without any hassle.</p>
+              <p>
+                Create a new timetable for any semester automatically without
+                any hassle.
+              </p>
             </div>
             <a @click="route(1)">Schedule Timetable</a>
           </div>
@@ -17,7 +24,10 @@
             <div class="image-2"></div>
             <div class="description">
               <h3>Internals</h3>
-              <p>Create a new timetable for internals and send it via sms to all students without any hassle.</p>
+              <p>
+                Create a new timetable for internals and send it via sms to all
+                students without any hassle.
+              </p>
             </div>
             <a @click="route(2)">Schedule Internals</a>
           </div>
@@ -33,14 +43,18 @@ import Header from "../components/Navigation/Header.vue";
 export default {
   name: "Choice",
   components: {
-    Header
+    Header,
   },
   methods: {
     route(page) {
+      this.$store.state.choice = page;
+      localStorage.setItem("choice", page);
       if (page == 1) {
         this.$router.push("/timetable");
+      } else if (page == 2) {
+        this.$router.push("/internals");
       }
-    }
+    },
   },
   created() {
     localStorage.setItem("currentRoute", this.$route.path);
@@ -48,7 +62,7 @@ export default {
     this.$store.state.createRouteTracker = localStorage.getItem(
       "createRouteTracker"
     );
-  }
+  },
 };
 </script>
 

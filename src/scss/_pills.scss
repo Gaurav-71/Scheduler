@@ -1,5 +1,5 @@
-@import "../../scss/colors";
-@import "../../scss/mediaQuery";
+@import "./colors";
+@import "./mediaQuery";
 
 .pills-container {
   display: flex;
@@ -36,15 +36,15 @@
       padding: 0.65rem 1rem;
       margin: 0 0.5rem;
       border-radius: 0.5rem;
-      text-align: center;      
+      text-align: center;
       cursor: pointer;
       @include ipad-portrait {
         font-size: small;
       }
     }
     .pill:hover {
-      background: rgba(21, 127, 135, 0.2);      
-      transition: all 0.3s ease;      
+      background: rgba(21, 127, 135, 0.2);
+      transition: all 0.3s ease;
     }
     .active {
       background: rgb(21, 127, 135);
@@ -56,7 +56,8 @@
       background: rgb(21, 127, 135);
     }
   }
-  .section-pills, .elective-pills {
+  .section-pills,
+  .elective-pills {
     margin: 0 1rem;
     border-radius: 0.8rem;
     background: rgba($color: $primary-dark, $alpha: 0.2);
@@ -97,10 +98,10 @@
       background: rgb(21, 127, 135);
     }
   }
-  .elective-pills{
+  .elective-pills {
     margin: 0;
     width: 12%;
-    .pill{
+    .pill {
       width: 5rem;
     }
   }
@@ -127,8 +128,8 @@
   .download-container {
     width: 100%;
     display: flex;
-    align-items: center;    
-    cursor: pointer;    
+    align-items: center;
+    cursor: pointer;
     @include ipad-portrait {
       display: none;
     }

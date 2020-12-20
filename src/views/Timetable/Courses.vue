@@ -1,7 +1,11 @@
 <template>
   <div class="courses">
     <transition name="fade" appear>
-      <Alert v-if="warning.isVisible" :obj="warning" :remove="warningRemoveObj" />
+      <Alert
+        v-if="warning.isVisible"
+        :obj="warning"
+        :remove="warningRemoveObj"
+      />
     </transition>
     <transition name="fade" appear>
       <Error :obj="error" />
@@ -15,7 +19,7 @@
         <div class="search-bar">
           <input type="search" placeholder="Search Courses" v-model="search" />
           <img
-            src="../assets/Courses/add.svg"
+            src="../../assets/Courses/add.svg"
             alt="add"
             title="Add New Course"
             @click="$store.state.showCourseModal = true"
@@ -38,7 +42,7 @@
                 <div v-if="!course.isEditing" class="card grow">
                   <div class="actions">
                     <img
-                      src="../assets/Common/edit.svg"
+                      src="../../assets/Common/edit.svg"
                       alt="edit"
                       title="Edit Course Details"
                       @click="edit(course)"
@@ -46,38 +50,38 @@
                     />
                     <div class="semester">
                       <img
-                        src="../assets/Courses/three.svg"
+                        src="../../assets/Courses/three.svg"
                         alt="three"
                         v-if="course.detail.Semester == 3"
                       />
                       <img
-                        src="../assets/Courses/four.svg"
+                        src="../../assets/Courses/four.svg"
                         alt="four"
                         v-else-if="course.detail.Semester == 4"
                       />
                       <img
-                        src="../assets/Courses/five.svg"
+                        src="../../assets/Courses/five.svg"
                         alt="five"
                         v-else-if="course.detail.Semester == 5"
                       />
                       <img
-                        src="../assets/Courses/six.svg"
+                        src="../../assets/Courses/six.svg"
                         alt="six"
                         v-else-if="course.detail.Semester == 6"
                       />
                       <img
-                        src="../assets/Courses/seven.svg"
+                        src="../../assets/Courses/seven.svg"
                         alt="seven"
                         v-else-if="course.detail.Semester == 7"
                       />
                       <img
-                        src="../assets/Courses/eight.svg"
+                        src="../../assets/Courses/eight.svg"
                         alt="eight"
                         v-else-if="course.detail.Semester == 8"
                       />
                     </div>
                     <img
-                      src="../assets/Common/delete.svg"
+                      src="../../assets/Common/delete.svg"
                       @click="removeCourse(course)"
                       alt="delete"
                       title="Delete Course"
@@ -87,9 +91,11 @@
                   <div class="details">
                     <h3>{{ course.detail.Name }}</h3>
                     <h4>
-                      {{ course.detail.Code }} | {{ course.detail.Credits.Theory }}:{{
-                      course.detail.Credits.Tutorial
-                      }}:{{ course.detail.Credits.Lab }} | {{ course.detail.Abbreviation }}
+                      {{ course.detail.Code }} |
+                      {{ course.detail.Credits.Theory }}:{{
+                        course.detail.Credits.Tutorial
+                      }}:{{ course.detail.Credits.Lab }} |
+                      {{ course.detail.Abbreviation }}
                     </h4>
                   </div>
                 </div>
@@ -97,18 +103,18 @@
               <div v-if="showEditing">
                 <div v-if="course.isEditing" class="card grow">
                   <div class="actions-edit">
-                    <img src="../assets/Common/edit.svg" alt="edit" />
+                    <img src="../../assets/Common/edit.svg" alt="edit" />
                     <div class="actions-group">
                       <img
                         @click="saveDetails(course)"
-                        src="../assets/Common/save.svg"
+                        src="../../assets/Common/save.svg"
                         alt="save"
                         title="Save Edited Details"
                         class="grow-btn"
                       />
                       <img
                         @click="cancelEdit(course)"
-                        src="../assets/Common/cancel.svg"
+                        src="../../assets/Common/cancel.svg"
                         alt="cancel"
                         title="Cancel Editing"
                         class="grow-btn"
@@ -118,16 +124,26 @@
                   <div class="details-edit">
                     <div class="row">
                       <label for="name">Name :</label>
-                      <input type="text" name="name" v-model="name" style="width: 7rem" />
+                      <input
+                        type="text"
+                        name="name"
+                        v-model="name"
+                        style="width: 7rem"
+                      />
                       <label for="code">Code :</label>
-                      <input type="text" name="code" v-model="code" style="width:2rem;" />
+                      <input
+                        type="text"
+                        name="code"
+                        v-model="code"
+                        style="width: 2rem"
+                      />
                     </div>
                     <div class="row">
                       <label for="semester">Sem :</label>
                       <input
                         list="semesters"
                         name="semester"
-                        style="width: 1.5rem;"
+                        style="width: 1.5rem"
                         v-model="semester"
                       />
                       <datalist id="semesters">
@@ -194,9 +210,9 @@
                 enter-active-class="animated bounceInUp"
                 appear
               >
-                <img src="../assets/Common/error.svg" alt="error" />
+                <img src="../../assets/Common/error.svg" alt="error" />
               </transition>
-              <h2>Sorry, we could'nt find any course named {{search}}</h2>
+              <h2>Sorry, we could'nt find any course named {{ search }}</h2>
             </div>
           </div>
         </transition>
@@ -207,11 +223,11 @@
 </template>
 
 <script>
-import AddCourse from "../components/Modals/AddCourse.vue";
-import Heading from "../components/Design/Heading";
-import Alert from "../components/Modals/Alert";
-import Error from "../components/Modals/Error";
-import Loading from "../components/Loading/Pulse";
+import AddCourse from "../../components/Modals/AddCourse.vue";
+import Heading from "../../components/Design/Heading";
+import Alert from "../../components/Modals/Alert";
+import Error from "../../components/Modals/Error";
+import Loading from "../../components/Loading/Pulse";
 
 export default {
   components: {
@@ -219,7 +235,7 @@ export default {
     Heading,
     Alert,
     Error,
-    Loading
+    Loading,
   },
   data() {
     return {
@@ -227,20 +243,20 @@ export default {
         h1: "Courses",
         h4:
           "A list of all courses taught by the department. Add, Modify or Delete a course at will",
-        src: "books.svg"
+        src: "books.svg",
       },
       warning: {
         isVisible: false,
         message: "Are you sure you want to delete this course permanently ?",
         button: "Delete Course",
-        number: 3
+        number: 3,
       },
       error: {
         isVisible: false,
         message: {
           code: "Missing-information",
-          message: "Please fill all data fields"
-        }
+          message: "Please fill all data fields",
+        },
       },
       warningRemoveObj: null,
       search: "",
@@ -252,29 +268,28 @@ export default {
       theoryCredits: 0,
       tutorialCredits: 0,
       labCredits: 0,
-      showEditing: false
+      showEditing: false,
     };
   },
   created() {
-    this.$store.state.sidebarCounter = 5;
     localStorage.setItem("currentRoute", this.$route.path);
   },
   computed: {
-    searchCourses: function() {
-      return this.$store.getters.getCourseList.filter(course => {
+    searchCourses: function () {
+      return this.$store.getters.getCourseList.filter((course) => {
         let courseLowerCase = course.detail.Name.toLowerCase();
         return courseLowerCase.match(this.search.toLowerCase());
       });
-    }
+    },
   },
   mounted() {
     this.$store.state.isLoadingCourses = true;
     this.$store
       .dispatch("loadCourseList")
-      .then(resp => {
+      .then((resp) => {
         this.unsubscribe = resp;
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err);
       });
   },
@@ -311,9 +326,9 @@ export default {
           Credits: {
             Theory: this.theoryCredits,
             Tutorial: this.tutorialCredits,
-            Lab: this.labCredits
+            Lab: this.labCredits,
           },
-          Abbreviation: this.abbreviation
+          Abbreviation: this.abbreviation,
         };
         this.$store
           .dispatch("updateCourseDetails", data)
@@ -328,7 +343,7 @@ export default {
             course.isEditing = false;
             this.showEditing = false;
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       }
@@ -340,18 +355,18 @@ export default {
     afterLeave(el, done) {
       this.showEditing = !this.showEditing;
       console.log(el, done);
-    }
+    },
   },
   beforeDestroy() {
     this.unsubscribe();
     this.$store.state.courseList = [];
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../scss/searchBar";
-@import "../scss/custom-animations";
+@import "../../scss/searchBar";
+@import "../../scss/custom-animations";
 
 .courses {
   margin-top: 4.5rem;
@@ -362,7 +377,7 @@ export default {
   overflow: hidden;
   .search-bar {
     input {
-      background-image: url("../assets/Courses/search.svg");
+      background-image: url("../../assets/Courses/search.svg");
     }
   }
   .results {
@@ -469,7 +484,7 @@ export default {
           }
         }
       }
-    }    
+    }
     .error {
       margin-top: 3rem;
       display: flex;

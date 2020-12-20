@@ -224,10 +224,10 @@
 </template>
 
 <script>
-import mappingTable from "../../components/Tables/mappingTable";
-import electiveTable from "../../components/Tables/electiveTable";
-import Error from "../../components/Modals/Error";
-import Loading from "../../components/Loading/Circle";
+import mappingTable from "../../../components/Tables/mappingTable";
+import electiveTable from "../../../components/Tables/electiveTable";
+import Error from "../../../components/Modals/Error";
+import Loading from "../../../components/Loading/Circle";
 
 export default {
   components: {
@@ -666,10 +666,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../scss/create-cards";
-@import "../../scss/table";
-@import "../../scss/pills";
-@import "../../scss/custom-animations";
+@import "../../../scss/create-cards";
+@import "../../../scss/table";
+@import "../../../scss/pills";
+@import "../../../scss/custom-animations";
 
 .mapping {
   display: flex;

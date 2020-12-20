@@ -1,5 +1,5 @@
-@import "../scss/colors";
-@import "../scss/mediaQuery";
+@import "./colors";
+@import "./mediaQuery";
 
 .container {
   width: 90%;
@@ -17,7 +17,6 @@
       border-radius: 2rem;
       border: 1px solid lightgray;
       outline: none;
-      background-image: url("../assets/Professors/search.svg");
       background-position-y: center;
       background-position-x: 0.8rem;
       background-size: 32.5px;

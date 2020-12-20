@@ -5,9 +5,8 @@
 <script>
 export default {
   created() {
-    this.$store.state.sidebarCounter = 1;
     localStorage.setItem("currentRoute", this.$route.path);
-  }
+  },
 };
 </script>
 

@@ -1,5 +1,4 @@
 export default {
-
   progressCounter: 1,
 
   sidebarCounter: 1,
@@ -41,6 +40,8 @@ export default {
   user: JSON.parse(localStorage.getItem("loggedUser")),
 
   createRouteTracker: localStorage.getItem("createRouteTracker"),
+
+  choice: localStorage.getItem("choice"),
 
   professorList: [],
 

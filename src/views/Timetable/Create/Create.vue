@@ -1,16 +1,20 @@
 <template>
   <div class="create">
     <ProgressBar />
-    <transition name="custom-classes-transition" enter-active-class="animated bounceInUp" appear>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated bounceInUp"
+      appear
+    >
       <div class="create-wrapper">
         <transition
-        name="custom-classes-transition-2"
-        enter-active-class="animated fadeInLeft"
-        leave-active-class="animated fadeOutRight"
-        mode="out-in"
-        :duration="{leave: 450}"
-        appear
-      >
+          name="custom-classes-transition-2"
+          enter-active-class="animated fadeInLeft"
+          leave-active-class="animated fadeOutRight"
+          mode="out-in"
+          :duration="{ leave: 450 }"
+          appear
+        >
           <router-view />
         </transition>
       </div>
@@ -19,16 +23,16 @@
 </template>
 
 <script>
-import ProgressBar from "../../components/Navigation/ProgressBar.vue";
+import ProgressBar from "../../../components/Navigation/ProgressBar.vue";
 
 export default {
   components: {
-    ProgressBar
+    ProgressBar,
   },
   data() {
     return {
       unsubscribeProfessor: null,
-      unsubscribeCourse: null
+      unsubscribeCourse: null,
     };
   },
   created() {
@@ -41,26 +45,26 @@ export default {
   mounted() {
     this.$store
       .dispatch("loadProfessorList")
-      .then(response => {
+      .then((response) => {
         this.unsubscribeProfessor = response;
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err);
       });
     this.$store
       .dispatch("loadCourseList")
-      .then(response => {
+      .then((response) => {
         this.unsubscribeCourse = response;
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err);
       });
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../scss/mediaQuery";
+@import "../../../scss/mediaQuery";
 .create {
   margin: 4.5rem 0 5rem 5rem;
   min-height: calc(100vh - 4.5rem);

@@ -25,12 +25,12 @@
           </div>
           <div class="doc-types">
             <img
-              src="../../assets/Result/pdf.svg"
+              src="../../../assets/Result/pdf.svg"
               alt="pdf"
               @click="printPDF()"
             />
             <img
-              src="../../assets/Result/word.svg"
+              src="../../../assets/Result/word.svg"
               alt="word"
               style="margin-left: 1rem"
               @click="printDoc(printID, filename)"
@@ -150,13 +150,13 @@
               </div>
               <div class="doc-types">
                 <img
-                  src="../../assets/Result/pdf.svg"
+                  src="../../../assets/Result/pdf.svg"
                   alt="pdf"
                   class="click shake"
                   @click="printPDF()"
                 />
                 <img
-                  src="../../assets/Result/word.svg"
+                  src="../../../assets/Result/word.svg"
                   alt="word"
                   style="margin-left: 1rem"
                   class="click shake"
@@ -475,9 +475,9 @@
 </template>
 
 <script>
-import studentTable from "../../components/Tables/studentTable";
-import teacherTable from "../../components/Tables/teacherTable";
-import Heading from "../../components/Design/Heading";
+import studentTable from "../../../components/Tables/studentTable";
+import teacherTable from "../../../components/Tables/teacherTable";
+import Heading from "../../../components/Design/Heading";
 export default {
   components: {
     studentTable,
@@ -616,10 +616,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../scss/create-cards";
-@import "../../scss/pills";
-@import "../../scss/table";
-@import "../../scss/custom-animations";
+@import "../../../scss/create-cards";
+@import "../../../scss/pills";
+@import "../../../scss/table";
+@import "../../../scss/custom-animations";
 
 .result {
   margin-top: 5rem;

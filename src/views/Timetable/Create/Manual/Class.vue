@@ -2,8 +2,14 @@
   <div class="class">
     <div class="card">
       <h1>Semester & Section</h1>
-      <img src="../../../assets/Semester/source/semester.svg" alt="semester" />
-      <p>Select the semester, section and room of the class you want to schedule a new Timetable</p>
+      <img
+        src="../../../../assets/Semester/source/semester.svg"
+        alt="semester"
+      />
+      <p>
+        Select the semester, section and room of the class you want to schedule
+        a new Timetable
+      </p>
       <form action="#">
         <input
           list="semesters"
@@ -11,7 +17,7 @@
           placeholder="Select Semester"
           v-model="$store.state.semester"
         />
-        <datalist id="semesters">          
+        <datalist id="semesters">
           <option value="Third Semester"></option>
           <option value="Fourth Semester"></option>
           <option value="Fifth Semester"></option>
@@ -42,18 +48,18 @@ export default {
   methods: {
     route() {
       this.$router.push("mapping/manual");
-    }
+    },
   },
   created() {
     this.$store.state.progressCounter = 2;
     this.$store.state.progressSteps[1] = "Class";
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../../scss/create-cards";
-@import "../../../scss/mediaQuery";
+@import "../../../../scss/create-cards";
+@import "../../../../scss/mediaQuery";
 .class {
   margin-top: 2.5rem;
   display: flex;
