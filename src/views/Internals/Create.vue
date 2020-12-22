@@ -3,6 +3,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Soon from "../../components/Design/Soon";
 export default {
   components: {
