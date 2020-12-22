@@ -1,8 +1,17 @@
 <template>
   <div v-if="obj.isVisible" class="modal-container">
-    <transition name="bounce" enter-active-class="animated bounceIn" :duration="500" appear>
+    <transition
+      name="bounce"
+      enter-active-class="animated bounceIn"
+      :duration="500"
+      appear
+    >
       <div v-if="obj.isVisible" class="modal">
-        <transition name="custom-classes-transition" enter-active-class="animated tada" appear>
+        <transition
+          name="custom-classes-transition"
+          enter-active-class="animated tada"
+          appear
+        >
           <transition
             name="tada"
             enter-active-class="animated tada"
@@ -13,23 +22,29 @@
           </transition>
         </transition>
         <div class="message">
-          <h2>{{obj.message.code}}</h2>
-          <h3>{{obj.message.message}}</h3>
+          <h2>{{ obj.message.code }}</h2>
+          <h3>{{ obj.message.message }}</h3>
         </div>
       </div>
     </transition>
-    <img src="../../assets/Common/delete.svg" alt="cancel" @click="handleError" class="cancel" />
+    <img
+      src="../../assets/Common/delete.svg"
+      alt="cancel"
+      @click="handleError"
+      class="cancel"
+    />
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   props: {
     obj: {
       isVisible: Boolean,
-      message: Object
+      message: Object,
     },
-    emptyStr: Boolean
+    emptyStr: Boolean,
   },
   methods: {
     handleError() {
@@ -37,8 +52,8 @@ export default {
       if (this.emptyStr) {
         this.obj.message.message = "";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

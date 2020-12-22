@@ -3,7 +3,11 @@
     <transition name="fade" appear>
       <Error :obj="error" />
     </transition>
-    <transition name="custom-classes-transition" enter-active-class="animated zoomInUp" appear>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated zoomInUp"
+      appear
+    >
       <div class="modal">
         <img src="../../assets/Professors/add.svg" alt="add" />
         <div class="line"></div>
@@ -11,7 +15,12 @@
           <div class="field1">
             <label for="name">Professor name</label>
             <br />
-            <input v-model="name" type="text" name="name" placeholder="Enter name" />
+            <input
+              v-model="name"
+              type="text"
+              name="name"
+              placeholder="Enter name"
+            />
           </div>
           <div class="field2">
             <label for="designation">Designation</label>
@@ -33,17 +42,41 @@
             <div class="col1">
               <label>Gender</label>
               <form>
-                <input type="radio" id="male" name="gender" value="M" v-model="gender" />
+                <input
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="M"
+                  v-model="gender"
+                />
                 <div class="custom-label">
-                  <img src="../../assets/Professors/Modal/male.svg" alt="male" />
+                  <img
+                    src="../../assets/Professors/Modal/male.svg"
+                    alt="male"
+                  />
                   <label for="male">Male</label>
                 </div>
-                <input type="radio" id="female" name="gender" value="F" v-model="gender" />
+                <input
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="F"
+                  v-model="gender"
+                />
                 <div class="custom-label">
-                  <img src="../../assets/Professors/Modal/female.svg" alt="male" />
+                  <img
+                    src="../../assets/Professors/Modal/female.svg"
+                    alt="male"
+                  />
                   <label for="female">Female</label>
                 </div>
-                <input type="radio" id="other" name="gender" value="O" v-model="gender" />
+                <input
+                  type="radio"
+                  id="other"
+                  name="gender"
+                  value="O"
+                  v-model="gender"
+                />
                 <div class="custom-label">
                   <img src="../../assets/Professors/other.svg" alt="male" />
                   <label for="other">Other</label>
@@ -58,18 +91,19 @@
     <img
       src="../../assets/Common/delete.svg"
       alt="cancel"
-      @click="$store.state.showProfessorModal=false"
+      @click="$store.state.showProfessorModal = false"
       class="cancel"
     />
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import Error from "./Error";
 
 export default {
   components: {
-    Error
+    Error,
   },
   data() {
     return {
@@ -80,9 +114,9 @@ export default {
         isVisible: false,
         message: {
           code: "Missing-information",
-          message: "Please fill all data fields"
-        }
-      }
+          message: "Please fill all data fields",
+        },
+      },
     };
   },
   methods: {
@@ -104,20 +138,20 @@ export default {
           Wednesday: ["", "", "", "", "", "", ""],
           Thursday: ["", "", "", "", "", "", ""],
           Friday: ["", "", "", "", "", "", ""],
-          Saturday: ["", "", "", "", "", "", ""]
+          Saturday: ["", "", "", "", "", "", ""],
         };
         this.$store
           .dispatch("addProfessor", data)
           .then(() => {})
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
         this.name = "";
         this.gender = "";
         this.designation = "";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

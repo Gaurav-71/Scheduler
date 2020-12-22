@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export default {
   progressCounter: 1,
 
@@ -23,6 +25,8 @@ export default {
 
   showCourseModal: false,
 
+  showStudentModal: false,
+
   isLoggedIn: false,
 
   isLoggingIn: true,
@@ -35,6 +39,8 @@ export default {
 
   isLoadingProfessors: false,
 
+  isLoadingStudents: false,
+
   postSubscription: null,
 
   user: JSON.parse(localStorage.getItem("loggedUser")),
@@ -46,6 +52,118 @@ export default {
   professorList: [],
 
   courseList: [],
+
+  // dummy student data
+  studentList: [
+    {
+      name: "Gaurav V",
+      usn: "1ms18cs046",
+      sem: 5,
+      section: "A",
+      batch: 1,
+      phNo: "7022851931",
+      isEditing: false,
+    },
+    {
+      name: "Dheeraj Bhat",
+      usn: "1ms18cs040",
+      sem: 6,
+      section: "B",
+      batch: 1,
+      phNo: "7022851932",
+      isEditing: false,
+    },
+    {
+      name: "Aravind Shreyas",
+      usn: "1ms18cs025",
+      sem: 3,
+      section: "C",
+      batch: 1,
+      phNo: "7022851933",
+      isEditing: false,
+    },
+    {
+      name: "Divya",
+      usn: "1ms18cs043",
+      sem: 3,
+      section: "B",
+      batch: 1,
+      phNo: "7022851933",
+      isEditing: false,
+    },
+    {
+      name: "Gaurav V",
+      usn: "1ms18cs046",
+      sem: 5,
+      section: "A",
+      batch: 1,
+      phNo: "7022851931",
+      isEditing: false,
+    },
+    {
+      name: "Dheeraj Bhat",
+      usn: "1ms18cs040",
+      sem: 6,
+      section: "B",
+      batch: 1,
+      phNo: "7022851932",
+      isEditing: false,
+    },
+    {
+      name: "Aravind Shreyas",
+      usn: "1ms18cs025",
+      sem: 3,
+      section: "C",
+      batch: 1,
+      phNo: "7022851933",
+      isEditing: false,
+    },
+    {
+      name: "Divya",
+      usn: "1ms18cs043",
+      sem: 3,
+      section: "B",
+      batch: 1,
+      phNo: "7022851933",
+      isEditing: false,
+    },
+    {
+      name: "Gaurav V",
+      usn: "1ms18cs046",
+      sem: 5,
+      section: "A",
+      batch: 1,
+      phNo: "7022851931",
+      isEditing: false,
+    },
+    {
+      name: "Dheeraj Bhat ",
+      usn: "1ms18cs040",
+      sem: 6,
+      section: "B",
+      batch: 1,
+      phNo: "7022851932",
+      isEditing: false,
+    },
+    {
+      name: "Aravind Shreyas",
+      usn: "1ms18cs025",
+      sem: 3,
+      section: "C",
+      batch: 1,
+      phNo: "7022851933",
+      isEditing: false,
+    },
+    {
+      name: "Divya",
+      usn: "1ms18cs043",
+      sem: 3,
+      section: "B",
+      batch: 1,
+      phNo: "7022851933",
+      visEditing: false,
+    },
+  ],
 
   /*  allOddCycleClasses: {
     sec3A: {},

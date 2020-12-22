@@ -2,53 +2,66 @@
   <div class="progress-bar-container">
     <Heading :obj="headingObj" />
     <div class="progress-bar">
-      <div class="step" style="text-align: right;">
+      <div class="step" style="text-align: right">
         <img
           src="../../assets/ProgressBar/automated.svg"
           alt="automated"
-          v-bind:class="{'active-img':$store.state.progressCounter>=1}"
+          v-bind:class="{ 'active-img': $store.state.progressCounter >= 1 }"
           @click="route(1)"
         />
-        <p v-bind:class="{'active-p':$store.state.progressCounter==1}">Type</p>
+        <p v-bind:class="{ 'active-p': $store.state.progressCounter == 1 }">
+          Type
+        </p>
       </div>
-      <div class="line" v-bind:class="{'active-line':$store.state.progressCounter>1}"></div>
-      <div class="step" style="text-align: center;">
+      <div
+        class="line"
+        v-bind:class="{ 'active-line': $store.state.progressCounter > 1 }"
+      ></div>
+      <div class="step" style="text-align: center">
         <img
           src="../../assets/ProgressBar/semester.svg"
           alt="semester"
-          v-bind:class="{'active-img':$store.state.progressCounter>=2}"
+          v-bind:class="{ 'active-img': $store.state.progressCounter >= 2 }"
           @click="route(2)"
         />
-        <p v-bind:class="{'active-p':$store.state.progressCounter==2}">Cycle</p>
+        <p v-bind:class="{ 'active-p': $store.state.progressCounter == 2 }">
+          Cycle
+        </p>
       </div>
-      <div class="line" v-bind:class="{'active-line':$store.state.progressCounter>2}"></div>
-      <div class="step" style="text-align: left;">
+      <div
+        class="line"
+        v-bind:class="{ 'active-line': $store.state.progressCounter > 2 }"
+      ></div>
+      <div class="step" style="text-align: left">
         <img
           src="../../assets/ProgressBar/mapping.svg"
           alt="mapping"
-          v-bind:class="{'active-img':$store.state.progressCounter>=3}"
+          v-bind:class="{ 'active-img': $store.state.progressCounter >= 3 }"
           @click="route(3)"
         />
-        <p v-bind:class="{'active-p':$store.state.progressCounter==3}">Mapping</p>
+        <p v-bind:class="{ 'active-p': $store.state.progressCounter == 3 }">
+          Mapping
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import Heading from "../Design/Heading";
 
 export default {
   components: {
-    Heading
+    Heading,
   },
   data() {
     return {
       headingObj: {
         h1: "Create",
         h4: "Design a new timetable without any hassle",
-        src: "create.svg"
-      }
+        src: "create.svg",
+      },
     };
   },
   methods: {
@@ -70,8 +83,8 @@ export default {
           }
           break;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

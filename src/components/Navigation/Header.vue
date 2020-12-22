@@ -8,6 +8,7 @@
   </header>
 </template>
 <script>
+/* eslint-disable */
 export default {
   name: "Header",
   methods: {
@@ -18,17 +19,17 @@ export default {
           this.$store.state.isLoggedIn = false;
           this.$router.push("/login");
         })
-        .catch(err => {
+        .catch((err) => {
           alert(err);
         });
-    }
+    },
   },
   created() {
     // important dont remove
     if (JSON.parse(localStorage.getItem("loggedUser"))) {
       this.$store.state.isLoggedIn = true;
     }
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -58,14 +59,14 @@ header {
     cursor: pointer;
     img {
       width: 25px;
-      height: 25px;      
+      height: 25px;
     }
     span {
       display: none;
     }
   }
   .signout:hover {
-    background: rgba($primary-light,0.75);
+    background: rgba($primary-light, 0.75);
     padding: 0.8rem 1rem;
     border-radius: 1rem;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
@@ -75,12 +76,11 @@ header {
       margin-left: 0.7rem;
       text-shadow: 1px 0.5px 1px black;
     }
-  }  
+  }
   @media print {
     display: none;
     margin: 0;
     padding: 0;
   }
 }
-
 </style>

@@ -3,8 +3,8 @@
     <div class="heading-container">
       <img :src="getImgUrl(src)" alt="result" />
       <div class="heading">
-        <h1>{{obj.h1}}</h1>
-        <h4>{{obj.h4}}</h4>
+        <h1>{{ obj.h1 }}</h1>
+        <h4>{{ obj.h4 }}</h4>
       </div>
     </div>
     <div class="line"></div>
@@ -12,24 +12,25 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   props: {
     obj: {
       h1: String,
       h4: String,
-      src: String
-    }
+      src: String,
+    },
   },
   data() {
     return {
-      src: this.obj.src
+      src: this.obj.src,
     };
   },
   methods: {
     getImgUrl(src) {
       return require("../../assets/Heading/" + src);
-    }
-  }
+    },
+  },
 };
 </script>
 

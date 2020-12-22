@@ -489,7 +489,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  2
+                2
               "
               @click="removeOEProfessor('sem5', index)"
             />
@@ -514,7 +514,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  3
+                3
               "
               @click="removeOEProfessor('sem5', index)"
             />
@@ -539,7 +539,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  4
+                4
               "
               @click="removeOEProfessor('sem5', index)"
             />
@@ -564,7 +564,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  5
+                5
               "
               @click="removeOEProfessor('sem5', index)"
             />
@@ -589,7 +589,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  6
+                6
               "
               @click="removeOEProfessor('sem5', index)"
             />
@@ -736,7 +736,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  2
+                2
               "
               @click="removeOEProfessor('sem7', index)"
             />
@@ -761,7 +761,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  3
+                3
               "
               @click="removeOEProfessor('sem7', index)"
             />
@@ -786,7 +786,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  4
+                4
               "
               @click="removeOEProfessor('sem7', index)"
             />
@@ -811,7 +811,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  5
+                5
               "
               @click="removeOEProfessor('sem7', index)"
             />
@@ -836,7 +836,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.oddCycleOpenElectives.sem5.getProfessors(index) ==
-                  6
+                6
               "
               @click="removeOEProfessor('sem7', index)"
             />
@@ -993,7 +993,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.evenCycleOpenElectives.sem5.getProfessors(index) ==
-                  2
+                2
               "
               @click="removeOEProfessor('sem6', index)"
             />
@@ -1018,7 +1018,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.evenCycleOpenElectives.sem5.getProfessors(index) ==
-                  3
+                3
               "
               @click="removeOEProfessor('sem6', index)"
             />
@@ -1043,7 +1043,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.evenCycleOpenElectives.sem5.getProfessors(index) ==
-                  4
+                4
               "
               @click="removeOEProfessor('sem6', index)"
             />
@@ -1068,7 +1068,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.evenCycleOpenElectives.sem5.getProfessors(index) ==
-                  5
+                5
               "
               @click="removeOEProfessor('sem6', index)"
             />
@@ -1093,7 +1093,7 @@
               title="Remove Professor"
               v-if="
                 $store.state.evenCycleOpenElectives.sem5.getProfessors(index) ==
-                  6
+                6
               "
               @click="removeOEProfessor('sem6', index)"
             />
@@ -1106,6 +1106,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   methods: {
     addProfessor(sem, index) {
@@ -1216,7 +1217,7 @@ export default {
   mounted() {
     let professorNames = this.$store.getters.getProfessorName;
     let list = document.getElementById("allProfessors");
-    professorNames.forEach(function(item) {
+    professorNames.forEach(function (item) {
       var option = document.createElement("option");
       option.value = item;
       list.appendChild(option);

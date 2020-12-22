@@ -1,18 +1,23 @@
 <template>
   <div id="app">
-    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1"
+      rel="stylesheet"
+      type="text/css"
+    />
     <router-view />
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 //import Sidebar from "@/components/Sidebar.vue";
 //import Sidebar from "@/views/Semester.vue";
 
 export default {
   components: {
     //  Sidebar
-  }
+  },
 };
 </script>
 

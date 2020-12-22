@@ -144,6 +144,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Header from "../Navigation/Header";
 import Alert from "../Modals/Alert";
 
@@ -174,8 +175,7 @@ export default {
         } else if (path == 2) {
           this.$router.push(this.$store.state.createRouteTracker);
         } else if (path == 3) {
-          //this.$router.push("");
-          alert("Page not created yet !");
+          this.$router.push("/timetable/saved");
         } else if (path == 4) {
           this.$router.push("/timetable/professors");
         } else if (path == 5) {

@@ -223,6 +223,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import AddCourse from "../../components/Modals/AddCourse.vue";
 import Heading from "../../components/Design/Heading";
 import Alert from "../../components/Modals/Alert";
@@ -381,12 +382,14 @@ export default {
     }
   }
   .results {
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: stretch;
     flex-wrap: wrap;
     overflow-y: scroll;
     .card {
-      width: 21rem;
+      width: 23.5rem;
       height: 14rem;
       margin: 0.8rem;
       background: white;

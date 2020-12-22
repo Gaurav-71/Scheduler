@@ -2,7 +2,10 @@
   <div class="landing">
     <Header />
     <h1>Schedule timetables and exams the modern way</h1>
-    <h5>The scheduler is a smart web solution which helps in scheduling timetables and exams</h5>
+    <h5>
+      The scheduler is a smart web solution which helps in scheduling timetables
+      and exams
+    </h5>
     <h6>Made by Aravind Shreyas, Dheeraj Bhat, Divya, Gaurav v</h6>
     <button @click="route" class="grow">Login</button>
     <footer>
@@ -12,23 +15,24 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Header from "../components/Navigation/Header.vue";
 
 export default {
   name: "Landing",
   components: {
-    Header
+    Header,
   },
   methods: {
     route() {
       this.$router.push("/login");
-    }
+    },
   },
   created() {
     if (JSON.parse(localStorage.getItem("loggedUser"))) {
       this.$router.push("/choice");
     }
-  }
+  },
 };
 </script>
 

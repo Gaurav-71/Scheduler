@@ -1,6 +1,11 @@
 <template>
   <div v-if="obj.isVisible" class="modal-container">
-    <transition name="bounce" enter-active-class="animated bounceIn" :duration="500" appear>
+    <transition
+      name="bounce"
+      enter-active-class="animated bounceIn"
+      :duration="500"
+      appear
+    >
       <div v-if="obj.isVisible" class="modal">
         <div class="message-container">
           <transition
@@ -9,17 +14,27 @@
             leave-active-class="fade"
             appear
           >
-            <img src="../../assets/Common/warning.svg" alt="warning" class="error" />
+            <img
+              src="../../assets/Common/warning.svg"
+              alt="warning"
+              class="error"
+            />
           </transition>
           <div class="message">
             <h2>Warning</h2>
-            <h3>{{obj.message}}</h3>
+            <h3>{{ obj.message }}</h3>
           </div>
         </div>
         <div class="line"></div>
         <div class="actions">
           <button @click="cancel()" class="btn transparent">Cancel</button>
-          <button @click="action(obj.number)" class="btn" style="margin-left: 2rem;">{{obj.button}}</button>
+          <button
+            @click="action(obj.number)"
+            class="btn red-btn"
+            style="margin-left: 2rem"
+          >
+            {{ obj.button }}
+          </button>
         </div>
       </div>
     </transition>
@@ -27,16 +42,17 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   props: {
     obj: {
       isVisible: Boolean,
       message: String,
       button: String,
-      number: Number
+      number: Number,
     },
     path: Number,
-    remove: Object
+    remove: Object,
   },
   methods: {
     cancel() {
@@ -75,19 +91,19 @@ export default {
         this.$store
           .dispatch("removeProfessor", this.remove.id)
           .then(() => {})
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       } else if (type == 3) {
         this.$store
           .dispatch("removeCourse", this.remove.id)
           .then(() => {})
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -180,5 +196,10 @@ export default {
       }
     }
   }
+}
+
+.red-btn {
+  border-color: transparent !important;
+  background-image: $gradient-red !important;
 }
 </style>

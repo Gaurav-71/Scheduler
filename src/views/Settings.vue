@@ -143,6 +143,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Heading from "../components/Design/Heading";
 import Error from "../components/Modals/Error";
 

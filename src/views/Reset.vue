@@ -7,7 +7,7 @@
     <transition
       name="custom-classes-transitions-1"
       enter-active-class="animated bounceInLeft"
-      leave-active-class="animated fadeOutDown"      
+      leave-active-class="animated fadeOutDown"
       appear
     >
       <div class="main">
@@ -28,18 +28,36 @@
                 placeholder="Email"
                 class="email"
               />
-              <input v-else type="email" v-model="loggedEmail" placeholder="Email" class="email" />
+              <input
+                v-else
+                type="email"
+                v-model="loggedEmail"
+                placeholder="Email"
+                class="email"
+              />
               <button @click="resetPassword()" class="btn grow">Reset</button>
             </div>
-            <Loading :message="'Sending an email to reset your password'" v-else />
+            <Loading
+              :message="'Sending an email to reset your password'"
+              v-else
+            />
           </div>
         </transition>
         <transition name="fade" appear>
           <div v-if="isSuccessful" class="sent-container">
             <div class="sent">
-              <img src="../assets/Login/Forgot/correct.svg" alt="succesful reset" />
+              <img
+                src="../assets/Login/Forgot/correct.svg"
+                alt="succesful reset"
+              />
               <h4>Email is sent succesfully, check your email</h4>
-              <button v-if="$store.state.isLoggedIn" @click="route" class="grow">Go to Settings</button>
+              <button
+                v-if="$store.state.isLoggedIn"
+                @click="route"
+                class="grow"
+              >
+                Go to Settings
+              </button>
               <button v-else @click="route" class="grow">Sign In</button>
             </div>
           </div>
@@ -50,6 +68,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { auth } from "../main.js";
 import Header from "../components/Navigation/Header.vue";
 import Error from "../components/Modals/Error.vue";
@@ -59,7 +78,7 @@ export default {
   components: {
     Header,
     Error,
-    Loading
+    Loading,
   },
   data() {
     return {
@@ -71,8 +90,8 @@ export default {
       isSuccessful: false,
       error: {
         isVisible: false,
-        message: ""
-      }
+        message: "",
+      },
     };
   },
   methods: {
@@ -91,7 +110,7 @@ export default {
           this.showReset = false;
           console.log(emailAddress);
         })
-        .catch(err => {
+        .catch((err) => {
           // An error happened.
           this.error.message = err;
           this.error.isVisible = true;
@@ -109,8 +128,8 @@ export default {
     afterLeave(el, done) {
       this.isSuccessful = true;
       console.log(el, done);
-    }
-  }
+    },
+  },
 };
 </script>
 

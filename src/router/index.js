@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import Vue from "vue";
 import VueRouter from "vue-router";
 
@@ -14,6 +16,7 @@ import Sidebar from "../components/Navigation/Sidebar.vue";
 import Professors from "../views/Timetable/Professors.vue";
 import Courses from "../views/Timetable/Courses.vue";
 import Home from "../views/Home.vue";
+import SavedTT from "../views/Timetable/Saved.vue";
 // Timetable create routes
 import Type from "../views/Timetable/Create/Type.vue";
 import Cycle from "../views/Timetable/Create/Cycle.vue";
@@ -107,6 +110,14 @@ const routes = [
         },
       },
       {
+        path: "/timetable/saved",
+        name: "SavedTT",
+        component: SavedTT,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
         path: "/timetable/courses",
         name: "Courses",
         component: Courses,
@@ -185,15 +196,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
   scrollBehavior(to, from, savedPosition) {
-    var ignore;
-    ignore = to;
-    ignore = from;
-    ignore = savedPosition;
-    ignore = null;
-    console.log(
-      "This is some stupid eslint problem, ignore this console log - from router scrollbehaviour function",
-      ignore
-    );
     return { x: 0, y: 0 };
   },
 });

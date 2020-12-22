@@ -11,31 +11,61 @@
       mode="out-in"
       appear
     >
-      <div class="container" :class="{'right-panel-active':shiftView}">
+      <div class="container" :class="{ 'right-panel-active': shiftView }">
         <div class="form-container sign-up-container">
           <form @submit.prevent="signUp" autocomplete="off">
-            <img src="../assets/Login/authorization.svg" alt="signin" style="width: 3rem;" />
-            <h1 style="margin: 1rem;">Create Account</h1>
+            <img
+              src="../assets/Login/authorization.svg"
+              alt="signin"
+              style="width: 3rem"
+            />
+            <h1 style="margin: 1rem">Create Account</h1>
             <div v-if="$store.state.isLoggingIn" class="form-fields">
-              <input v-model="name" type="text" placeholder="Name" class="name" />
-              <input v-model="email" type="email" placeholder="Email" class="email" />
-              <input v-model="password" type="password" placeholder="Password" class="password" />
+              <input
+                v-model="name"
+                type="text"
+                placeholder="Name"
+                class="name"
+              />
+              <input
+                v-model="email"
+                type="email"
+                placeholder="Email"
+                class="email"
+              />
+              <input
+                v-model="password"
+                type="password"
+                placeholder="Password"
+                class="password"
+              />
               <input
                 v-model="confirmpassword"
                 type="password"
                 placeholder="Confirm Password"
                 class="confirm-password"
               />
-              <input v-model="code" type="password" placeholder="Security Code" class="code" />
-              <button type="button" @click="signUp" class="grow">Sign Up</button>
+              <input
+                v-model="code"
+                type="password"
+                placeholder="Security Code"
+                class="code"
+              />
+              <button type="button" @click="signUp" class="grow">
+                Sign Up
+              </button>
             </div>
             <Loading :message="'Verifying and creating new account'" v-else />
           </form>
         </div>
         <div class="form-container sign-in-container">
           <form @submit.prevent="signIn" autocomplete="on">
-            <img src="../assets/Login/login.svg" alt="signin" style="width: 4.5rem;" />
-            <h1 style="margin: 1rem;">Sign in</h1>
+            <img
+              src="../assets/Login/login.svg"
+              alt="signin"
+              style="width: 4.5rem"
+            />
+            <h1 style="margin: 1rem">Sign in</h1>
             <div v-if="$store.state.isLoggingIn" class="form-fields">
               <input
                 v-model="email"
@@ -51,8 +81,12 @@
                 class="password"
                 autocomplete="on"
               />
-              <button type="button" @click="signIn" class="grow">Sign In</button>
-              <router-link to="/reset" class="forgot-pass">Forgot your password?</router-link>
+              <button type="button" @click="signIn" class="grow">
+                Sign In
+              </button>
+              <router-link to="/reset" class="forgot-pass"
+                >Forgot your password?</router-link
+              >
             </div>
             <Loading :message="'Verifying User Credentials'" v-else />
           </form>
@@ -61,13 +95,19 @@
           <div class="overlay">
             <div class="overlay-panel overlay-left">
               <h1>Welcome Back!</h1>
-              <p>To keep connected with us please login with your credentials</p>
-              <button class="ghost grow" @click="shiftView=false">Sign In</button>
+              <p>
+                To keep connected with us please login with your credentials
+              </p>
+              <button class="ghost grow" @click="shiftView = false">
+                Sign In
+              </button>
             </div>
             <div class="overlay-panel overlay-right">
               <h1>Hello!</h1>
               <p>Enter your details and start your journey with us</p>
-              <button class="ghost grow" @click="shiftView=true">Sign Up</button>
+              <button class="ghost grow" @click="shiftView = true">
+                Sign Up
+              </button>
             </div>
           </div>
         </div>
@@ -77,6 +117,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Header from "@/components/Navigation/Header.vue";
 import Error from "../components/Modals/Error.vue";
 import Loading from "../components/Loading/Circle.vue";
@@ -86,7 +127,7 @@ export default {
   components: {
     Header,
     Error,
-    Loading
+    Loading,
   },
   data() {
     return {
@@ -98,8 +139,8 @@ export default {
       code: "",
       error: {
         isVisible: false,
-        message: ""
-      }
+        message: "",
+      },
     };
   },
   methods: {
@@ -108,11 +149,11 @@ export default {
       this.$store
         .dispatch("signin", data)
         .then(() => {
-          this.$router.push("/choice").catch(err => {
+          this.$router.push("/choice").catch((err) => {
             console.log(err.message);
           });
         })
-        .catch(err => {
+        .catch((err) => {
           this.error.message = err;
           this.error.isVisible = true;
           this.password = "";
@@ -122,12 +163,12 @@ export default {
       let data = {
         name: this.name,
         email: this.email,
-        password: this.password
+        password: this.password,
       };
       if (this.password !== this.confirmpassword) {
         let customErr = {
           message: "Passwords do not match, please retry",
-          code: "auth/password-mismatch"
+          code: "auth/password-mismatch",
         };
         this.error.message = customErr;
         this.error.isVisible = true;
@@ -136,29 +177,28 @@ export default {
       } else if (this.name.trim() == "") {
         let customErr = {
           message: "User name is empty, please retry",
-          code: "auth/null-name"
+          code: "auth/null-name",
         };
         this.error.message = customErr;
         this.error.isVisible = true;
         this.password = "";
         this.confirmpassword = "";
-      } 
-      else if(this.code != this.$store.getters.getCode.data.code){
-          let customErr = {
-          message: "Invalid security code, a valid code is required to register.",
-          code: "auth/invalid-security-code"
+      } else if (this.code != this.$store.getters.getCode.data.code) {
+        let customErr = {
+          message:
+            "Invalid security code, a valid code is required to register.",
+          code: "auth/invalid-security-code",
         };
         this.error.message = customErr;
         this.error.isVisible = true;
-        this.code="";
-      }
-      else {
+        this.code = "";
+      } else {
         this.$store
           .dispatch("signup", data)
           .then(() => {
             this.$router.push("/choice");
           })
-          .catch(err => {
+          .catch((err) => {
             this.error.message = err;
             this.error.isVisible = true;
             this.$store.state.isLoggingIn = true;
@@ -167,20 +207,23 @@ export default {
         this.password = "";
         this.confirmpassword = "";
       }
-    }
+    },
   },
   mounted() {
     let user = JSON.parse(localStorage.getItem("loggedUser"));
-    this.$store.dispatch("downloadSecurityCode").then(response =>{
-    console.log(response);
-      }).catch(error =>{
+    this.$store
+      .dispatch("downloadSecurityCode")
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
         alert(error);
       });
     if (user) {
       this.$store.state.user = user;
       this.$router.push(localStorage.getItem("currentRoute"));
     }
-  }
+  },
 };
 </script>
 
@@ -270,7 +313,7 @@ export default {
     .password {
       background-image: url("../assets/Login/password.svg");
     }
-    .code{
+    .code {
       background-image: url("../assets/Login/secure.svg");
     }
     .confirm-password {

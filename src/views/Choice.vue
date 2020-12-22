@@ -38,6 +38,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import Header from "../components/Navigation/Header.vue";
 
 export default {

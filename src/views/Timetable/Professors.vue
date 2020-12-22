@@ -157,6 +157,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import AddProfessor from "../../components/Modals/AddProfessor.vue";
 import Heading from "../../components/Design/Heading";
 import Alert from "../../components/Modals/Alert";
@@ -286,13 +287,15 @@ export default {
   align-items: center;
   overflow: hidden;
   .results {
+    width: 100%;
     display: flex;
     justify-content: center;
+    align-items: stretch;
     flex-wrap: wrap;
     overflow-y: scroll;
     .card-container {
-      width: 20rem;
-      height: 12rem;
+      width: 23.5rem;
+      //height: 12rem;
       overflow: hidden;
       margin: 0.8rem;
       display: grid;

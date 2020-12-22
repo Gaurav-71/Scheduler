@@ -3,7 +3,11 @@
     <transition name="fade" appear>
       <Error :obj="error" />
     </transition>
-    <transition name="custom-classes-transition" enter-active-class="animated zoomInUp" appear>
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated zoomInUp"
+      appear
+    >
       <div class="modal">
         <img src="../../assets/Courses/add.svg" alt="add" class="add-course" />
         <div class="line"></div>
@@ -11,11 +15,23 @@
           <div class="row">
             <div class="field">
               <label for="name">Course name</label>
-              <input type="text" name="name" placeholder="Enter name" class="name" v-model="name" />
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter name"
+                class="name"
+                v-model="name"
+              />
             </div>
             <div class="field">
               <label for="code">Course code</label>
-              <input type="text" name="code" placeholder="Enter code" class="code" v-model="code" />
+              <input
+                type="text"
+                name="code"
+                placeholder="Enter code"
+                class="code"
+                v-model="code"
+              />
             </div>
           </div>
           <div class="row">
@@ -39,7 +55,12 @@
             </div>
             <div class="field">
               <label for="type">Course Abbreviation</label>
-              <input name="type" placeholder="Enter abbreviation" class="type" v-model="type" />
+              <input
+                name="type"
+                placeholder="Enter abbreviation"
+                class="type"
+                v-model="type"
+              />
             </div>
           </div>
           <div class="row1">
@@ -95,18 +116,19 @@
     <img
       src="../../assets/Common/delete.svg"
       alt="cancel"
-      @click="$store.state.showCourseModal=false"
+      @click="$store.state.showCourseModal = false"
       class="cancel"
     />
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import Error from "./Error";
 
 export default {
   components: {
-    Error
+    Error,
   },
   data() {
     return {
@@ -121,9 +143,9 @@ export default {
         isVisible: false,
         message: {
           code: "Missing-information",
-          message: "Please fill all data fields"
-        }
-      }
+          message: "Please fill all data fields",
+        },
+      },
     };
   },
   methods: {
@@ -144,14 +166,14 @@ export default {
           Credits: {
             Theory: this.theoryCredits,
             Tutorial: this.tutorialCredits,
-            Lab: this.labCredits
+            Lab: this.labCredits,
           },
-          Type: this.type
+          Type: this.type,
         };
         this.$store
           .dispatch("addCourse", data)
           .then(() => {})
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
           });
         this.name = "";
@@ -162,8 +184,8 @@ export default {
         this.tutorialCredits = 0;
         this.labCredits = 0;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
