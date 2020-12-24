@@ -102,6 +102,14 @@ export default {
             console.log(err);
           });
       }
+       else if (type == 4) {
+         this.$store
+          .dispatch("removeStudent", this.remove.id)
+          .then(()=>{})
+          .catch((err) => {
+            console.log(err);
+          })
+       }
     },
   },
 };

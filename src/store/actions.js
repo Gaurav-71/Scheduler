@@ -1410,7 +1410,91 @@ export default {
     await context.dispatch("emptyTimetable");
     await context.dispatch("automateTimetable");
   },
+
+// Internals
+
+  async loadStudentList(context) {
+    let response = db.collection("Students").onSnapshot((snapshot) => {
+      let items = [];
+      snapshot.forEach((doc) => {
+        let data = {
+          id: doc.id,
+          detail: doc.data(),
+          isEditing: false,
+        };
+        items.push(data);
+      });
+      items.sort(function(a, b) {
+        var semA = a.detail.semester,
+          semB = b.detail.semester;
+        if (semA < semB)
+          //sort string ascending
+          return -1;
+        if (semA > semB) return 1;
+        return 0; //default return value (no sorting)
+      });
+      context.commit("loadStudentList", items);
+    });
+    return response;
+  },
+  
+  async addStudent({ commit }, data) {
+    try {
+      console.log(commit);
+      await db.collection("Students").add(data);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async updateStudentBio({ commit }, data) {
+    try {
+      console.log(commit);
+      const { id, ...newData } = data;
+      await db
+        .collection("Students")
+        .doc(id)
+        .update(newData);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async removeStudent({ commit }, id) {
+    try {
+      console.log(commit);
+      await db
+        .collection("Students")
+        .doc(id)
+        .delete();
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*for (let k = 0; k < 6; k++) {
         let currentClass = this.state.allOddCycleClasses[classNames[k]];

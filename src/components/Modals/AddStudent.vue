@@ -155,17 +155,25 @@ export default {
       } else {
         this.$store.state.showStudentModal = false;
         let data = {
-          Name: this.name,
-          // fill the rest
+          name: this.name,
+          section :this.section,
+          phNo: this.phNo,
+          usn: this.usn,
+          batch: this.batch,
+          semester: this.semester 
         };
-        /* this.$store
+        this.$store
           .dispatch("addStudent", data)
           .then(() => {})
           .catch((err) => {
             console.log(err);
-          });*/
+          })
         this.name = "";
-        // empty all
+        this.usn = "";
+        this.batch = "";
+        this.semester = "";
+        this.phNo = "";
+        this.section = "";
       }
     },
   },

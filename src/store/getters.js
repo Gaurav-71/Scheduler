@@ -28,4 +28,7 @@ export default {
   getCode: (store) => {
     return store.code;
   },
+  getStudentList: (store) => {
+    return store.studentList;
+  }
 };

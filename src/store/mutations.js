@@ -55,4 +55,8 @@ export default {
       ].detail.isToggleChecked = payload.truthValue;
     }
   },
+  loadStudentList: (state, items) => {
+    state.studentList = items;
+    state.isLoadingStudent = false;
+  },
 };

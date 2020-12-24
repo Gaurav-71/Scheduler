@@ -49,46 +49,46 @@
                     <img
                       src="../../assets/Students/3.svg"
                       alt="three"
-                      v-if="student.sem == 3"
+                      v-if="student.detail.semester == 3"
                     />
                     <img
                       src="../../assets/Students/4.svg"
                       alt="four"
-                      v-else-if="student.sem == 4"
+                      v-else-if="student.detail.semester == 4"
                     />
                     <img
                       src="../../assets/Students/5.svg"
                       alt="five"
-                      v-else-if="student.sem == 5"
+                      v-else-if="student.detail.semester == 5"
                     />
                     <img
                       src="../../assets/Students/6.svg"
                       alt="six"
-                      v-else-if="student.sem == 6"
+                      v-else-if="student.detail.semester == 6"
                     />
                     <img
                       src="../../assets/Students/7.svg"
                       alt="seven"
-                      v-else-if="student.sem == 7"
+                      v-else-if="student.detail.semester == 7"
                     />
                     <img
                       src="../../assets/Students/8.svg"
                       alt="eight"
-                      v-else-if="student.sem == 8"
+                      v-else-if="student.detail.semester == 8"
                     />
                     <div class="details">
-                      <h3 style="margin: 0.5rem 0">{{ student.name }}</h3>
+                      <h3 style="margin: 0.5rem 0">{{ student.detail.name }}</h3>
                       <div class="flex">
-                        <h5>{{ student.sem }}{{ student.section }}</h5>
+                        <h5>{{ student.detail.semester }}{{ student.detail.section }}</h5>
                         <h5 style="margin: 0 0.5rem">|</h5>
-                        <h5>{{ student.usn }}</h5>
+                        <h5>{{ student.detail.usn }}</h5>
                         <h5 style="margin: 0 0.5rem">|</h5>
-                        <h5>{{ student.phNo }}</h5>
+                        <h5>{{ student.detail.phNo }}</h5>
                       </div>
                     </div>
                   </div>
                   <div class="actions">
-                    <h5>Batch Number : {{ student.batch }}</h5>
+                    <h5>Batch Number : {{ student.detail.batch }}</h5>
                     <div class="act">
                       <img
                         src="../../assets/Common/edit.svg"
@@ -117,36 +117,36 @@
                         <input
                           type="text"
                           placeholder="Enter name"
-                          v-model="student.name"
+                          v-model="name"
                         />
                         <input
                           type="text"
                           placeholder="Enter USN"
-                          v-model="student.usn"
+                          v-model="usn"
                         />
                       </div>
                       <div class="details-edit">
                         <input
                           type="text"
                           placeholder="Enter Phone Number"
-                          v-model="student.phNo"
+                          v-model="phNo"
                         />
                         <input
                           type="text"
                           placeholder="Enter Batch"
-                          v-model="student.batch"
+                          v-model="batch"
                         />
                       </div>
                       <div class="details-edit">
                         <input
                           type="text"
                           placeholder="Enter Semester"
-                          v-model="student.sem"
+                          v-model="semester"
                         />
                         <input
                           type="text"
                           placeholder="Enter Section"
-                          v-model="student.section"
+                          v-model="section"
                         />
                       </div>
                     </div>
@@ -216,7 +216,7 @@ export default {
         isVisible: false,
         message: "Are you sure you want to delete this student permanently ?",
         button: "Delete Student",
-        number: 2,
+        number: 4,
       },
       error: {
         isVisible: false,
@@ -229,6 +229,10 @@ export default {
       search: "",
       unsubscribe: null,
       name: "",
+      batch: "",
+      semester: "",
+      section: "",
+      phNo: "",
       usn: "",
       showEditing: false,
     };
@@ -243,30 +247,42 @@ export default {
     },
     edit(student) {
       student.isEditing = true;
-      this.name = student.Name;
-      this.designation = student.Designation;
-      this.gender = student.Gender;
+      this.name = student.detail.name;
+      this.batch = student.detail.batch;
+      this.phNo = student.detail.phNo;
+      this.semester = student.detail.semester;
+      this.section = student.detail.section;
+      this.usn = student.detail.usn;
     },
     saveDetails(student) {
       if (
         this.name.trim() == "" ||
-        this.designation.trim() == "" ||
-        this.gender.trim() == ""
+        this.batch.trim() == "" ||
+        this.semester.trim() == "" ||
+        this.section.trim() == "" ||
+        this.usn.trim() == "" ||
+        this.phNo.trim() == "" 
       ) {
         this.error.isVisible = true;
       } else {
         let data = {
           id: student.id,
-          Name: this.name,
-          Designation: this.designation,
-          Gender: this.gender,
+          name: this.name,
+          batch: this.batch,
+          section: this.section,
+          semester: this.semester,
+          usn: this.usn,
+          phNo: this.phNo,
         };
         this.$store
           .dispatch("updateStudentBio", data)
           .then(() => {
             this.name = "";
-            this.designation = "";
-            this.gender = "";
+            this.batch = "";
+            this.section = "";
+            this.semester = "";
+            this.usn = "";
+            this.phNo = "";
             student.isEditing = false;
             this.showEditing = false;
           })
@@ -286,24 +302,24 @@ export default {
   },
   computed: {
     searchStudents: function () {
-      return this.$store.getters.getStudentList;
-      /*
       return this.$store.getters.getStudentList.filter((student) => {
-        let studentLowerCase = student.Name.toLowerCase();
+        let studentLowerCase = student.detail.name.toLowerCase();
         return studentLowerCase.match(this.search.toLowerCase());
-      });*/
+      });
     },
   },
   mounted() {
-    /*this.$store.state.isLoadingStudents = true;
+    this.$store.state.isLoadingStudents = true;
     this.$store
       .dispatch("loadStudentList")
       .then((repsonse) => {
         this.unsubscribe = repsonse;
+        this.$store.state.isLoadingStudents = false;
+    
       })
       .catch((err) => {
         console.log(err);
-      });*/
+      });
   },
 };
 </script>
