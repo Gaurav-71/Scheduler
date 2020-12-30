@@ -77,13 +77,18 @@
                       v-else-if="student.detail.semester == 8"
                     />
                     <div class="details">
-                      <h3 style="margin: 0.5rem 0">{{ student.detail.name }}</h3>
+                      <h3 style="margin: 0.5rem 0">
+                        {{ student.detail.name }}
+                      </h3>
                       <div class="flex">
-                        <h5>{{ student.detail.semester }}{{ student.detail.section }}</h5>
-                        <h5 style="margin: 0 0.5rem">|</h5>
-                        <h5>{{ student.detail.usn }}</h5>
-                        <h5 style="margin: 0 0.5rem">|</h5>
-                        <h5>{{ student.detail.phNo }}</h5>
+                        <h6>
+                          {{ student.detail.semester
+                          }}{{ student.detail.section }}
+                        </h6>
+                        <h6 style="margin: 0 0.25rem">|</h6>
+                        <h6>{{ student.detail.usn }}</h6>
+                        <h6 style="margin: 0 0.25rem">|</h6>
+                        <h6>{{ student.detail.phNo }}</h6>
                       </div>
                     </div>
                   </div>
@@ -261,7 +266,7 @@ export default {
         this.semester.trim() == "" ||
         this.section.trim() == "" ||
         this.usn.trim() == "" ||
-        this.phNo.trim() == "" 
+        this.phNo.trim() == ""
       ) {
         this.error.isVisible = true;
       } else {
@@ -315,7 +320,6 @@ export default {
       .then((repsonse) => {
         this.unsubscribe = repsonse;
         this.$store.state.isLoadingStudents = false;
-    
       })
       .catch((err) => {
         console.log(err);
@@ -365,7 +369,7 @@ export default {
         .details {
           padding: 0 1rem;
           h3,
-          h5 {
+          h6 {
             padding: 0;
             margin: 0;
           }
@@ -373,9 +377,10 @@ export default {
             font-weight: 500;
             color: $primary;
           }
-          h5 {
+          h6 {
             padding-top: 0.2rem;
             font-weight: lighter;
+            font-size: small;
           }
         }
       }
